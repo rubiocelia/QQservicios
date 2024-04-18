@@ -1,0 +1,22 @@
+/* Incorporar la tipografía personalizada */
+@font-face {
+  font-family: "titulo";
+  src: url("tipografia/FUTURA PT DEMI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "texto";
+  src: url("tipografia/FUTURA BOOK FONT.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Variables de tipografía */
+  --titulo: "titulo", sans-serif;
+  --texto: "texto", sans-serif;
+  --rojoQQ: #e6312f;
+  --azulQQ: #2a255b;
+}
