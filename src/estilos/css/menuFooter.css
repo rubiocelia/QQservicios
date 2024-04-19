@@ -1,0 +1,118 @@
+/* Incorporar la tipografía personalizada */
+@font-face {
+  font-family: "titulo";
+  src: url("tipografia/FUTURA PT DEMI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "texto";
+  src: url("tipografia/FUTURA BOOK FONT.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Variables de tipografía */
+  --titulo: "titulo", sans-serif;
+  --texto: "texto", sans-serif;
+  --rojoQQ: #e6312f;
+  --azulQQ: #2a255b;
+}
+
+/* Estilo general del header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+}
+
+/* Estilo para el logo */
+.logo {
+  flex: 1;
+  width: 5em;
+  height: 5em;
+}
+
+/* Estilo para el menú de navegación */
+nav {
+  flex: 2;
+  text-align: center;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+}
+
+.menu li {
+  margin: 0 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Estilo para los botones de sesión */
+.botonResponsive,
+.iniciarSesion,
+.registro {
+  flex: 1;
+  text-align: right;
+}
+
+.inicioRegistro {
+}
+
+.iniciarSesion a,
+.registro a {
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.iniciarSesion a {
+  border: 2px solid blue;
+  color: black;
+  background-color: transparent;
+}
+
+.iniciarSesion a:hover {
+  background-color: blue;
+  color: red;
+}
+
+.registro a {
+  background-color: blue;
+  color: white;
+  border: none;
+}
+
+.registro a:hover {
+  color: red;
+}
