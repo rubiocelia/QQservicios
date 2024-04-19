@@ -105,15 +105,26 @@ function crearTablas($conexion) {
         FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
     )";
 
-    // Ejecutar las consultas para la creación de tablas
-    $tables = [$sql_usuarios, $sql_coaches, $sql_atributos, $sql_productos, $sql_datos_acceso, $sql_contenidos, $sql_compra, $sql_testimonios, $sql_archivos_usuarios];
-    foreach ($tables as $sql) {
-        if ($conexion->query($sql) === TRUE) {
-            echo "Tabla creada con éxito: " . $conexion->info . "<br>";
-        } else {
-            echo "Error al crear tabla: " . $conexion->error . "<br>";
-        }
+$tables = [
+    "usuarios" => $sql_usuarios, 
+    "coaches" => $sql_coaches, 
+    "atributos" => $sql_atributos, 
+    "productos" => $sql_productos, 
+    "datos_acceso" => $sql_datos_acceso, 
+    "contenidos" => $sql_contenidos, 
+    "compra" => $sql_compra, 
+    "testimonios" => $sql_testimonios, 
+    "archivos_usuarios" => $sql_archivos_usuarios
+];
+
+foreach ($tables as $table_name => $sql) {
+    if ($conexion->query($sql) === TRUE) {
+        echo "Tabla creada con éxito: " . $table_name . "<br>";
+    } else {
+        echo "Error al crear tabla $table_name: " . $conexion->error . "<br>";
     }
+}
+ 
 }
 
 crearTablas($conexion);
