@@ -21,98 +21,216 @@
   --azulQQ: #2a255b;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  font-family: var(--texto);
+  font-size: 20px;
+}
+
 /* Estilo general del header */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-}
-
-/* Estilo para el logo */
-.logo {
-  flex: 1;
-  width: 5em;
   height: 5em;
 }
 
-/* Estilo para el menú de navegación */
+.logo {
+  height: 5em;
+  width: auto; /* Mantener la proporción del logo */
+}
+
+.hamburger {
+  display: none; /* Oculto por defecto */
+  cursor: pointer;
+  color: black;
+  font-size: 24px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
 nav {
-  flex: 2;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.inicioRegistro {
+  list-style: none;
+  display: flex;
+  margin-right: 15px;
 }
 
 .menu {
   list-style: none;
+  display: flex;
+  justify-content: center; /* Centrar el menú en el espacio disponible */
+  flex-grow: 1;
+  margin: 0 20px; /* Añade margen lateral para separación */
   padding: 0;
-  margin: 0;
-  display: inline-flex;
 }
 
 .menu li {
-  margin: 0 10px;
+  padding: 0 10px;
 }
 
 .menu a {
   text-decoration: none;
   color: black;
-  font-weight: bold;
+  padding: 8px 15px;
+}
+
+.inicioRegistro li a {
+  text-decoration: none;
+  padding: 8px 15px;
 }
 
 .menu a:hover {
-  text-decoration: underline;
-  text-decoration-color: red;
+  border-bottom: 3px solid var(--rojoQQ);
 }
 
-/* Dropdown content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Estilo para los botones de sesión */
-.botonResponsive,
-.iniciarSesion,
-.registro {
-  flex: 1;
-  text-align: right;
-}
-
-.inicioRegistro {
-}
-
-.iniciarSesion a,
-.registro a {
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
+.iniciarSesion {
+  padding-right: 15px;
 }
 
 .iniciarSesion a {
-  border: 2px solid blue;
-  color: black;
   background-color: transparent;
+  border: 2px solid var(--azulQQ);
+  border-radius: 5px;
+  color: black;
 }
 
 .iniciarSesion a:hover {
-  background-color: blue;
-  color: red;
+  background-color: var(--azulQQ);
+  color: black;
 }
 
 .registro a {
-  background-color: blue;
+  background-color: var(--azulQQ);
+  border: 2px solid var(--azulQQ);
+  border-radius: 5px;
   color: white;
-  border: none;
 }
 
 .registro a:hover {
-  color: red;
+  background-color: var(--rojoQQ);
+  border: 2px solid var(--rojoQQ);
+  color: white;
+}
+
+/* footer */
+
+.footer {
+  background: #333;
+  color: white;
+  font-family: var(--texto);
+  padding-top: 50px;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+}
+
+.logoTexto {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  align-content: center;
+  width: 9em;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+.footer-text {
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+}
+
+.socials a {
+  display: inline-block;
+  margin: 0 0.5em;
+  transition: transform 0.3s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-0.5em);
+}
+
+.rrss {
+  border: 3px solid white;
+  border-radius: 50%;
+  width: 2em;
+  height: auto;
+}
+
+.footer-section h2 {
+  margin-bottom: 20px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul a {
+  display: block;
+  color: white;
+  padding: 0.5em;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.footer-section ul a:hover {
+  background-color: var(--rojoQQ);
+}
+
+.contact-form p {
+  padding: 0.5em;
+}
+
+.iconoFooter {
+  width: 1em;
+  height: auto;
+  padding-right: 0.5em;
+}
+
+.footer-bottom p {
+  background-color: #262626;
+  color: #5c5c5c;
+  font-family: var(--texto);
+  text-align: center;
+  padding: 1em 0;
+  font-size: 0.5em;
+}
+
+.footer-bottom a {
+  background-color: #262626;
+  color: #5c5c5c;
+  font-family: var(--texto);
+  text-align: center;
+  padding: 1em 0;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: var(--rojoQQ);
+  transition: background-color 0.3s;
 }
