@@ -32,6 +32,7 @@ function crearTablas($conexion)
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
             Apellidos VARCHAR(255),
+            Titulacion VARCHAR(255),
             Formacion VARCHAR(255),
             Experiencia VARCHAR(255),
             Foto VARCHAR(255)
@@ -125,17 +126,17 @@ LA INSERCCIÓN DE DATOS A CONTINUACIÓN SON DATOS DE EJEMPLO NO REALES NI VÁLID
 function insertarDatos($conexion)
 {
     // Insertar datos en Coaches
-    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Formacion, Experiencia, Foto) VALUES
-                      ('Coach1', 'Apellido1', 'Formacion1', 'Experiencia1', 'foto1Coaches.jpg'),
-                      ('Coach2', 'Apellido2', 'Formacion2', 'Experiencia2', 'foto2Coaches.jpg'),
-                      ('Coach3', 'Apellido3', 'Formacion3', 'Experiencia3', 'foto3Coaches.jpg'),
-                      ('Coach4', 'Apellido4', 'Formacion4', 'Experiencia4', 'foto4Coaches.jpg'),
-                      ('Coach5', 'Apellido5', 'Formacion5', 'Experiencia5', 'foto5Coaches.jpg'),
-                      ('Coach6', 'Apellido6', 'Formacion6', 'Experiencia6', 'foto6Coaches.jpg'),
-                      ('Coach7', 'Apellido7', 'Formacion7', 'Experiencia7', 'foto7Coaches.jpg'),
-                      ('Coach8', 'Apellido8', 'Formacion8', 'Experiencia8', 'foto8Coaches.jpg'),
-                      ('Coach9', 'Apellido9', 'Formacion9', 'Experiencia9', 'foto9Coaches.jpg'),
-                      ('Coach10', 'Apellido10', 'Formacion10', 'Experiencia10', 'foto10Coaches.jpg')");
+    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, Foto) VALUES
+                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Experiencia1', 'foto1Coaches.jpg'),
+                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Experiencia2', 'foto2Coaches.jpg'),
+                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Experiencia3', 'foto3Coaches.jpg'),
+                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Experiencia4', 'foto4Coaches.jpg'),
+                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Experiencia5', 'foto5Coaches.jpg'),
+                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Experiencia6', 'foto6Coaches.jpg'),
+                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Experiencia7', 'foto7Coaches.jpg'),
+                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Experiencia8', 'foto8Coaches.jpg'),
+                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Experiencia9', 'foto9Coaches.jpg'),
+                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Experiencia10', 'foto10Coaches.jpg')");
 
     // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES
@@ -176,18 +177,36 @@ function insertarDatos($conexion)
                       ('Producto9', 'Descripcion9', 'Categoria9', 'producto9.jpg', 'video9producto.mp4', 900, 1, 9, 9),
                       ('Producto10', 'Descripcion10', 'Categoria10', 'producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
 
-    // Insertar datos en DatosAcceso
-    $conexion->query("INSERT INTO DatosAcceso (Usuario, Contrasena, Administrador, FechaLogin, ID_usuario) VALUES
-                        ('usuario1', 'contrasena1', 1, NOW(), 1),
-                        ('usuario2', 'contrasena2', 0, NOW(), 2),
-                        ('usuario3', 'contrasena3', 1, NOW(), 3),
-                        ('usuario4', 'contrasena4', 0, NOW(), 4),
-                        ('usuario5', 'contrasena5', 1, NOW(), 5),
-                        ('usuario6', 'contrasena6', 0, NOW(), 6),
-                        ('usuario7', 'contrasena7', 1, NOW(), 7),
-                        ('usuario8', 'contrasena8', 0, NOW(), 8),
-                        ('usuario9', 'contrasena9', 1, NOW(), 9),
-                        ('usuario10', 'contrasena10', 0, NOW(), 10)");
+    // Define un array con los datos de los usuarios
+    $usuarios = [
+        ['Javier', 'adminJavier', 1],
+        ['usuario2', 'contrasena2', 0],
+        ['usuario3', 'contrasena3', 0],
+        ['usuario4', 'contrasena4', 0],
+        ['usuario5', 'contrasena5', 0],
+        ['usuario6', 'contrasena6', 0],
+        ['usuario7', 'contrasena7', 0],
+        ['usuario8', 'contrasena8', 0],
+        ['usuario9', 'contrasena9', 0],
+        ['usuario10', 'contrasena10', 0]
+    ];
+
+    // Recorre cada usuario del array
+    foreach ($usuarios as $key => $usuario) {
+        // Asigna cada parte del usuario a variables
+        $username = $usuario[0];  // Nombre de usuario
+        $password = password_hash($usuario[1], PASSWORD_DEFAULT);  // Contraseña cifrada
+        $admin = $usuario[2];  // Si es administrador (1) o no (0)
+        $id_usuario = $key + 1;  // Calcula el ID de usuario sumando 1 a la posición del array
+    
+        // Prepara la consulta SQL para insertar los datos en la base de datos
+        $sql = "INSERT INTO DatosAcceso (Usuario, Contrasena, Administrador, FechaLogin, ID_usuario) VALUES
+            ('$username', '$password', $admin, NOW(), $id_usuario)";
+    
+        // Ejecuta la consulta y maneja errores
+        $conexion->query($sql) or die("Error al insertar en DatosAcceso: " . $conexion->error);
+    }
+
 
     // Insertar datos en Contenidos
     $conexion->query("INSERT INTO Contenidos (Titulo, Descripcion, ID_Producto) VALUES
