@@ -206,8 +206,6 @@ function insertarDatos($conexion)
         // Ejecuta la consulta y maneja errores
         $conexion->query($sql) or die("Error al insertar en DatosAcceso: " . $conexion->error);
     }
-
-
     // Insertar datos en Contenidos
     $conexion->query("INSERT INTO Contenidos (Titulo, Descripcion, ID_Producto) VALUES
                         ('Titulo1', 'Descripcion del contenido 1', 1),
@@ -250,6 +248,7 @@ function insertarDatos($conexion)
     // Insertar datos en ArchivosUsuarios
     $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, ID_usuario) VALUES
                         ('ruta/archivo1.pdf', 'Manual del usuario 1', 1),
+                        ('ruta/EstadisticasExcel.csv', 'Estadisticas Excel', 1),
                         ('ruta/archivo2.pdf', 'Manual del usuario 2', 2),
                         ('ruta/archivo3.pdf', 'Manual del usuario 3', 3),
                         ('ruta/archivo4.pdf', 'Manual del usuario 4', 4),
@@ -262,7 +261,6 @@ function insertarDatos($conexion)
 }
 //Llamamos a la función para insetar los datos
 insertarDatos($conexion);
-
 
 // Cerrar conexión
 $conexion->close();
