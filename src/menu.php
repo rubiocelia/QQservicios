@@ -2,7 +2,7 @@
 <?php echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/menuFooter.css">'; ?>
 <header class="header">
 
-    <a href="index.php"><img class="logo" src="../src/archivos/logo.png" alt="logoQQ" class="logo"></a>
+    <a href="index.php"><img class="logo" src="../src/archivos/QQazul.png" alt="logoQQ" class="logo"></a>
     <nav>
 
         <button class="hamburger" aria-label="Abrir menú">☰</button>

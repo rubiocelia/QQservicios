@@ -78,7 +78,7 @@ nav {
 
 .menu a {
   text-decoration: none;
-  color: black;
+  color: white;
   padding: 8px 15px;
 }
 
@@ -97,14 +97,15 @@ nav {
 
 .iniciarSesion a {
   background-color: transparent;
-  border: 2px solid var(--azulQQ);
+  border: 2px solid white;
   border-radius: 5px;
-  color: black;
+  color: white;
 }
 
 .iniciarSesion a:hover {
-  background-color: var(--azulQQ);
-  color: black;
+  background-color: white;
+  border: 2px solid white;
+  color: var(--azulQQ);
 }
 
 .registro a {
