@@ -19,6 +19,11 @@
             el éxito!
         </p>
     </main>
+
+
+
+    <!-- JS de lógica para ocultarlo y mostrarlo -->
+    <script src="./scripts/scriptPopUp.js"></script>
     <?php include('footer.php'); ?>
 
 </body>

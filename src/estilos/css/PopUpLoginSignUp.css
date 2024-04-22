@@ -1,0 +1,137 @@
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0; /* Inicialmente, el popup estará oculto */
+    transition: opacity 0.3s ease; /* Agrega una transición de opacidad */
+}
+
+.popup-content {
+    background-color: #F9F9FA;
+    margin: 5% auto;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-content img {
+    width: 100%;
+    height: 100%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    height: fit-content;
+    margin-right: 1%;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    height: auto;
+}
+
+.PanelIzquierdo{
+    width: 35%;
+}
+
+.PanelDerecho{
+    width: 63%;
+    display: flex;
+    flex-direction: column;
+}
+
+.linksReedireccion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 2%;
+    margin-top: 0.5%;
+}
+
+.loginJoin{
+    align-self: flex-end;
+}
+
+.tituloBienvenido{
+    text-align: center;
+    margin-top: 30%;
+    margin-bottom: 1%;
+    font-family: var(--texto);
+}
+
+.Subtitulo{
+    text-align: center;
+    margin-bottom: 3%;
+}
+.CuerpoLogin{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+.botonAcceder{
+    width: 100%;
+}
+
+.FormularioLogin{
+    width: 70%;
+}
+
+.FormularioLogin input{
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+/* Animación Botón */
+button{
+    background:var(--azulQQ);
+    color:#F9F9FA;
+    border:none;
+    position:relative;
+    height:40px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  button:hover{
+    background:#F9F9FA;
+    color:var(--azulQQ);
+  }
+  button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: var(--azulQQ);
+    transition:400ms ease all;
+  }
+  button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
