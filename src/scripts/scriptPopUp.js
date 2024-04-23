@@ -2,6 +2,15 @@
 var loginBtn = document.getElementById("loginBtn");
 var loginPopup = document.getElementById("loginPopup");
 
+//Botón volver
+var volver = document.getElementById("volverBtn");
+
+//
+var volverRegistrar = document.getElementById("volverBtnRegistrarse");
+
+//Botón JoinNow
+var joinNow = document.getElementById("JoinNow");
+
 // Obtener el botón de registro y el popup
 var registerBtn = document.getElementById("registerBtn");
 var registerPopup = document.getElementById("registerPopup");
@@ -36,6 +45,14 @@ closeLoginBtn.onclick = function() {
     }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
 }
 
+// Ocultar el popup de inicio de sesión cuando se haga clic en el botón de volver
+volver.onclick = function() {
+    loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
+    setTimeout(function() {
+        loginPopup.style.display = "none";
+    }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
+}
+
 // Ocultar el popup de registro cuando se haga clic en el botón de cierre
 closeRegisterBtn.onclick = function() {
     registerPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
@@ -59,4 +76,18 @@ window.onclick = function(event) {
             registerPopup.style.display = "none";
         }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
     }
+}
+
+//Cambiar de Login a Registrarse
+// Mostrar el popup de registro cuando se haga clic en el botón de Join Now
+joinNow.onclick = function() {
+    registerPopup.style.display = "block";
+    setTimeout(function() {
+        registerPopup.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
+    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
+
+    loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
+    setTimeout(function() {
+        loginPopup.style.display = "none";
+    }, 30); // Espera 300 milisegundos para ocultar el popup después de la transición
 }
