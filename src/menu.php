@@ -40,8 +40,8 @@
                         <div class="loginJoin">¿Aún no eres miembro?<a href="">JOIN NOW</a></div>
                     </div>
                     <div class="CuerpoLogin">
-                    <h2 class="tituloBienvenido">¡Bienvenido de Vuelta!</h2>
-                    <h3 class="Subtitulo">INICIE SESIÓN PARA CONTINUAR</h3>
+                    <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
+                    <h3 class="Subtitulo">Inicie sesión para continuar</h3>
                     <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
                         <div>
                             <input type="email" id="correo" name="correo_electronico" placeholder="example@correo.es" required>

@@ -69,14 +69,14 @@
 
 .tituloBienvenido{
     text-align: center;
-    margin-top: 30%;
-    margin-bottom: 1%;
+    margin-top: 20%;
+    margin-bottom: 2%;
     font-family: var(--texto);
 }
 
 .Subtitulo{
     text-align: center;
-    margin-bottom: 3%;
+    margin-bottom: 10%;
 }
 .CuerpoLogin{
     display: flex;
@@ -99,7 +99,7 @@
 }
 
 /* Animación Botón */
-button{
+.botonAcceder{
     background:var(--azulQQ);
     color:#F9F9FA;
     border:none;
@@ -111,11 +111,11 @@ button{
     transition:800ms ease all;
     outline:none;
   }
-  button:hover{
+  .botonAcceder:hover{
     background:#F9F9FA;
     color:var(--azulQQ);
   }
-  button:before,button:after{
+  .botonAcceder:before,button:after{
     content:'';
     position:absolute;
     top:0;
@@ -125,13 +125,13 @@ button{
     background: var(--azulQQ);
     transition:400ms ease all;
   }
-  button:after{
+  .botonAcceder:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
   }
-  button:hover:before,button:hover:after{
+  .botonAcceder:hover:before,.botonAcceder:hover:after{
     width:100%;
     transition:800ms ease all;
   }
