@@ -34,25 +34,25 @@
 
                     <div class="linksReedireccion">
                         <div class="Loginvolver">
-                            <a href="">
+                            <a id="volverBtn">
                                 < Volver</a>
                         </div>
-                        <div class="loginJoin">¿Aún no eres miembro?<a href="">JOIN NOW</a></div>
+                        <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> JOIN NOW</a></div>
                     </div>
                     <div class="CuerpoLogin">
-                    <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
-                    <h3 class="Subtitulo">Inicie sesión para continuar</h3>
-                    <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
-                        <div>
-                            <input type="email" id="correo" name="correo_electronico" placeholder="example@correo.es" required>
-                        </div>
-                        <div>
-                            <input type="password" id="contrasena" name="contrasena" placeholder="**********" required>
-                        </div>
-                        <div>
-                            <button class="botonAcceder" type="submit">Acceder</button>
-                        </div>
-                    </form>
+                        <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
+                        <h3 class="Subtitulo">Inicie sesión para continuar</h3>
+                        <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
+                            <div>
+                                <input type="email" id="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
+                            </div>
+                            <div>
+                                <input type="password" id="inputLogin" name="contrasena" placeholder="**********" required>
+                            </div>
+                            <div>
+                                <button class="botonAcceder" type="submit">Acceder</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <span class="close">&times;</span>
@@ -63,17 +63,33 @@
         <!-- Registrarse  -->
         <div id="registerPopup" class="popup">
             <div class="popup-content">
+            <div class="PanelIzquierdo"> <img src="./archivos/FondoLogin.png" alt="Fondo del Login"></div>
+                <div class="PanelDerecho">
+
+                    <div class="linksReedireccion">
+                        <div class="Loginvolver">
+                            <a id="volverBtnRegistrarse">
+                                < Volver</a>
+                        </div>
+                        <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
+                    </div>
+                    <div class="CuerpoLogin">
+                        <h1 class="tituloBienvenido">Únete a nuestra comunidad</h1>
+                        <h3 class="Subtitulo">Registrate para descubrir cómo podemos ayudarte a alcanzar tus objetivos</h3>
+                        <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
+                            <div>
+                                <input type="email" id="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
+                            </div>
+                            <div>
+                                <input type="password" id="inputLogin" name="contrasena" placeholder="**********" required>
+                            </div>
+                            <div>
+                                <button class="botonAcceder" type="submit">Acceder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <span class="close">&times;</span>
-                <h2>Registrarse</h2>
-                <!-- Formulario de registro -->
-                <form action="register.php" method="post">
-                    <!-- Campos de formulario -->
-                    <input type="text" name="username" placeholder="Usuario">
-                    <input type="password" name="password" placeholder="Contraseña">
-                    <input type="email" name="email" placeholder="Correo electrónico">
-                    <button type="submit">Registrarse</button>
-                </form>
-            </div>
         </div>
 
     </header>
