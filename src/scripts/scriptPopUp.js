@@ -5,7 +5,7 @@ var loginPopup = document.getElementById("loginPopup");
 //Botón volver
 var volver = document.getElementById("volverBtn");
 
-//
+//Botón volver registrarse
 var volverRegistrar = document.getElementById("volverBtnRegistrarse");
 
 //Botón JoinNow

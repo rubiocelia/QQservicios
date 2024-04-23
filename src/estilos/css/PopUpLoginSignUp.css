@@ -45,11 +45,11 @@
 }
 
 .PanelIzquierdo{
-    width: 35%;
+    width: 30%;
 }
 
 .PanelDerecho{
-    width: 63%;
+    width: 68%;
     display: flex;
     flex-direction: column;
 }
@@ -60,7 +60,7 @@
     align-items: center;
     justify-content: space-between;
     margin-right: 2%;
-    margin-top: 0.5%;
+    margin-top: 1%;
 }
 
 .loginJoin{
@@ -70,6 +70,13 @@
 .tituloBienvenido{
     text-align: center;
     margin-top: 20%;
+    margin-bottom: 1%;
+    font-family: var(--texto);
+}
+
+.tituloUnete{
+    text-align: center;
+    margin-top: 5%;
     margin-bottom: 1%;
     font-family: var(--texto);
 }
@@ -97,6 +104,35 @@
     margin-bottom: 5%;
     width: 100%;
 }
+
+.FormularioRegistro{
+    width: 70%;
+}
+
+.formularioRegistroFlex{
+    display: flex;
+    flex-direction: row;
+    gap:5%;
+}
+
+.FormularioRegistro input{
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+.columnaPrimeraFormularioRegistro{
+display: flex;
+flex-direction: column;
+width: 50%;
+}
+
+.columnaSegundaFormularioRegistro{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+
 
 /* Animación Botón */
 .botonAcceder{
@@ -136,7 +172,7 @@
     transition:800ms ease all;
   }
 
-#inputLogin{
+.inputLogin{
     height: 50px; /* Ancho deseado */
     padding: 5px;
     border: #cccccd;

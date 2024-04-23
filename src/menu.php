@@ -44,10 +44,10 @@
                         <h3 class="Subtitulo">Inicie sesión para continuar</h3>
                         <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
                             <div>
-                                <input type="email" id="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
+                                <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
                             </div>
                             <div>
-                                <input type="password" id="inputLogin" name="contrasena" placeholder="**********" required>
+                                <input type="password" class="inputLogin" name="contrasena" placeholder="**********" required>
                             </div>
                             <div>
                                 <button class="botonAcceder" type="submit">Acceder</button>
@@ -74,18 +74,23 @@
                         <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
                     </div>
                     <div class="CuerpoLogin">
-                        <h1 class="tituloBienvenido">Únete a nuestra comunidad</h1>
+                        <h1 class="tituloUnete">Únete a nuestra comunidad</h1>
                         <h3 class="Subtitulo">Registrate para descubrir cómo podemos ayudarte a alcanzar tus objetivos</h3>
-                        <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
-                            <div>
-                                <input type="email" id="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
+                        <form class="FormularioRegistro" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
+                            <div class="formularioRegistroFlex">
+                            <div class="columnaPrimeraFormularioRegistro">
+                                <input type="text" class="inputLogin" name="Nombre" placeholder="Nombre" required>
+                                <input type="text" class="inputLogin" name="Apellidos" placeholder="Apellidos" required>
+                                <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@email.es" required>
                             </div>
-                            <div>
-                                <input type="password" id="inputLogin" name="contrasena" placeholder="**********" required>
+                            <div class="columnaSegundaFormularioRegistro">
+                                <input type="number" class="inputLogin" name="NumTel" placeholder="Teléfono" required>
+                                <input type="password" class="inputLogin" name="contrasena" placeholder="Contraseña" required>
+                                <input type="text" class="inputLogin" name="Organizacion" placeholder="Organización">
                             </div>
-                            <div>
-                                <button class="botonAcceder" type="submit">Acceder</button>
                             </div>
+                            <button class="botonAcceder" type="submit">Registrarse</button>
+
                         </form>
                     </div>
                 </div>
