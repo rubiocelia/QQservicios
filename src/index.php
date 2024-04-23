@@ -24,16 +24,46 @@
         </div>
         <div class="info">
             <h1>Descubre cómo podemos ayudarte a crecer</h1>
+            <div class="linea-vertical"></div>
             <div class="fila">
                 <div class="cuad1">
-                    <h3>Una Plataforma Única para un Aprendizaje Personalizado</h3>
+                    <h4>Una <span class="subRojo">Plataforma Única</span> para un Aprendizaje Personalizado</h4>
                 </div>
                 <div class="cuad2">
-                    <img class="" src="" alt="linkeding">
+                    <img class="icono" src="../src/archivos/index/ajustes.png" alt="linkedin">
                 </div>
                 <div class="cuad3">
                     <p>Nuestra plataforma ofrece una experiencia de aprendizaje personalizada y adaptativa en coaching,
                         ajustándose a las necesidades y ritmos únicos de cada usuario.</p>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="cuad3">
+                    <p>Nuestro objetivo es ofrecer un espacio que permita a los participantes adquirir habilidades
+                        prácticas de liderazgo y vida personal, brindando los recursos y el apoyo necesarios para
+                        alcanzar sus metas personales y profesionales.</p>
+                </div>
+                <div class="cuad2">
+                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
+                </div>
+                <div class="cuad1">
+                    <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
+
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="cuad1">
+                    <h4>¿Qué <span class="subRojo">valor</span> me puede añadir?</h4>
+                </div>
+                <div class="cuad2">
+                    <img class="icono" src="../src/archivos/index/valor.png" alt="linkedin">
+                </div>
+                <div class="cuad3">
+                    <p>Nuestros programas de coaching mejoran la toma de decisiones, clarifican objetivos, desarrollan
+                        habilidades comunicativas y expanden tu red profesional, preparándote para avanzar en tu
+                        carrera.</p>
                 </div>
             </div>
         </div>

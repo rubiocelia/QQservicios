@@ -36,6 +36,7 @@
 }
 
 .parrfInicial {
+  font-family: var(--texto);
   color: white;
   margin-left: 10%;
   margin-top: 15em;
@@ -76,9 +77,22 @@
 }
 
 .info {
-  margin-top: 4em;
+  font-family: var(--texto);
+  margin-top: 8em;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.linea-vertical {
+  height: calc(
+    100% - 150px
+  ); /* Ajusta esto según el margen y la altura del h1 */
+  width: 2px;
+  background-color: var(--rojoQQ);
+  position: absolute;
+  left: 50%;
+  top: 50.5em;
 }
 
 .info h1 {
@@ -86,6 +100,7 @@
   text-align: center;
   font-size: 32px;
   margin-bottom: 3em;
+  border-bottom: 2px solid var(--rojoQQ);
 }
 
 .fila {
@@ -93,9 +108,48 @@
   flex-direction: row;
   gap: 3em;
   margin: 0 5em;
+  margin-bottom: 5em;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Importante para el posicionamiento correcto */
 }
 
 .cuad1 {
   color: var(--azulQQ);
   font-size: 27px;
+  font-family: var(--titulo);
+  width: 40%;
+}
+
+.cuad2 {
+  background-color: var(--azulQQ);
+  color: var(--azulQQ);
+  font-size: 27px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  align-content: center;
+}
+
+.cuad3 {
+  color: var(--azulQQ);
+  font-size: 18px;
+  font-family: var(--texto);
+  width: 40%;
+}
+
+.subAzul {
+  background-color: var(--azulQQ);
+  color: white;
+}
+
+.subRojo {
+  background-color: var(--rojoQQ);
+  color: white;
+  padding: 0 5px;
+}
+
+.icono {
+  width: 50px;
+  height: auto;
 }
