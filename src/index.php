@@ -20,6 +20,7 @@
                 hacia
                 el éxito!
             </p>
+            <button class="btnUnete">¡Únete!</button>
         </div>
 
     </main>
