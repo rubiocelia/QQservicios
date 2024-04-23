@@ -24,12 +24,12 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: var(--texto);
-  font-size: 20px;
 }
 
 /* Estilo general del header */
 .header {
+  font-family: var(--texto);
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,6 +126,8 @@ nav {
 /* footer */
 
 .footer {
+  font-family: var(--texto);
+  font-size: 20px;
   background: #333;
   color: white;
   font-family: var(--texto);
