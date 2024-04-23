@@ -20,7 +20,22 @@
                 hacia
                 el éxito!
             </p>
-            <button class="btnUnete">¡Únete!</button>
+            <a href="#" class="btnUnete">¡Únete!</a>
+        </div>
+        <div class="info">
+            <h1>Descubre cómo podemos ayudarte a crecer</h1>
+            <div class="fila">
+                <div class="cuad1">
+                    <h3>Una Plataforma Única para un Aprendizaje Personalizado</h3>
+                </div>
+                <div class="cuad2">
+                    <img class="" src="" alt="linkeding">
+                </div>
+                <div class="cuad3">
+                    <p>Nuestra plataforma ofrece una experiencia de aprendizaje personalizada y adaptativa en coaching,
+                        ajustándose a las necesidades y ritmos únicos de cada usuario.</p>
+                </div>
+            </div>
         </div>
 
     </main>
