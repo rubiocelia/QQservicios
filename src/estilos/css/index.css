@@ -1,14 +1,14 @@
 /* Incorporar la tipografía personalizada */
 @font-face {
   font-family: "titulo";
-  src: url("tipografia/FUTURA PT DEMI.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "texto";
-  src: url("tipografia/FUTURA BOOK FONT.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -37,17 +37,19 @@
   background-repeat: no-repeat;
 }
 
-.titulo {
+.parrfInicial {
   color: white;
-  margin-left: 5em;
+  margin-left: 10%;
+  margin-top: 9em;
+}
+
+.titulo {
   font-family: var(--titulo);
-  font-size: 32px;
-  margin-bottom: 5em;
+  font-size: 38px;
+  margin-bottom: 1.5em;
 }
 
 .txtInicial {
   width: 60%;
-  color: white;
-  margin-left: 5em;
   font-family: var(--texto);
 }
