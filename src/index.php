@@ -69,6 +69,11 @@
             </div>
         </div>
 
+        <div>
+            <img class="fotoInicio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
+
+        </div>
+
     </main>
 
 
