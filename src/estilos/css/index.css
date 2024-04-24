@@ -160,4 +160,47 @@
   margin-right: auto;
   width: 55%;
   height: 450px;
+  margin-bottom: 100px;
+}
+
+.testimonios {
+  text-align: center;
+  font-family: var(--titulo);
+  margin-bottom: 1em;
+}
+
+.testimony-box {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 65%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.testimony-image {
+  flex: 0 0 auto;
+  margin-right: 20px;
+}
+
+.testimony-image img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.testimony-content {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.testimony-content p {
+  margin-bottom: 10px;
+  font-family: var(--texto);
+}
+
+.testimony-content p:last-child {
+  font-weight: bold;
 }

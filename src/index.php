@@ -73,6 +73,17 @@
             <img class="fotoInicio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
 
         </div>
+        <h1 class="testimonios">Testimonios</h1>
+        <div class="testimony-box">
+            <div class="testimony-image">
+                <img src="../src/archivos/index/coaching.jpg" alt="Testimony Image">
+            </div>
+            <div class="testimony-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros at dolor ultricies, at
+                    malesuada lorem interdum.</p>
+                <p>- Nombre del Testimonio</p>
+            </div>
+        </div>
 
     </main>
 
