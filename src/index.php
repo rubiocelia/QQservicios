@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>QQ Servicios</title>
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
+    <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 </head>
 
 <body class="index">
