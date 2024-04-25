@@ -91,3 +91,28 @@ joinNow.onclick = function() {
         loginPopup.style.display = "none";
     }, 30); // Espera 300 milisegundos para ocultar el popup después de la transición
 }
+var openPopupFooter = document.getElementById("openPopupFooter");
+var popupFooter = document.getElementById("popupFooter");
+
+// Obtener el elemento de cierre del popup
+var closePopup = document.getElementById("closePopup");
+
+// Mostrar el popup cuando se haga clic en el botón
+openPopupFooter.onclick = function() {
+    popupFooter.style.display = "block";
+    setTimeout(function() {
+        popupFooter.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
+    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
+}
+
+// Ocultar el popup cuando se haga clic en el botón de cierre
+closePopup.onclick = function() {
+    popupFooter.style.display = "none";
+}
+
+// Ocultar el popup cuando se haga clic fuera de él
+window.addEventListener('click', function(event) {
+    if (event.target == popupFooter) {
+        popupFooter.style.display = 'none';
+    }
+});

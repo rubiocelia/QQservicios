@@ -13,7 +13,7 @@
 
                 <a href="#"><img class="rrss" src="../src/archivos/facebook.png" alt="facebook" target="_blank"></a>
 
-                <a href="#"><img class="rrss" src="../src/archivos/llamada.png" alt="llamadas" target="_blank"></a>
+                <a id="openPopupFooter"><img class="rrss" src="../src/archivos/llamada.png" alt="llamadas" target="_blank"></a>
 
             </div>
         </div>
@@ -46,4 +46,13 @@
         </p>
         <p>&copy;2022 Todos los derechos reservados - Quid Qualitas</p>
     </div>
+
+    <div id="popupFooter">
+    <div id="popupContentFooter">
+      <img src="./archivos/contactanos.png" alt="Contactanos">
+      <span id="closePopup">&times;</span>
+    </div>
+  </div>
+
+
 </footer>
