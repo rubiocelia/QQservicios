@@ -2,7 +2,7 @@
     <?php echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/menuFooter.css">';
     echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLoginSignUp.css">'; ?>
     <header class="header">
-    <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+        <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
         <a href="index.php"><img class="logo" src="../src/archivos/QQAzul.png" alt="logoQQ" class="logo"></a>
         <nav>
 
@@ -27,70 +27,82 @@
         </nav>
 
         <!-- Inicio de sesión -->
-<div id="loginPopup" class="popup">
-    <div class="popup-content">
-        <div class="PanelIzquierdo"><img src="./archivos/FondoLogin.png" alt="Fondo del Login"></div>
-        <div class="PanelDerecho">
-            <div class="linksReedireccion">
-                <div class="Loginvolver">
-                    <a id="volverBtn"> < Volver</a>
+        <div id="loginPopup" class="popup">
+            <div class="popup-content">
+                <div class="PanelIzquierdo"><img src="./archivos/FondoLogin.png" alt="Fondo del Login"></div>
+                <div class="PanelDerecho">
+                    <div class="linksReedireccion">
+                        <div class="Loginvolver">
+                            <a id="volverBtn">
+                                < Volver</a>
+                        </div>
+                        <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> JOIN NOW</a></div>
+                    </div>
+                    <div class="CuerpoLogin">
+                        <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
+                        <h3 class="Subtitulo">Inicie sesión para continuar</h3>
+                        <form class="FormularioLogin" action="/submit-your-form-handler" method="POST"
+                            enctype="multipart/form-data">
+                            <div>
+                                <input type="email" class="inputLogin" name="correo_electronico"
+                                    placeholder="example@correo.es" required>
+                            </div>
+                            <div>
+                                <input type="password" class="inputLogin" name="contrasena" placeholder="**********"
+                                    required>
+                            </div>
+                            <div>
+                                <button class="botonAcceder" type="submit">Acceder</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> JOIN NOW</a></div>
-            </div>
-            <div class="CuerpoLogin">
-                <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
-                <h3 class="Subtitulo">Inicie sesión para continuar</h3>
-                <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
-                    <div>
-                        <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@correo.es" required>
-                    </div>
-                    <div>
-                        <input type="password" class="inputLogin" name="contrasena" placeholder="**********" required>
-                    </div>
-                    <div>
-                        <button class="botonAcceder" type="submit">Acceder</button>
-                    </div>
-                </form>
+                <span class="close">&times;</span>
             </div>
         </div>
-        <span class="close">&times;</span>
-    </div>
-</div>
 
-<!-- Registrarse -->
-<div id="registerPopup" class="popup">
-    <div class="popup-content">
-        <div class="PanelIzquierdo"><img src="./archivos/FondoLogin.png" alt="Fondo del Login"></div>
-        <div class="PanelDerecho">
-            <div class="linksReedireccion">
-                <div class="Loginvolver">
-                    <a id="volverBtnRegistrarse"> < Volver</a>
-                </div>
-                <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
-            </div>
-            <div class="CuerpoLogin">
-                <h1 class="tituloUnete">Únete a nuestra comunidad</h1>
-                <h3 class="Subtitulo">Regístrate para descubrir cómo podemos ayudarte a alcanzar tus objetivos</h3>
-                <form class="FormularioRegistro" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
-                    <div class="formularioRegistroFlex">
-                        <div class="columnaPrimeraFormularioRegistro">
-                            <input type="text" class="inputLogin" name="Nombre" placeholder="Nombre" required>
-                            <input type="text" class="inputLogin" name="Apellidos" placeholder="Apellidos" required>
-                            <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@email.es" required>
+        <!-- Registrarse -->
+        <div id="registerPopup" class="popup">
+            <div class="popup-content">
+                <div class="PanelIzquierdo"><img src="./archivos/FondoLogin.png" alt="Fondo del Login"></div>
+                <div class="PanelDerecho">
+                    <div class="linksReedireccion">
+                        <div class="Loginvolver">
+                            <a id="volverBtnRegistrarse">
+                                < Volver</a>
                         </div>
-                        <div class="columnaSegundaFormularioRegistro">
-                            <input type="number" class="inputLogin" name="NumTel" placeholder="Teléfono" required>
-                            <input type="password" class="inputLogin" name="contrasena" placeholder="Contraseña" required>
-                            <input type="text" class="inputLogin" name="Organizacion" placeholder="Organización">
-                        </div>
+                        <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
                     </div>
-                    <button class="botonAcceder" type="submit">Registrarse</button>
-                </form>
+                    <div class="CuerpoLogin">
+                        <h1 class="tituloUnete">Únete a nuestra comunidad</h1>
+                        <h3 class="Subtitulo">Regístrate para descubrir cómo podemos ayudarte a alcanzar tus objetivos
+                        </h3>
+                        <form class="FormularioRegistro" action="/submit-your-form-handler" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="formularioRegistroFlex">
+                                <div class="columnaPrimeraFormularioRegistro">
+                                    <input type="text" class="inputLogin" name="Nombre" placeholder="Nombre" required>
+                                    <input type="text" class="inputLogin" name="Apellidos" placeholder="Apellidos"
+                                        required>
+                                    <input type="email" class="inputLogin" name="correo_electronico"
+                                        placeholder="example@email.es" required>
+                                </div>
+                                <div class="columnaSegundaFormularioRegistro">
+                                    <input type="number" class="inputLogin" name="NumTel" placeholder="Teléfono"
+                                        required>
+                                    <input type="password" class="inputLogin" name="contrasena" placeholder="Contraseña"
+                                        required>
+                                    <input type="text" class="inputLogin" name="Organizacion"
+                                        placeholder="Organización">
+                                </div>
+                            </div>
+                            <button class="botonAcceder" type="submit">Registrarse</button>
+                        </form>
+                    </div>
+                </div>
+                <span class="close">&times;</span>
             </div>
         </div>
-        <span class="close">&times;</span>
-    </div>
-</div>
 
 
     </header>
