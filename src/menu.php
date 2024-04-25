@@ -82,6 +82,8 @@
                             <div>
                                 <button class="botonAcceder" type="submit">Acceder</button>
                             </div>
+                            <div class="mensajeError" style="color: red; font-weight: bold;"></div>
+
                         </form>
                     </div>
                 </div>

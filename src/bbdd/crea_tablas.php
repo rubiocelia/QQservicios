@@ -22,7 +22,7 @@ function crearTablas($conexion)
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
             Apellidos VARCHAR(255),
-            Correo_electronico VARCHAR(255),
+            Correo_electronico VARCHAR(255) UNIQUE,
             Numero_telefono VARCHAR(20),
             Foto VARCHAR(255),
             Fecha_Registro DATE
@@ -60,13 +60,14 @@ function crearTablas($conexion)
         //Tabla datos de Acceso para el login y registro de usuarios
         "datos_acceso" => "CREATE TABLE IF NOT EXISTS DatosAcceso (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Usuario VARCHAR(255),
+            Correo_electronico VARCHAR(255),
             Contrasena VARCHAR(255),
             Administrador BOOLEAN,
             FechaLogin DATETIME,
-            ID_usuario INT,
-            FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
+            FOREIGN KEY (Correo_electronico) REFERENCES Usuarios(Correo_electronico)
+        
         )",
+        
         //Tabla contenidos
         "contenidos" => "CREATE TABLE IF NOT EXISTS Contenidos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -177,35 +178,36 @@ function insertarDatos($conexion)
                       ('Producto9', 'Descripcion9', 'Categoria9', 'producto9.jpg', 'video9producto.mp4', 900, 1, 9, 9),
                       ('Producto10', 'Descripcion10', 'Categoria10', 'producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
 
-    // Define un array con los datos de los usuarios
-    $usuarios = [
-        ['Javier', 'adminJavier', 1],
-        ['usuario2', 'contrasena2', 0],
-        ['usuario3', 'contrasena3', 0],
-        ['usuario4', 'contrasena4', 0],
-        ['usuario5', 'contrasena5', 0],
-        ['usuario6', 'contrasena6', 0],
-        ['usuario7', 'contrasena7', 0],
-        ['usuario8', 'contrasena8', 0],
-        ['usuario9', 'contrasena9', 0],
-        ['usuario10', 'contrasena10', 0]
-    ];
+$usuarios = [
+    ['adminJavier','ejemplo1', 1, 'email1@example.com'],
+    ['usuario3', 'ejemplo1', 0, 'email3@example.com'],
+    ['usuario4', 'ejemplo1', 0, 'email4@example.com'],
+    ['usuario5', 'ejemplo1', 0, 'email5@example.com'],
+    ['usuario6', 'ejemplo1', 0, 'email6@example.com'],
+    ['usuario7','ejemplo1', 0, 'email7@example.com'],
+    ['usuario8','ejemplo1', 0, 'email8@example.com'],
+    ['usuario9', 'ejemplo1',0, 'email9@example.com'],
+    ['usuario10', 'ejemplo1',0, 'email10@example.com'],
+    ['usuario2', 'ejemplo1',0, 'email2@example.com'],
 
-    // Recorre cada usuario del array
-    foreach ($usuarios as $key => $usuario) {
-        // Asigna cada parte del usuario a variables
-        $username = $usuario[0];  // Nombre de usuario
-        $password = password_hash($usuario[1], PASSWORD_DEFAULT);  // Contraseña cifrada
-        $admin = $usuario[2];  // Si es administrador (1) o no (0)
-        $id_usuario = $key + 1;  // Calcula el ID de usuario sumando 1 a la posición del array
-    
-        // Prepara la consulta SQL para insertar los datos en la base de datos
-        $sql = "INSERT INTO DatosAcceso (Usuario, Contrasena, Administrador, FechaLogin, ID_usuario) VALUES
-            ('$username', '$password', $admin, NOW(), $id_usuario)";
-    
-        // Ejecuta la consulta y maneja errores
-        $conexion->query($sql) or die("Error al insertar en DatosAcceso: " . $conexion->error);
-    }
+
+
+];
+
+foreach ($usuarios as $usuario) {
+    $username = $usuario[0];
+    $password = password_hash($usuario[1], PASSWORD_DEFAULT);  // Cifra la contraseña
+    $admin = $usuario[2];
+    $correo = $usuario[3];
+
+    // Prepara la consulta SQL para insertar los datos en la tabla DatosAcceso
+    $sql = "INSERT INTO DatosAcceso (Correo_electronico, Contrasena, Administrador, FechaLogin) VALUES
+    ('$correo', '$password', $admin, NOW())";
+
+    // Ejecuta la consulta y maneja errores
+    $conexion->query($sql) or die("Error al insertar en DatosAcceso: " . $conexion->error);
+}
+
     // Insertar datos en Contenidos
     $conexion->query("INSERT INTO Contenidos (Titulo, Descripcion, ID_Producto) VALUES
                         ('Titulo1', 'Descripcion del contenido 1', 1),
