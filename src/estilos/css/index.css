@@ -160,47 +160,159 @@
   margin-right: auto;
   width: 55%;
   height: 450px;
-  margin-bottom: 100px;
+  margin-bottom: 3em;
 }
 
+/* testimonios */
 .testimonios {
-  text-align: center;
   font-family: var(--titulo);
+  font-size: 3.2em;
+  text-align: center;
+}
+
+.testimonial-slider {
+  position: relative;
+  width: 65%;
+  margin: auto;
+  overflow: hidden;
+  border: 2px solid var(--rojoQQ);
+  border-radius: 5px;
   margin-bottom: 1em;
 }
 
-.testimony-box {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 65%;
-  margin: 0 auto;
-  margin-bottom: 100px;
-}
-
-.testimony-image {
-  flex: 0 0 auto;
-  margin-right: 20px;
-}
-
-.testimony-image img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-}
-
-.testimony-content {
-  flex: 1 1 auto;
+.testimonial-item {
+  display: none; /* ocultar todos los items y mostrar solo el activo */
   text-align: center;
-}
-
-.testimony-content p {
-  margin-bottom: 10px;
+  padding: 20px;
   font-family: var(--texto);
 }
 
-.testimony-content p:last-child {
-  font-weight: bold;
+.testimonial-item h4 {
+  color: var(--azulQQ);
+  font-size: 1.5em;
+}
+
+.testimonial-item p {
+  color: var(--azulQQ);
+  font-size: 1.3em;
+}
+
+.active {
+  display: block; /* mostrar el item activo */
+}
+
+.fotoTestimonio {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1em;
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .titulo,
+  .txtInicial,
+  .testimonial-item h4,
+  .testimonial-item p {
+    text-align: center;
+  }
+
+  .linea-vertical {
+    display: none;
+  }
+
+  .titulo {
+    font-size: 32px; /* Reducir el tamaño del título en dispositivos más pequeños */
+  }
+
+  .txtInicial {
+    font-size: 18px; /* Reducir el tamaño del texto */
+    width: 90%; /* Aumentar el ancho para usar más espacio disponible */
+    margin: 0 auto; /* Centrar el texto */
+  }
+
+  .btnUnete {
+    font-size: 18px; /* Reducir el tamaño del texto en el botón */
+  }
+
+  .info,
+  .fila {
+    flex-direction: column; /* Cambiar la dirección de las filas a columnas */
+  }
+
+  .cuad1,
+  .cuad3 {
+    width: 80%; /* Ajustar el ancho de los cuadros para mejor visualización */
+    margin: 0 auto; /* Centrar los cuadros */
+    text-align: center; /* Centrar el texto en los cuadros */
+  }
+
+  .cuad2 {
+    margin: 20px auto; /* Centrar y agregar margen alrededor del cuadro 2 */
+    width: 50px; /* Ajustar el tamaño */
+    height: 50px;
+  }
+
+  .fotoInicio {
+    width: 80%; /* Ajustar el ancho de la imagen de inicio */
+  }
+
+  .testimonial-slider {
+    width: 90%; /* Ajustar el ancho del slider */
+  }
+
+  .fotoTestimonio {
+    width: 80px; /* Ajustar el tamaño de la foto en testimonios */
+    height: 80px;
+  }
+
+  button {
+    font-size: 20px; /* Reducir el tamaño de las flechas */
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo {
+    font-size: 24px;
+  }
+
+  .txtInicial {
+    font-size: 16px;
+  }
+
+  .linea-vertical {
+    display: none;
+  }
+
+  .btnUnete {
+    padding: 8px 16px; /* Reducir el padding del botón */
+  }
+
+  .cuad1,
+  .cuad3 {
+    font-size: 20px; /* Reducir aún más el tamaño de la fuente para textos más largos */
+  }
+
+  .cuad2 img {
+    width: 40px; /* Ajustar el tamaño del icono */
+    height: 40px;
+  }
 }

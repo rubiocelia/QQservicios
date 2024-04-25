@@ -74,16 +74,31 @@
 
         </div>
         <h1 class="testimonios">Testimonios</h1>
-        <div class="testimony-box">
-            <div class="testimony-image">
-                <img src="../src/archivos/index/coaching.jpg" alt="Testimony Image">
+        <div class="testimonial-slider">
+            <div class="testimonial-item active">
+                <img class="fotoTestimonio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
+                <h4>Juan Pérez</h4>
+                <p>Este es un testimonio fantástico. ¡El servicio fue excelente y el producto es de alta calidad!</p>
+
             </div>
-            <div class="testimony-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros at dolor ultricies, at
-                    malesuada lorem interdum.</p>
-                <p>- Nombre del Testimonio</p>
+            <div class="testimonial-item">
+                <img class="fotoTestimonio" src="../src/archivos/index/fondo.png" alt="fotoInicio">
+                <h4>Maria López</h4>
+                <p>Muy satisfecho con la compra. Llegó a tiempo y cumple con todas las expectativas.</p>
+
             </div>
+            <div class="testimonial-item">
+                <img class="fotoTestimonio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
+                <h4>Carlos Jiménez</h4>
+                <p>Increíble experiencia de principio a fin. Recomiendo ampliamente este servicio.</p>
+
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
         </div>
+
+
+
 
     </main>
 
@@ -91,6 +106,8 @@
 
     <!-- JS de lógica para ocultarlo y mostrarlo -->
     <script src="./scripts/scriptPopUp.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/testimonios.js"></script>
     <?php include('footer.php'); ?>
 
 </body>
