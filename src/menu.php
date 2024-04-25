@@ -1,4 +1,32 @@
-    <!-- menu.php -->
+<!-- Lógica AJAX Inicio de sesión -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".FormularioLogin").submit(function(event) {
+            event.preventDefault(); // Evitar el envío del formulario estándar
+
+            var form_data = $(this).serialize(); // Serializar datos del formulario
+            $.ajax({
+                type: "POST",
+                url: "./server/verificar_inicio_sesion.php", // Ruta al archivo PHP que maneja la verificación
+                data: form_data,
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        // Redirigir al usuario a su cuenta si las credenciales son válidas
+                        window.location.href = response.redirect;
+                    } else {
+                        // Mostrar mensaje de error si las credenciales son inválidas
+                        $(".mensajeError").text(response.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<!-- menu.php -->
     <?php echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/menuFooter.css">';
     echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLoginSignUp.css">'; ?>
     <header class="header">
