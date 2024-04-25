@@ -87,7 +87,7 @@
 .linea-vertical {
   height: calc(
     100% - 150px
-  ); /* Ajusta esto según el margen y la altura del h1 */
+  );
   width: 2px;
   background-color: var(--rojoQQ);
   position: absolute;
@@ -111,7 +111,7 @@
   margin-bottom: 5em;
   justify-content: center;
   align-items: center;
-  position: relative; /* Importante para el posicionamiento correcto */
+  position: relative;
 }
 
 .cuad1 {
@@ -240,52 +240,52 @@ button {
   }
 
   .titulo {
-    font-size: 32px; /* Reducir el tamaño del título en dispositivos más pequeños */
+    font-size: 32px;
   }
 
   .txtInicial {
-    font-size: 18px; /* Reducir el tamaño del texto */
-    width: 90%; /* Aumentar el ancho para usar más espacio disponible */
-    margin: 0 auto; /* Centrar el texto */
+    font-size: 18px;
+    width: 90%; 
+    margin: 0 auto; 
   }
 
   .btnUnete {
-    font-size: 18px; /* Reducir el tamaño del texto en el botón */
+    font-size: 18px;
   }
 
   .info,
   .fila {
-    flex-direction: column; /* Cambiar la dirección de las filas a columnas */
+    flex-direction: column; 
   }
 
   .cuad1,
   .cuad3 {
-    width: 80%; /* Ajustar el ancho de los cuadros para mejor visualización */
-    margin: 0 auto; /* Centrar los cuadros */
-    text-align: center; /* Centrar el texto en los cuadros */
+    width: 80%;
+    margin: 0 auto;
+    text-align: center; 
   }
 
   .cuad2 {
-    margin: 20px auto; /* Centrar y agregar margen alrededor del cuadro 2 */
-    width: 50px; /* Ajustar el tamaño */
+    margin: 20px auto;
+    width: 50px;
     height: 50px;
   }
 
   .fotoInicio {
-    width: 80%; /* Ajustar el ancho de la imagen de inicio */
+    width: 80%;
   }
 
   .testimonial-slider {
-    width: 90%; /* Ajustar el ancho del slider */
+    width: 90%; 
   }
 
   .fotoTestimonio {
-    width: 80px; /* Ajustar el tamaño de la foto en testimonios */
+    width: 80px;
     height: 80px;
   }
 
   button {
-    font-size: 20px; /* Reducir el tamaño de las flechas */
+    font-size: 20px; 
   }
 }
 
@@ -303,16 +303,16 @@ button {
   }
 
   .btnUnete {
-    padding: 8px 16px; /* Reducir el padding del botón */
+    padding: 8px 16px;
   }
 
   .cuad1,
   .cuad3 {
-    font-size: 20px; /* Reducir aún más el tamaño de la fuente para textos más largos */
+    font-size: 20px; /
   }
 
   .cuad2 img {
-    width: 40px; /* Ajustar el tamaño del icono */
+    width: 40px;
     height: 40px;
   }
 }
