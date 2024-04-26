@@ -12,20 +12,23 @@
 
     <?php include('menu.php'); ?>
     <main>
-        <div class="parrfInicial">
-            <h1 class="titulo">NUESTROS SERVICIOS</h1>
-            <p class="txtInicial">
-                ¡Explora nuevas habilidades con nuestros cursos introductorios!
-                ¿Listo para descubrir un mundo de posibilidades? Nuestros cursos te brindan el punto de partida perfecto
-                para adquirir nuevas habilidades y abrirte a nuevas oportunidades. ¡Inscríbete hoy y da el primer paso
-                hacia
-                el éxito!
-            </p>
-            <a href="#" class="btnUnete">¡Únete!</a>
+        <div class="fondo">
+            <div class="parrfInicial">
+                <h1 class="titulo">NUESTROS SERVICIOS</h1>
+                <p class="txtInicial">
+                    ¡Explora nuevas habilidades con nuestros cursos introductorios!
+                    ¿Listo para descubrir un mundo de posibilidades? Nuestros cursos te brindan el punto de partida
+                    perfecto
+                    para adquirir nuevas habilidades y abrirte a nuevas oportunidades. ¡Inscríbete hoy y da el primer
+                    paso
+                    hacia
+                    el éxito!
+                </p>
+                <a href="#" class="btnUnete">¡Únete!</a>
+            </div>
         </div>
         <div class="info">
             <h1>Descubre cómo podemos ayudarte a crecer</h1>
-            <div class="linea-vertical"></div>
             <div class="fila">
                 <div class="cuad1">
                     <h4>Una <span class="subRojo">Plataforma Única</span> para un Aprendizaje Personalizado</h4>

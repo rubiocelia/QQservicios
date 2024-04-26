@@ -34,6 +34,8 @@
   align-items: center;
   justify-content: space-between;
   height: 5em;
+  position: relative;
+  z-index: 10;
 }
 
 .logo {
