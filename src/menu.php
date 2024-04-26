@@ -64,7 +64,7 @@ $(document).ready(function() {
                         <a id="volverBtn">
                             ← Volver</a>
                     </div>
-                    <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> JOIN NOW</a></div>
+                    <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> Regístrate</a></div>
                 </div>
                 <div class="CuerpoLogin">
                     <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
@@ -98,7 +98,7 @@ $(document).ready(function() {
             <div class="PanelDerecho">
                 <div class="linksReedireccion">
                     <div class="Loginvolver">
-                        <a id="volverBtnRegistrarse">
+                        <a id="volverBtn">
                             ← Volver</a>
                     </div>
                     <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
