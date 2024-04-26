@@ -109,6 +109,7 @@
 
     <!-- JS de lógica para ocultarlo y mostrarlo -->
     <script src="./scripts/scriptPopUp.js"></script>
+    <script src="./scripts/validacionRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/testimonios.js"></script>
     <?php include('footer.php'); ?>

@@ -247,3 +247,19 @@
   color: black;
   cursor: pointer;
 }
+
+.errorMensaje{
+
+  color:var(--rojoQQ) ;
+  font-size: 0.7em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
