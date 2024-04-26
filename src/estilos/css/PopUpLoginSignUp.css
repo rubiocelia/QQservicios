@@ -235,3 +235,15 @@
   color: black;
   cursor: pointer;
 }
+
+#volverBtnRegistrarse {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+#loginRedireccion {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
