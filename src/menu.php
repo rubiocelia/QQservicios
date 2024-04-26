@@ -98,10 +98,10 @@ $(document).ready(function() {
             <div class="PanelDerecho">
                 <div class="linksReedireccion">
                     <div class="Loginvolver">
-                        <a id="volverBtn">
+                        <a id="volverBtnRegistrarse">
                             ← Volver</a>
                     </div>
-                    <div class="loginJoin">¿Ya eres miembro?<a id="JoinNow"> Inicia Sesión</a></div>
+                    <div class="loginJoin">¿Ya eres miembro?<a id="loginRedireccion"> Inicia Sesión</a></div>
                 </div>
                 <div class="CuerpoSign">
                     <h1 class="tituloUnete">Únete a nuestra comunidad</h1>

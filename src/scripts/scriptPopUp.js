@@ -1,118 +1,80 @@
-// Obtener el botón de inicio de sesión y el popup
+// Obtener elementos del DOM
 var loginBtn = document.getElementById("loginBtn");
 var loginPopup = document.getElementById("loginPopup");
-
-//Botón volver
 var volver = document.getElementById("volverBtn");
-
-//Botón volver registrarse
-var volverRegistrar = document.getElementById("volverBtnRegistrarse");
-
-//Botón JoinNow
-var joinNow = document.getElementById("JoinNow");
-
-// Obtener el botón de registro y el popup
+var volverBtnRegistrarse = document.getElementById("volverBtnRegistrarse");
+var loginRedireccion = document.getElementById("loginRedireccion");
 var registerBtn = document.getElementById("registerBtn");
 var registerPopup = document.getElementById("registerPopup");
-
-// Obtener el elemento de cierre del popup de inicio de sesión
-var closeLoginBtn = loginPopup.getElementsByClassName("close")[0];
-
-// Obtener el elemento de cierre del popup de registro
-var closeRegisterBtn = registerPopup.getElementsByClassName("close")[0];
-
-// Mostrar el popup de inicio de sesión cuando se haga clic en el botón de inicio de sesión
-loginBtn.onclick = function() {
-    loginPopup.style.display = "block";
-    setTimeout(function() {
-        loginPopup.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
-    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
-}
-
-// Mostrar el popup de registro cuando se haga clic en el botón de registro
-registerBtn.onclick = function() {
-    registerPopup.style.display = "block";
-    setTimeout(function() {
-        registerPopup.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
-    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
-}
-
-// Ocultar el popup de inicio de sesión cuando se haga clic en el botón de cierre
-closeLoginBtn.onclick = function() {
-    loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-    setTimeout(function() {
-        loginPopup.style.display = "none";
-    }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
-}
-
-// Ocultar el popup de inicio de sesión cuando se haga clic en el botón de volver
-volver.onclick = function() {
-    loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-    setTimeout(function() {
-        loginPopup.style.display = "none";
-    }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
-}
-
-// Ocultar el popup de registro cuando se haga clic en el botón de cierre
-closeRegisterBtn.onclick = function() {
-    registerPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-    setTimeout(function() {
-        registerPopup.style.display = "none";
-    }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
-}
-
-// Función para cerrar los popups si se hace clic fuera de ellos
-window.onclick = function(event) {
-    if (event.target == loginPopup) {
-        loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-        setTimeout(function() {
-            loginPopup.style.display = "none";
-        }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
-    }
-
-    if (event.target == registerPopup) {
-        registerPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-        setTimeout(function() {
-            registerPopup.style.display = "none";
-        }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
-    }
-}
-
-//Cambiar de Login a Registrarse
-// Mostrar el popup de registro cuando se haga clic en el botón de Join Now
-joinNow.onclick = function() {
-    registerPopup.style.display = "block";
-    setTimeout(function() {
-        registerPopup.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
-    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
-
-    loginPopup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
-    setTimeout(function() {
-        loginPopup.style.display = "none";
-    }, 30); // Espera 300 milisegundos para ocultar el popup después de la transición
-}
-var openPopupFooter = document.getElementById("openPopupFooter");
-var popupFooter = document.getElementById("popupFooter");
-
-// Obtener el elemento de cierre del popup
+var closeLoginBtn = loginPopup.querySelector(".close");
+var closeRegisterBtn = registerPopup.querySelector(".close");
+var joinNow = document.getElementById("JoinNow");
 var closePopup = document.getElementById("closePopup");
 
-// Mostrar el popup cuando se haga clic en el botón
-openPopupFooter.onclick = function() {
-    popupFooter.style.display = "block";
-    setTimeout(function() {
-        popupFooter.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
-    }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
+// Función para mostrar el popup con transición
+function mostrarPopup(popup) {
+  popup.style.display = "block";
+  setTimeout(function () {
+    popup.style.opacity = "1"; // Cambia la opacidad para mostrar gradualmente el popup
+  }, 50); // Se agrega un pequeño retraso para asegurar que la transición se aplique correctamente
 }
 
-// Ocultar el popup cuando se haga clic en el botón de cierre
-closePopup.onclick = function() {
-    popupFooter.style.display = "none";
+// Función para ocultar el popup con transición
+function ocultarPopup(popup) {
+  popup.style.opacity = "0"; // Cambia la opacidad para ocultar gradualmente el popup
+  setTimeout(function () {
+    popup.style.display = "none";
+  }, 300); // Espera 300 milisegundos para ocultar el popup después de la transición
 }
 
-// Ocultar el popup cuando se haga clic fuera de él
-window.addEventListener('click', function(event) {
-    if (event.target == popupFooter) {
-        popupFooter.style.display = 'none';
-    }
-});
+// Mostrar el popup de inicio de sesión cuando se haga clic en el botón de inicio de sesión
+loginBtn.onclick = function () {
+  mostrarPopup(loginPopup);
+};
+
+// Mostrar el popup de registro cuando se haga clic en el botón de registro
+registerBtn.onclick = function () {
+  mostrarPopup(registerPopup);
+};
+
+// Ocultar el popup de inicio de sesión cuando se haga clic en el botón de cierre
+closeLoginBtn.onclick = function () {
+  ocultarPopup(loginPopup);
+};
+
+// Ocultar el popup de registro cuando se haga clic en el botón de cierre
+closeRegisterBtn.onclick = function () {
+  ocultarPopup(registerPopup);
+};
+
+// Ocultar los popups cuando se haga clic fuera de ellos
+window.onclick = function (event) {
+  if (event.target == loginPopup) {
+    ocultarPopup(loginPopup);
+  }
+
+  if (event.target == registerPopup) {
+    ocultarPopup(registerPopup);
+  }
+};
+
+// Cambiar de Login a Registrarse
+joinNow.onclick = function () {
+  mostrarPopup(registerPopup);
+  ocultarPopup(loginPopup);
+};
+
+// Cambiar de Registrarse a Login
+loginRedireccion.onclick = function () {
+  mostrarPopup(loginPopup);
+  ocultarPopup(registerPopup);
+};
+// Ocultar el popup cuando se haga clic en el botón de volver
+volver.onclick = function () {
+  ocultarPopup(loginPopup);
+};
+
+// Ocultar el popup cuando se haga clic en el botón de volver desde el popup de registro
+volverBtnRegistrarse.onclick = function () {
+  ocultarPopup(registerPopup);
+};
