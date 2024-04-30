@@ -4,20 +4,20 @@ require_once("conecta.php");
 // Obtener conexión a la base de datos desde el archivo conecta.php
 $conexion = getConexion();
 
-// Función para crear la base de datos y las tablas necesarias
-function crearTablas($conexion)
-{
-    // Verificar si la base de datos 'QQservicios' existe
-    $verificarBD = $conexion->query("SHOW DATABASES LIKE 'QQservicios'");
-    if ($verificarBD->num_rows == 0) {
-        // Crear la base de datos si no existe
-        $conexion->query("CREATE DATABASE QQservicios") or die("Error al crear la base de datos: " . $conexion->error);
-    }
+// Función para crear las tablas y la base de datos
+function crearTablas($conexion) {
+     // Eliminar la base de datos si existe
+     $conexion->query("DROP DATABASE IF EXISTS QQservicios");
+
+     // Crear la base de datos
+     if (!$conexion->query("CREATE DATABASE QQservicios")) {
+         die("Error al crear la base de datos: " . $conexion->error);
+     }
+    
     $conexion->select_db("QQservicios");
 
-    // Creamos un array para la creación de las tabalas de la base de datos
+    // Array para la creación de las tablas de la base de datos
     $tables = [
-        //Tabla Usuarios
         "usuarios" => "CREATE TABLE IF NOT EXISTS Usuarios (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
@@ -27,7 +27,6 @@ function crearTablas($conexion)
             Foto VARCHAR(255),
             Fecha_Registro DATE
         )",
-        //Tabla Coaches
         "coaches" => "CREATE TABLE IF NOT EXISTS Coaches (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
@@ -37,12 +36,10 @@ function crearTablas($conexion)
             Experiencia VARCHAR(255),
             Foto VARCHAR(255)
         )",
-        //Tabla Atributos
         "atributos" => "CREATE TABLE IF NOT EXISTS Atributos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255)
         )",
-        //Tabla Productos
         "productos" => "CREATE TABLE IF NOT EXISTS Productos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
@@ -57,7 +54,6 @@ function crearTablas($conexion)
             FOREIGN KEY (ID_coaches) REFERENCES Coaches(ID),
             FOREIGN KEY (Id_atributo) REFERENCES Atributos(ID)
         )",
-        //Tabla datos de Acceso para el login y registro de usuarios
         "datos_acceso" => "CREATE TABLE IF NOT EXISTS DatosAcceso (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Correo_electronico VARCHAR(255),
@@ -65,10 +61,7 @@ function crearTablas($conexion)
             Administrador BOOLEAN,
             FechaLogin DATETIME,
             FOREIGN KEY (Correo_electronico) REFERENCES Usuarios(Correo_electronico)
-        
         )",
-        
-        //Tabla contenidos
         "contenidos" => "CREATE TABLE IF NOT EXISTS Contenidos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Titulo VARCHAR(255),
@@ -76,7 +69,6 @@ function crearTablas($conexion)
             ID_Producto INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
         )",
-        //Tabla Compras
         "compra" => "CREATE TABLE IF NOT EXISTS Compra (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             FechaHora DATETIME,
@@ -86,7 +78,6 @@ function crearTablas($conexion)
             FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID),
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
         )",
-        //Tabla Testimonios
         "testimonios" => "CREATE TABLE IF NOT EXISTS Testimonios (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
@@ -95,7 +86,6 @@ function crearTablas($conexion)
             ID_Producto INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
         )",
-        //Tabla archivos usuarios
         "archivos_usuarios" => "CREATE TABLE IF NOT EXISTS ArchivosUsuarios (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Ruta VARCHAR(255),
@@ -107,9 +97,14 @@ function crearTablas($conexion)
 
     // Crear cada tabla en la base de datos
     foreach ($tables as $table_name => $sql) {
-        $conexion->query($sql) or die("Error al crear tabla $table_name: " . $conexion->error);
+        if (!$conexion->query($sql)) {
+            die("Error al crear la tabla $table_name: " . $conexion->error);
+        } else {
+            echo "Tabla $table_name creada con éxito.<br>";
+        }
     }
 }
+    
 
 // Llama a la función para crear las tablas
 crearTablas($conexion);

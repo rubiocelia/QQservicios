@@ -218,16 +218,6 @@
   margin-bottom: 1em;
 }
 
-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-}
-
 .prev {
   left: 10px;
 }
