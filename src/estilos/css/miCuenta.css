@@ -24,7 +24,11 @@
 /* Estilos generales para el cuerpo de la página */
 
 .miCuenta {
-  background-color: #fea4ee;
+  height: auto;
+  background-image: url("../../archivos/perfil/fondoPerfil.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 main {
@@ -143,15 +147,27 @@ main {
   border-bottom: 1.7px solid var(--azulQQ);
   box-shadow: 0 1px 0 0 var(--azulQQ);
 }
+/* Estilos CSS */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribuye el espacio entre los botones */
+}
 
 .acciones button {
   background-color: var(--azulQQ);
   border: 2px solid var(--azulQQ);
   border-radius: 5px;
   color: white;
-  width: 120px;
-  height: 40px;
+  min-width: 120px;
+  height: auto;
   font-size: 1em;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  flex-grow: 1;
 }
 
 .acciones button:hover {
@@ -159,4 +175,11 @@ main {
   border: 2px solid var(--rojoQQ);
   color: white;
   cursor: pointer;
+}
+
+.formContacto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

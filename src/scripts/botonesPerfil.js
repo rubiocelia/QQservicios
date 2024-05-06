@@ -10,7 +10,23 @@ function habilitarEdicion() {
   // Mostrar el botón de guardar y ocultar el botón de modificar
   document.getElementById("btnGuardar").style.display = "block";
   document.getElementById("btnModificar").style.display = "none";
+  document.getElementById("btnCancelar").style.display = "block"; // Mostrar el botón de cancelar
 }
+
+document.getElementById("btnCancelar").addEventListener("click", function () {
+  // Obtener todos los campos de entrada dentro del contenedor con clase "perfil"
+  var campos = document.querySelectorAll(".perfil input");
+
+  // Iterar sobre los campos y deshabilitar la edición
+  campos.forEach(function (campo) {
+    campo.readOnly = true; // Habilita el modo de solo lectura
+  });
+
+  // Ocultar el botón de guardar y mostrar el botón de modificar
+  document.getElementById("btnGuardar").style.display = "none";
+  document.getElementById("btnModificar").style.display = "block";
+  document.getElementById("btnCancelar").style.display = "none"; // Ocultar el botón de cancelar
+});
 
 document
   .getElementById("btnGuardar")
@@ -35,8 +51,17 @@ function actualizarDatos() {
       });
       document.getElementById("btnGuardar").style.display = "none"; // Oculta el botón Guardar
       document.getElementById("btnModificar").style.display = "block"; // Muestra el botón Modificar
+      document.getElementById("btnCancelar").style.display = "none"; // Oculta el botón Cancelar
     })
     .catch((error) => {
       console.error(error);
     });
 }
+
+document.getElementById("btnCancelar").addEventListener("click", function () {
+  // Obtener el formulario
+  var form = document.querySelector("form");
+
+  // Resetear el formulario para deshacer los cambios no guardados
+  form.reset();
+});

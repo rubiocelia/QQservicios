@@ -106,6 +106,9 @@
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                             <button type="submit" id="btnGuardar" style="display:none;">Guardar Cambios</button>
+                            <button type="button" id="btnCancelar" style="display:none;"
+                                onclick="cancelarEdicion()">Cancelar</button>
+
                         </div>
 
                     </div>
@@ -122,17 +125,17 @@
 
             <div id="contacto" class="seccion">
                 <h1>Contacto</h1>
-                <form action="submit_contact.php" method="post" class="contact-form">
+                <form action="submit_contact.php" method="post" class="formContacto">
 
-                    <div class="form-group">
+                    <div class="campoContacto">
                         <label for="name">Nombre:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="campoContacto">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    <div class="form-group">
+                    <div class="campoContacto">
                         <label for="message">Mensaje:</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
