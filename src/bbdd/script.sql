@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     Apellidos VARCHAR(255),
     Correo_electronico VARCHAR(255),
     Numero_telefono VARCHAR(20),
+    Organizacion VARCHAR(255),
     Foto VARCHAR(255),
     Fecha_Registro DATE
 );
@@ -111,17 +112,17 @@ INSERT INTO Atributos (Nombre) VALUES
 ('Atributo9'),
 ('Atributo10');
 
-INSERT INTO Usuarios (Nombre, Apellidos, Correo_electronico, Numero_telefono, Foto, Fecha_Registro) VALUES
-('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'foto1Usuario.jpg', CURDATE()),
-('Nombre2', 'Apellido2', 'email2@example.com', '1234567891', 'foto2Usuario.jpg', CURDATE()),
-('Nombre3', 'Apellido3', 'email3@example.com', '1234567892', 'foto3Usuario.jpg', CURDATE()),
-('Nombre4', 'Apellido4', 'email4@example.com', '1234567893', 'foto4Usuario.jpg', CURDATE()),
-('Nombre5', 'Apellido5', 'email5@example.com', '1234567894', 'foto5Usuario.jpg', CURDATE()),
-('Nombre6', 'Apellido6', 'email6@example.com', '1234567895', 'foto6Usuario.jpg', CURDATE()),
-('Nombre7', 'Apellido7', 'email7@example.com', '1234567896', 'foto7Usuario.jpg', CURDATE()),
-('Nombre8', 'Apellido8', 'email8@example.com', '1234567897', 'foto8Usuario.jpg', CURDATE()),
-('Nombre9', 'Apellido9', 'email9@example.com', '1234567898', 'foto9Usuario.jpg', CURDATE()),
-('Nombre10', 'Apellido10', 'email10@example.com', '1234567899', 'foto10Usuario.jpg', CURDATE());
+INSERT INTO Usuarios (Nombre, Apellidos, Correo_electronico, Numero_telefono, Organizacion, Foto, Fecha_Registro) VALUES
+('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'Organización 1', 'foto1Usuario.jpg', CURDATE()),
+('Nombre2', 'Apellido2', 'email2@example.com', '1234567891','Organización 1', 'foto2Usuario.jpg', CURDATE()),
+('Nombre3', 'Apellido3', 'email3@example.com', '1234567892', 'Organización 1','foto3Usuario.jpg', CURDATE()),
+('Nombre4', 'Apellido4', 'email4@example.com', '1234567893', 'Organización 1','foto4Usuario.jpg', CURDATE()),
+('Nombre5', 'Apellido5', 'email5@example.com', '1234567894', 'Organización 1','foto5Usuario.jpg', CURDATE()),
+('Nombre6', 'Apellido6', 'email6@example.com', '1234567895', 'Organización 1','foto6Usuario.jpg', CURDATE()),
+('Nombre7', 'Apellido7', 'email7@example.com', '1234567896', 'Organización 1','foto7Usuario.jpg', CURDATE()),
+('Nombre8', 'Apellido8', 'email8@example.com', '1234567897', 'Organización 1','foto8Usuario.jpg', CURDATE()),
+('Nombre9', 'Apellido9', 'email9@example.com', '1234567898', 'Organización 1','foto9Usuario.jpg', CURDATE()),
+('Nombre10', 'Apellido10', 'email10@example.com', '1234567899', 'Organización 1','foto10Usuario.jpg', CURDATE());
 
 INSERT INTO Productos (Nombre, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, ID_coaches, Id_atributo) VALUES
 ('Producto1', 'Descripcion1', 'Categoria1', 'producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
