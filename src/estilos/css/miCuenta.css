@@ -81,8 +81,6 @@ main {
   display: none; /* Inicialmente oculto, se mostrará mediante JavaScript */
   padding: 20px;
   background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
 .seccion h1 {
@@ -90,26 +88,75 @@ main {
   margin-bottom: 0.5em;
 }
 
-/* Formularios y elementos de entrada */
-input[type="text"],
-input[type="email"],
-textarea {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: var(--titulo);
+  font-size: 1.2em;
 }
 
-input[type="submit"] {
-  background-color: #5c67f2;
-  color: white;
+.fotoPerfil {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 2em;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5em;
+}
+
+.campo {
+  flex: 1; /* Permite que cada campo se expanda equitativamente */
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.campo label {
+  margin-bottom: 5px;
+}
+
+.campo input {
+  width: 100%;
+  height: 1.5em;
+  font-family: var(--texto);
+  font-size: 0.8em;
+  padding-left: 5px;
   border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  border-bottom: 1.5px solid gray;
+  outline: none;
+  transition: border-bottom 0.1s ease-in-out;
 }
 
-input[type="submit"]:hover {
-  background-color: #4a54e1;
+.campo input:focus {
+  border-bottom: 1.7px solid var(--azulQQ);
+  box-shadow: 0 1px 0 0 var(--azulQQ);
+}
+
+.acciones button {
+  background-color: var(--azulQQ);
+  border: 2px solid var(--azulQQ);
+  border-radius: 5px;
+  color: white;
+  width: 120px;
+  height: 40px;
+  font-size: 1em;
+}
+
+.acciones button:hover {
+  background-color: var(--rojoQQ);
+  border: 2px solid var(--rojoQQ);
+  color: white;
+  cursor: pointer;
 }

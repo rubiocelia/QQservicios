@@ -60,26 +60,56 @@
             <div id="perfil" class="seccion">
                 <h1>Mi perfil</h1>
                 <form action="guardar_perfil.php" method="post">
-                    <img src="perfil.jpg" alt="Foto de Perfil" style="width:100px; height:100px;"><br>
-                    <label for="nombre">Nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre"
-                        value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly><br>
-                    <label for="apellidos">Apellidos:</label><br>
-                    <input type="text" id="apellidos" name="apellidos"
-                        value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly><br>
-                    <label for="email">Email:</label><br>
-                    <input type="email" id="email" name="email"
-                        value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly><br>
-                    <label for="telefono">Número de Teléfono:</label><br>
-                    <input type="tel" id="telefono" name="telefono"
-                        value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly><br>
-                    <!-- <label for="organizacion">Organización:</label><br>
-                    <input type="text" id="organizacion" name="organizacion"
-                        value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly><br> -->
+                    <div class="perfil">
+                        <div class="foto">
+                            <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
+                                class="fotoPerfil">
+                        </div>
 
-                    <button type="button2" onclick="habilitarEdicion()">Modificar</button>
-                    <button type="submit" id="guardar" style="display:none;">Guardar Cambios</button>
+                        <div class="datos">
+                            <!-- Fila para Nombre y Apellidos -->
+                            <div class="fila">
+                                <div class="campo">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" id="nombre" name="nombre"
+                                        value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
+                                </div>
+                                <div class="campo">
+                                    <label for="apellidos">Apellidos:</label>
+                                    <input type="text" id="apellidos" name="apellidos"
+                                        value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
+                                </div>
+                            </div>
+
+                            <!-- Fila para Email, Teléfono y Organización -->
+                            <div class="fila">
+                                <div class="campo">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email"
+                                        value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>"
+                                        readonly>
+                                </div>
+                                <div class="campo">
+                                    <label for="telefono">Número de Teléfono:</label>
+                                    <input type="tel" id="telefono" name="telefono"
+                                        value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
+                                </div>
+                                <div class="campo">
+                                    <label for="organizacion">Organización:</label>
+                                    <input type="text" id="organizacion" name="organizacion"
+                                        value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acciones">
+                            <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
+                            <button type="submit" id="btnGuardar" style="display:none;">Guardar Cambios</button>
+                        </div>
+
+                    </div>
                 </form>
+
             </div>
             <div id="servicios" class="seccion">
                 <h1>Mis servicios</h1>
@@ -112,16 +142,7 @@
     </main>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/menuLateral.js"></script>
-    <script>
-    function habilitarEdicion() {
-        document.getElementById('nombre').readOnly = false;
-        document.getElementById('apellidos').readOnly = false;
-        document.getElementById('email').readOnly = false;
-        document.getElementById('telefono').readOnly = false;
-        document.getElementById('organizacion').readOnly = false;
-        document.getElementById('guardar').style.display = 'inline-block';
-    }
-    </script>
+    <script src="./scripts/botonesPerfil.js"></script>
     <?php include('footer.php'); ?>
 </body>
 
