@@ -57,11 +57,11 @@ function crearTablas($conexion) {
         )",
         "datos_acceso" => "CREATE TABLE IF NOT EXISTS DatosAcceso (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Correo_electronico VARCHAR(255),
+            ID_usuario INT,
             Contrasena VARCHAR(255),
             Administrador BOOLEAN,
             FechaLogin DATETIME,
-            FOREIGN KEY (Correo_electronico) REFERENCES Usuarios(Correo_electronico)
+            FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
         )",
         "contenidos" => "CREATE TABLE IF NOT EXISTS Contenidos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -175,30 +175,27 @@ function insertarDatos($conexion)
                       ('Producto10', 'Descripcion10', 'Categoria10', 'producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
 
 $usuarios = [
-    ['adminJavier','ejemplo1', 1, 'email1@example.com'],
-    ['usuario3', 'ejemplo1', 0, 'email3@example.com'],
-    ['usuario4', 'ejemplo1', 0, 'email4@example.com'],
-    ['usuario5', 'ejemplo1', 0, 'email5@example.com'],
-    ['usuario6', 'ejemplo1', 0, 'email6@example.com'],
-    ['usuario7','ejemplo1', 0, 'email7@example.com'],
-    ['usuario8','ejemplo1', 0, 'email8@example.com'],
-    ['usuario9', 'ejemplo1',0, 'email9@example.com'],
-    ['usuario10', 'ejemplo1',0, 'email10@example.com'],
-    ['usuario2', 'ejemplo1',0, 'email2@example.com'],
-
-
-
+    ['adminJavier','ejemplo1', 1, 1],
+    ['usuario2', 'ejemplo1',0, 2],
+    ['usuario3', 'ejemplo1', 0, 3],
+    ['usuario4', 'ejemplo1', 0, 4],
+    ['usuario5', 'ejemplo1', 0, 5],
+    ['usuario6', 'ejemplo1', 0, 6],
+    ['usuario7','ejemplo1', 0, 7],
+    ['usuario8','ejemplo1', 0, 8],
+    ['usuario9', 'ejemplo1',0, 9],
+    ['usuario10', 'ejemplo1',0, 10],
 ];
 
 foreach ($usuarios as $usuario) {
     $username = $usuario[0];
     $password = password_hash($usuario[1], PASSWORD_DEFAULT);  // Cifra la contraseña
     $admin = $usuario[2];
-    $correo = $usuario[3];
+    $userID = $usuario[3];  // Obtener ID del usuario en lugar del correo electrónico
 
     // Prepara la consulta SQL para insertar los datos en la tabla DatosAcceso
-    $sql = "INSERT INTO DatosAcceso (Correo_electronico, Contrasena, Administrador, FechaLogin) VALUES
-    ('$correo', '$password', $admin, NOW())";
+    $sql = "INSERT INTO DatosAcceso (ID_usuario, Contrasena, Administrador, FechaLogin) VALUES
+    ('$userID', '$password', $admin, NOW())";
 
     // Ejecuta la consulta y maneja errores
     $conexion->query($sql) or die("Error al insertar en DatosAcceso: " . $conexion->error);

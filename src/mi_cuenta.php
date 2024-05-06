@@ -2,28 +2,28 @@
     // Iniciar sesión
     session_start();
 
-    // Verificar si el correo electrónico está almacenado en la sesión
-    if (!isset($_SESSION['correo_electronico'])) {
-        // Si el correo electrónico no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
+    // Verificar si el ID de usuario está almacenado en la sesión
+    if (!isset($_SESSION['id_usuario'])) {
+        // Si el ID de usuario no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
         header("Location: formulario_inicio_sesion.php");
         exit();
     }
 
-    // El correo electrónico del usuario está definido en la sesión
-    $correoElectronico = $_SESSION['correo_electronico'];
+    // El ID de usuario está definido en la sesión
+    $idUsuario = $_SESSION['id_usuario'];
     
     // Obtener los datos del usuario
     require_once("./bbdd/conecta.php");
     $conexion = getConexion();
-    $sql = "SELECT * FROM Usuarios WHERE Correo_electronico = ?";
+    $sql = "SELECT * FROM Usuarios WHERE ID = ?";
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("s", $correoElectronico);
+    $stmt->bind_param("i", $idUsuario); // 'i' para indicar que es un entero (ID)
     $stmt->execute();
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows == 0) {
         // No se encontraron resultados, posible manejo de error o redirección
-        echo "No se encontró información para el usuario con el correo proporcionado.";
+        echo "No se encontró información para el usuario con el ID proporcionado.";
         $conexion->close();
         exit();
     }
@@ -32,6 +32,7 @@
     $usuario = $resultado->fetch_assoc();
     $conexion->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -61,10 +62,10 @@
                 <h1>Mi perfil</h1>
                 <form action="guardar_perfil.php" method="post">
                     <div class="perfil">
-                        <div class="foto">
+                        <!-- <div class="foto">
                             <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
                                 class="fotoPerfil">
-                        </div>
+                        </div> -->
 
                         <div class="datos">
                             <!-- Fila para Nombre y Apellidos -->

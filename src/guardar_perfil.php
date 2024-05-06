@@ -2,7 +2,7 @@
 session_start();
 
 // Verificar si el usuario está autenticado
-if (!isset($_SESSION['correo_electronico'])) {
+if (!isset($_SESSION['id_usuario'])) {
     header("Location: formulario_inicio_sesion.php");
     exit();
 }
@@ -17,28 +17,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $conexion->real_escape_string($_POST['email']);
     $telefono = $conexion->real_escape_string($_POST['telefono']);
     $organizacion = $conexion->real_escape_string($_POST['organizacion']);
-    $correoElectronico = $_SESSION['correo_electronico'];
+    $id_usuario = $_SESSION['id_usuario'];
 
-    // SQL para actualizar los datos del usuario
-    $sql = "UPDATE Usuarios SET Nombre=?, Apellidos=?, Correo_electronico=?, Numero_telefono=?, Organizacion=? WHERE Correo_electronico=?";
-    $stmt = $conexion->prepare($sql);
-    if ($stmt === false) {
-        echo json_encode(['success' => false, 'message' => 'Error de preparación SQL: ' . $conexion->error]);
+    // Iniciar una transacción
+    $conexion->begin_transaction();
+
+    // SQL para actualizar los datos del usuario en la tabla Usuarios
+    $sqlUpdateUsuarios = "UPDATE Usuarios SET Nombre=?, Apellidos=?, Correo_electronico=?, Numero_telefono=?, Organizacion=? WHERE ID=?";
+    $stmtUpdateUsuarios = $conexion->prepare($sqlUpdateUsuarios);
+    if ($stmtUpdateUsuarios === false) {
+        echo json_encode(['success' => false, 'message' => 'Error de preparación SQL para actualizar Usuarios: ' . $conexion->error]);
         exit;
     }
 
-    $stmt->bind_param("ssssss", $nombre, $apellidos, $email, $telefono, $organizacion, $correoElectronico);
-    $success = $stmt->execute();
+    // Bind de parámetros por referencia
+    $stmtUpdateUsuarios->bind_param("sssssi", $nombre, $apellidos, $email, $telefono, $organizacion, $id_usuario);
 
-    if ($success) {
-        echo json_encode(['success' => true, 'message' => 'Datos actualizados correctamente']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Error al actualizar datos: ' . $stmt->error]);
+    // Ejecutar la consulta
+    $successUpdateUsuarios = $stmtUpdateUsuarios->execute();
+
+    if (!$successUpdateUsuarios) {
+        $conexion->rollback(); // Si la actualización falla, deshacer la transacción
+        echo json_encode(['success' => false, 'message' => 'Error al actualizar datos en Usuarios: ' . $stmtUpdateUsuarios->error]);
+        exit;
     }
-    
-    $stmt->close();
+
+    // Si llegamos aquí, la actualización fue exitosa, confirmar la transacción
+    $conexion->commit();
+
+    // Cerrar la declaración preparada
+    $stmtUpdateUsuarios->close();
+
+    // Cerrar la conexión
     $conexion->close();
+
+    echo json_encode(['success' => true, 'message' => 'Datos actualizados correctamente']);
     exit;
 }
-
 ?>
