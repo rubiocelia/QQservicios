@@ -60,12 +60,16 @@
             <!-- Sección Mi Perfil -->
             <div id="perfil" class="seccion">
                 <h1>Mi perfil</h1>
-                <form action="guardar_perfil.php" method="post">
+                <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                     <div class="perfil">
-                        <!-- <div class="foto">
+                        <div class="foto">
                             <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
                                 class="fotoPerfil">
-                        </div> -->
+                        </div>
+                        <div class="campo">
+                            <label for="foto">Cambiar foto:</label>
+                            <input type="file" id="foto" name="foto" accept="image/*">
+                        </div>
 
                         <div class="datos">
                             <!-- Fila para Nombre y Apellidos -->
@@ -125,22 +129,25 @@
 
             <div id="contacto" class="seccion">
                 <h1>Contacto</h1>
-                <form action="submit_contact.php" method="post" class="formContacto">
-
-                    <div class="campoContacto">
-                        <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="name" required>
+                <form action="enviarContacto.php" method="post" class="campoContacto">
+                    <div class="contacto">
+                        <div class="campoContacto">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" placeholder="Escribe tu nombre" required>
+                        </div>
+                        <div class="campoContacto">
+                            <label for="email">Correo Electrónico:</label>
+                            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                        </div>
+                        <div class="campoContacto">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btnEnviar">Enviar</button>
                     </div>
-                    <div class="campoContacto">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="campoContacto">
-                        <label for="message">Mensaje:</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit">Enviar</button>
                 </form>
+
             </div>
         </div>
     </main>

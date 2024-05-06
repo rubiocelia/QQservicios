@@ -129,6 +129,7 @@ main {
 
 .campo label {
   margin-bottom: 5px;
+  font-family: var(--titulo);
 }
 
 .campo input {
@@ -176,10 +177,69 @@ main {
   color: white;
   cursor: pointer;
 }
-
-.formContacto {
+.contacto {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  width: 70%;
+  font-family: var(--titulo);
+  font-size: 1.2em;
+  margin: 0 auto; /* Centra el bloque '.contacto' en el centro horizontalmente */
+  padding: 20px; /* Agrega un poco de espacio alrededor del contenido */
+}
+
+.campoContacto {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  width: 100%; /* Asegura que el campo ocupa el espacio disponible */
+  margin-bottom: 10px; /* Espacio entre los campos */
+}
+
+.campoContacto label,
+.campoContacto input,
+.campoContacto textarea {
+  align-self: flex-start; /* Alinea los elementos al inicio del eje transversal */
+}
+
+.campoContacto label {
+  margin-bottom: 5px;
+  font-family: var(--titulo);
+}
+
+.campoContacto input,
+.campoContacto textarea {
+  width: 100%;
+  font-family: var(--texto);
+  font-size: 0.8em;
+  padding-left: 5px;
+  border: none;
+  border-bottom: 1.5px solid gray;
+  outline: none;
+  transition: border-bottom 0.1s ease-in-out;
+}
+
+.campoContacto input {
+  height: 1.5em; /* Altura específica para input */
+}
+
+.campoContacto textarea {
+  height: 50px; /* Tamaño fijo para textarea */
+  resize: none; /* Impide que el usuario cambie el tamaño */
+}
+
+.campoContacto input:focus,
+.campoContacto textarea:focus {
+  border-bottom: 1.7px solid var(--azulQQ);
+  box-shadow: 0 1px 0 0 var(--azulQQ);
+}
+
+.btnEnviar {
+  padding: 10px 20px;
+  background-color: var(--azulQQ);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px; /* Espacio sobre el botón */
 }

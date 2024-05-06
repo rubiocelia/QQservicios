@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sqlUpdateUsuarios = "UPDATE Usuarios SET Nombre=?, Apellidos=?, Correo_electronico=?, Numero_telefono=?, Organizacion=? WHERE ID=?";
     $stmtUpdateUsuarios = $conexion->prepare($sqlUpdateUsuarios);
     if ($stmtUpdateUsuarios === false) {
-        echo json_encode(['success' => false, 'message' => 'Error de preparación SQL para actualizar Usuarios: ' . $conexion->error]);
         exit;
     }
 
@@ -38,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$successUpdateUsuarios) {
         $conexion->rollback(); // Si la actualización falla, deshacer la transacción
-        echo json_encode(['success' => false, 'message' => 'Error al actualizar datos en Usuarios: ' . $stmtUpdateUsuarios->error]);
         exit;
     }
 
@@ -50,8 +48,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Cerrar la conexión
     $conexion->close();
-
-    echo json_encode(['success' => true, 'message' => 'Datos actualizados correctamente']);
     exit;
 }
+
+// Asegúrate de verificar si se cargó una imagen
+if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+    $tmp_name = $_FILES['foto']['tmp_name'];
+    $nombreArchivo = basename($_FILES['foto']['name']);
+    $rutaGuardar = './path_to_save/' . $nombreArchivo; // Asegúrate de especificar el camino correcto y tener permisos de escritura
+
+    if (move_uploaded_file($tmp_name, $rutaGuardar)) {
+        // Si la imagen se guardó exitosamente, actualiza la ruta en la base de datos
+        $sqlUpdateFoto = "UPDATE Usuarios SET Foto=? WHERE ID=?";
+        $stmtUpdateFoto = $conexion->prepare($sqlUpdateFoto);
+        $stmtUpdateFoto->bind_param("si", $rutaGuardar, $id_usuario);
+        $stmtUpdateFoto->execute();
+        $stmtUpdateFoto->close();
+    } else {
+        echo "Error al subir el archivo.";
+        $conexion->rollback(); // Si la carga falla, deshacer la transacción
+        $conexion->close();
+        exit;
+    }
+}
+
+// Continúa con el resto de la actualización de datos...
+
 ?>

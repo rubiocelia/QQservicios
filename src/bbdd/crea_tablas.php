@@ -150,7 +150,7 @@ function insertarDatos($conexion)
 
     // Insertar datos en Usuarios. La función CURDATE() en sql devuelve la fecha actual 
     $conexion->query("INSERT INTO Usuarios (Nombre, Apellidos, Correo_electronico, Numero_telefono, Organizacion, Foto, Fecha_Registro) VALUES
-                      ('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'Organización 1', 'foto1Usuario.jpg', CURDATE()),
+                      ('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'Organización 1', '../src/archivos/perfil/fotosPerfil/foto1.jpg', CURDATE()),
                       ('Nombre2', 'Apellido2', 'email2@example.com', '1234567891', 'Organización 1', 'foto2Usuario.jpg', CURDATE()),
                       ('Nombre3', 'Apellido3', 'email3@example.com', '1234567892', 'Organización 1', 'foto3Usuario.jpg', CURDATE()),
                       ('Nombre4', 'Apellido4', 'email4@example.com', '1234567893', 'Organización 1', 'foto4Usuario.jpg', CURDATE()),
