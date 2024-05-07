@@ -24,7 +24,7 @@
                     hacia
                     el éxito!
                 </p>
-                <a href="#" class="btnUnete">¡Únete!</a>
+                <a class="btnUnete" id="btnUnete">¡Únete!</a>
             </div>
         </div>
         <div class="info">

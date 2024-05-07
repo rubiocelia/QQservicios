@@ -44,7 +44,7 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
 
             <li> <a href="servicios.php">Servicios</a></li>
 
-            <li> <a href="https://quidqualitas.es/">QuidQualitas</a></li>
+            <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
         </ul>
 
         <!-- Botones -->

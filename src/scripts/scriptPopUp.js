@@ -10,6 +10,7 @@ var closeLoginBtn = loginPopup.querySelector(".close");
 var closeRegisterBtn = registerPopup.querySelector(".close");
 var joinNow = document.getElementById("JoinNow");
 var closePopup = document.getElementById("closePopup");
+var btnUnete = document.getElementById("btnUnete");
 
 // Función para mostrar el popup con transición
 function mostrarPopup(popup) {
@@ -77,4 +78,9 @@ volver.onclick = function () {
 // Ocultar el popup cuando se haga clic en el botón de volver desde el popup de registro
 volverBtnRegistrarse.onclick = function () {
   ocultarPopup(registerPopup);
+};
+
+// Mostrar el popup de registro cuando se haga clic en el botón de registro
+btnUnete.onclick = function () {
+  mostrarPopup(registerPopup);
 };
