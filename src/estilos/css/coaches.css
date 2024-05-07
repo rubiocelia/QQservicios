@@ -153,8 +153,6 @@
   width: 65%;
   margin: auto;
   overflow: hidden;
-  border: 2px solid var(--rojoQQ);
-  border-radius: 5px;
   margin-bottom: 1em;
 }
 
@@ -175,14 +173,52 @@
   font-size: 1.3em;
 }
 
+.testimonial-carrusel{
+  display:flex ;
+  flex-direction: row;
+  gap: 3%;
+  margin: 1%;
+}
+
+.testimonial-text{
+  display: flex;
+  flex-direction: column;
+  margin: 5%;
+  margin-bottom: 10%;
+  text-align: left;
+}
+
+.testimonial-text h4{
+
+  margin-bottom: 2%;
+  font-family: var(--titulo);
+  font-size: 24px;
+}
+
+
+.testimonial-icons{
+
+  display: flex;
+  flex-direction: row;
+  gap:1%;
+  margin-top: 20%;
+}
+
+.testimonial-icons img{
+
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+
 .active {
   display: block; /* mostrar el item activo */
 }
 
 .fotoTestimonio {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 350px;
+  height: 500px;
   margin-bottom: 1em;
 }
 

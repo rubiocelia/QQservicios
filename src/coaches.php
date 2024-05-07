@@ -6,6 +6,7 @@
     <title>QQ Servicios</title>
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/coaches.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body class="index">
@@ -32,33 +33,64 @@
                 su enfoque y cómo pueden ayudarte a lograr tus objetivos.</h1>
         </div>
 
-        <div class="cardsCoaches">
+        <div class="testimonial-slider">
             <?php
             $query = "SELECT * FROM Coaches";
             $result = $conn->query($query);
+            $first = true;
             while ($coach = $result->fetch_assoc()) {
-                echo '<div class="card">
-                        <div class="face front">
-                            <img src="' . $coach['Foto'] . '" alt="' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '">
-                            <h3>' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '</h3>
-                        </div>
-                        <div class="face back">
-                            <h3>' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '</h3>
-                            <p>' . $coach['Experiencia'] . '</p>
-                            <div class="link">
-                                <a href="#">Conocer más</a>
-                            </div>
-                        </div>
-                    </div>';
+
+
+                echo '
+            
+            <div class="testimonial-item ' . ($first ? 'active' : '') . '">
+            <div class="testimonial-carrusel " class="animated-element">
+            <img class="fotoTestimonio"  src="' . $coach['Foto'] . '" alt="' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '">
+            <div class="testimonial-text">
+            <h4>' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '</h4>
+            <p>' . $coach['Experiencia'] . '</p>
+            <div class="testimonial-icons">
+            <img src="./archivos/linkedin_cuadrado.png" alt="botón Linkedin">
+              <img src="./archivos/boton-de-play.png" alt="botón multimedia">
+            </div>
+          </div>
+          </div>
+          </div>';
+                $first = false;
             }
             ?>
+            <!-- Aquí van los botones de navegación -->
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
         </div>
+
+
+
     </main>
 
     <!-- JS de lógica para ocultarlo y mostrarlo -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/validacionRegistro.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/coachesCarrusel.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeIn');
+                    } else {
+                        entry.target.classList.remove('animate__animated', 'animate__fadeIn');
+                    }
+                });
+            });
+
+            const elements = document.querySelectorAll('.animated-element');
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 
 
     <?php include('footer.php'); ?>
