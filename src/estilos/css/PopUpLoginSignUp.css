@@ -263,3 +263,19 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.ojoContrasena {
+  position: relative;
+}
+
+.inputLogin {
+  /* padding-right: 10px; Ajusta el padding según sea necesario para dejar espacio para el icono */
+  width: 100%; /* El input ocupa todo el espacio disponible */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 5px; /* Ajusta la posición del icono a la derecha */
+  top: 40%;
+  transform: translateY(-50%);
+}
