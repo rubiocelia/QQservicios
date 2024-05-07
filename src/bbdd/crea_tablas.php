@@ -124,16 +124,16 @@ function insertarDatos($conexion)
 {
     // Insertar datos en Coaches
     $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, Foto) VALUES
-                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Experiencia1', 'foto1Coaches.jpg'),
-                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Experiencia2', 'foto2Coaches.jpg'),
-                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Experiencia3', 'foto3Coaches.jpg'),
-                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Experiencia4', 'foto4Coaches.jpg'),
-                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Experiencia5', 'foto5Coaches.jpg'),
-                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Experiencia6', 'foto6Coaches.jpg'),
-                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Experiencia7', 'foto7Coaches.jpg'),
-                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Experiencia8', 'foto8Coaches.jpg'),
-                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Experiencia9', 'foto9Coaches.jpg'),
-                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Experiencia10', 'foto10Coaches.jpg')");
+                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Experiencia1', './archivos/coaches/FotoCoach1.jpg'),
+                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Experiencia2', './archivos/coaches/FotoCoach2.jpg'),
+                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Experiencia3', './archivos/coaches/FotoCoach3.jpg'),
+                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Experiencia4', './archivos/coaches/FotoCoach4.jpg'),
+                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Experiencia5', './archivos/coaches/FotoCoach1.jpg'),
+                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Experiencia6', './archivos/coaches/FotoCoach2.jpg'),
+                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Experiencia7', './archivos/coaches/FotoCoach3.jpg'),
+                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Experiencia8', './archivos/coaches/FotoCoach4.jpg'),
+                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Experiencia9', './archivos/coaches/FotoCoach1.jpg'),
+                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Experiencia10', './archivos/coaches/FotoCoach2.jpg')");
 
     // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES
