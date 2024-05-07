@@ -50,10 +50,15 @@
     <main>
         <div id="menu2">
             <ul>
-                <li onclick="mostrarSeccion('perfil')">Mi perfil</li>
-                <li onclick="mostrarSeccion('servicios')">Mis servicios</li>
-                <li onclick="mostrarSeccion('archivos')">Mis archivos</li>
-                <li onclick="mostrarSeccion('contacto')">Contacto</li>
+                <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil"
+                        class="iconoMenu">Mi
+                    perfil</li>
+                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png"
+                        alt="Icono de perfil" class="iconoMenu">Mis servicios</li>
+                <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/archivo.png" alt="Icono de perfil"
+                        class="iconoMenu">Mis archivos</li>
+                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/correo-de-contacto.png"
+                        alt="Icono de perfil" class="iconoMenu">Contacto</li>
             </ul>
         </div>
         <div id="contenido">
@@ -62,14 +67,18 @@
                 <h1>Mi perfil</h1>
                 <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                     <div class="perfil">
+
                         <div class="foto">
                             <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
                                 class="fotoPerfil">
+                            <input type="file" id="foto" name="foto" style="display:none;">
+                            <!-- Ocultamos el input real -->
+                            <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
+                            <!-- Botón estilizado para seleccionar foto -->
                         </div>
-                        <div class="campo">
-                            <label for="foto">Cambiar foto:</label>
-                            <input type="file" id="foto" name="foto" accept="image/*">
-                        </div>
+
+
+
 
                         <div class="datos">
                             <!-- Fila para Nombre y Apellidos -->
@@ -89,13 +98,13 @@
                             <!-- Fila para Email, Teléfono y Organización -->
                             <div class="fila">
                                 <div class="campo">
-                                    <label for="email">Email:</label>
+                                    <label for="email">Correo electrónico:</label>
                                     <input type="email" id="email" name="email"
                                         value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>"
                                         readonly>
                                 </div>
                                 <div class="campo">
-                                    <label for="telefono">Número de Teléfono:</label>
+                                    <label for="telefono">Número de teléfono:</label>
                                     <input type="tel" id="telefono" name="telefono"
                                         value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
                                 </div>
@@ -109,7 +118,7 @@
 
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
-                            <button type="submit" id="btnGuardar" style="display:none;">Guardar Cambios</button>
+                            <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
                             <button type="button" id="btnCancelar" style="display:none;"
                                 onclick="cancelarEdicion()">Cancelar</button>
 

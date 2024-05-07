@@ -50,10 +50,10 @@ main {
   background-color: var(--azulQQ);
   color: white;
   width: 200px;
-  padding: 20px 0;
+  padding: 10px 10px;
   box-sizing: border-box;
   font-family: var(--texto);
-  font-size: 1.5em;
+  font-size: 1.3em;
   height: 500px;
 }
 
@@ -64,13 +64,25 @@ main {
 }
 
 #menu2 li {
-  padding: 10px 20px;
+  padding: 5px 10px;
   cursor: pointer;
-  border-bottom: 1px solid var(--rojoQQ);
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #menu2 li:hover {
   background-color: var(--rojoQQ);
+  border-radius: 5px;
+}
+
+.iconoMenu {
+  padding: 5px 0;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 25px;
+  height: auto;
 }
 
 /* Estilos para el contenedor de contenido */
@@ -101,14 +113,41 @@ main {
   font-size: 1.2em;
 }
 
+.foto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
 .fotoPerfil {
-  width: 100px;
-  height: 100px;
+  max-width: 125px;
+  height: auto;
   border-radius: 50%;
-  margin-bottom: 2em;
+  margin-bottom: 0.5em;
+}
+
+#btnSeleccionarFoto {
+  display: none;
+  font-family: var(--texto);
+  font-size: 1em;
+  color: black;
+  background-color: #ffffff00;
+  border: none;
+  border-bottom: 1px solid transparent; /* Añade un borde transparente inicialmente */
+  cursor: pointer;
+  transition: border-bottom 0.1s ease-in-out;
+}
+
+#btnSeleccionarFoto:hover {
+  border-bottom: 1px solid var(--rojoQQ); /* Cambia sólo el color del borde al hacer hover */
+  color: black;
+  cursor: pointer;
 }
 
 .datos {
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
   width: 100%;
