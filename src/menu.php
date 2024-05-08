@@ -78,7 +78,9 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                         </div>
                         <div>
                             <input type="password" class="inputLogin" name="contrasena" placeholder="**********">
+
                         </div>
+
                         <div>
                             <button class="botonAcceder" type="submit">Acceder</button>
                         </div>
