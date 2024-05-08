@@ -10,7 +10,17 @@
 
 <body class="index">
 
-    <?php include('menu.php'); ?>
+<?php
+// Inicia o continua una sesión existente
+session_start();
+
+// Verifica si la sesión está iniciada y si $id_usuario está definido
+if (isset($_SESSION['id_usuario'])) {
+    include('menu_sesion_iniciada.php');
+} else {
+    include('menu.php');
+}
+?>
     <main>
         <div class="fondo">
             <div class="parrfInicial">
