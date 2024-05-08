@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var interval;
     function showNextCoach() {
         var current = $(".testimonial-slider .active");
         var next = current.next(".testimonial-item");
@@ -22,39 +23,39 @@ $(document).ready(function () {
     $(".next").click(showNextCoach);
     $(".prev").click(showPrevCoach);
   
-    // Avanzar automáticamente cada 8 segundos
-    setInterval(showNextCoach, 8000);
+    function startAutoSlide() {
+        interval = setInterval(showNextCoach, 8000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(interval);
+    }
   
-    // Observador de intersección para animar las fotos cuando entran en la vista
-    const fotoObserver = new IntersectionObserver(entries => {
+    // Observador de intersección para controlar la visibilidad del carrusel
+    const carouselObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate__animated', 'animate__fadeIn'); // Agrega clases de animación a la foto
+                startAutoSlide();
             } else {
-                entry.target.classList.remove('animate__animated', 'animate__fadeIn'); // Elimina clases de animación de la foto
+                stopAutoSlide();
+            }
+        });
+    }, { threshold: 0.5 }); // Configuración de umbral para determinar cuánto debe estar visible el carrusel para activar el intervalo
+  
+    carouselObserver.observe(document.querySelector('.testimonial-slider'));
+
+    // Observador de intersección para animar fotos y textos
+    const animateOnView = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate__animated', 'animate__fadeIn');
+            } else {
+                entry.target.classList.remove('animate__animated', 'animate__fadeIn');
             }
         });
     });
-  
-    const fotoTestimonios = document.querySelectorAll('.fotoTestimonio');
-    fotoTestimonios.forEach(foto => {
-        fotoObserver.observe(foto);
+
+    document.querySelectorAll('.fotoTestimonio, .testimonial-text').forEach(item => {
+        animateOnView.observe(item);
     });
-  
-    // Observador de intersección para animar el texto cuando entra en la vista
-    const textObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate__animated', 'animate__fadeIn'); // Agrega clases de animación al texto
-            } else {
-                entry.target.classList.remove('animate__animated', 'animate__fadeIn'); // Elimina clases de animación del texto
-            }
-        });
-    });
-  
-    const textSections = document.querySelectorAll('.testimonial-text');
-    textSections.forEach(text => {
-        textObserver.observe(text);
-    });
-  });
-  
+});

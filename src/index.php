@@ -10,17 +10,17 @@
 
 <body class="index">
 
-<?php
-// Inicia o continua una sesión existente
-session_start();
+    <?php
+    // Inicia o continua una sesión existente
+    session_start();
 
-// Verifica si la sesión está iniciada y si $id_usuario está definido
-if (isset($_SESSION['id_usuario'])) {
-    include('menu_sesion_iniciada.php');
-} else {
-    include('menu.php');
-}
-?>
+    // Verifica si la sesión está iniciada y si $id_usuario está definido
+    if (isset($_SESSION['id_usuario'])) {
+        include('menu_sesion_iniciada.php');
+    } else {
+        include('menu.php');
+    }
+    ?>
     <main>
         <div class="fondo">
             <div class="parrfInicial">
@@ -34,7 +34,14 @@ if (isset($_SESSION['id_usuario'])) {
                     hacia
                     el éxito!
                 </p>
-                <a class="btnUnete" id="btnUnete">¡Únete!</a>
+                <?php
+
+                // Verifica si la variable de sesión 'id_usuario' no está definida
+                if (!isset($_SESSION['id_usuario'])) {
+                    // Muestra el botón si el usuario no ha iniciado sesión
+                    echo '<a class="btnUnete" id="btnUnete">¡Únete!</a>';
+                }
+                ?>
             </div>
         </div>
         <div class="info">
