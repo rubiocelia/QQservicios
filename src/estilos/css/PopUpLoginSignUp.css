@@ -230,6 +230,12 @@
   cursor: pointer;
 }
 
+#JoinNow:hover {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+}
+
 #volverBtn {
   text-decoration: none;
   color: black;
@@ -248,34 +254,28 @@
   cursor: pointer;
 }
 
-.errorMensaje{
+#loginRedireccion:hover {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+}
 
-  color:var(--rojoQQ) ;
+.errorMensaje {
+  color: var(--rojoQQ);
   font-size: 0.7em;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-.ojoContrasena {
-  position: relative;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .inputLogin {
   /* padding-right: 10px; Ajusta el padding según sea necesario para dejar espacio para el icono */
   width: 100%; /* El input ocupa todo el espacio disponible */
-}
-
-.toggle-password {
-  position: absolute;
-  right: 5px; /* Ajusta la posición del icono a la derecha */
-  top: 40%;
-  transform: translateY(-50%);
 }
