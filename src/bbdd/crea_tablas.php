@@ -124,16 +124,16 @@ function insertarDatos($conexion)
 {
     // Insertar datos en Coaches
     $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, Foto) VALUES
-                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Experiencia1', './archivos/coaches/FotoCoach1.jpg'),
-                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Experiencia2', './archivos/coaches/FotoCoach2.jpg'),
-                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Experiencia3', './archivos/coaches/FotoCoach3.jpg'),
-                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Experiencia4', './archivos/coaches/FotoCoach4.jpg'),
-                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Experiencia5', './archivos/coaches/FotoCoach1.jpg'),
-                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Experiencia6', './archivos/coaches/FotoCoach2.jpg'),
-                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Experiencia7', './archivos/coaches/FotoCoach3.jpg'),
-                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Experiencia8', './archivos/coaches/FotoCoach4.jpg'),
-                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Experiencia9', './archivos/coaches/FotoCoach1.jpg'),
-                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Experiencia10', './archivos/coaches/FotoCoach2.jpg')");
+                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
+                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png'),
+                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach3.png'),
+                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach4.png'),
+                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
+                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png'),
+                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach3.png'),
+                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach4.png'),
+                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
+                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png')");
 
     // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES

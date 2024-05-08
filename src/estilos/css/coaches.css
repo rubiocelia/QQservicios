@@ -36,16 +36,6 @@
   background-repeat: no-repeat;
 }
 
-.fondo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-}
-
 .parrfInicial {
   font-family: var(--texto);
   color: white;
@@ -67,7 +57,7 @@
 
 .info {
   font-family: var(--texto);
-  margin-top: 120vh;
+  margin-top: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,73 +69,6 @@
   font-size: 24px;
   padding-left: 15em;
   padding-right: 15em;
-}
-
-.fila {
-  display: flex;
-  flex-direction: row;
-  gap: 3em;
-  margin: 0 5em;
-  margin-bottom: 5em;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.cuad1 {
-  color: var(--azulQQ);
-  font-size: 27px;
-  font-family: var(--titulo);
-  width: 40%;
-}
-
-.cuad2 {
-  background-color: var(--azulQQ);
-  color: var(--azulQQ);
-  font-size: 27px;
-  width: 70px;
-  height: 70px;
-  text-align: center;
-  align-content: center;
-}
-
-.cuad3 {
-  color: var(--azulQQ);
-  font-size: 18px;
-  font-family: var(--texto);
-  width: 40%;
-}
-
-.subAzul {
-  background-color: var(--azulQQ);
-  color: white;
-}
-
-.subRojo {
-  background-color: var(--rojoQQ);
-  color: white;
-  padding: 0 5px;
-}
-
-.icono {
-  width: 50px;
-  height: auto;
-}
-
-.fotoInicio {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 55%;
-  height: 450px;
-  margin-bottom: 3em;
-}
-
-/* testimonios */
-.testimonios {
-  font-family: var(--titulo);
-  font-size: 3.2em;
-  text-align: center;
 }
 
 .testimonial-slider {
@@ -173,14 +96,14 @@
   font-size: 1.3em;
 }
 
-.testimonial-carrusel{
-  display:flex ;
+.testimonial-carrusel {
+  display:flex;
   flex-direction: row;
   gap: 3%;
   margin: 1%;
 }
 
-.testimonial-text{
+.testimonial-text {
   display: flex;
   flex-direction: column;
   margin: 5%;
@@ -188,29 +111,24 @@
   text-align: left;
 }
 
-.testimonial-text h4{
-
+.testimonial-text h4 {
   margin-bottom: 2%;
   font-family: var(--titulo);
   font-size: 24px;
 }
 
-
-.testimonial-icons{
-
+.testimonial-icons {
   display: flex;
   flex-direction: row;
-  gap:1%;
+  gap: 1%;
   margin-top: 20%;
 }
 
-.testimonial-icons img{
-
+.testimonial-icons img {
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
-
 
 .active {
   display: block; /* mostrar el item activo */
@@ -248,102 +166,14 @@
   .parrfInicial {
     margin-top: 30em;
   }
-
-  .fotoInicio {
-    height: 550px;
-    width: 53%;
-  }
 }
 
-.card {
-  position: relative;
-  width: 300px;
-  height: 350px;
-  margin: 30px;
-}
-
-.card .face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: .5s;
-}
-
-.card .front {
-  transform: perspective(600px) rotateY(0deg);
-  box-shadow: 0 5px 10px #000;
-}
-
-.card .front img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card .front h3 {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
-  color: #fff;
-  background: rgba(0,0,0,.4);
-  text-align: center;
-}
-
-.card .back {
-  transform: perspective(600px) rotateY(180deg);
-  background: var(--azulQQ);
-  font-family: var(--texto);
-  padding: 15px;
-  color: #f3f3f3;
+.cardsCoaches {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  box-shadow: 0 5px 10px #000;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 80%;
+  margin: 20px auto;
 }
-
-.card .back .link {
-  border-top: solid 1px #f3f3f3;
-  height: 50px;
-  line-height: 50px;
-}
-
-.card .back .link a {
-  color: #f3f3f3;
-}
-
-.card .back h3 {
-  font-size: 30px;
-  margin-top: 20px;
-  letter-spacing: 2px;
-}
-
-.card .back p {
-  letter-spacing: 1px;
-} 
-
-.card:hover .front {
-  transform: perspective(600px) rotateY(180deg);
-}
-
-.card:hover .back {
-  transform: perspective(600px) rotateY(360deg);
-}
-
-.cardsCoaches{
-  display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 80%;
-
-    margin: 20px auto;
-}
-
