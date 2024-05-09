@@ -279,3 +279,22 @@ input[type="number"] {
   /* padding-right: 10px; Ajusta el padding según sea necesario para dejar espacio para el icono */
   width: 100%; /* El input ocupa todo el espacio disponible */
 }
+
+.password{
+  position: relative;
+}
+
+.password input{
+
+  padding: 10px 5px;
+}
+
+.pass-icon{
+
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  width: 27px !important;
+  height: 32px !important;
+  cursor: pointer;
+}

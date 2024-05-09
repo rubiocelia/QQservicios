@@ -2,28 +2,28 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $(".FormularioLogin").submit(function(event) {
-        event.preventDefault(); // Evitar el envío del formulario estándar
+    $(document).ready(function() {
+        $(".FormularioLogin").submit(function(event) {
+            event.preventDefault(); // Evitar el envío del formulario estándar
 
-        var form_data = $(this).serialize(); // Serializar datos del formulario
-        $.ajax({
-            type: "POST",
-            url: "./server/verificar_inicio_sesion.php", // Ruta al archivo PHP que maneja la verificación
-            data: form_data,
-            dataType: "json",
-            success: function(response) {
-                if (response.success) {
-                    // Redirigir al usuario a su cuenta si las credenciales son válidas
-                    window.location.href = response.redirect;
-                } else {
-                    // Mostrar mensaje de error si las credenciales son inválidas
-                    $(".mensajeError").text(response.message);
+            var form_data = $(this).serialize(); // Serializar datos del formulario
+            $.ajax({
+                type: "POST",
+                url: "./server/verificar_inicio_sesion.php", // Ruta al archivo PHP que maneja la verificación
+                data: form_data,
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        // Redirigir al usuario a su cuenta si las credenciales son válidas
+                        window.location.href = response.redirect;
+                    } else {
+                        // Mostrar mensaje de error si las credenciales son inválidas
+                        $(".mensajeError").text(response.message);
+                    }
                 }
-            }
+            });
         });
     });
-});
 </script>
 
 
@@ -70,15 +70,13 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                 <div class="CuerpoLogin">
                     <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
                     <h3 class="Subtitulo">Inicie sesión para continuar</h3>
-                    <form class="FormularioLogin" action="/submit-your-form-handler" method="POST"
-                        enctype="multipart/form-data">
+                    <form class="FormularioLogin" action="/submit-your-form-handler" method="POST" enctype="multipart/form-data">
                         <div>
-                            <input type="email" class="inputLogin" name="correo_electronico"
-                                placeholder="example@correo.es">
+                            <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@correo.es">
                         </div>
-                        <div>
-                            <input type="password" class="inputLogin" name="contrasena" placeholder="**********">
-
+                        <div class="password">
+                            <input type="password" class="inputLogin" name="contrasena" id="password" placeholder="**********">
+                            <img src="./archivos/ojo_cerrado.png" onclick="togglePassword()" class="pass-icon" id="pass-icon">
                         </div>
 
                         <div>
@@ -109,18 +107,19 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                     <h1 class="tituloUnete">Únete a nuestra comunidad</h1>
                     <h3 class="Subtitulo">Regístrate para descubrir cómo podemos ayudarte a alcanzar tus objetivos
                     </h3>
-                    <form class="FormularioRegistro" action="./server/insertar_datos_registro_formulario.php"
-                        method="POST" enctype="multipart/form-data">
+                    <form class="FormularioRegistro" action="./server/insertar_datos_registro_formulario.php" method="POST" enctype="multipart/form-data">
                         <div class="formularioRegistroFlex">
                             <div class="columnaPrimeraFormularioRegistro">
                                 <input type="text" class="inputLogin" name="Nombre" placeholder="Nombre">
                                 <input type="text" class="inputLogin" name="Apellidos" placeholder="Apellidos">
-                                <input type="email" class="inputLogin" name="correo_electronico"
-                                    placeholder="example@email.es">
+                                <input type="email" class="inputLogin" name="correo_electronico" placeholder="example@email.es">
                             </div>
                             <div class="columnaSegundaFormularioRegistro">
                                 <input type="number" class="inputLogin" name="NumTel" placeholder="Teléfono">
-                                <input type="password" class="inputLogin" name="contrasena" placeholder="Contraseña">
+                                <div class="password">
+                                    <input type="password" class="inputLogin" name="contrasena" id="password-Registro" placeholder="**********">
+                                    <img src="./archivos/ojo_cerrado.png" onclick="togglePasswordRegistro()" class="pass-icon" id="pass-icon-Registro">
+                                </div>
                                 <input type="text" class="inputLogin" name="Organizacion" placeholder="Organización">
                             </div>
                         </div>
@@ -135,6 +134,38 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
         </div>
     </div>
 
+
+    <script>
+        function togglePassword() {
+            var passwordInput = document.getElementById("password");
+            var passIcon = document.getElementById("pass-icon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passIcon.src = "./archivos/ojo_abierto.png";
+                passIcon.alt = "Ocultar Contraseña";
+            } else {
+                passwordInput.type = "password";
+                passIcon.src = "./archivos/ojo_cerrado.png";
+                passIcon.alt = "Mostrar Contraseña";
+            }
+        }
+
+        function togglePasswordRegistro() {
+            var passwordInput = document.getElementById("password-Registro");
+            var passIcon = document.getElementById("pass-icon-Registro");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passIcon.src = "./archivos/ojo_abierto.png";
+                passIcon.alt = "Ocultar Contraseña";
+            } else {
+                passwordInput.type = "password";
+                passIcon.src = "./archivos/ojo_cerrado.png";
+                passIcon.alt = "Mostrar Contraseña";
+            }
+        }
+    </script>
 
 </header>
 </header>
