@@ -150,7 +150,6 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                 passIcon.alt = "Mostrar Contraseña";
             }
         }
-
         function togglePasswordRegistro() {
             var passwordInput = document.getElementById("password-Registro");
             var passIcon = document.getElementById("pass-icon-Registro");

@@ -4,20 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
+    <!-- Enlace a la hoja de estilos para los coaches -->
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/coaches.css">
+    <!-- Icono de la pestaña del navegador -->
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+    <!-- Enlace a la librería de animaciones animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body class="index">
     <?php
-    // Inicia o continua una sesión existente
+    // Inicia o continúa una sesión existente
     session_start();
 
     // Verifica si la sesión está iniciada y si $id_usuario está definido
     if (isset($_SESSION['id_usuario'])) {
+        // Incluye el menú para sesión iniciada
         include('menu_sesion_iniciada.php');
     } else {
+        // Incluye el menú estándar
         include('menu.php');
     }
     ?>
@@ -25,6 +30,7 @@
     <?php $conn = getConexion(); ?>
 
     <main>
+        <!-- Sección del fondo con título y descripción -->
         <div class="fondo">
             <div class="parrfInicial">
                 <h1 class="titulo">NUESTROS COACHES</h1>
@@ -37,20 +43,23 @@
             </div>
         </div>
 
+        <!-- Sección con información sobre los coaches -->
         <div class="info">
-            <h1>Desliza a través de los perfiles de nuestros coaches para descubrir más sobre su
-                experiencia y áreas de especialización. Haz clic en su foto para aprender más sobre
-                su enfoque y cómo pueden ayudarte a lograr tus objetivos.</h1>
+            <h1>Creemos firmemente que la calidad del aprendizaje depende de la excelencia de 
+                los instructores. Nuestro equipo de coaches altamente calificados está dedicado a 
+                ayudarte a alcanzar tus metas personales y profesionales.</h1>
         </div>
 
+        <!-- Carrusel de testimonios -->
         <div class="testimonial-slider">
             <?php
+            // Consulta a la base de datos para obtener los coaches
             $query = "SELECT * FROM Coaches";
             $result = $conn->query($query);
             $first = true;
+            // Iteración sobre los resultados de la consulta
             while ($coach = $result->fetch_assoc()) {
-
-
+                // Impresión de cada testimonio
                 echo '
             
             <div class="testimonial-item ' . ($first ? 'active' : '') . '">
@@ -61,7 +70,8 @@
             <p>' . $coach['Experiencia'] . '</p>
             <div class="testimonial-icons">
             <img src="./archivos/linkedin_cuadrado.png" alt="botón Linkedin">
-              <img src="./archivos/boton-de-play.png" alt="botón multimedia">
+            <img src="./archivos/youtube.png" alt="botón multimedia">
+            <img src="./archivos/descripcion-general.png" class="icon-general" alt="">
             </div>
           </div>
           </div>
@@ -69,20 +79,19 @@
                 $first = false;
             }
             ?>
-            <!-- Aquí van los botones de navegación -->
+            <!-- Botones de navegación del carrusel -->
             <button class="prev">&#10094;</button>
             <button class="next">&#10095;</button>
         </div>
 
-
-
     </main>
 
-    <!-- JS de lógica para ocultarlo y mostrarlo -->
+    <!-- Enlaces a los scripts JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/validacionRegistro.js"></script>
     <script src="./scripts/coachesCarrusel.js"></script>
+    <!-- Script para animaciones al hacer scroll -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver(entries => {
@@ -102,7 +111,7 @@
         });
     </script>
 
-
+    <!-- Inclusión del pie de página -->
     <?php include('footer.php'); ?>
 </body>
 
