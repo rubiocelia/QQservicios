@@ -43,21 +43,26 @@
     <title>producto1</title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="./src/estilos/css/producto1.css">
+    <link rel="stylesheet" href="../src/estilos/css/producto1.css">
 </head>
 
-<body>
-    <?php
+<body class="fondoProducto">
+    <header>
+        <?php
     // Inicia o continua una sesión existente
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        // Si no hay sesión activa, iniciar una nueva sesión
+        session_start();
+    }
 
     // Verifica si la sesión está iniciada y si $id_usuario está definido
     if (isset($_SESSION['id_usuario'])) {
-        include('../menu_sesion_iniciada.php');
+        include('menu_sesion_iniciada.php');
     } else {
-        include('../menu.php');
+        include('menu.php');
     }
     ?>
+    </header>
     <main>
         <div class="titulo">
             <h1>Desarrolla tus Competencias como líder. Neuroliderazgo</h1>
@@ -66,7 +71,8 @@
             <div class="cajaIzquierda">
                 <div class="descripcion">
                     <p>Consigue un desempeño óptimo de tus funciones y la correcta gestión emocional que mejore tu
-                        equilibrio y balance personal. Programa Completo y Práctico para potenciar las competencias del
+                        equilibrio y balance personal. Programa Completo y Práctico para potenciar las competencias
+                        del
                         liderazgo eficaz requerido en este Siglo21.Impulsa tu Creatividad, fomenta entornos de
                         Colaboración y Gestiona la Diversidad. Duración: 6 sesiones de 1,5h. </p>
                 </div>
@@ -76,12 +82,11 @@
                 </div>
                 <div class="carrFotos">
                     <div class="fotosVideos">
-                        <img src="./src/archivos/productos/carruselProducto1/javier_ontiveros.jpeg"
-                            class="carrusel-item visible" alt="">
-                        <img src="./src/archivos/productos/carruselProducto1/Julia y Javier Conversacion.JPEG"
+                        <img src="../src/archivos/productos/carruselProducto1/Julia y Javier Conversacion.JPEG"
                             class="carrusel-item" alt="">
-                        <img src="./src/archivos/productos/carruselProducto1/foto3.jpg" class="carrusel-item" alt="">
-                        <video src="./src/archivos/productos/carruselProducto1/video1.mp4" class="carrusel-item"
+                        <img src="../src/archivos/productos/carruselProducto1/javier_ontiveros.jpeg"
+                            class="carrusel-item visible" alt="">
+                        <video src="../src/archivos/productos/carruselProducto1/video1.mp4" class="carrusel-item"
                             controls></video>
                     </div>
 
@@ -114,7 +119,8 @@
                             </div>
                             <div class="respuestaCont">
                                 <ul>
-                                    <li>Evaluación 360º competencias modelo i4* de neuroliderazgo (evaluación individual
+                                    <li>Evaluación 360º competencias modelo i4* de neuroliderazgo (evaluación
+                                        individual
                                         + evaluación de 10 personas).</li>
                                     <li>Comprensión global personal del presente</li>
                                     <li>Definir imagen clara del rol/ situación profesional actual</li>
@@ -127,7 +133,8 @@
                             <div class="tituloCont">Toma de Conciencia y Definición del Cambio</div>
                             <div class="respuestaCont">
                                 <ul>
-                                    <li>Report Individual-Confidencial de los Resultados de competencias en el modelo
+                                    <li>Report Individual-Confidencial de los Resultados de competencias en el
+                                        modelo
                                         i4* neurolíder</li>
                                     <li>Visualización de niveles de competencias (propias y externas)</li>
                                     <li>Fortalezas y Debilidades Compartidas. Puntos Ciegos</li>
@@ -158,8 +165,10 @@
                             </div>
                             <div class="respuestaCont">
                                 <ul>
-                                    <li>Coach y Coachee evalúan el impacto y resultados del Programa de Coaching</li>
-                                    <li>Situación actual del entorno profesional y el alcance de los objetivos definidos
+                                    <li>Coach y Coachee evalúan el impacto y resultados del Programa de Coaching
+                                    </li>
+                                    <li>Situación actual del entorno profesional y el alcance de los objetivos
+                                        definidos
                                     </li>
                                     <li>Planteamiento futuro después del Coaching</li>
                                 </ul>
@@ -169,36 +178,47 @@
                     <div id="testimonios" class="testimonios oculto" style="display: none;">
                         <!-- Carrusel de testimonios -->
                         <div class="testimonial">
-                            <img src="./src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
+                            <img src="../src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
                             <h2>Mª Rosa León Mateo</h2>
                             <h4>Socia Fundadora Network Courier</h4>
-                            <p>Mi querido Coach, como tantas veces te he dicho mi proceso como cochee contigo fue de las
-                                mejores cosas que he hecho en mi carrera profesional. Lo único que siento es no haberlo
-                                hecho antes... Si la forma de ejercer el liderazgo es siempre la base para obtener los
-                                mejores resultados, tener al equipo motivado, en definitiva tener el mejor retorno de
-                                nuestras acciones profesionales, en el periodo que estamos viviendo es fundamental. Mi
+                            <p>Mi querido Coach, como tantas veces te he dicho mi proceso como cochee contigo fue de
+                                las
+                                mejores cosas que he hecho en mi carrera profesional. Lo único que siento es no
+                                haberlo
+                                hecho antes... Si la forma de ejercer el liderazgo es siempre la base para obtener
+                                los
+                                mejores resultados, tener al equipo motivado, en definitiva tener el mejor retorno
+                                de
+                                nuestras acciones profesionales, en el periodo que estamos viviendo es fundamental.
+                                Mi
                                 proceso de aprendizaje como tu cochee sigue vivo y presente en mi, todos los días y
-                                procuro ejercerlo a diario, sacando mi mejor versión en este periodo tan complicado que
+                                procuro ejercerlo a diario, sacando mi mejor versión en este periodo tan complicado
+                                que
                                 estamos viviendo, con la satisfacción que eso supone.
 
                             </p>
                         </div>
                         <div class="testimonial">
-                            <img src="./src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
+                            <img src="../src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
                             <h2>Beatriz Achaques</h2>
                             <h4>CEO & Founder Dubita Arts&People</h4>
-                            <p>Es una bellísima persona y un profesional HUMANO. Tiene un don, que es ayudar a los demás
-                                y una sabiduría infinita. Es una de esas personas a las que acudir en momentos claves de
-                                tu vida. Sabe escuchar, leer a las personas y sembrar la semilla de crecimiento en el
-                                coachee para que una vez acabado el proceso sea uno mismo el que con las herramientas
-                                conseguidas en el proceso, pueda hacerla crecer de forma independiente. Me ha ayudado a
+                            <p>Es una bellísima persona y un profesional HUMANO. Tiene un don, que es ayudar a los
+                                demás
+                                y una sabiduría infinita. Es una de esas personas a las que acudir en momentos
+                                claves de
+                                tu vida. Sabe escuchar, leer a las personas y sembrar la semilla de crecimiento en
+                                el
+                                coachee para que una vez acabado el proceso sea uno mismo el que con las
+                                herramientas
+                                conseguidas en el proceso, pueda hacerla crecer de forma independiente. Me ha
+                                ayudado a
                                 alzar el vuelo. Solo tengo palabras de agradecimiento y gratitud hacia Javier.
 
 
                             </p>
                         </div>
                         <div class="testimonial">
-                            <img src="./src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
+                            <img src="../src/archivos/productos/foto1.jpg" class="fotoTestimonio" alt="">
                             <h2>Ramón Fco. Pérez Ruiz</h2>
                             <h4>Senior National Manager GLS</h4>
                             <p>Buenas tardes Javier, para nuestro desarrollo profesional fuiste una influencia muy
@@ -215,15 +235,17 @@
                 <div id="carruselCoaches" class="carrusel">
                     <!-- Caja de un coach -->
                     <div class="coach">
-                        <img src="./src/archivos/coaches/FotoCoach1.png" alt="Coach 1">
-                        <h2>Nombre del Coach 1</h2>
-                        <h3>Subtítulo del Coach 1</h3>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A consequuntur hic expedita aut sed
-                            autem! Dolores doloribus distinctio a quibusdam autem dolor beatae tenetur sint, possimus
-                            similique, officiis recusandae vitae?</p>
+                        <img src="../src/archivos/coaches/JavierOntiveros.jpg" alt="Coach 1">
+                        <h2>Javier Ontiveros</h2>
+                        <h3>Fundador y CEO de Quid Qualitas</h3>
+                        <p>Trayectoria profesional de más de 20 años en puestos directivos en Multinacionales de primer
+                            nivel del Sector de las Tecnologías de la Información y Consultoría Marketing Comunicación,
+                            Ventas, Consultoría y Gestión de Recursos Humanos. Asociado y Senior Manager Training LAB ·
+                            Director Xerox Global Services · Global Account General Manager Xerox Director Comercial
+                            Borland · Product Manager Lotus Development</p>
                     </div>
                     <div class="coach">
-                        <img src="./src/archivos/coaches/FotoCoach2.png" alt="Coach 2">
+                        <img src="../src/archivos/coaches/FotoCoach2.png" alt="Coach 2">
                         <h2>Nombre del Coach 2</h2>
                         <h3>Subtítulo del Coach 2</h3>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur esse accusantium
@@ -237,11 +259,10 @@
 
             </div>
         </div>
-
     </main>
 
-    <script src="./src/scripts/carruselProducto.js"></script>
-    <?php include('../footer.php'); ?>
+    <script src="../src/scripts/carruselProducto.js"></script>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

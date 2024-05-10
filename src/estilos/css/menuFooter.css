@@ -130,11 +130,12 @@ nav {
 .footer {
   font-family: var(--texto);
   font-size: 20px;
-  background: var(--azulQQ);
-  color: white;
-  font-family: var(--texto);
-  padding-top: 50px;
-  width: 100%;
+  width: 100%; /* Ocupa toda la anchura */
+  background: var(--azulQQ); /* Estilo de fondo */
+  color: white; /* Color del texto */
+  padding-top: 50px; /* Espacio en la parte superior */
+  padding-bottom: 20px; /* Espacio en la parte inferior */
+  box-sizing: border-box;
 }
 
 .footer-content {
@@ -161,7 +162,7 @@ nav {
 }
 
 .footer-text {
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
   text-align: center;
 }
 
