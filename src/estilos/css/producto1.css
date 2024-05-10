@@ -1,0 +1,419 @@
+/* Incorporar la tipografía personalizada */
+@font-face {
+  font-family: "titulo";
+  src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "texto";
+  src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Variables de tipografía */
+  --titulo: "titulo", sans-serif;
+  --texto: "texto", sans-serif;
+  --rojoQQ: #e6312f;
+  --azulQQ: #2a255b;
+}
+
+/* body */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  background-image: url(../../archivos/productos/fondo.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  top: 0;
+}
+
+.titulo {
+  font-family: var(--titulo);
+  font-size: 1.5em;
+  margin: 150px 350px 0 200px;
+}
+
+.contenidos {
+  display: flex;
+  flex-direction: row;
+  margin: 50px 150px;
+}
+
+.cajaIzquierda {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
+  flex-grow: 2;
+}
+
+.descripcion {
+  font-family: var(--texto);
+  font-size: 1.2em;
+  margin: 45px 100px;
+}
+
+.botonesPrecioComprar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--texto);
+  margin-bottom: 55px;
+}
+
+.botonesPrecioComprar p {
+  font-size: 1.5em;
+  margin-right: 35px;
+}
+
+.btnComprar {
+  padding: 5px 10px;
+  font-size: 1.5em;
+  background-color: var(--azulQQ);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btnComprar:hover {
+  padding: 5px 10px;
+  font-size: 1.5em;
+  background-color: var(--rojoQQ);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.carrFotos {
+  margin-top: 15px;
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.fotosVideos {
+  display: flex;
+  width: 100%;
+  height: 450px;
+  transition: transform 0.5s ease;
+}
+
+.carrusel-item {
+  width: 100%;
+  flex-shrink: 0;
+  display: none;
+}
+
+.carrusel-item.visible {
+  display: block;
+}
+
+.btnNav {
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--rojoQQ);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btnNav.prev {
+  left: 0;
+}
+
+.btnNav.next {
+  right: 0;
+}
+
+.btnNav:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--azulQQ);
+  transform: scale(1.2) translateY(-42%);
+}
+
+.menuHorizontal {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuContTest {
+  margin-bottom: 25px;
+  text-align: center;
+  padding: 20px;
+}
+
+.menuContTest button {
+  padding: 5px 10px;
+  font-family: var(
+    --texto
+  ); /* Usa una variable CSS para la familia de fuentes */
+  font-size: 1.5em;
+  margin: 0 70px;
+  border-style: none;
+  border-bottom: 1px solid var(--rojoQQ); /* Usa una variable CSS para el color */
+  background-color: rgba(240, 240, 240, 0); /* Transparente */
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Suaviza la transición de la transformación */
+  display: inline-block; /* Asegura que el botón se trate como bloque para transformaciones */
+  transform-origin: center center; /* Centra la transformación para crecer equitativamente en todas direcciones */
+}
+
+.menuContTest button:hover {
+  transform: scale(
+    1.1
+  ); /* Aumenta ligeramente el tamaño del texto y el botón */
+}
+
+.menuContTest button.active {
+  background-color: var(--rojoQQ); /* Color de fondo para el botón activo */
+  color: white; /* Color de texto para el botón activo */
+  border-bottom: 2px solid var(--rojoQQ); /* Un borde más pronunciado o un cambio en el estilo de borde */
+}
+
+.contenido,
+.testimonios {
+  display: none;
+}
+
+.contenido {
+  margin-bottom: 25px;
+}
+
+.oculto {
+  display: none;
+}
+
+.menu button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.contenidosTXT {
+  width: 700px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tituloCont {
+  font-family: var(--titulo);
+  padding: 15px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  position: relative;
+  background-color: #e0eafd;
+  border-radius: 8px 8px 0 0;
+}
+
+.tituloCont:after {
+  content: "\25BC"; /* Flecha hacia abajo */
+  position: absolute;
+  right: 20px;
+  font-size: 1em;
+  transition: transform 0.3s ease-in-out;
+}
+
+.respuestaCont {
+  font-family: var(--texto);
+  font-size: 1.1em;
+  padding: 15px 20px;
+  color: #000000;
+  display: none; /* Inicialmente oculto */
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: #fff;
+}
+
+.respuestaCont ul {
+  padding-left: 15px;
+}
+
+.respuestaCont li {
+  padding: 5px 0; /* Espacio entre puntos de la lista */
+}
+
+/* Clase activa que rota la flecha cuando el contenido está visible */
+.tituloCont.active:after {
+  transform: rotate(180deg);
+}
+
+.testimonial {
+  display: none; /* Oculto inicialmente */
+  text-align: center;
+
+  margin: 0 auto;
+  width: 650px;
+  height: 400px;
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+}
+
+.fotoTestimonio {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.testimonial h2 {
+  font-family: var(--titulo);
+  font-size: 1.7em;
+  margin-bottom: 5px;
+}
+
+.testimonial h4 {
+  font-family: var(--titulo);
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.testimonial p {
+  font-family: var(--texto);
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 0 25px;
+}
+
+/* Contenedor del carrusel de testimonios */
+#testimonios {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  justify-content: center;
+}
+
+/* Estilos básicos para botones de navegación */
+.prevTest,
+.nextTest {
+  font-size: 1.8em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  background-color: #00000000;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  z-index: 100;
+}
+
+/* Hover efectos para los botones */
+.prevTest:hover,
+.nextTest:hover {
+  color: var(--rojoQQ);
+  background-color: #00000000;
+}
+
+.prevTest {
+  left: 10px;
+}
+
+.nextTest {
+  right: 10px;
+}
+
+.cajaDerecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Asegura que todo está centrado horizontalmente */
+  background-color: #9a94cf;
+  margin-left: 100px;
+  margin-top: 150px;
+  width: 1500px;
+  height: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden; /* Oculta cualquier contenido que se desborde */
+}
+/* Estilo del carrusel dentro de cajaDerecha */
+#carruselCoaches {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinea horizontalmente al centro */
+  position: relative;
+  overflow: hidden;
+}
+
+.coach {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* Asegura que el coach no sea más ancho de 800px */
+  margin-top: 0; /* Asegura que no haya margen superior extra */
+}
+
+.coach.visible {
+  display: flex; /* Muestra el coach activo */
+}
+
+.coach img {
+  width: 250px;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.coach h2,
+.coach h3,
+.coach p {
+  padding: 0 30px;
+  margin-bottom: 10px;
+}
+
+/* Botones de navegación ajustados al tamaño de cajaDerecha */
+.prevCoaches,
+.nextCoaches {
+  position: absolute;
+  top: 50%; /* Centra los botones verticalmente respecto a su posición */
+  cursor: pointer;
+  padding: 15px 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+  font-size: 2em; /* Icono más grande para mejor clicabilidad */
+  z-index: 100;
+}
+
+.prevCoaches {
+  left: 5px; /* Posiciona dentro del área visible */
+}
+
+.nextCoaches {
+  right: 5px; /* Posiciona dentro del área visible */
+}
+
+.prevCoaches:hover,
+.nextCoaches:hover {
+  color: rgb(255, 33, 33);
+}

@@ -5,7 +5,7 @@
     // Verificar si el ID de usuario está almacenado en la sesión
     if (!isset($_SESSION['id_usuario'])) {
         // Si el ID de usuario no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
-        header("Location: formulario_inicio_sesion.php");
+        header("Location: index.php");
         exit();
     }
 
