@@ -192,6 +192,7 @@ main {
   margin: 0 70px;
   border-style: none;
   border-bottom: 1px solid var(--rojoQQ); /* Usa una variable CSS para el color */
+
   background-color: rgba(240, 240, 240, 0); /* Transparente */
   cursor: pointer;
   transition: transform 0.3s ease; /* Suaviza la transición de la transformación */
@@ -206,6 +207,7 @@ main {
 }
 
 .menuContTest button.active {
+  border-radius: 8px;
   background-color: rgba(255, 255, 255, 0);
   color: black; /* Color de texto para el botón activo */
   border: 2px solid var(--rojoQQ); /* Un borde más pronunciado o un cambio en el estilo de borde */
@@ -368,7 +370,7 @@ main {
   width: 1500px;
   height: fit-content;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
 }
