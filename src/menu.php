@@ -65,7 +65,7 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                         <a id="volverBtn">
                             ← Volver</a>
                     </div>
-                    <div class="loginJoin">¿Aún no eres miembro?<a id="JoinNow"> Regístrate</a></div>
+                    <div class="loginJoin">¿Aún no eres miembro? <a id="JoinNow">Regístrate</a></div>
                 </div>
                 <div class="CuerpoLogin">
                     <h2 class="tituloBienvenido">¡BIENVENIDO DE VUELTA!</h2>
@@ -78,6 +78,7 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                             <input type="password" class="inputLogin" name="contrasena" id="password" placeholder="**********">
                             <img src="./archivos/ojo_cerrado.png" onclick="togglePassword()" class="pass-icon" id="pass-icon">
                         </div>
+                        <div class="LinkOlvidarPassword"><p>¿Se te ha olvidado la contraseña?</p></div>
 
                         <div>
                             <button class="botonAcceder" type="submit">Acceder</button>
@@ -101,7 +102,7 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                         <a id="volverBtnRegistrarse">
                             ← Volver</a>
                     </div>
-                    <div class="loginJoin">¿Ya eres miembro?<a id="loginRedireccion"> Inicia Sesión</a></div>
+                    <div class="loginJoin">¿Ya eres miembro? <a id="loginRedireccion">Inicia Sesión</a></div>
                 </div>
                 <div class="CuerpoSign">
                     <h1 class="tituloUnete">Únete a nuestra comunidad</h1>

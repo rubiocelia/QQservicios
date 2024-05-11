@@ -298,3 +298,9 @@ input[type="number"] {
   height: 32px !important;
   cursor: pointer;
 }
+
+.LinkOlvidarPassword {
+  margin-top: -3% !important;
+  margin-bottom: 4% !important;
+  cursor: pointer;
+}

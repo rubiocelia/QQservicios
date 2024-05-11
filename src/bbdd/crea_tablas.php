@@ -35,6 +35,9 @@ function crearTablas($conexion) {
             Titulacion VARCHAR(255),
             Formacion VARCHAR(255),
             Experiencia VARCHAR(255),
+            LinkedIn VARCHAR(255),
+            Video VARCHAR(255),
+            General VARCHAR(255),
             Foto VARCHAR(255)
         )",
         "atributos" => "CREATE TABLE IF NOT EXISTS Atributos (
@@ -123,7 +126,7 @@ LA INSERCCIÓN DE DATOS A CONTINUACIÓN SON DATOS DE EJEMPLO NO REALES NI VÁLID
 function insertarDatos($conexion)
 {
     // Insertar datos en Coaches
-    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, Foto) VALUES
+    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, LinkedIn, Video, General,  Foto) VALUES
                       ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
                       ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png'),
                       ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach3.png'),
@@ -151,7 +154,7 @@ function insertarDatos($conexion)
     // Insertar datos en Usuarios. La función CURDATE() en sql devuelve la fecha actual 
     $conexion->query("INSERT INTO Usuarios (Nombre, Apellidos, Correo_electronico, Numero_telefono, Organizacion, Foto, Fecha_Registro) VALUES
                       ('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'Organización 1', '../src/archivos/perfil/fotosPerfil/foto1.jpg', CURDATE()),
-                      ('Nombre2', 'Apellido2', 'email2@example.com', '1234567891', 'Organización 1', 'foto2Usuario.jpg', CURDATE()),
+                      ('Nombre2', 'Apellido2', 'admin@admin.com', '1234567891', 'Organización 1', 'foto2Usuario.jpg', CURDATE()),
                       ('Nombre3', 'Apellido3', 'email3@example.com', '1234567892', 'Organización 1', 'foto3Usuario.jpg', CURDATE()),
                       ('Nombre4', 'Apellido4', 'email4@example.com', '1234567893', 'Organización 1', 'foto4Usuario.jpg', CURDATE()),
                       ('Nombre5', 'Apellido5', 'email5@example.com', '1234567894','Organización 1', 'foto5Usuario.jpg', CURDATE()),
@@ -175,8 +178,8 @@ function insertarDatos($conexion)
                       ('Producto10', 'Descripcion10', 'Categoria10', 'producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
 
 $usuarios = [
-    ['adminJavier','ejemplo1', 1, 1],
-    ['usuario2', 'ejemplo1',0, 2],
+    ['adminJavier','ejemplo1', 0, 1],
+    ['usuario2', 'ejemplo1',1, 2],
     ['usuario3', 'ejemplo1', 0, 3],
     ['usuario4', 'ejemplo1', 0, 4],
     ['usuario5', 'ejemplo1', 0, 5],
