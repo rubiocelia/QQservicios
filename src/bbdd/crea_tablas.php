@@ -95,7 +95,10 @@ function crearTablas($conexion) {
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Ruta VARCHAR(255),
             Descripcion TEXT,
+            Fecha DATE,
+            ID_Producto INT,
             ID_usuario INT,
+            FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
             FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
         )"
     ];
@@ -245,18 +248,18 @@ foreach ($usuarios as $usuario) {
                         ('Testigo10', 'Pudo ser mejor', 'testimonio10.jpg', 10)");
 
     // Insertar datos en ArchivosUsuarios
-    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, ID_usuario) VALUES
-                        ('ruta/archivo1.pdf', 'Manual del usuario 1', 1),
-                        ('ruta/EstadisticasExcel.csv', 'Estadisticas Excel', 1),
-                        ('ruta/archivo2.pdf', 'Manual del usuario 2', 2),
-                        ('ruta/archivo3.pdf', 'Manual del usuario 3', 3),
-                        ('ruta/archivo4.pdf', 'Manual del usuario 4', 4),
-                        ('ruta/archivo5.pdf', 'Manual del usuario 5', 5),
-                        ('ruta/archivo6.pdf', 'Manual del usuario 6', 6),
-                        ('ruta/archivo7.pdf', 'Manual del usuario 7', 7),
-                        ('ruta/archivo8.pdf', 'Manual del usuario 8', 8),
-                        ('ruta/archivo9.pdf', 'Manual del usuario 9', 9),
-                        ('ruta/archivo10.pdf', 'Manual del usuario 10', 10)");
+    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, Fecha, ID_Producto, ID_usuario) VALUES
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 1',NOW(), 1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Estadisticas Excel',NOW(),1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 2',NOW(),1, 2),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 3',NOW(),2, 3),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 4',NOW(),2, 4),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 5',NOW(),3, 5),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 6',NOW(),4, 6),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 7',NOW(),5, 7),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 8',NOW(),6, 8),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),7, 9),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),8, 10)");
 }
 //Llamamos a la función para insetar los datos
 insertarDatos($conexion);

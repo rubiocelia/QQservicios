@@ -1,6 +1,8 @@
 <?php
 // Iniciar sesión
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verificar si el ID de usuario está almacenado en la sesión
 if (!isset($_SESSION['id_usuario'])) {
@@ -146,7 +148,7 @@ $conexion->close();
                     // Iterar sobre los resultados y mostrar cada cliente en una fila de la tabla
                     while ($cliente = $resultado->fetch_assoc()) {
                         echo '<tr>';
-                        echo '<td>' . $cliente['Nombre'] . '</td>';
+                        echo '<td onclick="redireccionarAVistaCliente(' . $cliente['ID'] . ')">' . $cliente['Nombre'] . '</td>';
                         echo '<td>' . $cliente['Apellidos'] . '</td>';
                         echo '<td>' . $cliente['Correo_electronico'] . '</td>';
                         echo '<td>' . $cliente['Numero_telefono'] . '</td>';
@@ -194,6 +196,7 @@ $conexion->close();
     </main>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/menuLateral.js"></script>
+    <script src="./scripts/FuncionesAdmin.js"></script>
     <script src="./scripts/cerrarSesion.js"></script>
     <script src="./scripts/botonesPerfil.js"></script>
     <?php include('footer.php'); ?>
