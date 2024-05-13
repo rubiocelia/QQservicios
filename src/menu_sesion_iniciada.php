@@ -12,7 +12,7 @@
 
                 <li> <a href="coaches.php">Coaches</a></li>
 
-                <li> <a href="servicios.php">Servicios</a></li>
+                <li> <a href="producto1.php">Servicios</a></li>
 
                 <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
             </ul>

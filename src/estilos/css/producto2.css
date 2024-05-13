@@ -55,46 +55,44 @@ main {
   font-family: var(--titulo);
   color: white;
   font-size: 1.5em;
-  margin: 0 350px 0 100px;
+  margin: 0 350px 150px 100px;
 }
 
 .contenidos {
   display: flex;
   flex-direction: row;
-  margin: 55px 80px;
+  margin-top: 250px;
 }
 
 .cajaIzquierda {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
   flex-grow: 2;
 }
 
 .descripcion {
   font-family: var(--texto);
-  font-size: 1.2em;
-  margin: 45px 100px;
+  font-size: 1.1em;
+  margin: 45px 0;
 }
 
 .botonesPrecioComprar {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   font-family: var(--texto);
   margin-bottom: 55px;
 }
 
 .botonesPrecioComprar p {
-  font-size: 1.5em;
-  margin-right: 35px;
+  font-size: 1.2em;
 }
 
 .btnComprar {
+  margin-right: 35px;
   padding: 5px 10px;
-  font-size: 1.5em;
+  font-size: 1.3em;
   background-color: var(--azulQQ);
   color: white;
   border-style: none;
@@ -104,7 +102,7 @@ main {
 
 .btnComprar:hover {
   padding: 5px 10px;
-  font-size: 1.5em;
+  font-size: 1.3em;
   background-color: var(--rojoQQ);
   color: white;
   border-style: none;
@@ -114,7 +112,7 @@ main {
 }
 
 .carrFotos {
-  margin-top: 15px;
+  margin-top: 100px;
   position: relative;
   width: 80%;
   margin: 0 auto;
@@ -129,6 +127,7 @@ main {
   width: 80%;
   height: 450px;
   transition: transform 0.5s ease;
+  margin-top: 50px;
 }
 
 .carrusel-item {
@@ -229,7 +228,7 @@ main {
 }
 
 .contenidosTXT {
-  width: 700px;
+  width: 1000px;
   margin-bottom: 10px;
   background: #ffffff;
   border-radius: 8px;

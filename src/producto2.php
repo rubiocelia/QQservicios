@@ -43,7 +43,7 @@
     <title>producto1</title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="../src/estilos/css/producto1.css">
+    <link rel="stylesheet" href="../src/estilos/css/producto2.css">
 </head>
 
 <body class="fondoProducto">
@@ -66,20 +66,22 @@
     <main>
         <div class="titulo">
             <h1>Desarrolla tus Competencias como líder. Neuroliderazgo</h1>
+            <div class="descripcion">
+                <p>Consigue un desempeño óptimo de tus funciones y la correcta gestión emocional que mejore tu
+                    equilibrio y balance personal. Programa Completo y Práctico para potenciar las competencias
+                    del
+                    liderazgo eficaz requerido en este Siglo21.Impulsa tu Creatividad, fomenta entornos de
+                    Colaboración y Gestiona la Diversidad. Duración: 6 sesiones de 1,5h. </p>
+            </div>
+            <div class="botonesPrecioComprar">
+                <button class="btnComprar">Comprar</button>
+                <p>100€</p>
+
+            </div>
         </div>
         <div class="contenidos">
             <div class="cajaIzquierda">
-                <div class="descripcion">
-                    <p>Consigue un desempeño óptimo de tus funciones y la correcta gestión emocional que mejore tu
-                        equilibrio y balance personal. Programa Completo y Práctico para potenciar las competencias
-                        del
-                        liderazgo eficaz requerido en este Siglo21.Impulsa tu Creatividad, fomenta entornos de
-                        Colaboración y Gestiona la Diversidad. Duración: 6 sesiones de 1,5h. </p>
-                </div>
-                <div class="botonesPrecioComprar">
-                    <p>100€</p>
-                    <button class="btnComprar">Comprar</button>
-                </div>
+
                 <div class="carrFotos">
                     <div class="fotosVideos">
                         <img src="../src/archivos/productos/carruselProducto1/Julia y Javier Conversacion.JPEG"
@@ -231,31 +233,31 @@
                 </div>
 
             </div>
-            <div class="cajaDerecha">
+            <!-- <div class="cajaDerecha">
                 <div id="carruselCoaches" class="carrusel">
-                    <!-- Caja de un coach -->
-                    <div class="coach">
-                        <img src="../src/archivos/coaches/JavierOntiveros.jpg" alt="Coach 1">
-                        <h2>Javier Ontiveros</h2>
-                        <h3>Fundador y CEO de Quid Qualitas</h3>
-                        <p>Trayectoria profesional de más de 20 años en puestos directivos en Multinacionales de primer
-                            nivel del Sector de las Tecnologías de la Información y Consultoría Marketing Comunicación,
-                            Ventas, Consultoría y Gestión de Recursos Humanos.</p>
-                    </div>
-                    <div class="coach">
-                        <img src="../src/archivos/coaches/FotoCoach2.png" alt="Coach 2">
-                        <h2>Nombre del Coach 2</h2>
-                        <h3>Subtítulo del Coach 2</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur esse accusantium
-                            sapiente similique placeat dolorum quae porro modi vel repudiandae. Consequuntur rem
-                            deserunt officiis, asperiores minima doloribus voluptatem vel voluptates?</p>
-                    </div>
-                    <!-- Agrega más coaches según sea necesario -->
-                    <button class="prevCoaches">&#10094;</button>
-                    <button class="nextCoaches">&#10095;</button>
-                </div>
-
+                   
+            <div class="coach">
+                <img src="../src/archivos/coaches/JavierOntiveros.jpg" alt="Coach 1">
+                <h2>Javier Ontiveros</h2>
+                <h3>Fundador y CEO de Quid Qualitas</h3>
+                <p>Trayectoria profesional de más de 20 años en puestos directivos en Multinacionales de primer
+                    nivel del Sector de las Tecnologías de la Información y Consultoría Marketing Comunicación,
+                    Ventas, Consultoría y Gestión de Recursos Humanos.</p>
             </div>
+            <div class="coach">
+                <img src="../src/archivos/coaches/FotoCoach2.png" alt="Coach 2">
+                <h2>Nombre del Coach 2</h2>
+                <h3>Subtítulo del Coach 2</h3>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur esse accusantium
+                    sapiente similique placeat dolorum quae porro modi vel repudiandae. Consequuntur rem
+                    deserunt officiis, asperiores minima doloribus voluptatem vel voluptates?</p>
+            </div>
+            
+            <button class="prevCoaches">&#10094;</button>
+            <button class="nextCoaches">&#10095;</button>
+        </div>
+
+        </div> -->
         </div>
     </main>
 
