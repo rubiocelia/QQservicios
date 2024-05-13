@@ -35,6 +35,9 @@ function crearTablas($conexion) {
             Titulacion VARCHAR(255),
             Formacion VARCHAR(255),
             Experiencia VARCHAR(255),
+            LinkedIn VARCHAR(255),
+            Video VARCHAR(255),
+            General VARCHAR(255),
             Foto VARCHAR(255)
         )",
         "atributos" => "CREATE TABLE IF NOT EXISTS Atributos (
@@ -44,6 +47,7 @@ function crearTablas($conexion) {
         "productos" => "CREATE TABLE IF NOT EXISTS Productos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
+            DescripcionCorta TEXT,
             Descripcion TEXT,
             Categorias VARCHAR(255),
             Foto VARCHAR(255),
@@ -91,7 +95,10 @@ function crearTablas($conexion) {
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Ruta VARCHAR(255),
             Descripcion TEXT,
+            Fecha DATE,
+            ID_Producto INT,
             ID_usuario INT,
+            FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
             FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
         )"
     ];
@@ -123,17 +130,17 @@ LA INSERCCIÓN DE DATOS A CONTINUACIÓN SON DATOS DE EJEMPLO NO REALES NI VÁLID
 function insertarDatos($conexion)
 {
     // Insertar datos en Coaches
-    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, Foto) VALUES
-                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
-                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png'),
-                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach3.png'),
-                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach4.png'),
-                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
-                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png'),
-                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach3.png'),
-                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach4.png'),
-                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach1.png'),
-                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', './archivos/coaches/FotoCoach2.png')");
+    $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Formacion, Experiencia, LinkedIn, Video, General,  Foto) VALUES
+                      ('Coach1', 'Apellido1', 'Titulacion1', 'Formacion1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/', './archivos/coaches/FotoCoach1.png'),
+                      ('Coach2', 'Apellido2', 'Titulacion2', 'Formacion2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/', './archivos/coaches/FotoCoach2.png'),
+                      ('Coach3', 'Apellido3', 'Titulacion3', 'Formacion3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach3.png'),
+                      ('Coach4', 'Apellido4', 'Titulacion4', 'Formacion4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach4.png'),
+                      ('Coach5', 'Apellido5', 'Titulacion5', 'Formacion5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach1.png'),
+                      ('Coach6', 'Apellido6', 'Titulacion6', 'Formacion6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach2.png'),
+                      ('Coach7', 'Apellido7', 'Titulacion7', 'Formacion7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach3.png'),
+                      ('Coach8', 'Apellido8', 'Titulacion8', 'Formacion8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach4.png'),
+                      ('Coach9', 'Apellido9', 'Titulacion9', 'Formacion9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach1.png'),
+                      ('Coach10', 'Apellido10', 'Titulacion10', 'Formacion10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/','https://www.youtube.com/','https://www.google.es/','./archivos/coaches/FotoCoach2.png')");
 
     // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES
@@ -151,7 +158,7 @@ function insertarDatos($conexion)
     // Insertar datos en Usuarios. La función CURDATE() en sql devuelve la fecha actual 
     $conexion->query("INSERT INTO Usuarios (Nombre, Apellidos, Correo_electronico, Numero_telefono, Organizacion, Foto, Fecha_Registro) VALUES
                       ('Nombre1', 'Apellido1', 'email1@example.com', '1234567890', 'Organización 1', '../src/archivos/perfil/fotosPerfil/foto1.jpg', CURDATE()),
-                      ('Nombre2', 'Apellido2', 'email2@example.com', '1234567891', 'Organización 1', 'foto2Usuario.jpg', CURDATE()),
+                      ('Nombre2', 'Apellido2', 'admin@admin.com', '1234567891', 'Organización 1', 'foto2Usuario.jpg', CURDATE()),
                       ('Nombre3', 'Apellido3', 'email3@example.com', '1234567892', 'Organización 1', 'foto3Usuario.jpg', CURDATE()),
                       ('Nombre4', 'Apellido4', 'email4@example.com', '1234567893', 'Organización 1', 'foto4Usuario.jpg', CURDATE()),
                       ('Nombre5', 'Apellido5', 'email5@example.com', '1234567894','Organización 1', 'foto5Usuario.jpg', CURDATE()),
@@ -162,21 +169,21 @@ function insertarDatos($conexion)
                       ('Nombre10', 'Apellido10', 'email10@example.com', '1234567899', 'Organización 1', 'foto10Usuario.jpg', CURDATE())");
 
     // Insertar datos en Productos
-    $conexion->query("INSERT INTO Productos (Nombre, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, ID_coaches, Id_atributo) VALUES
-                      ('Producto1', 'Descripcion1', 'Categoria1', 'producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
-                      ('Producto2', 'Descripcion2', 'Categoria2', 'producto2.jpg', 'video2producto.mp4', 200, 0, 2, 2),
-                      ('Producto3', 'Descripcion3', 'Categoria3', 'producto3.jpg', 'video3producto.mp4', 300, 1, 3, 3),
-                      ('Producto4', 'Descripcion4', 'Categoria4', 'producto4.jpg', 'video4producto.mp4', 400, 0, 4, 4),
-                      ('Producto5', 'Descripcion5', 'Categoria5', 'producto5.jpg', 'video5producto.mp4', 500, 1, 5, 5),
-                      ('Producto6', 'Descripcion6', 'Categoria6', 'producto6.jpg', 'video6producto.mp4', 600, 0, 6, 6),
-                      ('Producto7', 'Descripcion7', 'Categoria7', 'producto7.jpg', 'video7producto.mp4', 700, 1, 7, 7),
-                      ('Producto8', 'Descripcion8', 'Categoria8', 'producto8.jpg', 'video8producto.mp4', 800, 0, 8, 8),
-                      ('Producto9', 'Descripcion9', 'Categoria9', 'producto9.jpg', 'video9producto.mp4', 900, 1, 9, 9),
-                      ('Producto10', 'Descripcion10', 'Categoria10', 'producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
+    $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, ID_coaches, Id_atributo) VALUES
+                      ('Desarrolla tus Competencias como líder. Neuroliderazgo', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion1', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
+                      ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, 2, 2),
+                      ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, 3, 3),
+                      ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, 4, 4),
+                      ('Producto5', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion5', 'Categoria5', './archivos/servicios/Producto5.jpg', 'video5producto.mp4', 500, 1, 5, 5),
+                      ('Producto6', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion6', 'Categoria6', './archivos/servicios/Producto6.jpg', 'video6producto.mp4', 600, 0, 6, 6),
+                      ('Producto7', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion7', 'Categoria7', './archivos/servicios/Producto7.jpg', 'video7producto.mp4', 700, 1, 7, 7),
+                      ('Producto8', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion8', 'Categoria8', './archivos/servicios/Producto8.jpg', 'video8producto.mp4', 800, 0, 8, 8),
+                      ('Producto9', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion9', 'Categoria9', './archivos/servicios/Producto9.jpg', 'video9producto.mp4', 900, 1, 9, 9),
+                      ('Producto10', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion10', 'Categoria10', './archivos/servicios/Producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
 
 $usuarios = [
-    ['adminJavier','ejemplo1', 1, 1],
-    ['usuario2', 'ejemplo1',0, 2],
+    ['adminJavier','ejemplo1', 0, 1],
+    ['usuario2', 'ejemplo1',1, 2],
     ['usuario3', 'ejemplo1', 0, 3],
     ['usuario4', 'ejemplo1', 0, 4],
     ['usuario5', 'ejemplo1', 0, 5],
@@ -241,18 +248,18 @@ foreach ($usuarios as $usuario) {
                         ('Testigo10', 'Pudo ser mejor', 'testimonio10.jpg', 10)");
 
     // Insertar datos en ArchivosUsuarios
-    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, ID_usuario) VALUES
-                        ('ruta/archivo1.pdf', 'Manual del usuario 1', 1),
-                        ('ruta/EstadisticasExcel.csv', 'Estadisticas Excel', 1),
-                        ('ruta/archivo2.pdf', 'Manual del usuario 2', 2),
-                        ('ruta/archivo3.pdf', 'Manual del usuario 3', 3),
-                        ('ruta/archivo4.pdf', 'Manual del usuario 4', 4),
-                        ('ruta/archivo5.pdf', 'Manual del usuario 5', 5),
-                        ('ruta/archivo6.pdf', 'Manual del usuario 6', 6),
-                        ('ruta/archivo7.pdf', 'Manual del usuario 7', 7),
-                        ('ruta/archivo8.pdf', 'Manual del usuario 8', 8),
-                        ('ruta/archivo9.pdf', 'Manual del usuario 9', 9),
-                        ('ruta/archivo10.pdf', 'Manual del usuario 10', 10)");
+    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, Fecha, ID_Producto, ID_usuario) VALUES
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 1',NOW(), 1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Estadisticas Excel',NOW(),1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 2',NOW(),1, 2),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 3',NOW(),2, 3),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 4',NOW(),2, 4),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 5',NOW(),3, 5),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 6',NOW(),4, 6),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 7',NOW(),5, 7),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 8',NOW(),6, 8),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),7, 9),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),8, 10)");
 }
 //Llamamos a la función para insetar los datos
 insertarDatos($conexion);

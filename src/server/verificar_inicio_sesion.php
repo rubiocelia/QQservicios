@@ -8,7 +8,7 @@ $contrasena = $_POST['contrasena'];
 
 // Realizar la verificación de las credenciales
 $conexion = getConexion();
-$query = "SELECT u.ID, u.Correo_electronico, da.Contrasena
+$query = "SELECT u.ID, u.Correo_electronico, da.Contrasena, da.Administrador
           FROM Usuarios u
           INNER JOIN DatosAcceso da ON u.ID = da.ID_usuario
           WHERE u.Correo_electronico = '$correo_electronico'";
@@ -20,13 +20,19 @@ if ($resultado->num_rows > 0) {
     $id_usuario = $row['ID']; // Obtenemos el ID del usuario
     $correo_electronico = $row['Correo_electronico'];
     $contrasena_almacenada = $row['Contrasena'];
+    $administrador = $row['Administrador'];
     // Comparar la contraseña proporcionada con la almacenada
     if (password_verify($contrasena, $contrasena_almacenada)) {
         // Contraseña válida, iniciar sesión
         session_start();
         $_SESSION['id_usuario'] = $id_usuario; // Establecemos el ID del usuario en la sesión
         // Devolver respuesta JSON con éxito
-        echo json_encode(array("success" => true, "redirect" => "mi_cuenta.php"));
+        if ($administrador == 1) {
+            echo json_encode(array("success" => true, "redirect" => "mi_cuenta_admin.php"));
+        } else {
+            echo json_encode(array("success" => true, "redirect" => "mi_cuenta.php"));
+        }
+        exit(); 
     } else {
         // Contraseña incorrecta, devolver respuesta JSON con error
         echo json_encode(array("success" => false, "message" => "Error de credenciales"));

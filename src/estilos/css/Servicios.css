@@ -200,7 +200,7 @@
   backface-visibility: hidden;
   border-radius: 10px;
   overflow: hidden;
-  transition: .5s;
+  transition: .7s;
 }
 
 .card .front {
@@ -219,7 +219,6 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 45px;
   line-height: 45px;
   color: #fff;
   background: rgba(0,0,0,.4);
@@ -229,7 +228,6 @@
 .card .back {
   transform: perspective(600px) rotateY(180deg);
   background: rgb(3, 35, 54);
-  padding: 15px;
   color: #f3f3f3;
   display: flex;
   flex-direction: column;
@@ -264,4 +262,42 @@
 
 .card:hover .back {
   transform: perspective(600px) rotateY(360deg);
+}
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f1f1f1;
+  padding-top: 20px;
+  transition: 0.5s;
+  overflow-y: auto;
+}
+.sidebar a {
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+.sidebar a:hover {
+  background-color: #ddd;
+}
+.dropdown-content {
+  display: none;
+  padding-left: 20px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+#openBtn {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f1f1f1;
+  border: none;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 999;
 }

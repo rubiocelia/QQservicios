@@ -17,7 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $conexion->real_escape_string($_POST['email']);
     $telefono = $conexion->real_escape_string($_POST['telefono']);
     $organizacion = $conexion->real_escape_string($_POST['organizacion']);
-    $id_usuario = $_SESSION['id_usuario'];
+
+    // Obtener el ID de usuario
+    $id_usuario = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id_usuario'];
 
     // Iniciar una transacción
     $conexion->begin_transaction();

@@ -15,7 +15,9 @@
 <body class="index">
     <?php
     // Inicia o continúa una sesión existente
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     // Verifica si la sesión está iniciada y si $id_usuario está definido
     if (isset($_SESSION['id_usuario'])) {
@@ -26,7 +28,7 @@
         include('menu.php');
     }
     ?>
-    <?php include('./bbdd/conecta.php'); ?>
+    <?php include_once('./bbdd/conecta.php'); ?>
     <?php $conn = getConexion(); ?>
 
     <main>
