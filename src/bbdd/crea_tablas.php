@@ -100,7 +100,14 @@ function crearTablas($conexion) {
             ID_usuario INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
             FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
-        )"
+        )",
+
+        "tiempo_conexion" => "CREATE TABLE IF NOT EXISTS tiempoConexion (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            FechaConexion DATE,
+            ID_usuario INT,
+            FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
+            )"
     ];
 
     // Crear cada tabla en la base de datos
@@ -261,8 +268,22 @@ foreach ($usuarios as $usuario) {
                         ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),7, 9),
                         ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),8, 10)");
 }
-//Llamamos a la función para insetar los datos
+
+
+    //Llamamos a la función para insetar los datos
 insertarDatos($conexion);
+
+    // Insertar datos en tiempoConexion
+    $num_users = 10; // Número de usuarios
+    $inserts_per_user = 10; // Número de inserts por usuario
+
+    for ($user_id = 1; $user_id <= $num_users; $user_id++) {
+        for ($i = 0; $i < $inserts_per_user; $i++) {
+            $fecha_conexion = date('Y-m-d', strtotime('-'.rand(0, 60).' days'));
+            $sql = "INSERT INTO tiempoConexion (FechaConexion, ID_usuario) VALUES ('$fecha_conexion', $user_id)";
+            $conexion->query($sql) or die("Error al insertar en tiempoConexion: " . $conexion->error);
+        }
+    }
 
 // Cerrar conexión
 $conexion->close();

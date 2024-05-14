@@ -75,17 +75,36 @@ $stmtCompras = $conexion->prepare($sqlCompras);
 $stmtCompras->bind_param("i", $idUsuario);
 $stmtCompras->execute();
 $resultCompras = $stmtCompras->get_result();
+
+$sqlAccesos = "SELECT FechaConexion, COUNT(*) as accesos 
+               FROM tiempoConexion 
+               WHERE ID_usuario = ? AND FechaConexion >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) 
+               GROUP BY FechaConexion 
+               ORDER BY FechaConexion";
+$stmtAccesos = $conexion->prepare($sqlAccesos);
+$stmtAccesos->bind_param("i", $idUsuario);
+$stmtAccesos->execute();
+$resultAccesos = $stmtAccesos->get_result();
+
+$fechas = [];
+$accesos = [];
+
+while ($rowAcceso = $resultAccesos->fetch_assoc()) {
+    $fechas[] = $rowAcceso['FechaConexion'];
+    $accesos[] = $rowAcceso['accesos'];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Editar Cliente - Vista Administrador</title>
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/vistaClienteAdmin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
 
 <?php include('menu_sesion_iniciada.php'); ?>
@@ -204,10 +223,64 @@ $resultCompras = $stmtCompras->get_result();
             </table>
         </div>
 
+        <div class="seccion">
+            <h1>Accesos del usuario en los últimos 3 meses</h1>
+            <canvas id="accesosChart"></canvas>
+        </div>
+
     </main>
+    <script>
+        // Obtener los datos de PHP
+        const fechas = <?php echo json_encode($fechas); ?>;
+        const accesos = <?php echo json_encode($accesos); ?>;
+        
+        // Debugging: verificar que los datos se obtienen correctamente
+        console.log(fechas);
+        console.log(accesos);
+
+        // Crear la gráfica con Chart.js
+        const ctx = document.getElementById('accesosChart').getContext('2d');
+        const accesosChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: fechas,
+                datasets: [{
+                    label: 'Número de accesos',
+                    data: accesos,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            tooltipFormat: 'dd/MM/yyyy',  // Asegúrate de usar 'dd' en lugar de 'DD'
+                            displayFormats: {
+                                day: 'dd/MM/yyyy'  // Asegúrate de usar 'dd' en lugar de 'DD'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Fecha'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Accesos'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/botonesPerfilVistaAdmin.js"></script>
     <?php include('footer.php'); ?>
 </body>
-
 </html>

@@ -1,33 +1,26 @@
-/* Incorporar la tipografía personalizada */
 @font-face {
   font-family: "titulo";
-  src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA PT DEMI.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "texto";
-  src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA BOOK FONT.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
 :root {
-  /* Variables de tipografía */
   --titulo: "titulo", sans-serif;
   --texto: "texto", sans-serif;
   --rojoQQ: #e6312f;
   --azulQQ: #2a255b;
 }
-
-/* body */
 * {
   margin: 0;
   padding: 0;
   font-family: var(--texto);
 }
-
 .index {
   height: 100vh;
   background-image: url("../../archivos/servicios/FondoPantallaServicios.jpg");
@@ -35,42 +28,34 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-
 .parrfInicial {
   font-family: var(--texto);
   color: white;
   margin-left: 10%;
   margin-top: 15em;
 }
-
 .titulo {
   font-family: var(--titulo);
   font-size: 42px;
   margin-bottom: 1em;
 }
-
 .txtInicial {
   width: 60%;
   font-family: var(--texto);
   font-size: 24px ;
 }
-
 .info {
   font-family: var(--texto);
   margin-top: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
-
 .info h1 {
   text-align: center;
   font-size: 36px;
   font-family: var(--texto);
-
 }
-
 .testimonial-slider {
   position: relative;
   width: 65%;
@@ -78,33 +63,28 @@
   overflow: hidden;
   margin-bottom: 1em;
 }
-
 .testimonial-item {
-  display: none; /* ocultar todos los items y mostrar solo el activo */
+  display: none;
   text-align: center;
   padding: 20px;
   font-family: var(--texto);
 }
-
 .testimonial-item h4 {
   color: var(--azulQQ);
   font-size: 1.5em;
   color: black;
 }
-
 .testimonial-item p {
   color: var(--azulQQ);
   font-size: 1.3em;
   color: black;
 }
-
 .testimonial-carrusel {
   display:flex;
   flex-direction: row;
   gap: 3%;
   margin: 1%;
 }
-
 .testimonial-text {
   display: flex;
   flex-direction: column;
@@ -112,36 +92,30 @@
   margin-bottom: 10%;
   text-align: left;
 }
-
 .testimonial-text h4 {
   margin-bottom: 2%;
   font-family: var(--titulo);
   font-size: 24px;
 }
-
 .testimonial-icons {
   display: flex;
   flex-direction: row;
   gap: 1%;
   margin-top: 20%;
 }
-
 .testimonial-icons img {
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
-
 .active {
-  display: block; /* mostrar el item activo */
+  display: block;
 }
-
 .fotoTestimonio {
   width: 350px;
   height: 500px;
   margin-bottom: 1em;
 }
-
 .prev {
   left: 10px;
   position: absolute;
@@ -152,7 +126,6 @@
   background-color: transparent;
   font-size: 24px;
 }
-
 .next {
   right: 10px;
   position: absolute;
@@ -163,13 +136,11 @@
   background-color: transparent;
   font-size: 24px;
 }
-
 @media (min-width: 1680px) {
   .parrfInicial {
     margin-top: 30em;
   }
 }
-
 .cardsCoaches {
   display: flex;
   flex-wrap: wrap;
@@ -179,20 +150,12 @@
   width: 80%;
   margin: 20px auto;
 }
-
-/* .icon-general{
-  width: 70px !important;
-  height: 70px !important;
-} */
-
-
 .card {
   position: relative;
   width: 300px;
   height: 350px;
   margin: 20px;
 }
-
 .card .face {
   position: absolute;
   width: 100%;
@@ -200,21 +163,18 @@
   backface-visibility: hidden;
   border-radius: 10px;
   overflow: hidden;
-  transition: .7s;
+  transition: transform 0.7s; /* Optimizado */
+  will-change: transform;
 }
-
-.card .front {
-  transform: perspective(600px) rotateY(0deg);
-  box-shadow: 0 5px 10px #000;
+.card .front, .card .back {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Simplificado */
 }
-
 .card .front img {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .card .front h3 {
   position: absolute;
   bottom: 0;
@@ -224,80 +184,34 @@
   background: rgba(0,0,0,.4);
   text-align: center;
 }
-
 .card .back {
-  transform: perspective(600px) rotateY(180deg);
+  transform: rotateY(180deg);
   background: rgb(3, 35, 54);
   color: #f3f3f3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  box-shadow: 0 5px 10px #000;
 }
-
 .card .back .link {
   border-top: solid 1px #f3f3f3;
   height: 50px;
   line-height: 50px;
 }
-
 .card .back .link a {
   color: #f3f3f3;
 }
-
 .card .back h3 {
   font-size: 30px;
   margin-top: 20px;
   letter-spacing: 2px;
 }
-
 .card .back p {
   letter-spacing: 1px;
-} 
-
+}
 .card:hover .front {
-  transform: perspective(600px) rotateY(180deg);
+  transform: rotateY(180deg);
 }
-
 .card:hover .back {
-  transform: perspective(600px) rotateY(360deg);
-}
-.sidebar {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #f1f1f1;
-  padding-top: 20px;
-  transition: 0.5s;
-  overflow-y: auto;
-}
-.sidebar a {
-  padding: 10px;
-  text-decoration: none;
-  display: block;
-}
-.sidebar a:hover {
-  background-color: #ddd;
-}
-.dropdown-content {
-  display: none;
-  padding-left: 20px;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-#openBtn {
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #f1f1f1;
-  border: none;
-  color: black;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 999;
+  transform: rotateY(360deg);
 }

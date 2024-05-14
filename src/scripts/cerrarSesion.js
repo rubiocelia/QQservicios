@@ -4,8 +4,8 @@ function confirmarCerrarSesion() {
         text: "¿Estás seguro de que deseas cerrar sesión?",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#2a255b',
+        cancelButtonColor: '#e6312f',
         confirmButtonText: 'Sí, cerrar sesión',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
