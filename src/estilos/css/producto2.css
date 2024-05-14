@@ -111,8 +111,16 @@ main {
   cursor: pointer;
 }
 
+.InformProd {
+  display: flex;
+  flex-direction: column;
+  margin-top: 250px;
+  margin-bottom: 70px;
+}
+
+/* carrusel multimedia  */
+
 .carrFotos {
-  margin-top: 100px;
   position: relative;
   width: 80%;
   margin: 0 auto;
@@ -124,10 +132,9 @@ main {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 80%;
-  height: 450px;
+  width: 75%;
+  height: 550px;
   transition: transform 0.5s ease;
-  margin-top: 50px;
 }
 
 .carrusel-item {
@@ -168,67 +175,27 @@ main {
   transform: scale(1.2) translateY(-42%);
 }
 
-.menuHorizontal {
-  margin-top: 50px;
+/* contenidos del producto */
+
+.contenidoProd {
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.menuContTest {
-  margin-bottom: 25px;
-  text-align: center;
-  padding: 20px;
-}
-
-.menuContTest button {
+.TitContenidos {
+  font-family: var(--titulo);
+  font-size: 2.2em;
+  margin-bottom: 50px;
+  border: 2px solid var(--rojoQQ);
+  border-radius: 5px;
   padding: 5px 10px;
-  font-family: var(--texto);
-  font-size: 1.5em;
-  margin: 0 70px;
-  border-style: none;
-  border-bottom: 1px solid var(--rojoQQ);
-  background-color: transparent;
-  cursor: pointer;
-  display: inline-block;
-  transform-origin: center center;
-}
-
-.menuContTest button:hover {
-  transform: scale(
-    1.1
-  ); /* Aumenta ligeramente el tamaño del texto y el botón */
-}
-
-.menuContTest button.active {
-  border-radius: 8px;
-  background-color: transparent;
-  color: black; /* Color de texto para el botón activo */
-  border: 2px solid var(--rojoQQ); /* Un borde más pronunciado o un cambio en el estilo de borde */
-}
-
-.contenido,
-.testimonios {
-  display: none;
-}
-
-.contenido {
-  margin-bottom: 25px;
-}
-
-.oculto {
-  display: none;
-}
-
-.menu button {
-  margin: 5px;
-  padding: 10px;
-  cursor: pointer;
 }
 
 .contenidosTXT {
-  width: 1000px;
+  width: 900px;
   margin-bottom: 10px;
   background: #ffffff;
   border-radius: 8px;
@@ -243,7 +210,7 @@ main {
   color: black;
   cursor: pointer;
   position: relative;
-  background-color: rgb(241, 241, 250);
+  background-color: rgb(230, 230, 255);
   border-radius: 8px 8px 0 0;
 }
 
@@ -274,16 +241,34 @@ main {
   padding: 5px 0; /* Espacio entre puntos de la lista */
 }
 
-/* Clase activa que rota la flecha cuando el contenido está visible */
+/* testimonios */
+
+.testimonios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Añadido para posicionar las flechas correctamente */
+  flex-direction: column;
+  margin: 70px 0;
+}
+
+.titTestimonios {
+  font-family: var(--titulo);
+  font-size: 2.2em;
+  margin-bottom: 50px;
+  border: 2px solid var(--rojoQQ);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
 .tituloCont.active:after {
   transform: rotate(180deg);
 }
 
 .testimonial {
-  display: none; /* Oculto inicialmente */
   text-align: center;
   margin: 0 auto;
-  width: 650px;
+  width: 750px;
   height: fit-content;
   box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
   padding: 15px;
@@ -323,6 +308,7 @@ main {
   overflow: hidden;
   padding: 20px 0;
   justify-content: center;
+  display: flex;
 }
 
 /* Estilos básicos para botones de navegación */
@@ -330,7 +316,7 @@ main {
 .nextTest {
   font-size: 1.8em;
   position: absolute;
-  top: 200px;
+  top: 250px;
   transform: translateY(-50%);
   color: var(--rojoQQ);
   background-color: transparent;
@@ -348,103 +334,9 @@ main {
 }
 
 .prevTest {
-  left: 20px;
+  left: 250px;
 }
 
 .nextTest {
-  right: 20px;
-}
-
-.cajaDerecha {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Asegura que todo está centrado horizontalmente */
-  background-color: #ffffff;
-  margin-left: 100px;
-  width: 1000px;
-  height: fit-content;
-  padding: 20px;
-  overflow: hidden;
-  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo del carrusel dentro de cajaDerecha */
-#carruselCoaches {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Alinea horizontalmente al centro */
-  position: relative;
-  overflow: hidden;
-}
-
-.coach {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  max-width: 600px; /* Asegura que el coach no sea más ancho de 800px */
-  margin-top: 0; /* Asegura que no haya margen superior extra */
-}
-
-.coach.visible {
-  display: flex; /* Muestra el coach activo */
-}
-
-.coach img {
-  width: 190px;
-  height: 250px;
-  margin-bottom: 20px;
-}
-
-.coach h2 {
-  font-family: var(--titulo);
-  font-size: 1.4em;
-}
-
-.coach h3 {
-  font-family: var(--titulo);
-  font-size: 1.2em;
-}
-
-.coach p {
-  text-align: left;
-  font-family: var(--texto);
-  font-size: 1.2em;
-}
-
-.coach h2,
-.coach h3,
-.coach p {
-  padding: 0 30px;
-  margin-bottom: 15px;
-}
-
-/* Botones de navegación ajustados al tamaño de cajaDerecha */
-.prevCoaches,
-.nextCoaches {
-  position: absolute;
-  top: 100px; /* Centra los botones verticalmente respecto a su posición */
-  cursor: pointer;
-  padding: 15px 0px;
-  background-color: transparent;
-  border: none;
-  color: var(--rojoQQ);
-  font-size: 2em; /* Icono más grande para mejor clicabilidad */
-  z-index: 100;
-}
-
-.prevCoaches {
-  left: 5px; /* Posiciona dentro del área visible */
-}
-
-.nextCoaches {
-  right: 5px; /* Posiciona dentro del área visible */
-}
-
-.prevCoaches:hover,
-.nextCoaches:hover {
-  color: var(--azulQQ);
+  right: 250px;
 }
