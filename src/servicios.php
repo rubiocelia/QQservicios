@@ -1,3 +1,37 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Verificar si el ID de usuario está almacenado en la sesión
+if (!isset($_SESSION['id_usuario'])) {
+    // Si el ID de usuario no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
+    header("Location: index.php");
+    exit();
+}
+
+// El ID de usuario está definido en la sesión
+$idUsuario = $_SESSION['id_usuario'];
+
+// Obtener los datos del usuario
+require_once("./bbdd/conecta.php");
+$conexion = getConexion();
+$sql = "SELECT * FROM Usuarios WHERE ID = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $idUsuario); // 'i' para indicar que es un entero (ID)
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+if ($resultado->num_rows == 0) {
+    // No se encontraron resultados, posible manejo de error o redirección
+    echo "No se encontró información para el usuario con el ID proporcionado.";
+    $conexion->close();
+    exit();
+}
+
+// Obtener los datos del usuario
+$usuario = $resultado->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,9 +43,20 @@
 </head>
 
 <body class="index">
-    <?php include('menu.php'); ?>
-    <?php include('./bbdd/conecta.php'); ?>
-    <?php $conn = getConexion(); ?>
+    <?php
+    // Inicia o continua una sesión existente
+    if (session_status() == PHP_SESSION_NONE) {
+        // Si no hay sesión activa, iniciar una nueva sesión
+        session_start();
+    }
+
+    // Verifica si la sesión está iniciada y si $id_usuario está definido
+    if (isset($_SESSION['id_usuario'])) {
+        include('menu_sesion_iniciada.php');
+    } else {
+        include('menu.php');
+    }
+    ?>
 
     <main>
         <div class="fondo">
@@ -34,7 +79,7 @@
         <div class="cardsCoaches">
             <?php
             $query = "SELECT * FROM Productos";
-            $result = $conn->query($query);
+            $result = $conexion->query($query);
             while ($producto = $result->fetch_assoc()) {
                 echo '<div class="card">
             <div class="face front">

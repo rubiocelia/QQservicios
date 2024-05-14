@@ -12,7 +12,10 @@
 
     <?php
     // Inicia o continua una sesión existente
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        // Si no hay sesión activa, iniciar una nueva sesión
+        session_start();
+    }
 
     // Verifica si la sesión está iniciada y si $id_usuario está definido
     if (isset($_SESSION['id_usuario'])) {

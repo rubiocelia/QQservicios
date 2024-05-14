@@ -47,17 +47,35 @@ $conexion->close();
 </head>
 
 <body class="miCuenta">
-    <?php include('menu_sesion_iniciada.php'); ?>
+    <?php
+    // Inicia o continua una sesión existente
+    if (session_status() == PHP_SESSION_NONE) {
+        // Si no hay sesión activa, iniciar una nueva sesión
+        session_start();
+    }
+
+    // Verifica si la sesión está iniciada y si $id_usuario está definido
+    if (isset($_SESSION['id_usuario'])) {
+        include('menu_sesion_iniciada.php');
+    } else {
+        include('menu.php');
+    }
+    ?>
     <h1 class="bienvenido">Bienvenid@, <?php echo htmlspecialchars($usuario['Nombre']); ?></h1>
     <main>
         <div id="menu2">
             <ul>
-                <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil" class="iconoMenu">Mi
+                <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil"
+                        class="iconoMenu">Mi
                     perfil</li>
-                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Mis servicios</li>
-                <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/archivo.png" alt="Icono de perfil" class="iconoMenu">Mis archivos</li>
-                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/correo-de-contacto.png" alt="Icono de perfil" class="iconoMenu">Contacto</li>
-                <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
+                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png"
+                        alt="Icono de perfil" class="iconoMenu">Mis servicios</li>
+                <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/archivo.png" alt="Icono de perfil"
+                        class="iconoMenu">Mis archivos</li>
+                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/correo-de-contacto.png"
+                        alt="Icono de perfil" class="iconoMenu">Contacto</li>
+                <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png"
+                        alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
         </div>
         <div id="contenido">
@@ -68,7 +86,8 @@ $conexion->close();
                     <div class="perfil">
 
                         <div class="foto">
-                            <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil" class="fotoPerfil">
+                            <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
+                                class="fotoPerfil">
                             <input type="file" id="foto" name="foto" style="display:none;">
                             <!-- Ocultamos el input real -->
                             <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
@@ -83,11 +102,13 @@ $conexion->close();
                             <div class="fila">
                                 <div class="campo">
                                     <label for="nombre">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
+                                    <input type="text" id="nombre" name="nombre"
+                                        value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="apellidos">Apellidos:</label>
-                                    <input type="text" id="apellidos" name="apellidos" value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
+                                    <input type="text" id="apellidos" name="apellidos"
+                                        value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
                                 </div>
                             </div>
 
@@ -95,15 +116,19 @@ $conexion->close();
                             <div class="fila">
                                 <div class="campo">
                                     <label for="email">Correo electrónico:</label>
-                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
+                                    <input type="email" id="email" name="email"
+                                        value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>"
+                                        readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="telefono">Número de teléfono:</label>
-                                    <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
+                                    <input type="tel" id="telefono" name="telefono"
+                                        value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="organizacion">Organización:</label>
-                                    <input type="text" id="organizacion" name="organizacion" value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
+                                    <input type="text" id="organizacion" name="organizacion"
+                                        value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +136,8 @@ $conexion->close();
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                             <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
-                            <button type="button" id="btnCancelar" style="display:none;" onclick="cancelarEdicion()">Cancelar</button>
+                            <button type="button" id="btnCancelar" style="display:none;"
+                                onclick="cancelarEdicion()">Cancelar</button>
 
                         </div>
 
@@ -141,7 +167,8 @@ $conexion->close();
                         </div>
                         <div class="campoContacto">
                             <label for="message">Mensaje:</label>
-                            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..."
+                                required></textarea>
                         </div>
                         <button type="submit" class="btnEnviar">Enviar</button>
                     </div>
