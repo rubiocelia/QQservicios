@@ -42,7 +42,7 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
 
             <li> <a href="coaches.php">Coaches</a></li>
 
-            <li> <a href="producto1.php">Servicios</a></li>
+            <li> <a href="servicios.php">Servicios</a></li>
 
             <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
         </ul>
@@ -82,7 +82,9 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
                             <img src="./archivos/ojo_cerrado.png" onclick="togglePassword()" class="pass-icon"
                                 id="pass-icon">
                         </div>
-                        <div class="LinkOlvidarPassword"><p>¿Se te ha olvidado la contraseña?</p></div>
+                        <div class="LinkOlvidarPassword">
+                            <p>¿Se te ha olvidado la contraseña?</p>
+                        </div>
 
                         <div>
                             <button class="botonAcceder" type="submit">Acceder</button>

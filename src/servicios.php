@@ -1,37 +1,3 @@
-<?php
-// Iniciar sesión
-session_start();
-
-// Verificar si el ID de usuario está almacenado en la sesión
-if (!isset($_SESSION['id_usuario'])) {
-    // Si el ID de usuario no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
-    header("Location: index.php");
-    exit();
-}
-
-// El ID de usuario está definido en la sesión
-$idUsuario = $_SESSION['id_usuario'];
-
-// Obtener los datos del usuario
-require_once("./bbdd/conecta.php");
-$conexion = getConexion();
-$sql = "SELECT * FROM Usuarios WHERE ID = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("i", $idUsuario); // 'i' para indicar que es un entero (ID)
-$stmt->execute();
-$resultado = $stmt->get_result();
-
-if ($resultado->num_rows == 0) {
-    // No se encontraron resultados, posible manejo de error o redirección
-    echo "No se encontró información para el usuario con el ID proporcionado.";
-    $conexion->close();
-    exit();
-}
-
-// Obtener los datos del usuario
-$usuario = $resultado->fetch_assoc();
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -44,19 +10,22 @@ $usuario = $resultado->fetch_assoc();
 
 <body class="index">
     <?php
-    // Inicia o continua una sesión existente
+    // Inicia o continúa una sesión existente
     if (session_status() == PHP_SESSION_NONE) {
-        // Si no hay sesión activa, iniciar una nueva sesión
         session_start();
     }
 
     // Verifica si la sesión está iniciada y si $id_usuario está definido
     if (isset($_SESSION['id_usuario'])) {
+        // Incluye el menú para sesión iniciada
         include('menu_sesion_iniciada.php');
     } else {
+        // Incluye el menú estándar
         include('menu.php');
     }
     ?>
+    <?php include_once('./bbdd/conecta.php'); ?>
+    <?php $conn = getConexion(); ?>
 
     <main>
         <div class="fondo">
@@ -79,7 +48,7 @@ $usuario = $resultado->fetch_assoc();
         <div class="cardsCoaches">
             <?php
             $query = "SELECT * FROM Productos";
-            $result = $conexion->query($query);
+            $result = $conn->query($query);
             while ($producto = $result->fetch_assoc()) {
                 echo '<div class="card">
             <div class="face front">
