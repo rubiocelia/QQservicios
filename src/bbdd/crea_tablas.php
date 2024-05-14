@@ -86,6 +86,7 @@ function crearTablas($conexion) {
         "testimonios" => "CREATE TABLE IF NOT EXISTS Testimonios (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
+            Subtitulo VARCHAR(255),
             Descripcion TEXT,
             Foto VARCHAR(255),
             ID_Producto INT,
@@ -177,7 +178,7 @@ function insertarDatos($conexion)
 
     // Insertar datos en Productos
     $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, ID_coaches, Id_atributo) VALUES
-                      ('Desarrolla tus Competencias como líder. Neuroliderazgo', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion1', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
+                      ('Desarrolla tus Competencias como líder. Neuroliderazgo', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Consigue un desempeño óptimo de tus funciones y la correcta gestión emocional que mejore tu equilibrio y balance personal. Programa Completo y Práctico para potenciar las competencias del liderazgo eficaz requerido en este Siglo21.Impulsa tu Creatividad, fomenta entornos de Colaboración y Gestiona la Diversidad. Duración: 6 sesiones de 1,5h.', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
                       ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, 2, 2),
                       ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, 3, 3),
                       ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, 4, 4),
@@ -217,16 +218,53 @@ foreach ($usuarios as $usuario) {
 
     // Insertar datos en Contenidos
     $conexion->query("INSERT INTO Contenidos (Titulo, Descripcion, ID_Producto) VALUES
-                        ('Titulo1', 'Descripcion del contenido 1', 1),
-                        ('Titulo2', 'Descripcion del contenido 2', 2),
-                        ('Titulo3', 'Descripcion del contenido 3', 3),
-                        ('Titulo4', 'Descripcion del contenido 4', 4),
-                        ('Titulo5', 'Descripcion del contenido 5', 5),
-                        ('Titulo6', 'Descripcion del contenido 6', 6),
-                        ('Titulo7', 'Descripcion del contenido 7', 7),
-                        ('Titulo8', 'Descripcion del contenido 8', 8),
-                        ('Titulo9', 'Descripcion del contenido 9', 9),
-                        ('Titulo10', 'Descripcion del contenido 10', 10)");
+    ('Sesión Previa Programa Coaching (1,5 horas)', 
+'<ul>
+    <li>Clarificando qué es y no es coaching</li>
+    <li>Pulsar el momento del líder/coachee. Compartir objetivos de cambio</li>
+    <li>Plantear el camino de evolución para la búsqueda de autonomía, despliegue de talento y desarrollo directivo</li>
+</ul>', 1),
+('Situación Actual Líder. Evaluación 360º', 
+'<ul>
+    <li>Evaluación 360º competencias modelo i4* de neuroliderazgo (evaluación individual + evaluación de 10 personas).</li>
+    <li>Comprensión global personal del presente</li>
+    <li>Definir imagen clara del rol/ situación profesional actual</li>
+    <li>Identificar necesidades de cambio</li>
+    <li>Identificar áreas de desarrollo y fortalezas</li>
+</ul>', 1),
+('Toma de Conciencia y Definición del Cambio', 
+'<ul>
+    <li>Report Individual-Confidencial de los Resultados de competencias en el modelo i4* neurolíder.</li>
+    <li>Visualización de niveles de competencias (propias y externas)</li>
+    <li>Fortalezas y Debilidades Compartidas. Puntos Ciegos</li>
+    <li>Definir la visión deseada, metas camino y objetivos</li>
+    <li>Generar y seleccionar perspectivas generadoras de valor</li>
+    <li>Elaboración detallada de un plan de mejora individual (PMI)</li>
+    <li>Generación de nuevos compromisos individuales de cambio</li>
+</ul>', 1),
+('Proceso de Desarrollo Individual', 
+'<ul>
+    <li>Seguimiento del plan de acción y consolidar cambios</li>
+    <li>Reevaluar realidades y decisiones</li>
+    <li>Herramientas requeridas por la persona para el cambio</li>
+    <li>Identificar avances, barreras, y ayudas necesarias</li>
+</ul>', 1),
+('Sesión Final de Evaluación de Impacto', 
+'<ul>
+    <li>Coach y Coachee evalúan el impacto y resultados del Programa de Coaching.</li>
+    <li>Situación actual del entorno profesional y el alcance de los objetivos definidos.</li>
+    <li>Planteamiento futuro después del Coaching</li>
+</ul>', 1),
+    ('Titulo2', 'Descripcion del contenido 2', 2),
+    ('Titulo3', 'Descripcion del contenido 3', 3),
+    ('Titulo4', 'Descripcion del contenido 4', 4),
+    ('Titulo5', 'Descripcion del contenido 5', 5),
+    ('Titulo6', 'Descripcion del contenido 6', 6),
+    ('Titulo7', 'Descripcion del contenido 7', 7),
+    ('Titulo8', 'Descripcion del contenido 8', 8),
+    ('Titulo9', 'Descripcion del contenido 9', 9),
+    ('Titulo10', 'Descripcion del contenido 10', 10)");
+
 
     // Insertar datos en Compra
     $conexion->query("INSERT INTO Compra (FechaHora, Confirmacion, ID_usuario, ID_Producto) VALUES
@@ -242,17 +280,19 @@ foreach ($usuarios as $usuario) {
                         (NOW(), 0, 10, 10)");
 
     // Insertar datos en Testimonios
-    $conexion->query("INSERT INTO Testimonios (Nombre, Descripcion, Foto, ID_Producto) VALUES
-                        ('Testigo1', 'Gran producto', 'testimonio1.jpg', 1),
-                        ('Testigo2', 'Excelente calidad', 'testimonio2.jpg', 2),
-                        ('Testigo3', 'Muy recomendable', 'testimonio3.jpg', 3),
-                        ('Testigo4', 'Satisfecho con la compra', 'testimonio4.jpg', 4),
-                        ('Testigo5', 'Buen servicio', 'testimonio5.jpg', 5),
-                        ('Testigo6', 'Me encantó', 'testimonio6.jpg', 6),
-                        ('Testigo7', 'No cumplió mis expectativas', 'testimonio7.jpg', 7),
-                        ('Testigo8', 'Volvería a comprar', 'testimonio8.jpg', 8),
-                        ('Testigo9', 'El mejor del mercado', 'testimonio9.jpg', 9),
-                        ('Testigo10', 'Pudo ser mejor', 'testimonio10.jpg', 10)");
+    $conexion->query("INSERT INTO Testimonios (Nombre, Subtitulo, Descripcion, Foto, ID_Producto) VALUES
+                        ('Mª Rosa León Mateo', 'Socia Fundadora Network Courier','Mi querido Coach, como tantas veces te he dicho mi proceso como cochee contigo fue de las mejores cosas que he hecho en mi carrera profesional. Lo único que siento es no haberlo hecho antes... Si la forma de ejercer el liderazgo es siempre la base para obtener los mejores resultados, tener al equipo motivado, en definitiva tener el mejor retorno de nuestras acciones profesionales, en el periodo que estamos viviendo es fundamental. Mi proceso de aprendizaje como tu cochee sigue vivo y presente en mi, todos los días y procuro ejercerlo a diario, sacando mi mejor versión en este periodo tan complicado que estamos viviendo, con la satisfacción que eso supone.', 'testimonio1.jpg', 1),
+                        ('Beatriz Achaques','CEO & Founder Dubita Arts&People', 'Es una bellísima persona y un profesional HUMANO. Tiene un don, que es ayudar a los demás y una sabiduría infinita. Es una de esas personas a las que acudir en momentos claves de tu vida. Sabe escuchar, leer a las personas y sembrar la semilla de crecimiento en el coachee para que una vez acabado el proceso sea uno mismo el que con las herramientas conseguidas en el proceso, pueda hacerla crecer de forma independiente. Me ha ayudado a alzar el vuelo. Solo tengo palabras de agradecimiento y gratitud hacia Javier', 'testimonio1.jpg', 1),
+                        ('Ramón Fco. Pérez Ruiz', 'Senior National Manager GLS','Buenas tardes Javier, para nuestro desarrollo profesional fuiste una influencia muy positiva gracias 👍', 'testimonio1.jpg', 1),
+                        ('Testigo2','subtitulo', 'Excelente calidad', 'testimonio2.jpg', 2),
+                        ('Testigo3','subtitulo', 'Muy recomendable', 'testimonio3.jpg', 3),
+                        ('Testigo4','subtitulo', 'Satisfecho con la compra', 'testimonio4.jpg', 4),
+                        ('Testigo5','subtitulo', 'Buen servicio', 'testimonio5.jpg', 5),
+                        ('Testigo6','subtitulo', 'Me encantó', 'testimonio6.jpg', 6),
+                        ('Testigo7','subtitulo', 'No cumplió mis expectativas', 'testimonio7.jpg', 7),
+                        ('Testigo8','subtitulo', 'Volvería a comprar', 'testimonio8.jpg', 8),
+                        ('Testigo9','subtitulo', 'El mejor del mercado', 'testimonio9.jpg', 9),
+                        ('Testigo10', 'subtitulo','Pudo ser mejor', 'testimonio10.jpg', 10)");
 
     // Insertar datos en ArchivosUsuarios
     $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, Fecha, ID_Producto, ID_usuario) VALUES
