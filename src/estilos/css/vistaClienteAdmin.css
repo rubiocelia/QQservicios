@@ -316,45 +316,26 @@ border-radius:100%;
 .archivos-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.archivos-table caption {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #3366cc; /* Color para el título */
-}
-
-.archivos-table th {
-  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
-  padding: 8px;
-  text-align: left;
-  border-bottom: 2px solid #ddd; /* Borde inferior */
-}
-
-.archivos-table th:hover {
-  background-color: #e6e6e6; /* Color de fondo cuando se hace hover sobre las celdas de encabezado */
-}
-
+.archivos-table th,
 .archivos-table td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd; /* Borde inferior */
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.archivos-table td:nth-child(odd) {
-  background-color: #f9f9f9; /* Color de fondo para las celdas impares */
+.archivos-table thead th {
+  background-color: #f2f2f2;
 }
 
-.archivos-table td:nth-child(odd):hover {
-  background-color: #f2f2f2; /* Color de fondo cuando se hace hover sobre las celdas impares */
+.archivos-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-.archivos-table td:nth-child(even) {
-  background-color: #ffffff; /* Color de fondo para las celdas pares */
-}
-
-.archivos-table td:nth-child(even):hover {
-  background-color: #f2f2f2; /* Color de fondo cuando se hace hover sobre las celdas pares */
+.archivos-table tbody tr:hover {
+  background-color: #ddd;
 }
 
 
@@ -370,6 +351,21 @@ border-radius:100%;
 .archivos-table .btn-eliminar:hover {
   background-color: #c82333;
 }
+
+.archivos-table .btn-deshabilitar:hover {
+  background-color: #555555;
+}
+
+.archivos-table .btn-deshabilitar {
+  padding: 5px 10px;
+  background-color: #777777;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
 
 
 caption{
@@ -442,4 +438,84 @@ caption a{
 
 .productos-table .btn-eliminar:hover {
   background-color: #c82333;
+}
+
+.btn-eliminar {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 3%;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+
+
+/* Contenedor del formulario */
+.form-container {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Estilos del formulario */
+.styled-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grupo de formulario */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Etiqueta del formulario */
+.form-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Entradas del formulario */
+.form-input {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botón del formulario */
+.form-button {
+  background-color: #2a255b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #1e1a47;
+}
+
+canvas{
+align-self: center !important;
+  width: 60% !important;
+  height: 40% !important;
 }

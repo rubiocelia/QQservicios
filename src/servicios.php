@@ -41,6 +41,13 @@
             </div>
         </div>
 
+        <div class="video-background">
+    <video autoplay muted loop class="video">
+        <source src="../../archivos/videoEjemplo1.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+
         <div class="info">
             <h1>DESPIERTA TODO TU POTENCIAL AL EXPLORAR LO QUE OFRECEN NUESTROS SERVICIOS. </h1>
         </div>

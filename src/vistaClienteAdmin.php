@@ -18,7 +18,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     if ($resultado->num_rows == 0) {
         // No se encontraron resultados para el ID proporcionado
         echo "No se encontraron datos para el cliente con el ID proporcionado.";
-        $conexion->close();
         exit();
     }
 
@@ -62,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['eliminar_archivo']) && i
     }
 
     // Cerrar la declaración preparada
-    $stmtEliminarArchivo->close();
 }
 
 // Consulta SQL para obtener los productos comprados por el cliente
@@ -93,10 +91,21 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
     $fechas[] = $rowAcceso['FechaConexion'];
     $accesos[] = $rowAcceso['accesos'];
 }
+
+$conexion = getConexion();
+$productos = $conexion->query("
+SELECT p.ID, p.Nombre 
+FROM Productos p
+INNER JOIN Compra c ON p.ID = c.ID_Producto
+WHERE c.ID_usuario = $idUsuario;
+");
+
+define("ID_USUARIO", $idUsuario);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Cliente - Vista Administrador</title>
@@ -105,6 +114,7 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <?php include('menu_sesion_iniciada.php'); ?>
@@ -177,7 +187,8 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
                                 <th>Tipo</th>
                                 <th>Descripción</th>
                                 <th>Fecha de Subida</th>
-                                <th>Acciones</th>
+                                <th>Accion</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -188,13 +199,46 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
                             <td><?php echo $row['Descripcion']; ?></td>
                             <td><?php echo $row['Fecha']; ?></td>
                             <td><button class="btn-eliminar" onclick="eliminarArchivo(<?php echo $row['ID']; ?>, <?php echo $idUsuario; ?>);">Eliminar</button></td>
-
-                        <?php endwhile; ?>
+                            <td><button class="btn-deshabilitar" onclick="deshabilitarArchivo(<?php echo $row['ID']; ?>);">Deshabilitar</button></td>
+                        </tr>
+                    <?php endwhile; ?>
                         </tbody>
                     </table>
-                    <button type="button" class="volver" onclick="window.location.href = 'anadirArchivosUsuario.php?id=<?php echo $idUsuario; ?>';">Añadir Archivo</button>
+                    <button type="button" class="volver" onclick="mostrarFormulario();">Añadir Archivo</button>
 
+                    <!-- Contenedor del formulario que se muestra/oculta -->
+                    <div id="formularioArchivo" class="form-container" style="display: none;">
+                        <form id="formArchivo" class="styled-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="archivo" class="form-label">Seleccionar archivo:</label>
+                                <input type="file" id="archivo" name="archivo" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="producto" class="form-label">Producto:</label>
+                                <select id="producto" name="producto" class="form-input" required>
+                                    <?php
+                                    while ($producto = $productos->fetch_assoc()) {
+                                        echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descripcion" class="form-label">Descripción:</label>
+                                <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+                            </div>
+
+                            <input type="hidden" name="idUsuario" value="<?php echo  $_GET['id']; ?>">
+
+                            <button type="button" class="form-button" onclick="subirArchivo();">Subir Archivo</button>
+                        </form>
+                        <button type="button" class="btn-eliminar" onclick="ocultarFormulario();">Cancelar</button>
+
+                    </div>
         </div>
+
 
         <!-- Aquí se muestra la tabla de los productos comprados -->
         <div class="seccion">
@@ -233,7 +277,7 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
         // Obtener los datos de PHP
         const fechas = <?php echo json_encode($fechas); ?>;
         const accesos = <?php echo json_encode($accesos); ?>;
-        
+
         // Debugging: verificar que los datos se obtienen correctamente
         console.log(fechas);
         console.log(accesos);
@@ -258,9 +302,9 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
                         type: 'time',
                         time: {
                             unit: 'day',
-                            tooltipFormat: 'dd/MM/yyyy',  // Asegúrate de usar 'dd' en lugar de 'DD'
+                            tooltipFormat: 'dd/MM/yyyy', // Asegúrate de usar 'dd' en lugar de 'DD'
                             displayFormats: {
-                                day: 'dd/MM/yyyy'  // Asegúrate de usar 'dd' en lugar de 'DD'
+                                day: 'dd/MM/yyyy' // Asegúrate de usar 'dd' en lugar de 'DD'
                             }
                         },
                         title: {
@@ -281,6 +325,8 @@ while ($rowAcceso = $resultAccesos->fetch_assoc()) {
     </script>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/botonesPerfilVistaAdmin.js"></script>
+    <script src="./scripts/scriptArchivoAdmin.js"></script>
     <?php include('footer.php'); ?>
 </body>
+
 </html>

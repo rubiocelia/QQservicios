@@ -97,6 +97,7 @@ function crearTablas($conexion) {
             Ruta VARCHAR(255),
             Descripcion TEXT,
             Fecha DATE,
+            Deshabilitado INT,
             ID_Producto INT,
             ID_usuario INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
@@ -269,6 +270,8 @@ foreach ($usuarios as $usuario) {
     // Insertar datos en Compra
     $conexion->query("INSERT INTO Compra (FechaHora, Confirmacion, ID_usuario, ID_Producto) VALUES
                         (NOW(), 1, 1, 1),
+                        (NOW(),1,1,2),
+                        (NOW(),1,1,3),
                         (NOW(), 0, 2, 2),
                         (NOW(), 1, 3, 3),
                         (NOW(), 0, 4, 4),
@@ -295,18 +298,18 @@ foreach ($usuarios as $usuario) {
                         ('Testigo10', 'subtitulo','Pudo ser mejor', 'testimonio10.jpg', 10)");
 
     // Insertar datos en ArchivosUsuarios
-    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, Fecha, ID_Producto, ID_usuario) VALUES
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 1',NOW(), 1, 1),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Estadisticas Excel',NOW(),1, 1),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 2',NOW(),1, 2),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 3',NOW(),2, 3),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 4',NOW(),2, 4),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 5',NOW(),3, 5),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 6',NOW(),4, 6),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 7',NOW(),5, 7),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 8',NOW(),6, 8),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),7, 9),
-                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),8, 10)");
+    $conexion->query("INSERT INTO ArchivosUsuarios (Ruta, Descripcion, Fecha, Deshabilitado, ID_Producto, ID_usuario) VALUES
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 1',NOW(), 0, 1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Estadisticas Excel',NOW(),0,1, 1),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 2',NOW(),0,1, 2),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 3',NOW(),0,2, 3),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 4',NOW(),0,2, 4),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 5',NOW(),0,3, 5),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 6',NOW(),0,4, 6),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 7',NOW(),0,5, 7),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 8',NOW(),0,6, 8),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),0,7, 9),
+                        ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),0,8, 10)");
 }
 
 

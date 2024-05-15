@@ -7,7 +7,13 @@ function confirmarCerrarSesion() {
         confirmButtonColor: '#2a255b',
         cancelButtonColor: '#e6312f',
         confirmButtonText: 'Sí, cerrar sesión',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            title: 'custom-swal-title',
+            content: 'custom-swal-content',
+            confirmButton: 'custom-swal-confirm',
+            cancelButton: 'custom-swal-cancel'
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             // Redirigir al usuario a cerrar_sesion.php

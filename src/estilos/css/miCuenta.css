@@ -282,3 +282,32 @@ main {
   cursor: pointer;
   margin-top: 10px; /* Espacio sobre el botón */
 }
+
+/* Fuente para el popUp de cerrar sesión */
+
+.custom-swal-title {
+  font-family:var(--texto);
+}
+
+.custom-swal-content {
+  font-family:var(--texto);
+}
+
+.custom-swal-confirm {
+  font-family:var(--texto);
+}
+
+.custom-swal-cancel {
+  font-family:var(--texto);
+}
+
+.swal2-popup .swal2-title,
+.swal2-popup .swal2-content,
+.swal2-popup .swal2-confirm,
+.swal2-popup .swal2-cancel {
+  font-family:var(--texto);
+}
+
+.swal2-html-container{
+  font-family:var(--texto);
+}
