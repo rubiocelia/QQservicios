@@ -22,7 +22,7 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 0) {
-    // No se encontraron resultados, posible manejo de error o redirección
+    // No se encontraron resultados, posible manejo de error o rediricción
     echo "No se encontró información para el usuario con el ID proporcionado.";
     $conexion->close();
     exit();
@@ -49,7 +49,7 @@ $productoStmt->execute();
 $productoResult = $productoStmt->get_result();
 
 if ($productoResult->num_rows == 0) {
-    // No se encontraron resultados, posible manejo de error o redirección
+    // No se encontraron resultados, posible manejo de error o rediricción
     echo "No se encontró información para el producto con el ID proporcionado.";
     $conexion->close();
     exit();
@@ -72,9 +72,12 @@ $testimonioStmt->bind_param("i", $idProducto);
 $testimonioStmt->execute();
 $testimonioResult = $testimonioStmt->get_result();
 
-// Obtener los coaches relacionados (ejemplo)
-$coachesQuery = "SELECT * FROM Coaches";
-$coachesResult = $conexion->query($coachesQuery);
+// Obtener los coaches relacionados con el producto
+$coachesQuery = "SELECT C.* FROM Coaches C INNER JOIN Productos P ON C.ID = P.ID_coaches WHERE P.ID = ?";
+$coachesStmt = $conexion->prepare($coachesQuery);
+$coachesStmt->bind_param("i", $idProducto);
+$coachesStmt->execute();
+$coachesResult = $coachesStmt->get_result();
 
 $conexion->close();
 ?>
@@ -85,7 +88,7 @@ $conexion->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $producto['Nombre']; ?></title>
+    <title><?php echo htmlspecialchars($producto['Nombre']); ?></title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <link rel="stylesheet" href="../src/estilos/css/producto1.css">
 </head>
@@ -93,13 +96,6 @@ $conexion->close();
 <body class="fondoProducto">
     <header>
         <?php
-        // Inicia o continua una sesión existente
-        if (session_status() == PHP_SESSION_NONE) {
-            // Si no hay sesión activa, iniciar una nueva sesión
-            session_start();
-        }
-
-        // Verifica si la sesión está iniciada y si $id_usuario está definido
         if (isset($_SESSION['id_usuario'])) {
             include('menu_sesion_iniciada.php');
         } else {
@@ -109,15 +105,15 @@ $conexion->close();
     </header>
     <main>
         <div class="titulo">
-            <h1><?php echo $producto['Nombre']; ?></h1>
+            <h1><?php echo htmlspecialchars($producto['Nombre']); ?></h1>
         </div>
         <div class="contenidos">
             <div class="cajaIzquierda">
                 <div class="descripcion">
-                    <p><?php echo $producto['Descripcion']; ?></p>
+                    <p><?php echo htmlspecialchars($producto['Descripcion']); ?></p>
                 </div>
                 <div class="botonesPrecioComprar">
-                    <p><?php echo $producto['Precio']; ?>€</p>
+                    <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
                     <button class="btnComprar">Comprar</button>
                 </div>
                 <div class="carrFotos">
@@ -129,7 +125,6 @@ $conexion->close();
                         <video src="../src/archivos/productos/carruselProducto1/video1.mp4" class="carrusel-item"
                             controls></video>
                     </div>
-
                     <!-- Botones de navegación -->
                     <button class="btnNav prev">&#10094;</button>
                     <button class="btnNav next">&#10095;</button>
@@ -145,8 +140,8 @@ $conexion->close();
                         if ($contenidoResult->num_rows > 0) {
                             while ($contenido = $contenidoResult->fetch_assoc()) {
                                 echo "<div class='contenidosTXT'>";
-                                echo "<div class='tituloCont'>" . $contenido['Titulo'] . "</div>";
-                                echo "<div class='respuestaCont'>" . $contenido['Descripcion'] . "</div>";
+                                echo "<div class='tituloCont'>" . htmlspecialchars($contenido['Titulo']) . "</div>";
+                                echo "<div class='respuestaCont'>" . htmlspecialchars($contenido['Descripcion']) . "</div>";
                                 echo "</div>";
                             }
                         } else {
@@ -160,10 +155,10 @@ $conexion->close();
                         if ($testimonioResult->num_rows > 0) {
                             while ($testimonio = $testimonioResult->fetch_assoc()) {
                                 echo "<div class='testimonial'>";
-                                echo "<img src='../src/archivos/testimonios/" . $testimonio['Foto'] . "' class='fotoTestimonio' alt='Foto de " . $testimonio['Nombre'] . "'>";
-                                echo "<h2>" . $testimonio['Nombre'] . "</h2>";
-                                echo "<h4>" . $testimonio['Subtitulo'] . "</h4>";
-                                echo "<p>" . $testimonio['Descripcion'] . "</p>";
+                                echo "<img class='fotoTestimonio' src='" . $testimonio["Foto"] . "' alt='" . $testimonio["Nombre"] .  "?'";
+                                echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
+                                echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
+                                echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
                                 echo "</div>";
                             }
                         } else {
@@ -182,10 +177,10 @@ $conexion->close();
                     if ($coachesResult->num_rows > 0) {
                         while ($coach = $coachesResult->fetch_assoc()) {
                             echo "<div class='coach'>";
-                            echo "<img src='../src/archivos/coaches/" . $coach['Foto'] . "' alt='Foto de " . $coach['Nombre'] . "'>";
-                            echo "<h2>" . $coach['Nombre'] . "</h2>";
-                            echo "<h3>" . $coach['Titulacion'] . "</h3>";
-                            echo "<p>" . $coach['Descripcion'] . "</p>";
+                            echo "<img  src='" . $coach["Foto"] . "' alt='" . $coach["Nombre"] . ""  . $coach["Apellidos"] . "?'";
+                            echo "<h2>" . htmlspecialchars($coach['Nombre']) . "</h2>";
+                            echo "<h3>" . htmlspecialchars($coach['Titulacion']) . "</h3>";
+                            echo "<p>" . htmlspecialchars($coach['Descripcion']) . "</p>";
                             echo "</div>";
                         }
                     } else {
