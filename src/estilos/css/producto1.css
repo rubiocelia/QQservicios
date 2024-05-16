@@ -45,10 +45,11 @@ main {
   position: relative; /* en lugar de absolute */
   width: 100%;
   min-height: 100vh; /* en lugar de height para que se expanda según el contenido */
-  background-image: url(../../archivos/productos/fondo.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url(../../archivos/productos/fondo.jpg),
+    url(../../archivos/fondoprueba.jpg);
+  background-size: cover, cover;
+  background-position: center, bottom;
+  background-repeat: no-repeat, repeat;
 }
 
 .titulo {
@@ -67,15 +68,47 @@ main {
 .cajaIzquierda {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
-  flex-grow: 2;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  flex-grow: 4; /* Crece más en comparación con .cajaDerecha */
+  width: 90%; /* Ajusta según el tamaño deseado */
+  height: fit-content;
+}
+
+.cajaDerecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  margin-left: 30px;
+  flex-grow: 1; /* Crece menos en comparación con .cajaIzquierda */
+  width: 30%; /* Ajusta según el tamaño deseado */
+}
+
+.contenedor-cajas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.carrusel,
+.cajaComprar {
+  width: 100%;
+  margin-bottom: 20px; /* Añade separación entre las cajas */
+  border-radius: 8px;
+  height: fit-content;
+  overflow: hidden;
+  padding: 5px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .descripcion {
   font-family: var(--texto);
-  font-size: 1.2em;
-  margin: 45px 100px;
+  font-size: 1.1em;
+  margin: 45px 0px;
 }
 
 .botonesPrecioComprar {
@@ -84,17 +117,17 @@ main {
   align-items: center;
   justify-content: center;
   font-family: var(--texto);
-  margin-bottom: 55px;
+  margin-bottom: 220px;
 }
 
 .botonesPrecioComprar p {
-  font-size: 1.5em;
+  font-size: 1.1em;
   margin-right: 35px;
 }
 
 .btnComprar {
   padding: 5px 10px;
-  font-size: 1.5em;
+  font-size: 1.3em; /* Aumentado desde 1.2em a 1.3em para mantener el tamaño constante */
   background-color: var(--azulQQ);
   color: white;
   border-style: none;
@@ -103,21 +136,15 @@ main {
 }
 
 .btnComprar:hover {
-  padding: 5px 10px;
-  font-size: 1.5em;
   background-color: var(--rojoQQ);
-  color: white;
-  border-style: none;
-  border-radius: 5px;
   transform: scale(1.1);
   cursor: pointer;
 }
 
 .carrFotos {
-  margin-top: 15px;
   position: relative;
   width: 80%;
-  margin: 0 auto;
+  margin: 20px auto;
   overflow: hidden;
 }
 
@@ -290,6 +317,13 @@ main {
   padding: 15px;
 }
 
+.testimonial-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .fotoTestimonio {
   width: 100px;
   height: auto;
@@ -329,7 +363,7 @@ main {
 /* Estilos básicos para botones de navegación */
 .prevTest,
 .nextTest {
-  font-size: 1.8em;
+  font-size: 1.5em;
   position: absolute;
   top: 200px;
   transform: translateY(-50%);
@@ -349,30 +383,17 @@ main {
 }
 
 .prevTest {
-  left: 20px;
+  left: 70px;
 }
 
 .nextTest {
-  right: 20px;
-}
-
-.cajaDerecha {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Asegura que todo está centrado horizontalmente */
-  background-color: #ffffff;
-  margin-left: 100px;
-  width: 1000px;
-  height: fit-content;
-  padding: 20px;
-  overflow: hidden;
-  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.2);
+  right: 70px;
 }
 
 /* Estilo del carrusel dentro de cajaDerecha */
 #carruselCoaches {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center; /* Alinea horizontalmente al centro */
@@ -381,6 +402,7 @@ main {
 }
 
 .coach {
+  padding: 15px;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -419,7 +441,7 @@ main {
 .coach h2,
 .coach h3,
 .coach p {
-  padding: 0 30px;
+  padding: 0 10px;
   margin-bottom: 15px;
 }
 
@@ -433,19 +455,91 @@ main {
   background-color: transparent;
   border: none;
   color: var(--rojoQQ);
-  font-size: 2em; /* Icono más grande para mejor clicabilidad */
+  font-size: 1.5em; /* Icono más grande para mejor clicabilidad */
   z-index: 100;
 }
 
 .prevCoaches {
-  left: 5px; /* Posiciona dentro del área visible */
+  left: 25px; /* Posiciona dentro del área visible */
 }
 
 .nextCoaches {
-  right: 5px; /* Posiciona dentro del área visible */
+  right: 25px; /* Posiciona dentro del área visible */
 }
 
 .prevCoaches:hover,
 .nextCoaches:hover {
   color: var(--azulQQ);
+}
+
+.cajaComprar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* Define la animación de flotación */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Define la animación de cambio de color */
+@keyframes colorChange {
+  0%,
+  100% {
+    color: var(--azulQQ); /* Azul */
+  }
+  50% {
+    color: var(--rojoQQ); /* Rojo */
+  }
+}
+
+/* Aplicar las animaciones al h1 */
+.cajaComprar h1 {
+  font-family: var(--titulo);
+  font-size: 2em;
+  margin: 20px 0;
+  animation: float 2s ease-in-out infinite, colorChange 3s linear infinite;
+}
+
+.btnComprar2 {
+  padding: 5px 10px;
+  font-size: 1.3em; /* Aumentado desde 1.2em a 1.3em para mantener el tamaño constante */
+  background-color: var(--azulQQ);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btnComprar2:hover {
+  background-color: var(--rojoQQ);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 35%; /* Ajusta según sea necesario */
 }

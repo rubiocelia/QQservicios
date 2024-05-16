@@ -106,16 +106,16 @@ $conexion->close();
     <main>
         <div class="titulo">
             <h1><?php echo htmlspecialchars($producto['Nombre']); ?></h1>
+            <div class="descripcion">
+                <p><?php echo htmlspecialchars($producto['Descripcion']); ?></p>
+            </div>
+            <div class="botonesPrecioComprar">
+                <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
+                <button class="btnComprar">Comprar</button>
+            </div>
         </div>
         <div class="contenidos">
             <div class="cajaIzquierda">
-                <div class="descripcion">
-                    <p><?php echo htmlspecialchars($producto['Descripcion']); ?></p>
-                </div>
-                <div class="botonesPrecioComprar">
-                    <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
-                    <button class="btnComprar">Comprar</button>
-                </div>
                 <div class="carrFotos">
                     <div class="fotosVideos">
                         <img src="../src/archivos/productos/carruselProducto1/Julia y Javier Conversacion.JPEG"
@@ -141,7 +141,7 @@ $conexion->close();
                             while ($contenido = $contenidoResult->fetch_assoc()) {
                                 echo "<div class='contenidosTXT'>";
                                 echo "<div class='tituloCont'>" . htmlspecialchars($contenido['Titulo']) . "</div>";
-                                echo "<div class='respuestaCont'>" . htmlspecialchars($contenido['Descripcion']) . "</div>";
+                                echo "<div class='respuestaCont'>" . $contenido['Descripcion'] . "</div>"; // No se usa htmlspecialchars aquí para permitir HTML
                                 echo "</div>";
                             }
                         } else {
@@ -155,12 +155,16 @@ $conexion->close();
                         if ($testimonioResult->num_rows > 0) {
                             while ($testimonio = $testimonioResult->fetch_assoc()) {
                                 echo "<div class='testimonial'>";
-                                echo "<img class='fotoTestimonio' src='" . $testimonio["Foto"] . "' alt='" . $testimonio["Nombre"] .  "?'";
+                                echo "<div class='testimonial-content'>";
+                                echo "<img class='fotoTestimonio' src='" . htmlspecialchars($testimonio["Foto"]) . "' alt='" . htmlspecialchars($testimonio["Nombre"]) . "'>";
+                                
                                 echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
                                 echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
                                 echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
-                                echo "</div>";
+                                echo "</div>"; // Close testimonial-content div
+                                echo "</div>"; // Close testimonial div
                             }
+                        
                         } else {
                             echo "<p>No se encontraron testimonios para este producto.</p>";
                         }
@@ -171,26 +175,41 @@ $conexion->close();
                 </div>
             </div>
             <div class="cajaDerecha">
-                <div id="carruselCoaches" class="carrusel">
-                    <!-- Caja de un coach -->
-                    <?php
-                    if ($coachesResult->num_rows > 0) {
-                        while ($coach = $coachesResult->fetch_assoc()) {
-                            echo "<div class='coach'>";
-                            echo "<img  src='" . $coach["Foto"] . "' alt='" . $coach["Nombre"] . ""  . $coach["Apellidos"] . "?'";
-                            echo "<h2>" . htmlspecialchars($coach['Nombre']) . "</h2>";
-                            echo "<h3>" . htmlspecialchars($coach['Titulacion']) . "</h3>";
-                            echo "<p>" . htmlspecialchars($coach['Descripcion']) . "</p>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "<p>No se encontraron coaches.</p>";
-                    }
-                    ?>
-                    <button class="prevCoaches">&#10094;</button>
-                    <button class="nextCoaches">&#10095;</button>
+                <div class="contenedor-cajas">
+                    <div id="carruselCoaches" class="carrusel">
+                        <!-- Caja de un coach -->
+                        <?php
+                            if ($coachesResult->num_rows > 0) {
+                                while ($coach = $coachesResult->fetch_assoc()) {
+                                    echo "<div class='coach'>";
+                                    echo "<img src='" . htmlspecialchars($coach["Foto"]) . "' alt='" . htmlspecialchars($coach["Nombre"]) . "'>";
+                                    echo "<h2>" . htmlspecialchars($coach['Nombre']) . " " . htmlspecialchars($coach['Apellidos']) ."</h2>";
+                                    echo "<h3>" . htmlspecialchars($coach['Titulacion']) . "</h3>";
+                                    echo "<p>" . htmlspecialchars($coach['Descripcion']) . "</p>";
+                                    echo "</div>";
+                                }
+                            } else {
+                                echo "<p>No se encontraron coaches.</p>";
+                            }
+                        ?>
+                        <button class="prevCoaches">&#10094;</button>
+                        <button class="nextCoaches">&#10095;</button>
+                    </div>
+
+                    <div class="cajaComprar">
+                        <h1>¡Potencia tu futuro!</h1>
+                        <div class="image-container">
+                            <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
+                            <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
+                                alt="GIF animado">
+                        </div>
+                        <button class="btnComprar2">Comprar</button>
+                    </div>
+
+
                 </div>
             </div>
+
         </div>
     </main>
 

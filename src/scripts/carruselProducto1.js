@@ -119,3 +119,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   showCurrentCoach(); // Inicializa mostrando el primer coach
 });
+
+// animacion fotop y gif
+
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.querySelector(".btnComprar2");
+  const staticImage = document.getElementById("staticImage");
+  const animatedImage = document.getElementById("animatedImage");
+
+  button.addEventListener("mouseover", () => {
+    staticImage.classList.add("hidden");
+    animatedImage.classList.remove("hidden");
+  });
+
+  button.addEventListener("mouseout", () => {
+    animatedImage.classList.add("hidden");
+    staticImage.classList.remove("hidden");
+  });
+});
