@@ -31,18 +31,46 @@ if ($resultado->num_rows == 0) {
 // Obtener los datos del usuario
 $usuario = $resultado->fetch_assoc();
 
-// Obtener la información del producto con ID 1
-$productoQuery = "SELECT * FROM Productos WHERE ID = 1";
-$productoResult = $conexion->query($productoQuery);
+// Obtener el ID del producto desde la URL
+$idProducto = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($idProducto == 0) {
+    // Si el ID del producto no es válido, manejar el error o redirigir
+    echo "ID de producto no válido.";
+    $conexion->close();
+    exit();
+}
+
+// Obtener la información del producto con el ID proporcionado
+$productoQuery = "SELECT * FROM Productos WHERE ID = ?";
+$productoStmt = $conexion->prepare($productoQuery);
+$productoStmt->bind_param("i", $idProducto);
+$productoStmt->execute();
+$productoResult = $productoStmt->get_result();
+
+if ($productoResult->num_rows == 0) {
+    // No se encontraron resultados, posible manejo de error o redirección
+    echo "No se encontró información para el producto con el ID proporcionado.";
+    $conexion->close();
+    exit();
+}
+
+// Obtener los datos del producto
 $producto = $productoResult->fetch_assoc();
 
-// Obtener los contenidos relacionados con el producto con ID 1
-$contenidoQuery = "SELECT Titulo, Descripcion FROM Contenidos WHERE ID_Producto = 1";
-$contenidoResult = $conexion->query($contenidoQuery);
+// Obtener los contenidos relacionados con el producto
+$contenidoQuery = "SELECT Titulo, Descripcion FROM Contenidos WHERE ID_Producto = ?";
+$contenidoStmt = $conexion->prepare($contenidoQuery);
+$contenidoStmt->bind_param("i", $idProducto);
+$contenidoStmt->execute();
+$contenidoResult = $contenidoStmt->get_result();
 
-// Obtener los testimonios relacionados con el producto con ID 1
-$testimonioQuery = "SELECT Nombre, Subtitulo, Descripcion, Foto FROM Testimonios WHERE ID_Producto = 1";
-$testimonioResult = $conexion->query($testimonioQuery);
+// Obtener los testimonios relacionados con el producto
+$testimonioQuery = "SELECT Nombre, Subtitulo, Descripcion, Foto FROM Testimonios WHERE ID_Producto = ?";
+$testimonioStmt = $conexion->prepare($testimonioQuery);
+$testimonioStmt->bind_param("i", $idProducto);
+$testimonioStmt->execute();
+$testimonioResult = $testimonioStmt->get_result();
 
 // Obtener los coaches relacionados (ejemplo)
 $coachesQuery = "SELECT * FROM Coaches";
@@ -157,7 +185,7 @@ $conexion->close();
                             echo "<img src='../src/archivos/coaches/" . $coach['Foto'] . "' alt='Foto de " . $coach['Nombre'] . "'>";
                             echo "<h2>" . $coach['Nombre'] . "</h2>";
                             echo "<h3>" . $coach['Titulacion'] . "</h3>";
-                            echo "<p>" . $coach['Experiencia'] . "</p>";
+                            echo "<p>" . $coach['Descripcion'] . "</p>";
                             echo "</div>";
                         }
                     } else {
@@ -171,7 +199,7 @@ $conexion->close();
         </div>
     </main>
 
-    <script src="../src/scripts/carruselProducto.js"></script>
+    <script src="../src/scripts/carruselProducto1.js"></script>
     <?php include('footer.php'); ?>
 </body>
 

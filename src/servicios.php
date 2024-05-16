@@ -42,14 +42,14 @@
         </div>
 
         <div class="video-background">
-    <video autoplay muted loop class="video">
-        <source src="../../archivos/videoEjemplo1.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-    </video>
-</div>
+            <video autoplay muted loop class="video">
+                <source src="../../archivos/videoEjemplo1.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
 
         <div class="info">
-            <h1>DESPIERTA TODO TU POTENCIAL AL EXPLORAR LO QUE OFRECEN NUESTROS SERVICIOS. </h1>
+            <h1>DESPIERTA TODO TU POTENCIAL AL EXPLORAR LO QUE OFRECEN NUESTROS SERVICIOS.</h1>
         </div>
 
         <div class="cardsCoaches">
@@ -59,70 +59,65 @@
             while ($producto = $result->fetch_assoc()) {
                 echo '<div class="card">
             <div class="face front">
-                <img src="' . $producto['Foto'] . '" alt="' . $producto['Nombre'] . '">
-                <h3>' . $producto['Nombre'] . '</h3>
+                <img src="' . htmlspecialchars($producto['Foto']) . '" alt="' . htmlspecialchars($producto['Nombre']) . '">
+                <h3>' . htmlspecialchars($producto['Nombre']) . '</h3>
             </div>
             <div class="face back">
-                <h3>' . $producto['Nombre'] . '</h3>
-                <p>' . $producto['DescripcionCorta'] . '</p>
+                <h3>' . htmlspecialchars($producto['Nombre']) . '</h3>
+                <p>' . htmlspecialchars($producto['DescripcionCorta']) . '</p>
                 <div class="link">
-                    <a href="#">Saber más</a>
+                    <a href="producto1BBDD.php?id=' . htmlspecialchars($producto['ID']) . '">Saber más</a>
                 </div>
             </div>
         </div>';
             }
             ?>
-
         </div>
 
-
         <!-- MENÚ LATERAL DE FILTROS -->
+        <!-- 
+        <button id="openBtn" onclick="toggleSidebar()">☰</button>
 
-        <!-- <button id="openBtn" onclick="toggleSidebar()">☰</button>
+        <div id="sidebar" class="sidebar">
+            <h2>Filtros</h2>
+            <div class="dropdown">
+                <a href="#">Categoría</a>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" name="categoria" value="categoria1"> Categoría 1</label><br>
+                    <label><input type="checkbox" name="categoria" value="categoria2"> Categoría 2</label><br>
+                    <label><input type="checkbox" name="categoria" value="categoria3"> Categoría 3</label><br>
+                     Agrega más categorías si es necesario
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Precio</a>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" name="precio" value="precio1"> Precio 1</label><br>
+                    <label><input type="checkbox" name="precio" value="precio2"> Precio 2</label><br>
+                    <label><input type="checkbox" name="precio" value="precio3"> Precio 3</label><br>
+                     Agrega más opciones de precios si es necesario
+                </div>
+            </div>
+            Agrega más filtros desplegables según tus necesidades
+        </div>
 
-<div id="sidebar" class="sidebar">
-    <h2>Filtros</h2>
-    <div class="dropdown">
-        <a href="#">Categoría</a>
-        <div class="dropdown-content">
-            <label><input type="checkbox" name="categoria" value="categoria1"> Categoría 1</label><br>
-            <label><input type="checkbox" name="categoria" value="categoria2"> Categoría 2</label><br>
-            <label><input type="checkbox" name="categoria" value="categoria3"> Categoría 3</label><br>
-             Agrega más categorías si es necesario -->
-        <!-- </div>
-    </div>
-    <div class="dropdown">
-        <a href="#">Precio</a>
-        <div class="dropdown-content">
-            <label><input type="checkbox" name="precio" value="precio1"> Precio 1</label><br>
-            <label><input type="checkbox" name="precio" value="precio2"> Precio 2</label><br>
-            <label><input type="checkbox" name="precio" value="precio3"> Precio 3</label><br>
-             Agrega más opciones de precios si es necesario -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- Agrega más filtros desplegables según tus necesidades -->
-        <!-- </div> -->
-
-        <!-- <script>
-    function toggleSidebar() {
-        var sidebar = document.getElementById("sidebar");
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-        } else {
-            sidebar.style.width = "250px";
-        }
-    }
-</script> -->
-
-
-
+        <script>
+            function toggleSidebar() {
+                var sidebar = document.getElementById("sidebar");
+                if (sidebar.style.width === "250px") {
+                    sidebar.style.width = "0";
+                } else {
+                    sidebar.style.width = "250px";
+                }
+            }
+        </script>
+        -->
     </main>
 
     <!-- JS de lógica para ocultarlo y mostrarlo -->
-    <script src="./scripts/scriptPopUp.js"></script>
-    <script src="./scripts/validacionRegistro.js"></script>
+    <script src="../src/scripts/carruselProducto.js"></script>
+    <script src="../src/scripts/validacionRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 
     <?php include('footer.php'); ?>
 </body>
