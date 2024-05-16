@@ -5,3 +5,7 @@ function redireccionarAVistaCliente(idUsuario) {
     // Redireccionar a vistaClienteAdmin.php con el ID del usuario en la URL
     window.location.href = url;
 }
+
+function redireccionarAVistaCoach(id) {
+    window.location.href = 'detalleCoach.php?id=' + id;
+}

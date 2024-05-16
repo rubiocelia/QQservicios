@@ -56,7 +56,7 @@ $conexion->close();
             <ul>
                 <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil" class="iconoMenu">Mi perfil</li>
                 <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil" class="iconoMenu">Clientes</li>
-                <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
+                <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
                 <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
                 <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Carruseles</li>
                 <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
@@ -122,7 +122,7 @@ $conexion->close();
 
             </div>
             <div id="clientes" class="seccion">
-                <h1>Clientes</h1>
+                <h1>Mis Clientes</h1>
                 <?php
                 // Obtener conexión a la base de datos
                 $conexion = getConexion();
@@ -167,8 +167,48 @@ $conexion->close();
                 ?>
             </div>
 
-            <div id="archivos" class="seccion">
-                <h1>Mis archivos</h1>
+            <div id="coaches" class="seccion">
+                <h1>Mis Coaches</h1>
+                <?php
+                // Obtener conexión a la base de datos
+                $conexion = getConexion();
+
+                // Consulta para obtener todos los coaches
+                $query = "SELECT * FROM Coaches";
+                $resultado = $conexion->query($query);
+
+                // Comprobar si hay resultados
+                if ($resultado->num_rows > 0) {
+                    echo '<table class="coaches-table">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Nombre</th>';
+                    echo '<th>Apellidos</th>';
+                    echo '<th>Titulación</th>';
+                    echo '<th>Foto</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                    // Iterar sobre los resultados y mostrar cada coach en una fila de la tabla
+                    while ($coach = $resultado->fetch_assoc()) {
+                        echo '<tr onclick="redireccionarAVistaCoach(' . $coach['ID'] . ')">';                        
+                        echo '<td>' . $coach['Nombre'] . '</td>';
+                        echo '<td>' . $coach['Apellidos'] . '</td>';
+                        echo '<td>' . $coach['Titulacion'] . '</td>';
+                        echo '<td><img src="' . $coach['Foto'] . '" alt="Foto de perfil" width="50" height="50"></td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo 'No se encontraron coaches.';
+                }
+
+                // Cerrar conexión
+                $conexion->close();
+                ?>
+                <button type="button" class="volver" onclick="window.location.href = 'nuevoCoach.php';">Añadir Nuevo </button>
+
             </div>
 
             <div id="contacto" class="seccion">

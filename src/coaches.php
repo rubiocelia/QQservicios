@@ -69,7 +69,7 @@
             <img class="fotoTestimonio"  src="' . $coach['Foto'] . '" alt="' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '">
             <div class="testimonial-text">
             <h4>' . $coach['Nombre'] . ' ' . $coach['Apellidos'] . '</h4>
-            <p>' . $coach['Experiencia'] . '</p>
+            <p>' . $coach['Descripcion'] . '</p>
             <div class="testimonial-icons">
             <img src="./archivos/linkedin_cuadrado.png" alt="botón Linkedin">
             <img src="./archivos/youtube.png" alt="botón multimedia">
