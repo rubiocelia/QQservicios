@@ -170,6 +170,34 @@ define("ID_USUARIO", $idUsuario);
                 </div>
             </form>
         </div>
+
+        <!-- Aquí se muestra la tabla de los productos comprados -->
+        <div class="seccion">
+            <h1>Productos comprados por el cliente</h1>
+            <table class="productos-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción Corta</th>
+                        <th>Fecha de Compra</th>
+                        <th>Confirmación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($rowCompra = $resultCompras->fetch_assoc()) : ?>
+                        <tr>
+                            <td><?php echo $rowCompra['Nombre']; ?></td>
+                            <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
+                            <td><?php echo $rowCompra['FechaHora']; ?></td>
+                            <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
+                            <td><button class="btn-eliminar" onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+
         <div class="seccion">
             <h1>Documentos del cliente</h1>
             <?php
@@ -240,32 +268,7 @@ define("ID_USUARIO", $idUsuario);
         </div>
 
 
-        <!-- Aquí se muestra la tabla de los productos comprados -->
-        <div class="seccion">
-            <h1>Productos comprados por el cliente</h1>
-            <table class="productos-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción Corta</th>
-                        <th>Fecha de Compra</th>
-                        <th>Confirmación</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($rowCompra = $resultCompras->fetch_assoc()) : ?>
-                        <tr>
-                            <td><?php echo $rowCompra['Nombre']; ?></td>
-                            <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
-                            <td><?php echo $rowCompra['FechaHora']; ?></td>
-                            <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
-                            <td><button class="btn-eliminar" onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
+        
 
         <div class="seccion">
             <h1>Accesos del usuario en los últimos 3 meses</h1>

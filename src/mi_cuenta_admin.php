@@ -57,8 +57,9 @@ $conexion->close();
                 <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil" class="iconoMenu">Mi perfil</li>
                 <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil" class="iconoMenu">Clientes</li>
                 <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
-                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
-                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Carruseles</li>
+                <li onclick="mostrarSeccion('servicio')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
+                <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Carruseles</li>
+                <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Testimonios</li>
                 <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
         </div>
@@ -191,7 +192,7 @@ $conexion->close();
                     echo '<tbody>';
                     // Iterar sobre los resultados y mostrar cada coach en una fila de la tabla
                     while ($coach = $resultado->fetch_assoc()) {
-                        echo '<tr onclick="redireccionarAVistaCoach(' . $coach['ID'] . ')">';                        
+                        echo '<tr onclick="redireccionarAVistaCoach(' . $coach['ID'] . ')">';
                         echo '<td>' . $coach['Nombre'] . '</td>';
                         echo '<td>' . $coach['Apellidos'] . '</td>';
                         echo '<td>' . $coach['Titulacion'] . '</td>';
@@ -207,30 +208,67 @@ $conexion->close();
                 // Cerrar conexión
                 $conexion->close();
                 ?>
-                <button type="button" class="volver" onclick="window.location.href = 'nuevoCoach.php';">Añadir Nuevo </button>
+                <button type="button" class="volver" onclick="mostrarFormulario()">Añadir Nuevo</button>
+                <div id="formularioNuevoCoach" class="form-container" style="display: none;">
+                    <form id="formNuevoCoach" class="styled-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellidos" class="form-label">Apellidos:</label>
+                            <input type="text" id="apellidos" name="apellidos" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titulacion" class="form-label">Titulación:</label>
+                            <input type="text" id="titulacion" name="titulacion" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <input type="text" id="descripcion" name="descripcion" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linkedin" class="form-label">LinkedIn:</label>
+                            <input type="url" id="linkedin" name="linkedin" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video" class="form-label">Video:</label>
+                            <input type="url" id="video" name="video" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="general" class="form-label">General:</label>
+                            <input type="text" id="general" name="general" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto" class="form-label">Foto:</label>
+                            <input type="file" id="foto" name="foto" class="form-input" required>
+                        </div>
+
+                        <div class="form-button-container">
+                            <button type="button" class="form-button" onclick="insertarCoach()">Enviar</button>
+                            <button type="button" class="form-button-cancel" onclick="cancelarCoach()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
 
             </div>
 
-            <div id="contacto" class="seccion">
-                <h1>Contacto</h1>
-                <form action="enviarContacto.php" method="post" class="campoContacto">
-                    <div class="contacto">
-                        <div class="campoContacto">
-                            <label for="name">Nombre:</label>
-                            <input type="text" id="name" name="name" placeholder="Escribe tu nombre" required>
-                        </div>
-                        <div class="campoContacto">
-                            <label for="email">Correo Electrónico:</label>
-                            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
-                        </div>
-                        <div class="campoContacto">
-                            <label for="message">Mensaje:</label>
-                            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                        </div>
-                        <button type="submit" class="btnEnviar">Enviar</button>
-                    </div>
-                </form>
+            <div id="servicio" class="seccion">
+                <h1>Mis Servicios</h1>
+            </div>
+            <div id="carrusel" class="seccion">
+                <h1>Mis Galerias</h1>
+            </div>
 
+            <div id="testimonios" class="seccion">
+                <h1>Mis Galerias</h1>
             </div>
         </div>
     </main>
