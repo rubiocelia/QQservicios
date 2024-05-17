@@ -46,7 +46,7 @@ main {
   width: 100%;
   min-height: 100vh; /* en lugar de height para que se expanda según el contenido */
   background-image: url(../../archivos/productos/fondo.jpg),
-    url(../../archivos/fondoprueba.jpg);
+    url(../../archivos/fondoprueba2.jpg);
   background-size: cover, cover;
   background-position: center, bottom;
   background-repeat: no-repeat, repeat;
@@ -479,15 +479,6 @@ main {
   justify-content: center;
 }
 /* Define la animación de flotación */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
 
 /* Define la animación de cambio de color */
 @keyframes colorChange {
@@ -504,7 +495,7 @@ main {
 .cajaComprar h1 {
   font-family: var(--titulo);
   font-size: 2em;
-  margin: 20px 0;
+  margin: 10px 0;
   animation: float 2s ease-in-out infinite, colorChange 3s linear infinite;
 }
 
@@ -516,7 +507,7 @@ main {
   border-style: none;
   border-radius: 5px;
   margin-bottom: 10px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .btnComprar2:hover {
