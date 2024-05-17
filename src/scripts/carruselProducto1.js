@@ -137,3 +137,22 @@ document.addEventListener("DOMContentLoaded", () => {
     staticImage.classList.remove("hidden");
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const faqHeaders = document.querySelectorAll(".faq h3");
+
+  faqHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const faq = this.parentElement;
+      const allFaqs = document.querySelectorAll(".faq");
+
+      allFaqs.forEach((f) => {
+        if (f !== faq) {
+          f.classList.remove("open");
+        }
+      });
+
+      faq.classList.toggle("open");
+    });
+  });
+});

@@ -37,8 +37,13 @@ body {
 }
 
 main {
-  margin-top: 125px;
+  margin-top: 130px;
   flex: 1; /* Esto asegura que el main ocupe el espacio necesario y empuje el footer hacia abajo */
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
 }
 
 .fondoProducto {
@@ -46,7 +51,7 @@ main {
   width: 100%;
   min-height: 100vh; /* en lugar de height para que se expanda según el contenido */
   background-image: url(../../archivos/productos/fondo.jpg),
-    url(../../archivos/fondoprueba2.jpg);
+    url(../../archivos/productos/BackgroundCubes_V2.svg);
   background-size: cover, cover;
   background-position: center, bottom;
   background-repeat: no-repeat, repeat;
@@ -62,7 +67,7 @@ main {
 .contenidos {
   display: flex;
   flex-direction: row;
-  margin: 55px 80px;
+  margin: 10px 80px;
 }
 
 .cajaIzquierda {
@@ -197,7 +202,6 @@ main {
 }
 
 .menuHorizontal {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -205,7 +209,6 @@ main {
 }
 
 .menuContTest {
-  margin-bottom: 25px;
   text-align: center;
   padding: 20px;
 }
@@ -533,4 +536,65 @@ main {
 
 .image-container img {
   width: 35%; /* Ajusta según sea necesario */
+}
+
+/* CSS para las FAQs */
+.faqSection {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.faqSection h2 {
+  justify-content: center;
+  font-family: var(--titulo);
+  font-size: 32px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+}
+
+.faq {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid var(--azulQQ);
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.faq h3 {
+  font-family: var(--titulo);
+  font-size: 1.2em;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  padding-right: 30px;
+}
+
+.faq h3::after {
+  content: "\25BC";
+  font-size: 1.2em;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
+  color: var(--azulQQ);
+}
+
+.faq.open h3::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faq p {
+  font-family: var(--texto);
+
+  display: none;
+  margin: 10px 0 0;
+  font-size: 1.1em;
+  color: #313131;
+}
+
+.faq.open p {
+  display: block;
 }

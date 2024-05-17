@@ -79,6 +79,20 @@ $coachesStmt->bind_param("i", $idProducto);
 $coachesStmt->execute();
 $coachesResult = $coachesStmt->get_result();
 
+// Obtener los datos del carrusel de multimedia relacionados con el producto
+$carruselQuery = "SELECT RutaArchivos FROM carruselMultimedia WHERE ID_Producto = ?";
+$carruselStmt = $conexion->prepare($carruselQuery);
+$carruselStmt->bind_param("i", $idProducto);
+$carruselStmt->execute();
+$carruselResult = $carruselStmt->get_result();
+
+// Obtener las FAQs relacionadas con el producto
+$faqQuery = "SELECT Pregunta, Respuesta FROM faqs WHERE ID_Producto = ?";
+$faqStmt = $conexion->prepare($faqQuery);
+$faqStmt->bind_param("i", $idProducto);
+$faqStmt->execute();
+$faqResult = $faqStmt->get_result();
+
 $conexion->close();
 ?>
 
@@ -114,29 +128,38 @@ $conexion->close();
                 <button class="btnComprar">Comprar</button>
             </div>
         </div>
-        <div class="contenidos">
-            <div class="cajaIzquierda">
-                <div class="carrFotos">
-                    <div class="fotosVideos">
-                        <img src="../src/archivos/productos/carruselProducto1/Julia y Javier Conversacion.JPEG"
-                            class="carrusel-item" alt="">
-                        <img src="../src/archivos/productos/carruselProducto1/javier_ontiveros.jpeg"
-                            class="carrusel-item visible" alt="">
-                        <video src="../src/archivos/productos/carruselProducto1/video1.mp4" class="carrusel-item"
-                            controls></video>
+        <div class="todo">
+            <div class="contenidos">
+                <div class="cajaIzquierda">
+                    <div class="carrFotos">
+                        <div class="fotosVideos">
+                            <?php
+                        if ($carruselResult->num_rows > 0) {
+                            while ($carrusel = $carruselResult->fetch_assoc()) {
+                                $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
+                                if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                                    echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
+                                } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
+                                    echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
+                                }
+                            }
+                        } else {
+                            echo "<p>No se encontraron archivos multimedia para este producto.</p>";
+                        }
+                        ?>
+                        </div>
+                        <!-- Botones de navegación -->
+                        <button class="btnNav prev">&#10094;</button>
+                        <button class="btnNav next">&#10095;</button>
                     </div>
-                    <!-- Botones de navegación -->
-                    <button class="btnNav prev">&#10094;</button>
-                    <button class="btnNav next">&#10095;</button>
-                </div>
-                <div class="menuHorizontal">
-                    <div class="menuContTest">
-                        <button id="contenidosBtn">Contenidos</button>
-                        <button id="testimoniosBtn">Testimonios</button>
-                    </div>
-                    <div id="contenidos" class="contenido">
-                        <!-- Contenidos desplegables -->
-                        <?php
+                    <div class="menuHorizontal">
+                        <div class="menuContTest">
+                            <button id="contenidosBtn">Contenidos</button>
+                            <button id="testimoniosBtn">Testimonios</button>
+                        </div>
+                        <div id="contenidos" class="contenido">
+                            <!-- Contenidos desplegables -->
+                            <?php
                         if ($contenidoResult->num_rows > 0) {
                             while ($contenido = $contenidoResult->fetch_assoc()) {
                                 echo "<div class='contenidosTXT'>";
@@ -148,10 +171,10 @@ $conexion->close();
                             echo "<p>No se encontraron contenidos para este producto.</p>";
                         }
                         ?>
-                    </div>
-                    <div id="testimonios" class="testimonios oculto" style="display: none;">
-                        <!-- Carrusel de testimonios -->
-                        <?php
+                        </div>
+                        <div id="testimonios" class="testimonios oculto" style="display: none;">
+                            <!-- Carrusel de testimonios -->
+                            <?php
                         if ($testimonioResult->num_rows > 0) {
                             while ($testimonio = $testimonioResult->fetch_assoc()) {
                                 echo "<div class='testimonial'>";
@@ -169,16 +192,16 @@ $conexion->close();
                             echo "<p>No se encontraron testimonios para este producto.</p>";
                         }
                         ?>
-                        <button class="prevTest">&#10094;</button>
-                        <button class="nextTest">&#10095;</button>
+                            <button class="prevTest">&#10094;</button>
+                            <button class="nextTest">&#10095;</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="cajaDerecha">
-                <div class="contenedor-cajas">
-                    <div id="carruselCoaches" class="carrusel">
-                        <!-- Caja de un coach -->
-                        <?php
+                <div class="cajaDerecha">
+                    <div class="contenedor-cajas">
+                        <div id="carruselCoaches" class="carrusel">
+                            <!-- Caja de un coach -->
+                            <?php
                             if ($coachesResult->num_rows > 0) {
                                 while ($coach = $coachesResult->fetch_assoc()) {
                                     echo "<div class='coach'>";
@@ -192,24 +215,40 @@ $conexion->close();
                                 echo "<p>No se encontraron coaches.</p>";
                             }
                         ?>
-                        <button class="prevCoaches">&#10094;</button>
-                        <button class="nextCoaches">&#10095;</button>
-                    </div>
-
-                    <div class="cajaComprar">
-                        <h1>¡Potencia tu futuro!</h1>
-                        <div class="image-container">
-                            <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
-                            <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
-                                alt="GIF animado">
+                            <button class="prevCoaches">&#10094;</button>
+                            <button class="nextCoaches">&#10095;</button>
                         </div>
-                        <button class="btnComprar2">Comprar</button>
-                    </div>
 
+                        <div class="cajaComprar">
+                            <h1>¡Potencia tu futuro!</h1>
+                            <div class="image-container">
+                                <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
+                                <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
+                                    alt="GIF animado">
+                            </div>
+                            <button class="btnComprar2">Comprar</button>
+                        </div>
+                    </div>
 
                 </div>
-            </div>
 
+            </div>
+            <!-- Sección de FAQs -->
+            <div class="faqSection">
+                <h2>Preguntas Frecuentes</h2>
+                <?php
+                    if ($faqResult->num_rows > 0) {
+                        while ($faq = $faqResult->fetch_assoc()) {
+                            echo "<div class='faq'>";
+                            echo "<h3>" . htmlspecialchars($faq['Pregunta']) . "</h3>";
+                            echo "<p>" . htmlspecialchars($faq['Respuesta']) . "</p>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<p>No se encontraron FAQs para este producto.</p>";
+                    }
+                    ?>
+            </div>
         </div>
     </main>
 
