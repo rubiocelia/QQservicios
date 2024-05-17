@@ -107,7 +107,7 @@ $conexion->close();
         <div class="titulo">
             <h1><?php echo htmlspecialchars($producto['Nombre']); ?></h1>
             <div class="descripcion">
-                <p><?php echo htmlspecialchars($producto['Descripcion']); ?></p>
+                <p><?php echo ($producto['Descripcion']); ?></p>
             </div>
             <div class="botonesPrecioComprar">
                 <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
