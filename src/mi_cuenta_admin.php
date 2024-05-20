@@ -50,7 +50,7 @@ $conexion->close();
 
 <body class="miCuenta">
     <?php include('menu_sesion_iniciada.php'); ?>
-    <h1 class="bienvenido">Bienvenid@, <?php echo htmlspecialchars($usuario['Nombre']); ?></h1>
+    <h1 class="bienvenido">Bienvenid@ administrador, <?php echo htmlspecialchars($usuario['Nombre']); ?></h1>
     <main>
         <div id="menu2">
             <ul>
@@ -185,7 +185,7 @@ $conexion->close();
                     echo '<tr>';
                     echo '<th>Nombre</th>';
                     echo '<th>Apellidos</th>';
-                    echo '<th>Titulación</th>';
+                    echo '<th>Titulo profesional</th>';
                     echo '<th>Foto</th>';
                     echo '</tr>';
                     echo '</thead>';
@@ -222,7 +222,7 @@ $conexion->close();
                         </div>
 
                         <div class="form-group">
-                            <label for="titulacion" class="form-label">Titulación:</label>
+                            <label for="titulacion" class="form-label">Titulo profesional::</label>
                             <input type="text" id="titulacion" name="titulacion" class="form-input" required>
                         </div>
 
@@ -260,9 +260,60 @@ $conexion->close();
 
             </div>
 
-            <div id="servicio" class="seccion">
-                <h1>Mis Servicios</h1>
+            <div id="carrusel" class="seccion">
+                <h1>Mis Galerías</h1>
+                <?php
+                // Obtener conexión a la base de datos
+                $conexion = getConexion();
+
+                // Consulta para obtener los datos agrupados por nombre del carrusel
+                $query = "
+                SELECT cm.ID, cm.Nombre_carrusel, COUNT(cm.RutaArchivos) AS Items, p.Nombre AS Producto
+                FROM carruselMultimedia cm
+                LEFT JOIN Productos p ON cm.ID_Producto = p.ID
+                GROUP BY cm.Nombre_carrusel, p.Nombre, cm.ID;
+                
+    ";
+                $resultado = $conexion->query($query);
+
+                // Comprobar si hay resultados
+                if ($resultado->num_rows > 0) {
+                    echo '<table class="clientes-table">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Nombre del Carrusel</th>';
+                    echo '<th>Items</th>';
+                    echo '<th>Producto Asociado</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                    // Iterar sobre los resultados y mostrar cada carrusel en una fila de la tabla
+                    while ($carrusel = $resultado->fetch_assoc()) {
+                        echo '<tr onclick="redireccionarAGestionarCarrusel(' . $carrusel['ID'] . ')">';
+                        echo '<td>' . htmlspecialchars($carrusel['Nombre_carrusel']) . '</td>';
+                        echo '<td>' . htmlspecialchars($carrusel['Items']) . '</td>';
+                        echo '<td>' . htmlspecialchars($carrusel['Producto']) . '</td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo 'No se encontraron galerías.';
+                }
+
+                // Cerrar conexión
+                $conexion->close();
+                ?>
+                <button type="button" class="volver" onclick="mostrarFormularioCarrusel()">Añadir Nuevo</button>
+                <div id="formularioCarrusel" style="display: none;">
+                    <form id="formNuevoCarrusel">
+                        <label for="nombreCarrusel">Nombre del Carrusel:</label>
+                        <input type="text" id="nombreCarrusel" name="nombreCarrusel" required>
+                        <button type="button" onclick="crearCarrusel()">Crear Carrusel</button>
+                    </form>
+                </div>
             </div>
+
             <div id="carrusel" class="seccion">
                 <h1>Mis Galerias</h1>
             </div>

@@ -59,3 +59,32 @@ function insertarCoach() {
     });
 }
 
+function mostrarFormularioCarrusel() {
+    document.getElementById('formularioCarrusel').style.display = 'block';
+}
+
+function crearCarrusel() {
+    var nombreCarrusel = document.getElementById('nombreCarrusel').value;
+    
+    fetch('./server/crear_carrusel.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre: nombreCarrusel })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = 'gestionar_carrusel.php?id=' + data.id;
+        } else {
+            alert('Error al crear el carrusel: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function redireccionarAGestionarCarrusel(id) {
+    window.location.href = 'gestionar_carrusel.php?id=' + id;
+}
+

@@ -476,3 +476,43 @@ main {
 #coaches {
   margin-bottom: 5%;
 }
+
+
+.elementos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.elemento-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.elemento-item img, .elemento-item video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.elemento-item iframe {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn-eliminar {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}

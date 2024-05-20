@@ -113,6 +113,8 @@ function crearTablas($conexion) {
 
         "carrusel_multimedia" => "CREATE TABLE IF NOT EXISTS carruselMultimedia (
             ID INT AUTO_INCREMENT PRIMARY KEY,
+            Link_Video TEXT,
+            Nombre_carrusel VARCHAR(255),
             RutaArchivos VARCHAR(255),
             ID_Producto INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
@@ -331,9 +333,17 @@ function insertarDatos($conexion)
 
 
                 // Insertar datos en carruselMultimedia
-                $conexion->query("INSERT INTO carruselMultimedia (RutaArchivos, ID_Producto) VALUES
-                ('./archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg', 1),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg', 1)");
+                $conexion->query("INSERT INTO carruselMultimedia (RutaArchivos, Link_Video, Nombre_carrusel, ID_Producto) VALUES
+                ('./archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg','','Carrusel 1', 1),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
+                (' ','https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz','Carrusel 1', 1),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
+                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2)
+                ");
 }
 
 
