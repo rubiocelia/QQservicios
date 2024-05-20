@@ -1,3 +1,21 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Conectar a la base de datos
+require_once("./bbdd/conecta.php");
+$conexion = getConexion();
+
+// Obtener todos los testimonios sin importar el producto
+$testimonioQuery = "SELECT Nombre, Subtitulo, Descripcion, Foto FROM Testimonios";
+$testimonioResult = $conexion->query($testimonioQuery);
+
+// Cerrar la conexión
+$conexion->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,7 +45,8 @@
     <main>
         <div class="fondo">
             <div class="parrfInicial">
-                <h1 class="titulo">SERVICIOS QQ</h1>
+                <h1 class="titulo">Transforma Tu Negocio con Nuestros Servicios Profesionales</h1>
+                <h2 class="subtitulo">Soluciones personalizadas para llevar tu empresa al siguiente nivel</h2>
                 <p class="txtInicial">
                     ¡Explora nuevas habilidades con nuestros cursos introductorios!
                     ¿Listo para descubrir un mundo de posibilidades? Nuestros cursos te brindan el punto de partida
@@ -62,6 +81,8 @@
                 </div>
             </div>
 
+
+
             <div class="fila">
                 <div class="cuad3">
                     <p>Nuestro objetivo es ofrecer un espacio que permita a los participantes adquirir habilidades
@@ -91,33 +112,105 @@
                 </div>
             </div>
         </div>
-
-        <div>
-            <img class="fotoInicio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
-
+        <div class="beneficios">
+            <h1>¿Por qué elegirnos?</h1>
+            <div class="benefCuad">
+                <div class="beneficio">
+                    <img src="../src/archivos/index/medalla.png" class="logoBenef">
+                    <p>Expertos en la Industria</p>
+                </div>
+                <div class="beneficio">
+                    <img src="../src/archivos/index/personalizar.png" class="logoBenef">
+                    <p>Soluciones Personalizadas</p>
+                </div>
+                <div class="beneficio">
+                    <img src="../src/archivos/index/garantizar.png" class="logoBenef">
+                    <p>Resultados Garantizados</p>
+                </div>
+            </div>
         </div>
-        <h1 class="testimonios">Testimonios</h1>
-        <div class="testimonial-slider">
-            <div class="testimonial-item active">
-                <img class="fotoTestimonio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
-                <h4>Juan Pérez</h4>
-                <p>Este es un testimonio fantástico. ¡El servicio fue excelente y el producto es de alta calidad!</p>
 
+        <div class="faldon">
+            <div class="video-container">
+                <iframe class="videoFaldon" src="https://www.youtube.com/embed/N_H54I-DSJY?si=uNiSUsRykz4Ksm1X"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-            <div class="testimonial-item">
-                <img class="fotoTestimonio" src="../src/archivos/index/fondo.png" alt="fotoInicio">
-                <h4>Maria López</h4>
-                <p>Muy satisfecho con la compra. Llegó a tiempo y cumple con todas las expectativas.</p>
+            <div class="texto-container">
+                <h2>Vive la Innovación en el Evento QQ Clients</h2>
+                <p>
+                    Sumérgete en una experiencia transformadora con nuestro video resumen del Evento QQ Clients. Este
+                    evento de co-creación se centra en revolucionar la Experiencia de Cliente a través de la Innovación,
+                    Creatividad, y Neuroliderazgo. Descubre cómo los valores y la cultura pueden impulsar la
+                    Transformación Digital en tu organización.
+                </p>
+                <br>
+                <p>
+                    ¡No te pierdas los momentos más inspiradores y las ideas más impactantes de líderes y expertos en la
+                    industria! Haz clic en el video para ser parte de esta jornada única de aprendizaje y crecimiento.
+                </p>
+            </div>
+        </div>
 
-            </div>
-            <div class="testimonial-item">
-                <img class="fotoTestimonio" src="../src/archivos/index/coaching.jpg" alt="fotoInicio">
-                <h4>Carlos Jiménez</h4>
-                <p>Increíble experiencia de principio a fin. Recomiendo ampliamente este servicio.</p>
+        <div class="datos-interactivos">
+            <h2>Lo que hemos logrado</h2>
+            <div class="infografia">
 
+                <div class="dato">
+                    <h3 class="count" data-target="10800">0</h3>
+                    <p>Asistentes satisfechos</p>
+                </div>
+                <div class="dato">
+                    <h3 class="count" data-target="15">0</h3>
+                    <p>Años de experiencia</p>
+                </div>
+                <div class="dato">
+                    <h3 class="count" data-target="25">0</h3>
+                    <p>Empresas</p>
+                </div>
             </div>
-            <button class="prev">&#10094;</button>
-            <button class="next">&#10095;</button>
+        </div>
+
+        <div class="cta-secundaria">
+            <h2>¿Listo para Empezar?</h2>
+            <p>Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos.</p>
+            <a href="#contacto" class="cta-button">Contacta con nosotros</a>
+        </div>
+
+        <div class="testimonios">
+            <h1>Lo que dicen nuestros clientes</h1>
+            <div class="testimonial-slider">
+                <div id="testimonios" class="testimonios">
+                    <!-- Carrusel de testimonios -->
+                    <?php
+                        if ($testimonioResult->num_rows > 0) {
+                            // Convertir el resultado en un array
+                            $testimonios = [];
+                            while ($testimonio = $testimonioResult->fetch_assoc()) {
+                                $testimonios[] = $testimonio;
+                            }
+                            // Mezclar el array para mostrar los testimonios en orden aleatorio
+                            shuffle($testimonios);
+                            // Mostrar los testimonios
+                            foreach ($testimonios as $testimonio) {
+                                echo "<div class='testimonial'>";
+                                echo "<div class='testimonial-content'>";
+                                echo "<img class='fotoTestimonio' src='" . htmlspecialchars($testimonio["Foto"]) . "' alt='" . htmlspecialchars($testimonio["Nombre"]) . "'>";
+                                echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
+                                echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
+                                echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
+                                echo "</div>"; // Close testimonial-content div
+                                echo "</div>"; // Close testimonial div
+                            }
+                        } else {
+                            echo "<p>No se encontraron testimonios para este producto.</p>";
+                        }
+                    ?>
+                    <button class="prevTest">&#10094;</button>
+                    <button class="nextTest">&#10095;</button>
+                </div>
+            </div>
         </div>
 
 
@@ -131,7 +224,7 @@
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/validacionRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/testimonios.js"></script>
+    <script src="./scripts/index.js"></script>
     <?php include('footer.php'); ?>
 
 </body>

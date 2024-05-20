@@ -134,63 +134,63 @@ $conexion->close();
 
                     <div class="menuHorizontal">
                         <div class="menuContTest">
-                            <button id="contenidosBtn">Contenidos</button>
-                            <button id="testimoniosBtn">Testimonios</button>
+                            <button id="contenidosBtn" class="tab active">Contenidos</button>
+                            <button id="testimoniosBtn" class="tab">Testimonios</button>
                         </div>
-                        <div id="contenidos" class="contenido">
+                        <div id="contenidos" class="contenido active">
                             <!-- Contenidos desplegables -->
                             <?php
-                        if ($contenidoResult->num_rows > 0) {
-                            while ($contenido = $contenidoResult->fetch_assoc()) {
-                                echo "<div class='contenidosTXT'>";
-                                echo "<div class='tituloCont'>" . htmlspecialchars($contenido['Titulo']) . "</div>";
-                                echo "<div class='respuestaCont'>" . $contenido['Descripcion'] . "</div>"; // No se usa htmlspecialchars aquí para permitir HTML
-                                echo "</div>";
+                            if ($contenidoResult->num_rows > 0) {
+                                while ($contenido = $contenidoResult->fetch_assoc()) {
+                                    echo "<div class='contenidosTXT'>";
+                                    echo "<div class='tituloCont'>" . htmlspecialchars($contenido['Titulo']) . "</div>";
+                                    echo "<div class='respuestaCont'>" . $contenido['Descripcion'] . "</div>"; // No se usa htmlspecialchars aquí para permitir HTML
+                                    echo "</div>";
+                                }
+                            } else {
+                                echo "<p>No se encontraron contenidos para este producto.</p>";
                             }
-                        } else {
-                            echo "<p>No se encontraron contenidos para este producto.</p>";
-                        }
-                        ?>
+                            ?>
                         </div>
-                        <div id="testimonios" class="testimonios oculto" style="display: none;">
+                        <div id="testimonios" class="testimonios">
                             <!-- Carrusel de testimonios -->
                             <?php
-                        if ($testimonioResult->num_rows > 0) {
-                            while ($testimonio = $testimonioResult->fetch_assoc()) {
-                                echo "<div class='testimonial'>";
-                                echo "<div class='testimonial-content'>";
-                                echo "<img class='fotoTestimonio' src='" . htmlspecialchars($testimonio["Foto"]) . "' alt='" . htmlspecialchars($testimonio["Nombre"]) . "'>";
-                                
-                                echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
-                                echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
-                                echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
-                                echo "</div>"; // Close testimonial-content div
-                                echo "</div>"; // Close testimonial div
+                            if ($testimonioResult->num_rows > 0) {
+                                while ($testimonio = $testimonioResult->fetch_assoc()) {
+                                    echo "<div class='testimonial'>";
+                                    echo "<div class='testimonial-content'>";
+                                    echo "<img class='fotoTestimonio' src='" . htmlspecialchars($testimonio["Foto"]) . "' alt='" . htmlspecialchars($testimonio["Nombre"]) . "'>";
+                                    
+                                    echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
+                                    echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
+                                    echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
+                                    echo "</div>"; // Close testimonial-content div
+                                    echo "</div>"; // Close testimonial div
+                                }
+                            
+                            } else {
+                                echo "<p>No se encontraron testimonios para este producto.</p>";
                             }
-                        
-                        } else {
-                            echo "<p>No se encontraron testimonios para este producto.</p>";
-                        }
-                        ?>
+                            ?>
                             <button class="prevTest">&#10094;</button>
                             <button class="nextTest">&#10095;</button>
                         </div>
                         <div class="carrFotos">
                             <div class="fotosVideos">
                                 <?php
-                        if ($carruselResult->num_rows > 0) {
-                            while ($carrusel = $carruselResult->fetch_assoc()) {
-                                $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
-                                if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                                    echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
-                                } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
-                                    echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
+                                if ($carruselResult->num_rows > 0) {
+                                    while ($carrusel = $carruselResult->fetch_assoc()) {
+                                        $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
+                                        if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                                            echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
+                                        } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
+                                            echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<p>No se encontraron archivos multimedia para este producto.</p>";
                                 }
-                            }
-                        } else {
-                            echo "<p>No se encontraron archivos multimedia para este producto.</p>";
-                        }
-                        ?>
+                                ?>
                             </div>
                             <!-- Botones de navegación -->
                             <button class="btnNav prev">&#10094;</button>
@@ -215,7 +215,7 @@ $conexion->close();
                             } else {
                                 echo "<p>No se encontraron coaches.</p>";
                             }
-                        ?>
+                            ?>
                             <button class="prevCoaches">&#10094;</button>
                             <button class="nextCoaches">&#10095;</button>
                         </div>
@@ -254,6 +254,21 @@ $conexion->close();
     </main>
 
     <script src="../src/scripts/carruselProducto1.js"></script>
+    <script>
+    document.getElementById('contenidosBtn').addEventListener('click', function() {
+        document.getElementById('contenidos').classList.add('active');
+        document.getElementById('testimonios').classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('testimoniosBtn').classList.remove('active');
+    });
+
+    document.getElementById('testimoniosBtn').addEventListener('click', function() {
+        document.getElementById('testimonios').classList.add('active');
+        document.getElementById('contenidos').classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('contenidosBtn').classList.remove('active');
+    });
+    </script>
     <?php include('footer.php'); ?>
 </body>
 

@@ -202,24 +202,28 @@ main {
 }
 
 .menuHorizontal {
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 80%;
+  margin: 0 auto; /* Centrar horizontalmente el contenedor */
 }
 
 .menuContTest {
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  margin-bottom: -1px; /* Para unir visualmente las pestañas con el contenido */
+  justify-content: flex-start; /* Alinear los botones a la izquierda */
 }
 
 .menuContTest button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   font-family: var(--texto);
   font-size: 1.5em;
-  margin: 0 70px;
-  border-style: none;
-  border-bottom: 1px solid var(--rojoQQ);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0;
+  border: 1px solid var(--azulQQ);
+  border-bottom: none; /* Quitar borde inferior para unir con el contenido */
   background-color: transparent;
   cursor: pointer;
   display: inline-block;
@@ -227,39 +231,36 @@ main {
 }
 
 .menuContTest button:hover {
-  transform: scale(
-    1.1
-  ); /* Aumenta ligeramente el tamaño del texto y el botón */
+  background-color: var(--azulQQ);
+  color: white;
 }
 
 .menuContTest button.active {
-  border-radius: 8px;
-  background-color: transparent;
-  color: black; /* Color de texto para el botón activo */
-  border: 2px solid var(--rojoQQ); /* Un borde más pronunciado o un cambio en el estilo de borde */
+  background-color: #ffffff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: black;
+  border-bottom: 1px solid #ffffff; /* Unir visualmente con el contenido */
+  z-index: 1;
 }
 
 .contenido,
 .testimonios {
   display: none;
+  padding: 20px;
+  border: 1px solid var(--azulQQ);
+  border-radius: 0 8px 8px 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.contenido {
-  margin-bottom: 25px;
-}
-
-.oculto {
-  display: none;
-}
-
-.menu button {
-  margin: 5px;
-  padding: 10px;
-  cursor: pointer;
+.contenido.active,
+.testimonios.active {
+  display: block;
 }
 
 .contenidosTXT {
-  width: 700px;
+  width: 100%;
   margin-bottom: 10px;
   background: #ffffff;
   border-radius: 8px;
@@ -311,13 +312,10 @@ main {
 }
 
 .testimonial {
-  display: none; /* Oculto inicialmente */
   text-align: center;
   margin: 0 auto;
-  width: 650px;
+  width: 100%;
   height: fit-content;
-  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
-  padding: 15px;
 }
 
 .testimonial-content {
@@ -325,6 +323,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 85%;
+  margin: 0 auto;
 }
 
 .fotoTestimonio {
@@ -368,7 +368,7 @@ main {
 .nextTest {
   font-size: 1.5em;
   position: absolute;
-  top: 200px;
+  top: 150px;
   transform: translateY(-50%);
   color: var(--rojoQQ);
   background-color: transparent;
@@ -386,11 +386,11 @@ main {
 }
 
 .prevTest {
-  left: 70px;
+  left: 10px;
 }
 
 .nextTest {
-  right: 70px;
+  right: 10px;
 }
 
 /* Estilo del carrusel dentro de cajaDerecha */

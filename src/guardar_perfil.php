@@ -49,16 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
         // Ruta donde se guardarán las imágenes
         $rutaImagenes = './archivos/perfil/fotosPerfil/';
-        $archivoFoto = $rutaImagenes . basename($_FILES['foto']['name']);
-        
-        // Obtén la extensión del archivo para verificar si es una imagen
-        $tipoArchivo = strtolower(pathinfo($archivoFoto, PATHINFO_EXTENSION));
+        $tipoArchivo = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
         
         // Lista de extensiones permitidas
         $extensionesPermitidas = array("jpg", "jpeg", "png", "gif");
         
         if (in_array($tipoArchivo, $extensionesPermitidas)) {
-            if (move_uploaded_file($_FILES['foto']['tmp_name'], $archivoFoto)) {
+            // Generar un nombre de archivo único
+            $nombreUnico = $rutaImagenes . 'foto_' . $id_usuario . '_' . time() . '.' . $tipoArchivo;
+            
+            if (move_uploaded_file($_FILES['foto']['tmp_name'], $nombreUnico)) {
                 // Actualizar la ruta de la foto en la base de datos
                 $sqlUpdateFoto = "UPDATE Usuarios SET Foto=? WHERE ID=?";
                 $stmtUpdateFoto = $conexion->prepare($sqlUpdateFoto);
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit;
                 }
 
-                $stmtUpdateFoto->bind_param("si", $archivoFoto, $id_usuario);
+                $stmtUpdateFoto->bind_param("si", $nombreUnico, $id_usuario);
 
                 if (!$stmtUpdateFoto->execute()) {
                     $conexion->rollback(); // Si la actualización falla, deshacer la transacción
