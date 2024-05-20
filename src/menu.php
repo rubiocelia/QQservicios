@@ -40,9 +40,11 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
         <ul class="menu">
             <li> <a href="index.php">Inicio</a></li>
 
-            <li> <a href="coaches.php">Coaches</a></li>
-
             <li> <a href="servicios.php">Servicios</a></li>
+
+            <li> <a href="coaches.php">Método</a></li>
+
+
 
             <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
         </ul>
