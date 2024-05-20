@@ -27,7 +27,7 @@
     <main>
         <div class="fondo">
             <div class="parrfInicial">
-                <h1 class="titulo">NUESTROS SERVICIOS</h1>
+                <h1 class="titulo">SERVICIOS QQ</h1>
                 <p class="txtInicial">
                     ¡Explora nuevas habilidades con nuestros cursos introductorios!
                     ¿Listo para descubrir un mundo de posibilidades? Nuestros cursos te brindan el punto de partida

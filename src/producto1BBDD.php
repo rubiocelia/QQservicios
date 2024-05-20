@@ -131,27 +131,7 @@ $conexion->close();
         <div class="todo">
             <div class="contenidos">
                 <div class="cajaIzquierda">
-                    <div class="carrFotos">
-                        <div class="fotosVideos">
-                            <?php
-                        if ($carruselResult->num_rows > 0) {
-                            while ($carrusel = $carruselResult->fetch_assoc()) {
-                                $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
-                                if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                                    echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
-                                } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
-                                    echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
-                                }
-                            }
-                        } else {
-                            echo "<p>No se encontraron archivos multimedia para este producto.</p>";
-                        }
-                        ?>
-                        </div>
-                        <!-- Botones de navegación -->
-                        <button class="btnNav prev">&#10094;</button>
-                        <button class="btnNav next">&#10095;</button>
-                    </div>
+
                     <div class="menuHorizontal">
                         <div class="menuContTest">
                             <button id="contenidosBtn">Contenidos</button>
@@ -194,6 +174,27 @@ $conexion->close();
                         ?>
                             <button class="prevTest">&#10094;</button>
                             <button class="nextTest">&#10095;</button>
+                        </div>
+                        <div class="carrFotos">
+                            <div class="fotosVideos">
+                                <?php
+                        if ($carruselResult->num_rows > 0) {
+                            while ($carrusel = $carruselResult->fetch_assoc()) {
+                                $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
+                                if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                                    echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
+                                } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
+                                    echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
+                                }
+                            }
+                        } else {
+                            echo "<p>No se encontraron archivos multimedia para este producto.</p>";
+                        }
+                        ?>
+                            </div>
+                            <!-- Botones de navegación -->
+                            <button class="btnNav prev">&#10094;</button>
+                            <button class="btnNav next">&#10095;</button>
                         </div>
                     </div>
                 </div>

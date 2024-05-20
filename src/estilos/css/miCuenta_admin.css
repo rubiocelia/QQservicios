@@ -97,6 +97,7 @@ main {
   display: none; /* Inicialmente oculto, se mostrará mediante JavaScript */
   padding: 20px;
   background-color: white;
+  margin-bottom: 50px;
 }
 
 .seccion h1 {
@@ -472,7 +473,6 @@ main {
   background-color: #1e1a47;
 }
 
-#coaches{
-
+#coaches {
   margin-bottom: 5%;
 }

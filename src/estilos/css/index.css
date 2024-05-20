@@ -185,7 +185,7 @@
   width: 65%;
   margin: auto;
   overflow: hidden;
-  border: 2px solid var(--rojoQQ);
+  border: 2px solid black;
   border-radius: 5px;
   margin-bottom: 1em;
 }
@@ -198,12 +198,12 @@
 }
 
 .testimonial-item h4 {
-  color: var(--azulQQ);
+  color: black;
   font-size: 1.5em;
 }
 
 .testimonial-item p {
-  color: var(--azulQQ);
+  color: black;
   font-size: 1.3em;
 }
 
