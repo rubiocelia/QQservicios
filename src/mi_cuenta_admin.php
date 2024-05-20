@@ -57,9 +57,9 @@ $conexion->close();
                 <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil" class="iconoMenu">Mi perfil</li>
                 <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil" class="iconoMenu">Clientes</li>
                 <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
-                <li onclick="mostrarSeccion('servicio')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
+                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
                 <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Carruseles</li>
-                <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Testimonios</li>
+                <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/testimonios.png" alt="Icono de perfil" class="iconoMenu">Testimonios</li>
                 <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
         </div>
@@ -314,12 +314,79 @@ $conexion->close();
                 </div>
             </div>
 
-            <div id="carrusel" class="seccion">
-                <h1>Mis Galerias</h1>
+            <div id="servicios" class="seccion">
+                <h1>Mis servicios</h1>
             </div>
 
             <div id="testimonios" class="seccion">
-                <h1>Mis Galerias</h1>
+                <h1>Mis Testimonios</h1>
+                <?php
+                // Consulta para obtener los testimonios
+                $query = "
+            SELECT t.ID, t.Nombre, t.Subtitulo, t.Descripcion, t.Foto, p.Nombre AS Producto
+            FROM Testimonios t
+            LEFT JOIN Productos p ON t.ID_Producto = p.ID;
+        ";
+                $conn = getConexion();
+                $resultado = $conn->query($query);
+
+                // Comprobar si hay resultados
+                if ($resultado->num_rows > 0) {
+                    echo '<table class="clientes-table">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Nombre</th>';
+                    echo '<th>Subtitulo</th>';
+                    echo '<th>Producto Asociado</th>';
+                    echo '<th>Foto</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                    // Iterar sobre los resultados y mostrar cada testimonio en una fila de la tabla
+                    while ($testimonio = $resultado->fetch_assoc()) {
+                        echo '<tr onclick="redireccionarATestimonio(' . $testimonio['ID'] . ')">';
+                        echo '<td>' . htmlspecialchars($testimonio['Nombre']) . '</td>';
+                        echo '<td>' . htmlspecialchars($testimonio['Subtitulo']) . '</td>';
+                        echo '<td>' . htmlspecialchars($testimonio['Producto']) . '</td>';
+                        echo '<td><img src="' . htmlspecialchars($testimonio['Foto']) . '" alt="Foto del testimonio" style="width:50px;height:50px;"></td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo 'No se encontraron testimonios.';
+                }
+
+                ?>
+                <button type="button" class="volver" onclick="mostrarFormularioTestimonio()">Añadir Nuevo</button>
+                <div id="formularioTestimonio" style="display: none;">
+                    <form id="formNuevoTestimonio" enctype="multipart/form-data">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+
+                        <label for="subtitulo">Subtitulo:</label>
+                        <input type="text" id="subtitulo" name="subtitulo" required>
+
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" required></textarea>
+
+                        <label for="producto">Producto Asociado:</label>
+                        <select id="producto" name="producto" required>
+                            <?php
+                            // Obtener productos para el desplegable
+                            $productos = $conn->query("SELECT ID, Nombre FROM Productos");
+                            while ($producto = $productos->fetch_assoc()) {
+                                echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+
+                        <label for="foto">Foto:</label>
+                        <input type="file" id="foto" name="foto" required>
+
+                        <button type="button" onclick="crearTestimonio()">Crear Testimonio</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
