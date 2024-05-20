@@ -284,11 +284,6 @@ input[type="number"] {
   position: relative;
 }
 
-.password input{
-
-  padding: 10px 5px;
-}
-
 .pass-icon{
 
   position: absolute;
