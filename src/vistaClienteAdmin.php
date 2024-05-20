@@ -39,10 +39,10 @@ $stmt2->bind_param("i", $idUsuario);
 $stmt2->execute();
 $result2 = $stmt2->get_result();
 
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['eliminar_archivo']) && isset($_GET['id_archivo']) && isset($_GET['id_usuario'])) {
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['eliminar_archivo']) && isset($_GET['id_archivo']) && isset($_GET['id'])) {
     // Obtener el ID del archivo y el ID del usuario a eliminar
     $idArchivo = $_GET['id_archivo'];
-    $idUsuario = $_GET['id_usuario'];
+    $idUsuario = $_GET['id'];
 
     // Consulta SQL para eliminar el archivo
     $sqlEliminarArchivo = "DELETE FROM archivosusuarios WHERE ID = ?";
@@ -101,6 +101,19 @@ WHERE c.ID_usuario = $idUsuario;
 ");
 
 define("ID_USUARIO", $idUsuario);
+
+
+$sql2 = "SELECT AU.ID, AU.Ruta, AU.Descripcion, AU.Fecha, AU.Deshabilitado, P.Nombre AS TipoArchivo, P.ID AS ID_Producto 
+        FROM ArchivosUsuarios AU 
+        INNER JOIN Productos P ON AU.ID_Producto = P.ID 
+        WHERE AU.ID_usuario = ?
+        ORDER BY P.ID";
+$stmt2 = $conexion->prepare($sql2);
+$stmt2->bind_param("i", $idUsuario);
+$stmt2->execute();
+$result2 = $stmt2->get_result();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -128,8 +141,7 @@ define("ID_USUARIO", $idUsuario);
             <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                 <div class="perfil">
                     <div class="foto">
-                        <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
-                            class="fotoPerfil">
+                        <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil" class="fotoPerfil">
                         <input type="file" id="foto" name="foto" style="display:none;">
                         <!-- Ocultamos el input real -->
                         <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
@@ -140,39 +152,33 @@ define("ID_USUARIO", $idUsuario);
                         <div class="fila">
                             <div class="campo">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre"
-                                    value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
+                                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="apellidos">Apellidos:</label>
-                                <input type="text" id="apellidos" name="apellidos"
-                                    value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
+                                <input type="text" id="apellidos" name="apellidos" value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
                             </div>
                         </div>
                         <!-- Fila para Email, Teléfono y Organización -->
                         <div class="fila">
                             <div class="campo">
                                 <label for="email">Correo electrónico:</label>
-                                <input type="email" id="email" name="email"
-                                    value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
+                                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="telefono">Número de teléfono:</label>
-                                <input type="tel" id="telefono" name="telefono"
-                                    value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
+                                <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="organizacion">Organización:</label>
-                                <input type="text" id="organizacion" name="organizacion"
-                                    value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
+                                <input type="text" id="organizacion" name="organizacion" value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="acciones">
                         <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                         <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
-                        <button type="button" id="btnCancelar" style="display:none;"
-                            onclick="cancelarEdicion()">Cancelar</button>
+                        <button type="button" id="btnCancelar" style="display:none;" onclick="cancelarEdicion()">Cancelar</button>
                     </div>
                 </div>
             </form>
@@ -193,14 +199,13 @@ define("ID_USUARIO", $idUsuario);
                 </thead>
                 <tbody>
                     <?php while ($rowCompra = $resultCompras->fetch_assoc()) : ?>
-                    <tr>
-                        <td><?php echo $rowCompra['Nombre']; ?></td>
-                        <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
-                        <td><?php echo $rowCompra['FechaHora']; ?></td>
-                        <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
-                        <td><button class="btn-eliminar"
-                                onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
-                    </tr>
+                        <tr>
+                            <td><?php echo $rowCompra['Nombre']; ?></td>
+                            <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
+                            <td><?php echo $rowCompra['FechaHora']; ?></td>
+                            <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
+                            <td><button class="btn-eliminar" onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
@@ -215,68 +220,72 @@ define("ID_USUARIO", $idUsuario);
                 if ($currentProducto !== $row['ID_Producto']) :
                     $currentProducto = $row['ID_Producto'];
             ?>
-            <table class="archivos-table">
-                <caption><a><?php echo $row['TipoArchivo']; ?></a></caption>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Descripción</th>
-                        <th>Fecha de Subida</th>
-                        <th>Accion</th>
-                        <th>Accion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php endif; ?>
-                    <tr>
-                        <td><a href="<?php echo $row['Ruta']; ?>"
-                                target="_blank"><?php echo basename($row['Ruta']); ?></a></td>
-                        <td><?php echo $row['TipoArchivo']; ?></td>
-                        <td><?php echo $row['Descripcion']; ?></td>
-                        <td><?php echo $row['Fecha']; ?></td>
-                        <td><button class="btn-eliminar"
-                                onclick="eliminarArchivo(<?php echo $row['ID']; ?>, <?php echo $idUsuario; ?>);">Eliminar</button>
-                        </td>
-                        <td><button class="btn-deshabilitar"
-                                onclick="deshabilitarArchivo(<?php echo $row['ID']; ?>);">Deshabilitar</button></td>
-                    </tr>
+                    <table class="archivos-table">
+                        <caption><a><?php echo $row['TipoArchivo']; ?></a></caption>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Fecha de Subida</th>
+                                <th>Accion</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php endif; ?>
+                        <tr>
+                            <td><a href="<?php echo $row['Ruta']; ?>" target="_blank"><?php echo basename($row['Ruta']); ?></a></td>
+                            <td><?php echo $row['TipoArchivo']; ?></td>
+                            <td><?php echo $row['Descripcion']; ?></td>
+                            <td><?php echo $row['Fecha']; ?></td>
+                            <td><button class="btn-eliminar" onclick="eliminarArchivo(<?php echo $row['ID']; ?>, <?php echo $_GET['id']; ?>);">Eliminar</button>
+                            </td>
+                            <td>
+                                <!-- Si es un 0, el usuario puede ver el archivo, Si es un 1, no puede verlo -->
+                                <?php if ($row['Deshabilitado'] == 0) : ?>
+                                    <button class="btn-deshabilitar" onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 1);">Deshabilitar</button>
+                                <?php else : ?>
+                                    <button class="btn-habilitar" onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 0);">Habilitar</button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
                     <?php endwhile; ?>
-                </tbody>
-            </table>
-            <button type="button" class="volver" onclick="mostrarFormulario();">Añadir Archivo</button>
+                        </tbody>
+                    </table>
+                    <button type="button" class="volver" onclick="mostrarFormulario();">Añadir Archivo</button>
 
-            <!-- Contenedor del formulario que se muestra/oculta -->
-            <div id="formularioArchivo" class="form-container" style="display: none;">
-                <form id="formArchivo" class="styled-form" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="archivo" class="form-label">Seleccionar archivo:</label>
-                        <input type="file" id="archivo" name="archivo" class="form-input" required>
-                    </div>
+                    <!-- Contenedor del formulario que se muestra/oculta -->
+                    <div id="formularioArchivo" class="form-container" style="display: none;">
+                        <form id="formArchivo" class="styled-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="archivo" class="form-label">Seleccionar archivo:</label>
+                                <input type="file" id="archivo" name="archivo" class="form-input" required>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="producto" class="form-label">Producto:</label>
-                        <select id="producto" name="producto" class="form-input" required>
-                            <?php
+                            <div class="form-group">
+                                <label for="producto" class="form-label">Producto:</label>
+                                <select id="producto" name="producto" class="form-input" required>
+                                    <?php
                                     while ($producto = $productos->fetch_assoc()) {
                                         echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
                                     }
                                     ?>
-                        </select>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descripcion" class="form-label">Descripción:</label>
+                                <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+                            </div>
+
+                            <input type="hidden" name="idUsuario" value="<?php echo  $_GET['id']; ?>">
+
+                            <button type="button" class="form-button" onclick="subirArchivo();">Subir Archivo</button>
+                        </form>
+                        <button type="button" class="btn-eliminar" onclick="ocultarFormulario();">Cancelar</button>
+
                     </div>
-
-                    <div class="form-group">
-                        <label for="descripcion" class="form-label">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
-                    </div>
-
-                    <input type="hidden" name="idUsuario" value="<?php echo  $_GET['id']; ?>">
-
-                    <button type="button" class="form-button" onclick="subirArchivo();">Subir Archivo</button>
-                </form>
-                <button type="button" class="btn-eliminar" onclick="ocultarFormulario();">Cancelar</button>
-
-            </div>
         </div>
 
 
@@ -289,54 +298,54 @@ define("ID_USUARIO", $idUsuario);
 
     </main>
     <script>
-    // Obtener los datos de PHP
-    const fechas = <?php echo json_encode($fechas); ?>;
-    const accesos = <?php echo json_encode($accesos); ?>;
+        // Obtener los datos de PHP
+        const fechas = <?php echo json_encode($fechas); ?>;
+        const accesos = <?php echo json_encode($accesos); ?>;
 
-    // Debugging: verificar que los datos se obtienen correctamente
-    console.log(fechas);
-    console.log(accesos);
+        // Debugging: verificar que los datos se obtienen correctamente
+        console.log(fechas);
+        console.log(accesos);
 
-    // Crear la gráfica con Chart.js
-    const ctx = document.getElementById('accesosChart').getContext('2d');
-    const accesosChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: fechas,
-            datasets: [{
-                label: 'Número de accesos',
-                data: accesos,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day',
-                        tooltipFormat: 'dd/MM/yyyy', // Asegúrate de usar 'dd' en lugar de 'DD'
-                        displayFormats: {
-                            day: 'dd/MM/yyyy' // Asegúrate de usar 'dd' en lugar de 'DD'
+        // Crear la gráfica con Chart.js
+        const ctx = document.getElementById('accesosChart').getContext('2d');
+        const accesosChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: fechas,
+                datasets: [{
+                    label: 'Número de accesos',
+                    data: accesos,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            tooltipFormat: 'dd/MM/yyyy', // Asegúrate de usar 'dd' en lugar de 'DD'
+                            displayFormats: {
+                                day: 'dd/MM/yyyy' // Asegúrate de usar 'dd' en lugar de 'DD'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Fecha'
                         }
                     },
-                    title: {
-                        display: true,
-                        text: 'Fecha'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Accesos'
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Accesos'
+                        }
                     }
                 }
             }
-        }
-    });
+        });
     </script>
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/botonesPerfilVistaAdmin.js"></script>
