@@ -121,10 +121,10 @@ function pass(){
 }
 
 
-function eliminarArchivo(idArchivo, idUsuario) {
+function eliminarArchivo(idArchivo, id) {
     if (confirm("¿Estás seguro de que deseas eliminar este archivo?")) {
         // Enviar solicitud GET al servidor para eliminar el archivo
-        fetch(`vistaClienteAdmin.php?eliminar_archivo=true&id_archivo=${idArchivo}&id_usuario=${idUsuario}`, {
+        fetch(`vistaClienteAdmin.php?eliminar_archivo=true&id_archivo=${idArchivo}&id=${id}`, {
             method: 'GET',
         })
         .then(response => {
@@ -139,5 +139,22 @@ function eliminarArchivo(idArchivo, idUsuario) {
             alert('Hubo un error al eliminar el archivo. Por favor, intenta nuevamente.');
         });
     }
+}
+
+function cambiarEstadoArchivo(idArchivo, nuevoEstado) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "./server/cambiar_estado_archivo.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                location.reload(); // Recargar la página para reflejar los cambios
+            } else {
+                alert("Error: " + response.message);
+            }
+        }
+    };
+    xhr.send("id_archivo=" + idArchivo + "&nuevo_estado=" + nuevoEstado);
 }
 
