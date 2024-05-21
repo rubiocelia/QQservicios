@@ -222,6 +222,22 @@ $conexion->close();
 
                         <div class="cajaComprar">
                             <h1>¡Potencia tu futuro!</h1>
+
+                            <?php if (!empty($producto['Duracion']) || !empty($producto['Modalidad']) || !empty($producto['txtLibre'])): ?>
+                            <div class="infoProduct">
+                                <?php if (!empty($producto['Duracion'])): ?>
+                                <p>⏱️ Duración: <?php echo htmlspecialchars($producto['Duracion']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($producto['Modalidad'])): ?>
+                                <p>👥 Modalidad: <?php echo htmlspecialchars($producto['Modalidad']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($producto['txtLibre'])): ?>
+                                <p>👣<?php echo htmlspecialchars($producto['txtLibre']); ?></p>
+                                <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
+
+
                             <div class="image-container">
                                 <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
                                 <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
@@ -254,21 +270,7 @@ $conexion->close();
     </main>
 
     <script src="../src/scripts/carruselProducto1.js"></script>
-    <script>
-    document.getElementById('contenidosBtn').addEventListener('click', function() {
-        document.getElementById('contenidos').classList.add('active');
-        document.getElementById('testimonios').classList.remove('active');
-        this.classList.add('active');
-        document.getElementById('testimoniosBtn').classList.remove('active');
-    });
-
-    document.getElementById('testimoniosBtn').addEventListener('click', function() {
-        document.getElementById('testimonios').classList.add('active');
-        document.getElementById('contenidos').classList.remove('active');
-        this.classList.add('active');
-        document.getElementById('contenidosBtn').classList.remove('active');
-    });
-    </script>
+    <script src="./scripts/scriptPopUp.js"></script>
     <?php include('footer.php'); ?>
 </body>
 

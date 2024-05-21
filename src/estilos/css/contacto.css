@@ -1,0 +1,137 @@
+/* Incorporar la tipografía personalizada */
+@font-face {
+  font-family: "titulo";
+  src: url("../../estilos/tipografia/FUTURA PT DEMI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "texto";
+  src: url("../../estilos/tipografia/FUTURA BOOK FONT.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Variables de tipografía */
+  --titulo: "titulo", sans-serif;
+  --texto: "texto", sans-serif;
+  --rojoQQ: #e6312f;
+  --azulQQ: #2a255b;
+}
+
+body {
+  font-family: var(--texto);
+  margin: 0;
+  padding: 0;
+}
+
+.contacto {
+  height: auto;
+  background-color: #454a90;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contacto-main {
+  margin-top: 15px;
+}
+
+.contacto-hero {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--azulQQ);
+  color: white;
+}
+
+.contacto-hero h1 {
+  margin-top: 10px;
+  font-family: var(--titulo);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.contacto-hero p {
+  font-size: 1.5rem;
+  padding: 0 305px;
+}
+
+.logoContacto {
+  width: 90px;
+  height: auto;
+}
+
+.cajasContacto {
+  display: flex;
+  flex-direction: row;
+}
+
+.contacto-info {
+}
+
+.contacto-formulario,
+.contacto-info {
+  background-color: white;
+  margin: 15px auto;
+  padding: 2rem;
+  width: fit-content;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contacto-formulario h2,
+.contacto-info h2 {
+  font-family: var(--titulo);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: var(--rojoQQ);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: darken(var(--rojoQQ), 10%);
+}
+
+.contacto-info p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.contacto-info p strong {
+  display: block;
+  font-weight: bold;
+}

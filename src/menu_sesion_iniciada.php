@@ -44,9 +44,10 @@
 
             <li> <a href="coaches.php">Método</a></li>
 
-
-
             <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
+
+            <li> <a href="contacto.php">Contacto</a></li>
+
         </ul>
 
         <!-- Botones -->

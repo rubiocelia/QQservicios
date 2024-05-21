@@ -44,9 +44,9 @@ echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLogin
 
             <li> <a href="coaches.php">Método</a></li>
 
-
-
             <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
+
+            <li> <a href="contacto.php">Contacto</a></li>
         </ul>
 
         <!-- Botones -->
