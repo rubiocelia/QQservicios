@@ -53,6 +53,9 @@ function crearTablas($conexion) {
             Videos TEXT,
             Precio DECIMAL(10,2),
             Adquirible BOOLEAN,
+            Duracion VARCHAR(255),
+            Modalidad VARCHAR(255),
+            txtLibre VARCHAR(255),
             ID_coaches INT,
             Id_atributo INT,
             FOREIGN KEY (ID_coaches) REFERENCES Coaches(ID),
@@ -187,18 +190,18 @@ function insertarDatos($conexion)
                       ('Atributo9'),
                       ('Atributo10')");
 
-    
-    $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, ID_coaches, Id_atributo) VALUES
-                        ('Impulsa tus Competencias como líder. Neuroliderazgo', '¿Listo para potenciar tu liderazgo y gestión emocional? Nuestro programa de Neuroliderazgo mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de diversidad.', '¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.<br><em>6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.</em>', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, 1, 1),
-                        ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, 2, 2),
-                      ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, 3, 3),
-                      ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, 4, 4),
-                      ('Producto5', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion5', 'Categoria5', './archivos/servicios/Producto5.jpg', 'video5producto.mp4', 500, 1, 5, 5),
-                      ('Producto6', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion6', 'Categoria6', './archivos/servicios/Producto6.jpg', 'video6producto.mp4', 600, 0, 6, 6),
-                      ('Producto7', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion7', 'Categoria7', './archivos/servicios/Producto7.jpg', 'video7producto.mp4', 700, 1, 7, 7),
-                      ('Producto8', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion8', 'Categoria8', './archivos/servicios/Producto8.jpg', 'video8producto.mp4', 800, 0, 8, 8),
-                      ('Producto9', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion9', 'Categoria9', './archivos/servicios/Producto9.jpg', 'video9producto.mp4', 900, 1, 9, 9),
-                      ('Producto10', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion10', 'Categoria10', './archivos/servicios/Producto10.jpg', 'video10producto.mp4', 1000, 0, 10, 10)");
+$conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, Duracion, Modalidad, txtLibre, ID_coaches, Id_atributo) VALUES
+                        ('Impulsa tus Competencias como líder. Neuroliderazgo', '¿Listo para potenciar tu liderazgo y gestión emocional? Nuestro programa de Neuroliderazgo mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de diversidad.', '¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.<br><em>6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.</em>', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, '6 sesiones', 'Presencial', '', 1, 1),
+                        ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, '6 sesiones', 'Presencial', '', 2, 2),
+                        ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, '6 sesiones', 'Presencial', '', 3, 3),
+                        ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, '6 sesiones', 'Presencial', '', 4, 4),
+                        ('Producto5', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion5', 'Categoria5', './archivos/servicios/Producto5.jpg', 'video5producto.mp4', 500, 1, '6 sesiones', 'Presencial', '', 5, 5),
+                        ('Producto6', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion6', 'Categoria6', './archivos/servicios/Producto6.jpg', 'video6producto.mp4', 600, 0, '6 sesiones', 'Presencial', '', 6, 6),
+                        ('Producto7', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion7', 'Categoria7', './archivos/servicios/Producto7.jpg', 'video7producto.mp4', 700, 1, '6 sesiones', 'Presencial', '', 7, 7),
+                        ('Producto8', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion8', 'Categoria8', './archivos/servicios/Producto8.jpg', 'video8producto.mp4', 800, 0, '6 sesiones', 'Presencial', '', 8, 8),
+                        ('Producto9', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion9', 'Categoria9', './archivos/servicios/Producto9.jpg', 'video9producto.mp4', 900, 1, '6 sesiones', 'Presencial', '', 9, 9),
+                        ('Producto10', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion10', 'Categoria10', './archivos/servicios/Producto10.jpg', 'video10producto.mp4', 1000, 0, '6 sesiones', 'Presencial', '', 10, 10)");
+
 
 
     $usuarios = [
