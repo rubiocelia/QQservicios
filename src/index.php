@@ -6,13 +6,19 @@ session_start();
 require_once("./bbdd/conecta.php");
 $conexion = getConexion();
 
-// Obtener todos los testimonios sin importar el producto
+// Obtener todos los testimonios
 $testimonioQuery = "SELECT Nombre, Subtitulo, Descripcion, Foto FROM Testimonios";
 $testimonioResult = $conexion->query($testimonioQuery);
+
+// Obtener 4 productos aleatorios
+$productoQuery = "SELECT ID, Nombre, DescripcionCorta, Foto FROM Productos ORDER BY RAND() LIMIT 5";
+$productoResult = $conexion->query($productoQuery);
 
 // Cerrar la conexión
 $conexion->close();
 ?>
+
+
 
 
 
@@ -112,6 +118,26 @@ $conexion->close();
                 </div>
             </div>
         </div>
+
+        <!-- Carrusel de Productos -->
+        <div class="carousel-container">
+            <h1>Productos Destacados</h1>
+            <div class="carousel">
+                <?php
+                if ($productoResult->num_rows > 0) {
+                    while ($producto = $productoResult->fetch_assoc()) {
+                        echo "<div class='carousel-item'>";
+                        echo "<img src='" . htmlspecialchars($producto['Foto']) . "' alt='" . htmlspecialchars($producto['Nombre']) . "'>";
+                        echo "<h2>" . htmlspecialchars($producto['Nombre']) . "</h2>";
+                        echo "<p>" . htmlspecialchars($producto['DescripcionCorta']) . "</p>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>No se encontraron productos.</p>";
+                }
+                ?>
+            </div>
+        </div>
         <div class="beneficios">
             <h1>¿Por qué elegirnos?</h1>
             <div class="benefCuad">
@@ -140,15 +166,19 @@ $conexion->close();
             <div class="texto-container">
                 <h2>Vive la Innovación en el Evento QQ Clients</h2>
                 <p>
-                    Sumérgete en una experiencia transformadora con nuestro video resumen del Evento QQ Clients. Este
-                    evento de co-creación se centra en revolucionar la Experiencia de Cliente a través de la Innovación,
+                    Sumérgete en una experiencia transformadora con nuestro video resumen del Evento QQ Clients.
+                    Este
+                    evento de co-creación se centra en revolucionar la Experiencia de Cliente a través de la
+                    Innovación,
                     Creatividad, y Neuroliderazgo. Descubre cómo los valores y la cultura pueden impulsar la
                     Transformación Digital en tu organización.
                 </p>
                 <br>
                 <p>
-                    ¡No te pierdas los momentos más inspiradores y las ideas más impactantes de líderes y expertos en la
-                    industria! Haz clic en el video para ser parte de esta jornada única de aprendizaje y crecimiento.
+                    ¡No te pierdas los momentos más inspiradores y las ideas más impactantes de líderes y expertos
+                    en la
+                    industria! Haz clic en el video para ser parte de esta jornada única de aprendizaje y
+                    crecimiento.
                 </p>
             </div>
         </div>
@@ -175,7 +205,7 @@ $conexion->close();
         <div class="cta-secundaria">
             <h2>¿Listo para Empezar?</h2>
             <p>Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos.</p>
-            <a href="#contacto" class="cta-button">Contacta con nosotros</a>
+            <a href="contacto.php" class="cta-button">Contacta con nosotros</a>
         </div>
 
         <div class="testimonios">
