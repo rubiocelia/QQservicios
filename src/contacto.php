@@ -44,7 +44,8 @@ if (isset($_SESSION['id_usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto</title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="../src/estilos/css/contacto.css">
 </head>
 
@@ -70,29 +71,46 @@ if (isset($_SESSION['id_usuario'])) {
         <div class="cajasContacto">
 
             <section class="contacto-info">
-                <h2>Información de Contacto</h2>
-                <p>Puedes encontrarnos en:</p>
-                <p><strong>Dirección:</strong> C. de Eugenio Salazar, 14, 28002 Madrid</p>
-                <p><strong>Teléfono:</strong> +34 681 31 10 37</p>
-                <p><strong>Email:</strong> inspiring@quidqualitas.es</p>
+                <h2>Puedes encontrarnos en:</h2>
+                <p>
+                    <ion-icon name="time-outline"></ion-icon>
+                    Lunes-Viernes: 10:00-14:00h
+
+                </p>
+                <p>
+                    <ion-icon name="business-outline"></ion-icon>
+                    C. de Eugenio Salazar, 14, 28002 Madrid
+                </p>
+                <p>
+                    <ion-icon name="call-outline"></ion-icon>
+                    +34 681 31 10 37
+                </p>
+                <p>
+                    <ion-icon name="mail-open-outline"></ion-icon>
+                    inspiring@quidqualitas.es
+                </p>
+                <div class="mapa">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.612031387825!2d-3.6723748846068554!3d40.4425225793624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228fa137a6753%3A0x2b8b9f81e5f37461!2sC.%20de%20Eugenio%20Salazar%2C%2014%2C%2028002%20Madrid%2C%20Spain!5e0!3m2!1sen!2ses!4v1629814148106!5m2!1sen!2ses"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </section>
 
             <section class="contacto-formulario">
-                <h2>Formulario de Contacto</h2>
                 <form action="procesar_contacto.php" method="post">
                     <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre..."
+                            value="<?php echo $nombre; ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
+                        <input type="email" id="email" name="email" placeholder="Correo elctrónico..."
+                            value="<?php echo $email; ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="mensaje">Mensaje:</label>
-                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?"
+                            required></textarea>
                     </div>
-                    <button type="submit">Enviar</button>
+                    <button class="btnContacto" type="submit">Enviar</button>
                 </form>
             </section>
 

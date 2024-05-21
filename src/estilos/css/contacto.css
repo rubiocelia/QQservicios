@@ -29,7 +29,7 @@ body {
 
 .contacto {
   height: auto;
-  background-color: #454a90;
+  background-color: #595ea3;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -69,69 +69,107 @@ body {
 }
 
 .contacto-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 50px 100px;
+  color: white;
 }
 
-.contacto-formulario,
-.contacto-info {
-  background-color: white;
-  margin: 15px auto;
-  padding: 2rem;
-  width: fit-content;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.contacto-formulario h2,
 .contacto-info h2 {
   font-family: var(--titulo);
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  color: white;
+  font-size: 1.3em;
+}
+
+.contacto-info p {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin: 15px 5px;
+  font-family: var(--texto);
+  font-size: 1.1em;
+}
+
+.contacto-info p ion-icon {
+  margin-right: 9px; /* Espacio entre el icono y el texto */
+  font-size: 1.3em; /* Tamaño del icono */
+}
+
+.mapa {
+  border-radius: 10px;
+  margin: 15px 5px;
+  overflow: hidden;
+}
+
+.mapa iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+.contacto-formulario {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  margin: 50px 100px;
+  color: white;
 }
 
 .form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 50px;
+  position: relative;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  background-color: transparent;
+  color: white;
+  font-family: var(--texto);
+  font-size: 1.2em;
+  transition: border-color 0.3s;
+}
+
+::placeholder {
+  color: #999797; /* Color del placeholder */
+  opacity: 1; /* Por defecto es medio transparente */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-bottom-color: var(--azulQQ);
 }
 
 .form-group textarea {
   resize: vertical;
 }
 
-button {
-  background-color: var(--rojoQQ);
+.btnContacto {
+  width: 150px;
+  height: 55px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  background-color: transparent;
+  font-family: var(--texto);
+  font-size: 1.3em;
+  border-radius: 8px;
   color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+}
+
+.btnContacto:hover {
+  width: 150px;
+  height: 55px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  background-color: white;
+  font-family: var(--texto);
+  font-size: 1.3em;
+  border-radius: 8px;
+  color: var(--azulQQ);
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: darken(var(--rojoQQ), 10%);
-}
-
-.contacto-info p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-}
-
-.contacto-info p strong {
-  display: block;
-  font-weight: bold;
 }
