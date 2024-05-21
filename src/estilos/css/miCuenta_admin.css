@@ -516,3 +516,69 @@ main {
   display: block;
   width: 100%;
 }
+
+/* Contenedor general */
+
+/* Título de la sección */
+
+/* Tabla de datos */
+.clientes-table, .productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.clientes-table th, .clientes-table td, .productos-table th, .productos-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.clientes-table th, .productos-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+.clientes-table tr:hover, .productos-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Contenedor de elementos */
+.elementos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.elemento-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.elemento-item img, .elemento-item iframe {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn-eliminar {
+  background-color: #e6312f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-eliminar:hover {
+  background-color: #b12723;
+}

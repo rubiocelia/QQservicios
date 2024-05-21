@@ -261,57 +261,37 @@ $conexion->close();
             </div>
 
             <div id="carrusel" class="seccion">
-                <h1>Mis Galerías</h1>
+                <h1>Mis Productos</h1>
                 <?php
                 // Obtener conexión a la base de datos
                 $conexion = getConexion();
 
-                // Consulta para obtener los datos agrupados por nombre del carrusel
-                $query = "
-                SELECT cm.ID, cm.Nombre_carrusel, COUNT(cm.RutaArchivos) AS Items, p.Nombre AS Producto
-                FROM carruselMultimedia cm
-                LEFT JOIN Productos p ON cm.ID_Producto = p.ID
-                GROUP BY cm.Nombre_carrusel, p.Nombre, cm.ID;
-                
-    ";
+                // Consulta para obtener los productos
+                $query = "SELECT ID, Nombre FROM Productos";
                 $resultado = $conexion->query($query);
 
                 // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
-                    echo '<table class="clientes-table">';
+                    echo '<table class="productos-table">';
                     echo '<thead>';
                     echo '<tr>';
-                    echo '<th>Nombre del Carrusel</th>';
-                    echo '<th>Items</th>';
-                    echo '<th>Producto Asociado</th>';
+                    echo '<th>Nombre del Producto</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada carrusel en una fila de la tabla
-                    while ($carrusel = $resultado->fetch_assoc()) {
-                        echo '<tr onclick="redireccionarAGestionarCarrusel(' . $carrusel['ID'] . ')">';
-                        echo '<td>' . htmlspecialchars($carrusel['Nombre_carrusel']) . '</td>';
-                        echo '<td>' . htmlspecialchars($carrusel['Items']) . '</td>';
-                        echo '<td>' . htmlspecialchars($carrusel['Producto']) . '</td>';
+                    // Iterar sobre los resultados y mostrar cada producto en una fila de la tabla
+                    while ($producto = $resultado->fetch_assoc()) {
+                        echo '<tr onclick="redireccionarAGestionarCarrusel(' . $producto['ID'] . ')">';
+                        echo '<td>' . htmlspecialchars($producto['Nombre']) . '</td>';
                         echo '</tr>';
                     }
                     echo '</tbody>';
                     echo '</table>';
                 } else {
-                    echo 'No se encontraron galerías.';
+                    echo 'No se encontraron productos.';
                 }
 
-                // Cerrar conexión
-                $conexion->close();
                 ?>
-                <button type="button" class="volver" onclick="mostrarFormularioCarrusel()">Añadir Nuevo</button>
-                <div id="formularioCarrusel" style="display: none;">
-                    <form id="formNuevoCarrusel">
-                        <label for="nombreCarrusel">Nombre del Carrusel:</label>
-                        <input type="text" id="nombreCarrusel" name="nombreCarrusel" required>
-                        <button type="button" onclick="crearCarrusel()">Crear Carrusel</button>
-                    </form>
-                </div>
             </div>
 
             <div id="servicios" class="seccion">

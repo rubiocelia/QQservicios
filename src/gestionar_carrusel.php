@@ -4,28 +4,29 @@ include('./bbdd/conecta.php');
 $conn = getConexion();
 
 if (!isset($_GET['id'])) {
-    die("ID de carrusel no proporcionado");
+    die("ID de producto no proporcionado");
 }
 
-$idCarrusel = $_GET['id'];
+$idProducto = $_GET['id'];
 
-// Obtener el nombre del carrusel
-$query = "SELECT Nombre_carrusel FROM carruselMultimedia WHERE ID = ?";
+// Consulta para obtener el nombre del producto
+$query = "SELECT Nombre FROM Productos WHERE ID = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $idCarrusel);
+$stmt->bind_param("i", $idProducto);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    die("No se encontró el carrusel");
+    die("No se encontró el producto");
 }
 
-$carrusel = $result->fetch_assoc();
-$nombreCarrusel = $carrusel['Nombre_carrusel'];
+$producto = $result->fetch_assoc();
+$nombreProducto = $producto['Nombre'];
 
-$queryElementos = "SELECT * FROM carruselMultimedia WHERE Nombre_carrusel = ?";
+// Consulta para obtener los elementos del carrusel asociados al producto
+$queryElementos = "SELECT * FROM carruselMultimedia WHERE ID_Producto = ?";
 $stmtElementos = $conn->prepare($queryElementos);
-$stmtElementos->bind_param("s", $nombreCarrusel);
+$stmtElementos->bind_param("i", $idProducto);
 $stmtElementos->execute();
 $resultElementos = $stmtElementos->get_result();
 ?>
@@ -35,68 +36,51 @@ $resultElementos = $stmtElementos->get_result();
 
 <head>
     <meta charset="UTF-8">
-    <title>Gestionar Carrusel</title>
+    <title>QQ Servicios</title>
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/estilos.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+    <!-- CDN para el popup de cerrar sesión -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="miCuenta">
+<body>
     <?php include('menu_sesion_iniciada.php'); ?>
-    <button type="button" class="volver" onclick="window.location.href = 'mi_cuenta_admin.php';">⬅​ Volver</button>
-    <div class="form-container">
-        <h1>Gestionar Carrusel: <?php echo htmlspecialchars($nombreCarrusel); ?></h1>
+    <h1>Gestionar Carrusel: <?php echo htmlspecialchars($nombreProducto); ?></h1>
 
-        <form id="formNuevoElemento" class="styled-form" enctype="multipart/form-data">
-            <input type="hidden" name="nombre_carrusel" value="<?php echo htmlspecialchars($nombreCarrusel); ?>">
-            <div class="form-group">
-                <label for="archivo" class="form-label">Seleccionar archivo:</label>
-                <input type="file" id="archivo" name="archivo" class="form-input" accept="image/*,video/*">
+    <form id="formNuevoElemento" enctype="multipart/form-data">
+        <input type="hidden" name="idProducto" value="<?php echo htmlspecialchars($idProducto); ?>">
+        <label for="archivo">Seleccionar archivo:</label>
+        <input type="file" id="archivo" name="archivo" accept="image/*,video/*">
+
+        <label for="link_video">URL de YouTube:</label>
+        <input type="url" id="link_video" name="link_video">
+
+        <button type="button" onclick="agregarElemento()">Agregar Elemento</button>
+    </form>
+
+    <h2>Elementos del Carrusel</h2>
+    <div id="elementosCarrusel" class="elementos-container">
+        <?php while ($elemento = $resultElementos->fetch_assoc()) : ?>
+            <div class="elemento-item">
+                <?php if ($elemento['RutaArchivos']) : ?>
+                    <img src="<?php echo htmlspecialchars($elemento['RutaArchivos']); ?>" alt="">
+                <?php elseif ($elemento['Link_Video']) : ?>
+                    <?php
+                    // Convertir URL de YouTube a URL de inserción
+                    $videoUrl = str_replace("watch?v=", "embed/", htmlspecialchars($elemento['Link_Video']));
+                    ?>
+                    <iframe width="560" height="315" src="<?php echo $videoUrl; ?>" frameborder="0" allowfullscreen></iframe>
+                <?php endif; ?>
+                <button type="button" class="btn-eliminar" onclick="eliminarElemento(<?php echo $elemento['ID']; ?>)">Eliminar</button>
             </div>
-
-            <div class="form-group">
-                <label for="link_video" class="form-label">URL de YouTube:</label>
-                <input type="url" id="link_video" name="link_video" class="form-input">
-            </div>
-
-            <div class="form-button-container">
-                <button type="button" onclick="agregarElemento()" class="form-button">Agregar Elemento</button>
-            </div>
-        </form>
-
-        <h2>Elementos del Carrusel</h2>
-        <div id="elementosCarrusel" class="elementos-container">
-            <?php while ($elemento = $resultElementos->fetch_assoc()) : ?>
-                <div class="elemento-item">
-                    <?php if ($elemento['RutaArchivos']) : ?>
-                        <?php $extension = pathinfo($elemento['RutaArchivos'], PATHINFO_EXTENSION); ?>
-                        <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) : ?>
-                            <img src="<?php echo htmlspecialchars($elemento['RutaArchivos']); ?>" alt="">
-                        <?php elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) : ?>
-                            <video width="560" height="315" controls>
-                                <source src="<?php echo htmlspecialchars($elemento['RutaArchivos']); ?>" type="video/<?php echo $extension; ?>">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
-                        <?php endif; ?>
-                    <?php elseif ($elemento['Link_Video']) : ?>
-                        <?php
-                        // Convertir URL de YouTube a URL de inserción
-                        $videoUrl = str_replace("watch?v=", "embed/", htmlspecialchars($elemento['Link_Video']));
-                        ?>
-                        <iframe width="560" height="315" src="<?php echo $videoUrl; ?>" frameborder="0" allowfullscreen></iframe>
-                    <?php endif; ?>
-                    <button type="button" class="btn-eliminar" onclick="eliminarElemento(<?php echo $elemento['ID']; ?>)">Eliminar</button>
-                </div>
-            <?php endwhile; ?>
-        </div>
+        <?php endwhile; ?>
     </div>
-    <?php include('footer.php'); ?>
 
     <script>
         function agregarElemento() {
             var formData = new FormData(document.getElementById('formNuevoElemento'));
+            formData.append('idProducto', <?php echo $idProducto; ?>);
 
             fetch('./server/agregar_elemento.php', {
                     method: 'POST',
@@ -107,7 +91,7 @@ $resultElementos = $stmtElementos->get_result();
                     if (data.success) {
                         window.location.reload();
                     } else {
-                        Swal.fire('Error', 'Error al agregar el elemento: ' + data.message, 'error');
+                        alert('Error al agregar el elemento: ' + data.message);
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -122,12 +106,18 @@ $resultElementos = $stmtElementos->get_result();
                     if (data.success) {
                         window.location.reload();
                     } else {
-                        Swal.fire('Error', 'Error al eliminar el elemento: ' + data.message, 'error');
+                        alert('Error al eliminar el elemento: ' + data.message);
                     }
                 })
                 .catch(error => console.error('Error:', error));
         }
     </script>
+    <script src="./scripts/scriptPopUp.js"></script>
+    <script src="./scripts/menuLateral.js"></script>
+    <script src="./scripts/FuncionesAdmin.js"></script>
+    <script src="./scripts/cerrarSesion.js"></script>
+    <script src="./scripts/botonesPerfil.js"></script>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>
