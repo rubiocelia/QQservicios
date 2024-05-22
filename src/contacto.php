@@ -4,7 +4,9 @@ session_start();
 
 // Inicializar variables para los datos del usuario
 $nombre = "";
+$apellidos = "";
 $email = "";
+$telefono = "";
 
 // Verificar si el ID de usuario está almacenado en la sesión
 if (isset($_SESSION['id_usuario'])) {
@@ -24,7 +26,9 @@ if (isset($_SESSION['id_usuario'])) {
         // Obtener los datos del usuario
         $usuario = $resultado->fetch_assoc();
         $nombre = htmlspecialchars($usuario['Nombre']);
+        $apellidos = htmlspecialchars($usuario['Apellidos']);
         $email = htmlspecialchars($usuario['Correo_electronico']);
+        $telefono = htmlspecialchars($usuario['Numero_telefono']);
     } else {
         // No se encontraron resultados, posible manejo de error o redirección
         echo "No se encontró información para el usuario con el ID proporcionado.";
@@ -103,8 +107,16 @@ if (isset($_SESSION['id_usuario'])) {
                             value="<?php echo $nombre; ?>" required>
                     </div>
                     <div class="form-group">
+                        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos..."
+                            value="<?php echo $apellidos; ?>" required>
+                    </div>
+                    <div class="form-group">
                         <input type="email" id="email" name="email" placeholder="Correo elctrónico..."
                             value="<?php echo $email; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono..."
+                            value="<?php echo $telefono; ?>" required>
                     </div>
                     <div class="form-group">
                         <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?"

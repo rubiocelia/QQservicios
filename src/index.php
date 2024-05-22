@@ -120,8 +120,8 @@ $conexion->close();
         </div>
 
         <!-- Carrusel de Productos -->
-        <div class="carousel-container">
-            <h1>Productos Destacados</h1>
+        <!-- <div class="carousel-container">
+            <h1>Productos destacados</h1>
             <div class="carousel">
                 <?php
                 if ($productoResult->num_rows > 0) {
@@ -137,7 +137,7 @@ $conexion->close();
                 }
                 ?>
             </div>
-        </div>
+        </div> -->
         <div class="beneficios">
             <h1>¿Por qué elegirnos?</h1>
             <div class="benefCuad">

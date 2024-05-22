@@ -72,8 +72,6 @@ $conexion->close();
                         alt="Icono de perfil" class="iconoMenu">Mis servicios</li>
                 <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/archivo.png" alt="Icono de perfil"
                         class="iconoMenu">Mis archivos</li>
-                <li onclick="mostrarSeccion('contacto')"><img src="./archivos/perfil/correo-de-contacto.png"
-                        alt="Icono de perfil" class="iconoMenu">Contacto</li>
                 <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png"
                         alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
@@ -153,28 +151,6 @@ $conexion->close();
                 <h1>Mis archivos</h1>
             </div>
 
-            <div id="contacto" class="seccion">
-                <h1>Contacto</h1>
-                <form action="enviarContacto.php" method="post" class="campoContacto">
-                    <div class="contacto">
-                        <div class="campoContacto">
-                            <label for="name">Nombre:</label>
-                            <input type="text" id="name" name="name" placeholder="Escribe tu nombre" required>
-                        </div>
-                        <div class="campoContacto">
-                            <label for="email">Correo Electrónico:</label>
-                            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
-                        </div>
-                        <div class="campoContacto">
-                            <label for="message">Mensaje:</label>
-                            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..."
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btnEnviar">Enviar</button>
-                    </div>
-                </form>
-
-            </div>
         </div>
     </main>
     <script src="./scripts/scriptPopUp.js"></script>

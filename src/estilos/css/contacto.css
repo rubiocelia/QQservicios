@@ -29,7 +29,7 @@ body {
 
 .contacto {
   height: auto;
-  background-color: #595ea3;
+  background-color: #6d72b6;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -135,7 +135,7 @@ body {
 }
 
 ::placeholder {
-  color: #999797; /* Color del placeholder */
+  color: #afacac; /* Color del placeholder */
   opacity: 1; /* Por defecto es medio transparente */
 }
 
