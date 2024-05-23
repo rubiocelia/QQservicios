@@ -91,18 +91,20 @@ $conexion->close();
 
 
             <div class="fila">
+                <div class="cuad1">
+                    <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
+
+                </div>
+                <div class="cuad2">
+                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
+                </div>
                 <div class="cuad3">
                     <p>Nuestro objetivo es ofrecer un espacio que permita a los participantes adquirir habilidades
                         prácticas de liderazgo y vida personal, brindando los recursos y el apoyo necesarios para
                         alcanzar sus metas personales y profesionales.</p>
                 </div>
-                <div class="cuad2">
-                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
-                </div>
-                <div class="cuad1">
-                    <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
 
-                </div>
+
             </div>
 
             <div class="fila">
