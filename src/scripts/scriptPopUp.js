@@ -11,6 +11,7 @@ var closeRegisterBtn = registerPopup.querySelector(".close");
 var joinNow = document.getElementById("JoinNow");
 var closePopup = document.getElementById("closePopup");
 var btnUnete = document.getElementById("btnUnete");
+var comprarBtn = document.getElementById("comprarBtn"); // Añadir esta línea
 
 // Función para mostrar el popup con transición
 function mostrarPopup(popup) {
@@ -37,6 +38,14 @@ loginBtn.onclick = function () {
 registerBtn.onclick = function () {
   mostrarPopup(registerPopup);
 };
+
+// Mostrar el popup de inicio de sesión cuando se haga clic en el botón de comprar
+if (comprarBtn) {
+  // Añadir esta verificación
+  comprarBtn.onclick = function () {
+    mostrarPopup(loginPopup);
+  };
+}
 
 // Ocultar el popup de inicio de sesión cuando se haga clic en el botón de cierre
 closeLoginBtn.onclick = function () {
@@ -70,6 +79,7 @@ loginRedireccion.onclick = function () {
   mostrarPopup(loginPopup);
   ocultarPopup(registerPopup);
 };
+
 // Ocultar el popup cuando se haga clic en el botón de volver
 volver.onclick = function () {
   ocultarPopup(loginPopup);
@@ -84,3 +94,32 @@ volverBtnRegistrarse.onclick = function () {
 btnUnete.onclick = function () {
   mostrarPopup(registerPopup);
 };
+
+// Lógica AJAX para el inicio de sesión
+$(document).ready(function () {
+  $(".FormularioLogin").submit(function (event) {
+    event.preventDefault(); // Evitar el envío del formulario estándar
+
+    var form_data = $(this).serialize(); // Serializar datos del formulario
+    $.ajax({
+      type: "POST",
+      url: "./server/verificar_inicio_sesion.php", // Ruta al archivo PHP que maneja la verificación
+      data: form_data,
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          if (response.redirect) {
+            // Redirigir al usuario a la página del administrador
+            window.location.href = response.redirect;
+          } else {
+            // Recargar la página actual para usuarios normales
+            window.location.reload();
+          }
+        } else {
+          // Mostrar mensaje de error si las credenciales son inválidas
+          $(".mensajeError").text(response.message);
+        }
+      },
+    });
+  });
+});

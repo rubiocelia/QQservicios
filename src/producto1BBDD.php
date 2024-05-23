@@ -2,34 +2,12 @@
 // Iniciar sesión
 session_start();
 
-// Verificar si el ID de usuario está almacenado en la sesión
-if (!isset($_SESSION['id_usuario'])) {
-    // Si el ID de usuario no está almacenado en la sesión, redirigir al usuario al formulario de inicio de sesión
-    header("Location: index.php");
-    exit();
-}
-
-// El ID de usuario está definido en la sesión
-$idUsuario = $_SESSION['id_usuario'];
+// Verificar si el usuario está registrado
+$idUsuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : null;
 
 // Obtener los datos del usuario
 require_once("./bbdd/conecta.php");
 $conexion = getConexion();
-$sql = "SELECT * FROM Usuarios WHERE ID = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("i", $idUsuario); // 'i' para indicar que es un entero (ID)
-$stmt->execute();
-$resultado = $stmt->get_result();
-
-if ($resultado->num_rows == 0) {
-    // No se encontraron resultados, posible manejo de error o rediricción
-    echo "No se encontró información para el usuario con el ID proporcionado.";
-    $conexion->close();
-    exit();
-}
-
-// Obtener los datos del usuario
-$usuario = $resultado->fetch_assoc();
 
 // Obtener el ID del producto desde la URL
 $idProducto = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -110,7 +88,7 @@ $conexion->close();
 <body class="fondoProducto">
     <header>
         <?php
-        if (isset($_SESSION['id_usuario'])) {
+        if ($idUsuario) {
             include('menu_sesion_iniciada.php');
         } else {
             include('menu.php');
@@ -124,14 +102,17 @@ $conexion->close();
                 <p><?php echo ($producto['Descripcion']); ?></p>
             </div>
             <div class="botonesPrecioComprar">
+                <?php if ($idUsuario): ?>
                 <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
-                <button class="btnComprar">Comprar</button>
+                <?php endif; ?>
+                <button class="btnComprar" <?php if (!$idUsuario) echo 'id="comprarBtn"' ?>>Comprar</button>
             </div>
+
+
         </div>
         <div class="todo">
             <div class="contenidos">
                 <div class="cajaIzquierda">
-
                     <div class="menuHorizontal">
                         <div class="menuContTest">
                             <button id="contenidosBtn" class="tab active">Contenidos</button>
@@ -160,7 +141,6 @@ $conexion->close();
                                     echo "<div class='testimonial'>";
                                     echo "<div class='testimonial-content'>";
                                     echo "<img class='fotoTestimonio' src='" . htmlspecialchars($testimonio["Foto"]) . "' alt='" . htmlspecialchars($testimonio["Nombre"]) . "'>";
-                                    
                                     echo "<h2>" . htmlspecialchars($testimonio['Nombre']) . "</h2>";
                                     echo "<h4>" . htmlspecialchars($testimonio['Subtitulo']) . "</h4>";
                                     echo "<p>" . htmlspecialchars($testimonio['Descripcion']) . "</p>";
@@ -243,7 +223,8 @@ $conexion->close();
                                 <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
                                     alt="GIF animado">
                             </div>
-                            <button class="btnComprar2">Comprar</button>
+                            <button class="btnComprar2"
+                                <?php if (!$idUsuario) echo 'onclick="mostrarPopup()"' ?>>Comprar</button>
                         </div>
                     </div>
 
@@ -271,6 +252,7 @@ $conexion->close();
 
     <script src="../src/scripts/carruselProducto1.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
+
     <?php include('footer.php'); ?>
 </body>
 

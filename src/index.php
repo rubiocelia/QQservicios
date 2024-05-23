@@ -10,13 +10,14 @@ $conexion = getConexion();
 $testimonioQuery = "SELECT Nombre, Subtitulo, Descripcion, Foto FROM Testimonios";
 $testimonioResult = $conexion->query($testimonioQuery);
 
-// Obtener 4 productos aleatorios
-$productoQuery = "SELECT ID, Nombre, DescripcionCorta, Foto FROM Productos ORDER BY RAND() LIMIT 5";
+// Obtener los primeros 5 productos
+$productoQuery = "SELECT ID, Nombre, DescripcionCorta, Foto FROM Productos LIMIT 5";
 $productoResult = $conexion->query($productoQuery);
 
 // Cerrar la conexión
 $conexion->close();
 ?>
+
 
 
 
@@ -119,25 +120,29 @@ $conexion->close();
             </div>
         </div>
 
-        <!-- Carrusel de Productos -->
-        <!-- <div class="carousel-container">
-            <h1>Productos destacados</h1>
-            <div class="carousel">
-                <?php
-                if ($productoResult->num_rows > 0) {
-                    while ($producto = $productoResult->fetch_assoc()) {
-                        echo "<div class='carousel-item'>";
-                        echo "<img src='" . htmlspecialchars($producto['Foto']) . "' alt='" . htmlspecialchars($producto['Nombre']) . "'>";
-                        echo "<h2>" . htmlspecialchars($producto['Nombre']) . "</h2>";
-                        echo "<p>" . htmlspecialchars($producto['DescripcionCorta']) . "</p>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "<p>No se encontraron productos.</p>";
-                }
-                ?>
+        <div class="carrusel-container">
+            <h1>Servicios destacados</h1>
+            <button class="prev">&#10094;</button>
+            <div class="carrusel">
+                <div class="carrusel-inner">
+                    <?php if ($productoResult->num_rows > 0): ?>
+                    <?php while($row = $productoResult->fetch_assoc()): ?>
+                    <div class="carrusel-item">
+                        <div class="producto-info">
+                            <h3 class="producto-nombre"><?php echo $row['Nombre']; ?></h3>
+                            <img src="<?php echo $row['Foto']; ?>" alt="<?php echo $row['Nombre']; ?>">
+                        </div>
+                    </div>
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                    <p>No se encontraron productos.</p>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div> -->
+            <button class="next">&#10095;</button>
+        </div>
+
+
         <div class="beneficios">
             <h1>¿Por qué elegirnos?</h1>
             <div class="benefCuad">
@@ -203,7 +208,7 @@ $conexion->close();
         </div>
 
         <div class="cta-secundaria">
-            <h2>¿Listo para Empezar?</h2>
+            <h2>¿Listo para empezar?</h2>
             <p>Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos.</p>
             <a href="contacto.php" class="cta-button">Contacta con nosotros</a>
         </div>
@@ -255,6 +260,8 @@ $conexion->close();
     <script src="./scripts/validacionRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/IndexProductos.js"></script>
+
     <?php include('footer.php'); ?>
 
 </body>

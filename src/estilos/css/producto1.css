@@ -217,47 +217,54 @@ main {
 
 .menuContTest {
   display: flex;
-  margin-bottom: -1px; /* Para unir visualmente las pestañas con el contenido */
+  margin-bottom: 0; /* Eliminar margen para unir visualmente las pestañas con el contenido */
   justify-content: flex-start; /* Alinear los botones a la izquierda */
 }
 
 .menuContTest button {
   padding: 10px 20px;
+  border-style: none;
+  box-shadow: -1px 0px 4px 0px rgba(0, 0, 0, 0.1),
+    2px -3px 2px rgba(0, 0, 0, 0.1);
   font-family: var(--texto);
   font-size: 1.5em;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   margin: 0;
-  border: 1px solid var(--azulQQ);
   border-bottom: none; /* Quitar borde inferior para unir con el contenido */
   background-color: transparent;
   cursor: pointer;
   display: inline-block;
   transform-origin: center center;
+  position: relative;
+  z-index: 2;
 }
 
 .menuContTest button:hover {
-  background-color: var(--azulQQ);
-  color: white;
+  padding: 10px 20px;
+  border-style: none;
+  box-shadow: -1px -3px 4px rgba(0, 0, 0, 0.1), 0px -3px 2px rgba(0, 0, 0, 0.1);
+  font-family: var(--texto);
+  background-color: #ffb2b170;
+  cursor: pointer;
+  display: inline-block;
+  transform-origin: center center;
 }
 
 .menuContTest button.active {
-  background-color: #ffffff;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  color: black;
-  border-bottom: 1px solid #ffffff; /* Unir visualmente con el contenido */
-  z-index: 1;
+  background-color: white;
+  color: var(--rojoQQ);
+  box-shadow: -1px -3px 4px rgba(0, 0, 0, 0.1), 0px -3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .contenido,
 .testimonios {
   display: none;
   padding: 20px;
-  border: 1px solid var(--azulQQ);
   border-radius: 0 8px 8px 8px;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1),
+    -2px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .contenido.active,
