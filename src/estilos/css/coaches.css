@@ -50,25 +50,87 @@
 }
 
 .txtInicial {
-  width: 60%;
+  width: 70%;
   font-family: var(--texto);
-  font-size: 24px ;
+  font-size: 24px;
 }
 
 .info {
   font-family: var(--texto);
   margin-top: 55vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-
+  background-color: #e2dffa;
+  padding: 5px 10px;
 }
 
-.info h1 {
+.info p {
   text-align: center;
-  font-size: 24px;
-  padding-left: 15em;
-  padding-right: 15em;
+  font-size: 23px;
+  padding-left: 5em;
+  padding-right: 5em;
+}
+
+.container {
+  margin-top: 35px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.programas {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.programa {
+  width: 195px;
+  height: 185px;
+  padding: 5px;
+  color: black;
+  margin: 25px 60px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.programa img {
+  width: 70px;
+  height: 70px;
+}
+
+.programa:hover {
+  transform: scale(1.1);
+}
+
+.programa p {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--texto);
+  font-size: 1.2em;
+}
+
+.programa1 {
+  background-image: url("../../archivos/coaches/mancha1.png");
+}
+
+.programa2 {
+  background-image: url("../../archivos/coaches/mancha2.png");
+}
+
+.programa3 {
+  background-image: url("../../archivos/coaches/mancha3.png");
+}
+
+.programa4 {
+  background-image: url("../../archivos/coaches/mancha4.png");
 }
 
 .testimonial-slider {
@@ -99,7 +161,7 @@
 }
 
 .testimonial-carrusel {
-  display:flex;
+  display: flex;
   flex-direction: row;
   gap: 3%;
   margin: 1%;

@@ -35,21 +35,39 @@
         <!-- Sección del fondo con título y descripción -->
         <div class="fondo">
             <div class="parrfInicial">
-                <h1 class="titulo">NUESTROS COACHES</h1>
+                <h1 class="titulo">Metodología QQ Experiencial e Inmersiva</h1>
                 <p class="txtInicial">
-                    En nuestra comunidad, creemos que la calidad del aprendizaje depende significativamente
-                    de la excelencia de los instructores. Por eso, hemos reunido a un equipo de coaches
-                    altamente calificados y apasionados, dedicados a ayudarte a alcanzar tus metas personales
-                    y profesionales.
+                    En QQ Experiences, experimentarás una metodología única que combina reflexión y práctica en
+                    ambientes especialmente diseñados para ti. Este enfoque te permitirá crecer tanto profesional como
+                    personalmente, asegurando un aprendizaje profundo y significativo.
                 </p>
             </div>
         </div>
 
         <!-- Sección con información sobre los coaches -->
         <div class="info">
-            <h1>Creemos firmemente que la calidad del aprendizaje depende de la excelencia de 
-                los instructores. Nuestro equipo de coaches altamente calificados está dedicado a 
-                ayudarte a alcanzar tus metas personales y profesionales.</h1>
+            <p>En cualquier programa de desarrollo profesional el contenido es
+                importante, pero la forma y el contexto son aspectos clave a la hora
+                de entender y anclar cualquier concepto. Por ello, nuestra
+                metodología propia tiene nombre: <strong>QQ Experiences</strong> , que da identidad
+                y valor a todos nuestros programas de desarrollo individual y
+                colaborativo. Es una metodología experiencial, basada en los detalles,
+                que deja huella. En muchos casos utilizamos dos ambientes
+                claramente diferenciados: el área de reflexión y puesta en común; y
+                un espacio experiencial que será el “laboratorio” perfecto a la hora de
+                vivir estas actividades. (Espacios distintos y específicos según el tipo
+                de Experiencia).</p>
+        </div>
+
+
+        <div class="container">
+            <h2>Gracias a QQ Experiences, los resultados son siempre más satisfactorios:</h2>
+            <div class="programas">
+                <img src="./archivos/coaches/">
+                <img src="./archivos/coaches/">
+                <img src="./archivos/coaches/">
+                <img src="./archivos/coaches/">
+            </div>
         </div>
 
         <!-- Carrusel de testimonios -->
@@ -95,22 +113,22 @@
     <script src="./scripts/coachesCarrusel.js"></script>
     <!-- Script para animaciones al hacer scroll -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate__animated', 'animate__fadeIn');
-                    } else {
-                        entry.target.classList.remove('animate__animated', 'animate__fadeIn');
-                    }
-                });
-            });
-
-            const elements = document.querySelectorAll('.animated-element');
-            elements.forEach(element => {
-                observer.observe(element);
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeIn');
+                } else {
+                    entry.target.classList.remove('animate__animated', 'animate__fadeIn');
+                }
             });
         });
+
+        const elements = document.querySelectorAll('.animated-element');
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    });
     </script>
 
     <!-- Inclusión del pie de página -->

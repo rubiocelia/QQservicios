@@ -65,6 +65,8 @@ if (isset($_SESSION['id_usuario'])) {
     </header>
 
     <main class="contacto-main">
+        <source src="./archivos/contacto/Poligon_Digital.mp4" type="video/mp4">
+
         <section class="contacto-hero">
             <img src="../src/archivos/contacto/comunicar.png" alt="Logo contacto" class="logoContacto">
             <h1>¡ Contacta con nosotros !</h1>

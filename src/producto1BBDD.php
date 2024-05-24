@@ -224,7 +224,8 @@ $conexion->close();
                                     alt="GIF animado">
                             </div>
                             <button class="btnComprar2"
-                                <?php if (!$idUsuario) echo 'onclick="mostrarPopup()"' ?>>Comprar</button>
+                                <?php if (!$idUsuario) echo 'id="comprarBtn"' ?>>Comprar</button>
+
                         </div>
                     </div>
 

@@ -11,7 +11,8 @@ var closeRegisterBtn = registerPopup.querySelector(".close");
 var joinNow = document.getElementById("JoinNow");
 var closePopup = document.getElementById("closePopup");
 var btnUnete = document.getElementById("btnUnete");
-var comprarBtn = document.getElementById("comprarBtn"); // Añadir esta línea
+var comprarBtn = document.getElementById("comprarBtn");
+var comprarBtn2 = document.querySelector(".btnComprar2");
 
 // Función para mostrar el popup con transición
 function mostrarPopup(popup) {
@@ -30,70 +31,93 @@ function ocultarPopup(popup) {
 }
 
 // Mostrar el popup de inicio de sesión cuando se haga clic en el botón de inicio de sesión
-loginBtn.onclick = function () {
-  mostrarPopup(loginPopup);
-};
+if (loginBtn) {
+  loginBtn.onclick = function () {
+    mostrarPopup(loginPopup);
+  };
+}
 
 // Mostrar el popup de registro cuando se haga clic en el botón de registro
-registerBtn.onclick = function () {
-  mostrarPopup(registerPopup);
-};
+if (registerBtn) {
+  registerBtn.onclick = function () {
+    mostrarPopup(registerPopup);
+  };
+}
 
 // Mostrar el popup de inicio de sesión cuando se haga clic en el botón de comprar
 if (comprarBtn) {
-  // Añadir esta verificación
   comprarBtn.onclick = function () {
     mostrarPopup(loginPopup);
   };
 }
 
+// Mostrar el popup de inicio de sesión cuando se haga clic en el botón de comprar en "¡Potencia tu futuro!"
+if (comprarBtn2) {
+  comprarBtn2.onclick = function () {
+    mostrarPopup(loginPopup);
+  };
+}
+
 // Ocultar el popup de inicio de sesión cuando se haga clic en el botón de cierre
-closeLoginBtn.onclick = function () {
-  ocultarPopup(loginPopup);
-};
+if (closeLoginBtn) {
+  closeLoginBtn.onclick = function () {
+    ocultarPopup(loginPopup);
+  };
+}
 
 // Ocultar el popup de registro cuando se haga clic en el botón de cierre
-closeRegisterBtn.onclick = function () {
-  ocultarPopup(registerPopup);
-};
+if (closeRegisterBtn) {
+  closeRegisterBtn.onclick = function () {
+    ocultarPopup(registerPopup);
+  };
+}
 
 // Ocultar los popups cuando se haga clic fuera de ellos
 window.onclick = function (event) {
   if (event.target == loginPopup) {
     ocultarPopup(loginPopup);
   }
-
   if (event.target == registerPopup) {
     ocultarPopup(registerPopup);
   }
 };
 
 // Cambiar de Login a Registrarse
-joinNow.onclick = function () {
-  mostrarPopup(registerPopup);
-  ocultarPopup(loginPopup);
-};
+if (joinNow) {
+  joinNow.onclick = function () {
+    mostrarPopup(registerPopup);
+    ocultarPopup(loginPopup);
+  };
+}
 
 // Cambiar de Registrarse a Login
-loginRedireccion.onclick = function () {
-  mostrarPopup(loginPopup);
-  ocultarPopup(registerPopup);
-};
+if (loginRedireccion) {
+  loginRedireccion.onclick = function () {
+    mostrarPopup(loginPopup);
+    ocultarPopup(registerPopup);
+  };
+}
 
 // Ocultar el popup cuando se haga clic en el botón de volver
-volver.onclick = function () {
-  ocultarPopup(loginPopup);
-};
+if (volver) {
+  volver.onclick = function () {
+    ocultarPopup(loginPopup);
+  };
+}
 
 // Ocultar el popup cuando se haga clic en el botón de volver desde el popup de registro
-volverBtnRegistrarse.onclick = function () {
-  ocultarPopup(registerPopup);
-};
+if (volverBtnRegistrarse) {
+  volverBtnRegistrarse.onclick = function () {
+    ocultarPopup(registerPopup);
+  };
+}
 
 // Mostrar el popup de registro cuando se haga clic en el botón de registro
-btnUnete.onclick = function () {
-  mostrarPopup(registerPopup);
-};
+if (btnUnete) {
+  btnUnete.onclick = function () {
+    mostrarPopup(registerPopup);
+  };
+}
 
 // Lógica AJAX para el inicio de sesión
 $(document).ready(function () {
