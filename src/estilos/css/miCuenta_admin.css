@@ -582,3 +582,39 @@ main {
 .btn-eliminar:hover {
   background-color: #b12723;
 }
+
+
+/* Estilos para las tablas de galerías y contenido */
+.galerias-table, .contenido-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.galerias-table th, .galerias-table td, .contenido-table th, .contenido-table td {
+  border: 1px solid #ddd !important;
+  padding: 8px;
+  text-align: left;
+}
+
+.galerias-table th, .contenido-table th {
+  background-color: #f2f2f2 !important;
+  color: #333;
+  font-weight: bold;
+}
+
+.galerias-table tr:nth-child(even), .contenido-table tr:nth-child(even) {
+  background-color: #f9f9f9 !important;
+}
+
+.galerias-table tr:hover, .contenido-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.placeholder {
+  background-color: #e2e2e2 !important;
+  border: 2px dashed #ccc;
+  height: 50px; /* Ajustar según el tamaño de las filas */
+}

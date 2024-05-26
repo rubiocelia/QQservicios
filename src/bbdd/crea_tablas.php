@@ -5,15 +5,16 @@ require_once("conecta.php");
 $conexion = getConexion();
 
 // Función para crear las tablas y la base de datos
-function crearTablas($conexion) {
-     // Eliminar la base de datos si existe
-     $conexion->query("DROP DATABASE IF EXISTS QQservicios");
+function crearTablas($conexion)
+{
+    // Eliminar la base de datos si existe
+    $conexion->query("DROP DATABASE IF EXISTS QQservicios");
 
-     // Crear la base de datos
-     if (!$conexion->query("CREATE DATABASE QQservicios")) {
-         die("Error al crear la base de datos: " . $conexion->error);
-     }
-    
+    // Crear la base de datos
+    if (!$conexion->query("CREATE DATABASE QQservicios")) {
+        die("Error al crear la base de datos: " . $conexion->error);
+    }
+
     $conexion->select_db("QQservicios");
 
     // Array para la creación de las tablas de la base de datos
@@ -105,7 +106,7 @@ function crearTablas($conexion) {
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
             FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
         )",
-        
+
         "faqs" => "CREATE TABLE IF NOT EXISTS faqs (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Pregunta VARCHAR(255),
@@ -114,14 +115,27 @@ function crearTablas($conexion) {
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
             )",
 
-        "carrusel_multimedia" => "CREATE TABLE IF NOT EXISTS carruselMultimedia (
+        "contenido_multimedia" => "CREATE TABLE IF NOT EXISTS ContenidoMultimedia (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Link_Video TEXT,
-            Nombre_carrusel VARCHAR(255),
-            RutaArchivos VARCHAR(255),
-            ID_Producto INT,
-            FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
-            )",
+            Tipo ENUM('video_local', 'foto', 'video_youtube') NOT NULL,
+            URL_Local VARCHAR(255),
+            URL_Youtube VARCHAR(255),
+            Descripcion TEXT
+        )",
+
+        "galerias" => "CREATE TABLE IF NOT EXISTS Galerias (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            Nombre_galeria VARCHAR(255) NOT NULL
+        )",
+
+        "galeria_contenido" => "CREATE TABLE IF NOT EXISTS GaleriaContenido (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            ID_Galeria INT,
+            ID_Contenido INT,
+            Orden INT,
+            FOREIGN KEY (ID_Galeria) REFERENCES Galerias(ID),
+            FOREIGN KEY (ID_Contenido) REFERENCES ContenidoMultimedia(ID)
+        )"
     ];
 
     // Crear cada tabla en la base de datos
@@ -133,7 +147,7 @@ function crearTablas($conexion) {
         }
     }
 }
-    
+
 
 // Llama a la función para crear las tablas
 crearTablas($conexion);
@@ -176,8 +190,8 @@ function insertarDatos($conexion)
                         ('Coach8', 'Apellido8', 'Titulacion8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach4.png'),
                         ('Coach9', 'Apellido9', 'Titulacion9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach1.png'),
                         ('Coach10', 'Apellido10', 'Titulacion10',  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach2.png')");
-   
-   // Insertar datos en Atributos
+
+    // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES
                       ('Individual'),
                       ('Grupal'),
@@ -190,7 +204,7 @@ function insertarDatos($conexion)
                       ('Atributo9'),
                       ('Atributo10')");
 
-$conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, Duracion, Modalidad, txtLibre, ID_coaches, Id_atributo) VALUES
+    $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, Duracion, Modalidad, txtLibre, ID_coaches, Id_atributo) VALUES
                         ('Impulsa tus Competencias como líder. Neuroliderazgo', '¿Listo para potenciar tu liderazgo y gestión emocional? Nuestro programa de Neuroliderazgo mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de diversidad.', '¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.<br><em>6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.</em>', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, '6 sesiones', 'Presencial', '', 1, 1),
                         ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, '6 sesiones', 'Presencial', '', 2, 2),
                         ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, '6 sesiones', 'Presencial', '', 3, 3),
@@ -205,16 +219,16 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
 
 
     $usuarios = [
-        ['adminJavier','ejemplo1', 0, 1],
-        ['usuario2', 'ejemplo1',1, 2],
+        ['adminJavier', 'ejemplo1', 0, 1],
+        ['usuario2', 'ejemplo1', 1, 2],
         ['usuario3', 'ejemplo1', 0, 3],
         ['usuario4', 'ejemplo1', 0, 4],
         ['usuario5', 'ejemplo1', 0, 5],
         ['usuario6', 'ejemplo1', 0, 6],
-        ['usuario7','ejemplo1', 0, 7],
-        ['usuario8','ejemplo1', 0, 8],
-        ['usuario9', 'ejemplo1',0, 9],
-        ['usuario10', 'ejemplo1',0, 10],
+        ['usuario7', 'ejemplo1', 0, 7],
+        ['usuario8', 'ejemplo1', 0, 8],
+        ['usuario9', 'ejemplo1', 0, 9],
+        ['usuario10', 'ejemplo1', 0, 10],
     ];
 
     foreach ($usuarios as $usuario) {
@@ -322,8 +336,8 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
 
 
 
-                // Insertar datos en faqs
-                $conexion->query("INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES
+    // Insertar datos en faqs
+    $conexion->query("INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES
                         ('¿Qué es el coaching y cómo se diferencia de la terapia o la consultoría?', 'El coaching se centra en ayudarte a alcanzar objetivos específicos y desarrollar habilidades a través de un proceso de colaboración y guía. A diferencia de la terapia, que trata problemas emocionales profundos y del pasado, el coaching se enfoca en el presente y el futuro. La consultoría implica ofrecer soluciones específicas y consejos expertos, mientras que el coaching te ayuda a descubrir tus propias respuestas y estrategias.', 1),
                         ('¿Cómo se realiza la evaluación 360º en el programa de Neuroliderazgo?', 'La evaluación 360º en nuestro programa se basa en el modelo i4 de neuroliderazgo. Incluye retroalimentación de compañeros, superiores y subordinados para proporcionar una visión completa de tus competencias de liderazgo. Esto ayuda a identificar tus fortalezas, áreas de mejora y puntos ciegos.', 1),
                         ('¿Qué incluye el Plan de Mejora Individual (PMI)?', 'El PMI es un plan detallado que se elabora durante el programa y que incluye metas claras, objetivos específicos y estrategias personalizadas para mejorar tus competencias de liderazgo. Este plan es fundamental para guiar tu desarrollo y seguimiento continuo.', 1),
@@ -335,22 +349,38 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
 
 
 
-                // Insertar datos en carruselMultimedia
-                $conexion->query("INSERT INTO carruselMultimedia (RutaArchivos, Link_Video, Nombre_carrusel, ID_Producto) VALUES
-                ('./archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg','','Carrusel 1', 1),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
-                (' ','https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz','Carrusel 1', 1),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 1', 1),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2),
-                ('./archivos/productos/carruselProducto1/javier_ontiveros.jpeg','','Carrusel 2', 2)
-                ");
+    // Insertar datos en carruselMultimedia
+    $conexion->query("INSERT INTO ContenidoMultimedia (Tipo, URL_Local, URL_Youtube, Descripcion) VALUES
+    ('foto', './archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg', NULL, 'Foto de Julia y Javier en el sofá'),
+    ('foto', './archivos/productos/carruselProducto1/javier_ontiveros.jpeg', NULL, 'Foto de Javier Ontiveros'),
+    ('video_youtube', NULL, 'https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz', 'Video de YouTube'),
+    ('foto', './archivos/productos/carruselProducto1/Foto3.png', NULL, 'Foto de Ejemplo 3'),
+    ('foto', './archivos/productos/carruselProducto1/Foto4.jpeg', NULL, 'Foto de EJemplo 4'),
+    ('video_local', './archivos/productos/carruselProducto1/Video1.mp4', NULL, 'Video de ejemplo 1')
+");
+
+    // Insertar contenido en la tabla Galerias
+    $conexion->query("INSERT INTO Galerias (Nombre_galeria) VALUES
+    ('Carrusel 1'),
+    ('Carrusel 2')
+");
+
+    // Insertar contenido en la tabla GaleriaContenido
+    $conexion->query("INSERT INTO GaleriaContenido (ID_Galeria, ID_Contenido, Orden) VALUES
+    (1, 1, 1),
+    (1, 2, 2),
+    (1, 3, 3),
+    (1, 4, 4),
+    (1, 5, 5),
+    (2, 6, 1),
+    (2, 1, 2),
+    (2, 2, 3),
+    (2, 3, 4)
+");
 }
 
 
-    //Llamamos a la función para insetar los datos
+//Llamamos a la función para insetar los datos
 insertarDatos($conexion);
 
 

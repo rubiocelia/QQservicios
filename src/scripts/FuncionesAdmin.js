@@ -102,3 +102,15 @@ function crearTestimonio() {
     })
     .catch((error) => console.error("Error:", error));
 }
+
+function redireccionarAVerGaleria(idGaleria) {
+  window.location.href = "ver_galeria.php?id=" + idGaleria;
+}
+
+function crearNuevaGaleria() {
+  let nombreGaleria = prompt("Introduce el nombre de la nueva galería:");
+  if (nombreGaleria) {
+    window.location.href =
+      "./server/crear_galeria.php?nombre=" + encodeURIComponent(nombreGaleria);
+  }
+}

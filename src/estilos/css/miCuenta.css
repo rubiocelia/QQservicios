@@ -311,3 +311,79 @@ main {
 .swal2-html-container {
   font-family: var(--texto);
 }
+
+
+/* Estilos para las tablas de archivos */
+.tablaArchivos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.tablaArchivos th, .tablaArchivos td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tablaArchivos th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.tablaArchivos tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tablaArchivos tr:hover {
+  background-color: #f1f1f1;
+}
+
+.tablaArchivos td a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.tablaArchivos td a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para las tablas de galerías y contenido */
+.galerias-table, .contenido-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.galerias-table th, .galerias-table td, .contenido-table th, .contenido-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.galerias-table th, .contenido-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.galerias-table tr:nth-child(even), .contenido-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.galerias-table tr:hover, .contenido-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.placeholder {
+    background-color: #e2e2e2;
+    border: 2px dashed #ccc;
+    height: 50px; /* Ajustar según el tamaño de las filas */
+}
+
+

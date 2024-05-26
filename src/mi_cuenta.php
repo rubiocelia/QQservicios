@@ -30,6 +30,22 @@ if ($resultado->num_rows == 0) {
 
 // Obtener los datos del usuario
 $usuario = $resultado->fetch_assoc();
+
+// Obtener los archivos habilitados para el usuario
+$sqlArchivos = "SELECT a.Ruta, a.Descripcion, a.Fecha, p.Nombre AS Producto 
+               FROM ArchivosUsuarios a
+               JOIN Productos p ON a.ID_Producto = p.ID
+               WHERE a.ID_usuario = ? AND a.Deshabilitado = 0";
+$stmtArchivos = $conexion->prepare($sqlArchivos);
+$stmtArchivos->bind_param("i", $idUsuario);
+$stmtArchivos->execute();
+$resultadoArchivos = $stmtArchivos->get_result();
+
+$archivosPorProducto = [];
+while ($fila = $resultadoArchivos->fetch_assoc()) {
+    $archivosPorProducto[$fila['Producto']][] = $fila;
+}
+
 $conexion->close();
 ?>
 
@@ -66,8 +82,7 @@ $conexion->close();
         <div id="menu2">
             <ul>
                 <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil"
-                        class="iconoMenu">Mi
-                    perfil</li>
+                        class="iconoMenu">Mi perfil</li>
                 <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png"
                         alt="Icono de perfil" class="iconoMenu">Mis servicios</li>
                 <li onclick="mostrarSeccion('archivos')"><img src="./archivos/perfil/archivo.png" alt="Icono de perfil"
@@ -82,7 +97,6 @@ $conexion->close();
                 <h1>Mi perfil</h1>
                 <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                     <div class="perfil">
-
                         <div class="foto">
                             <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
                                 class="fotoPerfil">
@@ -91,10 +105,6 @@ $conexion->close();
                             <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
                             <!-- Botón estilizado para seleccionar foto -->
                         </div>
-
-
-
-
                         <div class="datos">
                             <!-- Fila para Nombre y Apellidos -->
                             <div class="fila">
@@ -130,27 +140,46 @@ $conexion->close();
                                 </div>
                             </div>
                         </div>
-
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                             <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
                             <button type="button" id="btnCancelar" style="display:none;"
                                 onclick="cancelarEdicion()">Cancelar</button>
-
                         </div>
-
                     </div>
                 </form>
-
             </div>
             <div id="servicios" class="seccion">
                 <h1>Mis servicios</h1>
             </div>
-
-            <div id="archivos" class="seccion">
+            <div id="archivos" class="seccion" class="archivosCliente">
                 <h1>Mis archivos</h1>
+                <?php if (!empty($archivosPorProducto)): ?>
+                    <?php foreach ($archivosPorProducto as $producto => $archivos): ?>
+                        <h2><?php echo htmlspecialchars($producto); ?></h2>
+                        <table class="tablaArchivos">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                    <th>Archivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($archivos as $archivo): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($archivo['Descripcion']); ?></td>
+                                        <td><?php echo htmlspecialchars($archivo['Fecha']); ?></td>
+                                        <td><a href="<?php echo htmlspecialchars($archivo['Ruta']); ?>" download>Descargar</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No hay archivos disponibles.</p>
+                <?php endif; ?>
             </div>
-
         </div>
     </main>
     <script src="./scripts/scriptPopUp.js"></script>
@@ -161,3 +190,4 @@ $conexion->close();
 </body>
 
 </html>
+

@@ -261,37 +261,36 @@ $conexion->close();
             </div>
 
             <div id="carrusel" class="seccion">
-                <h1>Mis Productos</h1>
+                <h1>Mis Galerías</h1>
                 <?php
-                // Obtener conexión a la base de datos
+                // Consulta para obtener las galerías
                 $conexion = getConexion();
-
-                // Consulta para obtener los productos
-                $query = "SELECT ID, Nombre FROM Productos";
+                $query = "SELECT ID, Nombre_galeria FROM Galerias";
                 $resultado = $conexion->query($query);
 
                 // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
-                    echo '<table class="productos-table">';
+                    echo '<table class="galerias-table">';
                     echo '<thead>';
                     echo '<tr>';
-                    echo '<th>Nombre del Producto</th>';
+                    echo '<th>Nombre de la Galería</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada producto en una fila de la tabla
-                    while ($producto = $resultado->fetch_assoc()) {
-                        echo '<tr onclick="redireccionarAGestionarCarrusel(' . $producto['ID'] . ')">';
-                        echo '<td>' . htmlspecialchars($producto['Nombre']) . '</td>';
+                    // Iterar sobre los resultados y mostrar cada galería en una fila de la tabla
+                    while ($galeria = $resultado->fetch_assoc()) {
+                        echo '<tr onclick="redireccionarAVerGaleria(' . $galeria['ID'] . ')">';
+                        echo '<td>' . htmlspecialchars($galeria['Nombre_galeria']) . '</td>';
                         echo '</tr>';
                     }
                     echo '</tbody>';
                     echo '</table>';
                 } else {
-                    echo 'No se encontraron productos.';
+                    echo 'No se encontraron galerías.';
                 }
-
                 ?>
+
+                <button class="volver" onclick="crearNuevaGaleria()">Crear Nueva Galería</button>
             </div>
 
             <div id="servicios" class="seccion">
