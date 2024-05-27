@@ -28,6 +28,7 @@ body {
 }
 
 .contacto {
+  background-color: #7e71f7;
   position: relative;
   height: 100vh; /* Asegura que la sección ocupe toda la altura de la pantalla */
 }

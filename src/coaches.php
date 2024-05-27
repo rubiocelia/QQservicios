@@ -10,6 +10,8 @@
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- Enlace a la librería de animaciones animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body class="index">
@@ -63,11 +65,16 @@
         <div class="container">
             <h2>Gracias a QQ Experiences, los resultados son siempre más satisfactorios:</h2>
             <div class="programas">
-                <img src="./archivos/coaches/">
-                <img src="./archivos/coaches/">
-                <img src="./archivos/coaches/">
-                <img src="./archivos/coaches/">
+                <img src="./archivos/coaches/1.png">
+                <img src="./archivos/coaches/3.png">
+                <img src="./archivos/coaches/2.png">
+                <img src="./archivos/coaches/4.png">
             </div>
+        </div>
+
+        <div class="container2">
+            <h2>Gráfico de Aprendizaje</h2>
+            <canvas id="myChart"></canvas>
         </div>
 
         <!-- Carrusel de testimonios -->

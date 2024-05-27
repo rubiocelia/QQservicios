@@ -80,57 +80,31 @@
 }
 
 .programas {
-  margin-top: 25px;
+  margin-top: 35px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  gap: 100px;
 }
 
-.programa {
-  width: 195px;
-  height: 185px;
-  padding: 5px;
-  color: black;
-  margin: 25px 60px;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.programas img {
+  width: 250px;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 10px; /* Opcional: para bordes redondeados */
 }
 
-.programa img {
-  width: 70px;
-  height: 70px;
+.programas img:hover {
+  transform: scale(1.1); /* Aumenta la imagen al pasar el ratón */
 }
 
-.programa:hover {
-  transform: scale(1.1);
-}
-
-.programa p {
-  margin-top: 10px;
+.container2 {
   text-align: center;
-  font-family: var(--texto);
-  font-size: 1.2em;
+  margin-top: 50px;
 }
 
-.programa1 {
-  background-image: url("../../archivos/coaches/mancha1.png");
-}
-
-.programa2 {
-  background-image: url("../../archivos/coaches/mancha2.png");
-}
-
-.programa3 {
-  background-image: url("../../archivos/coaches/mancha3.png");
-}
-
-.programa4 {
-  background-image: url("../../archivos/coaches/mancha4.png");
+#myChart {
+  width: 70%;
+  height: 60%;
+  margin: 0 auto;
 }
 
 .testimonial-slider {
