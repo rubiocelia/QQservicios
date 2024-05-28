@@ -46,6 +46,16 @@ while ($fila = $resultadoArchivos->fetch_assoc()) {
     $archivosPorProducto[$fila['Producto']][] = $fila;
 }
 
+// Obtener los servicios comprados por el usuario
+$sqlServicios = "SELECT p.ID, p.Nombre, p.DescripcionCorta, p.Foto 
+                 FROM Compra c
+                 JOIN Productos p ON c.ID_Producto = p.ID
+                 WHERE c.ID_usuario = ? AND c.Confirmacion = 1";
+$stmtServicios = $conexion->prepare($sqlServicios);
+$stmtServicios->bind_param("i", $idUsuario);
+$stmtServicios->execute();
+$resultadoServicios = $stmtServicios->get_result();
+
 $conexion->close();
 ?>
 
@@ -149,35 +159,61 @@ $conexion->close();
                     </div>
                 </form>
             </div>
+
+            <!-- Sección Mis Servicios -->
             <div id="servicios" class="seccion">
                 <h1>Mis servicios</h1>
+                <div class="servicios-container">
+                    <?php if ($resultadoServicios->num_rows > 0): ?>
+                    <?php while ($servicio = $resultadoServicios->fetch_assoc()): ?>
+                    <div class="tarjeta-servicio">
+                        <img src="<?php echo htmlspecialchars($servicio['Foto']); ?>" alt="Imagen de servicio">
+                        <h3><?php echo htmlspecialchars($servicio['Nombre']); ?></h3>
+                        <p>
+                            <?php echo htmlspecialchars(substr($servicio['DescripcionCorta'], 0, 100)); ?>
+                            <?php if (strlen($servicio['DescripcionCorta']) > 100): ?>
+                            ... <a href="infoServicio.php?servicio=<?php echo $servicio['ID']; ?>"
+                                class="read-more-link">Leer
+                                más</a>
+                            <?php endif; ?>
+                        </p>
+                        <a href="infoServicio.php?servicio=<?php echo $servicio['ID']; ?>" class="btn-detalle">Ver
+                            detalles</a>
+                    </div>
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                    <p>No has adquirido ningún servicio.</p>
+                    <?php endif; ?>
+                </div>
             </div>
+
+            <!-- Sección Mis Archivos -->
             <div id="archivos" class="seccion" class="archivosCliente">
                 <h1>Mis archivos</h1>
                 <?php if (!empty($archivosPorProducto)): ?>
-                    <?php foreach ($archivosPorProducto as $producto => $archivos): ?>
-                        <h2><?php echo htmlspecialchars($producto); ?></h2>
-                        <table class="tablaArchivos">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Fecha</th>
-                                    <th>Archivo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($archivos as $archivo): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($archivo['Descripcion']); ?></td>
-                                        <td><?php echo htmlspecialchars($archivo['Fecha']); ?></td>
-                                        <td><a href="<?php echo htmlspecialchars($archivo['Ruta']); ?>" download>Descargar</a></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php endforeach; ?>
+                <?php foreach ($archivosPorProducto as $producto => $archivos): ?>
+                <h2><?php echo htmlspecialchars($producto); ?></h2>
+                <table class="tablaArchivos">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Fecha</th>
+                            <th>Archivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($archivos as $archivo): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($archivo['Descripcion']); ?></td>
+                            <td><?php echo htmlspecialchars($archivo['Fecha']); ?></td>
+                            <td><a href="<?php echo htmlspecialchars($archivo['Ruta']); ?>" download>Descargar</a></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endforeach; ?>
                 <?php else: ?>
-                    <p>No hay archivos disponibles.</p>
+                <p>No hay archivos disponibles.</p>
                 <?php endif; ?>
             </div>
         </div>
@@ -190,4 +226,3 @@ $conexion->close();
 </body>
 
 </html>
-
