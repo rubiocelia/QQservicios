@@ -114,3 +114,39 @@ function crearNuevaGaleria() {
       "./server/crear_galeria.php?nombre=" + encodeURIComponent(nombreGaleria);
   }
 }
+
+function mostrarFormularioProducto() {
+  Swal.fire({
+    title: "Añadir Nuevo Producto",
+    html: document.getElementById("formularioNuevoProducto").innerHTML,
+    showCancelButton: true,
+    confirmButtonText: "Guardar",
+    customClass: "swal-wide",
+    preConfirm: () => {
+      const form = Swal.getPopup().querySelector("form");
+      const formData = new FormData(form);
+      return fetch("insertar_producto.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          if (data !== "Producto insertado correctamente") {
+            throw new Error(data);
+          }
+          return data;
+        })
+        .catch((error) => {
+          Swal.showValidationMessage(`Request failed: ${error}`);
+        });
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire("¡Éxito!", "El producto ha sido añadido.", "success").then(
+        () => {
+          location.reload();
+        }
+      );
+    }
+  });
+}

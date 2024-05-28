@@ -50,15 +50,20 @@ $testimonioStmt->bind_param("i", $idProducto);
 $testimonioStmt->execute();
 $testimonioResult = $testimonioStmt->get_result();
 
-// Obtener los coaches relacionados con el producto
-$coachesQuery = "SELECT C.* FROM Coaches C INNER JOIN Productos P ON C.ID = P.ID_coaches WHERE P.ID = ?";
+// Obtener los coaches relacionados con el producto usando la tabla de relación
+$coachesQuery = "SELECT C.* FROM Coaches C INNER JOIN ProductoCoaches PC ON C.ID = PC.ID_Coach WHERE PC.ID_Producto = ?";
 $coachesStmt = $conexion->prepare($coachesQuery);
 $coachesStmt->bind_param("i", $idProducto);
 $coachesStmt->execute();
 $coachesResult = $coachesStmt->get_result();
 
-// Obtener los datos del carrusel de multimedia relacionados con el producto
-$carruselQuery = "SELECT RutaArchivos FROM carruselMultimedia WHERE ID_Producto = ?";
+// Obtener los datos del carrusel de multimedia relacionados con el producto, ordenados por la columna Orden
+$carruselQuery = "SELECT cm.Tipo, cm.URL_Local, cm.URL_Youtube 
+                  FROM GaleriaContenido gc 
+                  INNER JOIN ContenidoMultimedia cm 
+                  ON gc.ID_Contenido = cm.ID 
+                  WHERE gc.ID_Galeria = (SELECT Id_galeria FROM Productos WHERE ID = ?)
+                  ORDER BY gc.Orden";
 $carruselStmt = $conexion->prepare($carruselQuery);
 $carruselStmt->bind_param("i", $idProducto);
 $carruselStmt->execute();
@@ -72,6 +77,57 @@ $faqStmt->execute();
 $faqResult = $faqStmt->get_result();
 
 $conexion->close();
+
+function convertirUrlYoutube($url) {
+    $parsedUrl = parse_url($url);
+    $videoId = '';
+    $startTime = '';
+
+    if (strpos($parsedUrl['host'], 'youtube.com') !== false) {
+        parse_str($parsedUrl['query'], $queryParams);
+        $videoId = $queryParams['v'];
+        if (isset($queryParams['t'])) {
+            $startTime = convertirTiempoASegundos($queryParams['t']);
+        }
+    } elseif (strpos($parsedUrl['host'], 'youtu.be') !== false) {
+        $videoId = ltrim($parsedUrl['path'], '/');
+        if (isset($parsedUrl['query'])) {
+            parse_str($parsedUrl['query'], $queryParams);
+            if (isset($queryParams['t'])) {
+                $startTime = convertirTiempoASegundos($queryParams['t']);
+            }
+        }
+    }
+
+    return 'https://www.youtube.com/embed/' . $videoId . '?start=' . $startTime;
+}
+
+function convertirTiempoASegundos($tiempo) {
+    if (is_numeric($tiempo)) {
+        return $tiempo;
+    }
+
+    $tiempo = strtolower($tiempo);
+    $segundos = 0;
+    preg_match_all('/(\d+)([hms])/', $tiempo, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+        list(, $cantidad, $unidad) = $match;
+        switch ($unidad) {
+            case 'h':
+                $segundos += $cantidad * 3600;
+                break;
+            case 'm':
+                $segundos += $cantidad * 60;
+                break;
+            case 's':
+                $segundos += $cantidad;
+                break;
+        }
+    }
+
+    return $segundos;
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +139,7 @@ $conexion->close();
     <title><?php echo htmlspecialchars($producto['Nombre']); ?></title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <link rel="stylesheet" href="../src/estilos/css/producto1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
 </head>
 
 <body class="fondoProducto">
@@ -107,8 +164,6 @@ $conexion->close();
                 <?php endif; ?>
                 <button class="btnComprar" <?php if (!$idUsuario) echo 'id="comprarBtn"' ?>>Comprar</button>
             </div>
-
-
         </div>
         <div class="todo">
             <div class="contenidos">
@@ -147,7 +202,6 @@ $conexion->close();
                                     echo "</div>"; // Close testimonial-content div
                                     echo "</div>"; // Close testimonial div
                                 }
-                            
                             } else {
                                 echo "<p>No se encontraron testimonios para este producto.</p>";
                             }
@@ -160,11 +214,13 @@ $conexion->close();
                                 <?php
                                 if ($carruselResult->num_rows > 0) {
                                     while ($carrusel = $carruselResult->fetch_assoc()) {
-                                        $extension = pathinfo($carrusel['RutaArchivos'], PATHINFO_EXTENSION);
-                                        if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                                            echo "<img src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' alt=''>";
-                                        } elseif (in_array($extension, ['mp4', 'webm', 'ogg'])) {
-                                            echo "<video src='". htmlspecialchars($carrusel['RutaArchivos']) ."' class='carrusel-item' controls></video>";
+                                        if ($carrusel['Tipo'] == 'foto') {
+                                            echo "<img src='". htmlspecialchars($carrusel['URL_Local']) ."' class='carrusel-item' alt=''>";
+                                        } elseif ($carrusel['Tipo'] == 'video_local') {
+                                            echo "<video src='". htmlspecialchars($carrusel['URL_Local']) ."' class='carrusel-item' controls></video>";
+                                        } elseif ($carrusel['Tipo'] == 'video_youtube') {
+                                            $embedUrl = convertirUrlYoutube($carrusel['URL_Youtube']);
+                                            echo "<iframe src='". htmlspecialchars($embedUrl) ."' class='carrusel-item' width='480' height='360' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
                                         }
                                     }
                                 } else {
@@ -217,7 +273,6 @@ $conexion->close();
                             </div>
                             <?php endif; ?>
 
-
                             <div class="image-container">
                                 <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
                                 <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
@@ -250,11 +305,41 @@ $conexion->close();
             </div>
         </div>
     </main>
-
     <script src="../src/scripts/carruselProducto1.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
 
+
+
+
     <?php include('footer.php'); ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let controller = new ScrollMagic.Controller();
+
+        let scene = new ScrollMagic.Scene({
+            triggerElement: 'body', // Elemento que desencadena la animación
+            triggerHook: 'onLeave', // Comienza cuando el elemento sale de la vista
+            offset: 1 // Un pequeño desplazamiento para evitar activación inmediata
+        })
+        .on('start', function (event) {
+            if (event.scrollDirection === 'FORWARD') {
+                window.scrollTo({
+                    top: window.innerHeight *1.15,
+                    behavior: 'smooth'
+                });
+            }
+        })
+        .addTo(controller);
+
+        // Resetear el estado cuando el usuario vuelve a la parte superior
+        window.addEventListener('scroll', function () {
+            if (window.scrollY === 0) {
+                controller.update(true);
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

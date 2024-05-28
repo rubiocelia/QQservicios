@@ -44,6 +44,7 @@ $conexion->close();
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- CDN para el popup de cerrar sesión -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -69,7 +70,6 @@ $conexion->close();
                 <h1>Mi perfil</h1>
                 <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                     <div class="perfil">
-
                         <div class="foto">
                             <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil" class="fotoPerfil">
                             <input type="file" id="foto" name="foto" style="display:none;">
@@ -77,10 +77,6 @@ $conexion->close();
                             <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
                             <!-- Botón estilizado para seleccionar foto -->
                         </div>
-
-
-
-
                         <div class="datos">
                             <!-- Fila para Nombre y Apellidos -->
                             <div class="fila">
@@ -93,7 +89,6 @@ $conexion->close();
                                     <input type="text" id="apellidos" name="apellidos" value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
                                 </div>
                             </div>
-
                             <!-- Fila para Email, Teléfono y Organización -->
                             <div class="fila">
                                 <div class="campo">
@@ -110,29 +105,22 @@ $conexion->close();
                                 </div>
                             </div>
                         </div>
-
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                             <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
                             <button type="button" id="btnCancelar" style="display:none;" onclick="cancelarEdicion()">Cancelar</button>
-
                         </div>
-
                     </div>
                 </form>
-
             </div>
+            <!-- Sección Clientes -->
             <div id="clientes" class="seccion">
                 <h1>Mis Clientes</h1>
                 <?php
-                // Obtener conexión a la base de datos
                 $conexion = getConexion();
-
-                // Consulta para obtener todos los clientes
                 $query = "SELECT * FROM Usuarios";
                 $resultado = $conexion->query($query);
 
-                // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
                     echo '<table class="clientes-table">';
                     echo '<thead>';
@@ -146,7 +134,6 @@ $conexion->close();
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada cliente en una fila de la tabla
                     while ($cliente = $resultado->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td onclick="redireccionarAVistaCliente(' . $cliente['ID'] . ')">' . $cliente['Nombre'] . '</td>';
@@ -163,22 +150,17 @@ $conexion->close();
                     echo 'No se encontraron clientes.';
                 }
 
-                // Cerrar conexión
                 $conexion->close();
                 ?>
             </div>
-
+            <!-- Sección Coaches -->
             <div id="coaches" class="seccion">
                 <h1>Mis Coaches</h1>
                 <?php
-                // Obtener conexión a la base de datos
                 $conexion = getConexion();
-
-                // Consulta para obtener todos los coaches
                 $query = "SELECT * FROM Coaches";
                 $resultado = $conexion->query($query);
 
-                // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
                     echo '<table class="coaches-table">';
                     echo '<thead>';
@@ -190,7 +172,6 @@ $conexion->close();
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada coach en una fila de la tabla
                     while ($coach = $resultado->fetch_assoc()) {
                         echo '<tr onclick="redireccionarAVistaCoach(' . $coach['ID'] . ')">';
                         echo '<td>' . $coach['Nombre'] . '</td>';
@@ -205,7 +186,6 @@ $conexion->close();
                     echo 'No se encontraron coaches.';
                 }
 
-                // Cerrar conexión
                 $conexion->close();
                 ?>
                 <button type="button" class="volver" onclick="mostrarFormulario()">Añadir Nuevo</button>
@@ -259,16 +239,14 @@ $conexion->close();
                 </div>
 
             </div>
-
+            <!-- Sección Carruseles -->
             <div id="carrusel" class="seccion">
                 <h1>Mis Galerías</h1>
                 <?php
-                // Consulta para obtener las galerías
                 $conexion = getConexion();
                 $query = "SELECT ID, Nombre_galeria FROM Galerias";
                 $resultado = $conexion->query($query);
 
-                // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
                     echo '<table class="galerias-table">';
                     echo '<thead>';
@@ -277,7 +255,6 @@ $conexion->close();
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada galería en una fila de la tabla
                     while ($galeria = $resultado->fetch_assoc()) {
                         echo '<tr onclick="redireccionarAVerGaleria(' . $galeria['ID'] . ')">';
                         echo '<td>' . htmlspecialchars($galeria['Nombre_galeria']) . '</td>';
@@ -292,24 +269,132 @@ $conexion->close();
 
                 <button class="volver" onclick="crearNuevaGaleria()">Crear Nueva Galería</button>
             </div>
-
+            <!-- Sección Servicios -->
             <div id="servicios" class="seccion">
                 <h1>Mis servicios</h1>
-            </div>
+                <div class="servicios-container">
+                    <?php
+                    $conexion = getConexion();
+                    $query = "SELECT * FROM Productos";
+                    $resultado = $conexion->query($query);
 
+                    if ($resultado->num_rows > 0) {
+                        while ($producto = $resultado->fetch_assoc()) {
+                            echo '<div class="servicio-box">';
+                            echo '<h2>' . htmlspecialchars($producto['Nombre']) . '</h2>';
+                            echo '<p>' . htmlspecialchars($producto['Precio']) . ' €</p>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo 'No se encontraron servicios.';
+                    }
+
+                    $conexion->close();
+                    ?>
+                </div>
+                <!-- Botón para añadir un nuevo producto -->
+                <button type="button" class="volver" onclick="mostrarFormularioProducto()">Añadir Nuevo</button>
+
+                <div id="formularioNuevoProducto" style="display: none;">
+                    <form id="formNuevoProducto" class="styled-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcionCorta" class="form-label">Descripción Corta:</label>
+                            <textarea id="descripcionCorta" name="descripcionCorta" class="form-input" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="categorias" class="form-label">Categorías:</label>
+                            <input type="text" id="categorias" name="categorias" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto" class="form-label">Foto:</label>
+                            <input type="file" id="foto" name="foto" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="videos" class="form-label">Videos:</label>
+                            <textarea id="videos" name="videos" class="form-input" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio" class="form-label">Precio:</label>
+                            <input type="number" id="precio" name="precio" step="0.01" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adquirible" class="form-label">Adquirible:</label>
+                            <select id="adquirible" name="adquirible" class="form-input" required>
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duracion" class="form-label">Duración:</label>
+                            <input type="text" id="duracion" name="duracion" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalidad" class="form-label">Modalidad:</label>
+                            <input type="text" id="modalidad" name="modalidad" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtLibre" class="form-label">Texto Libre:</label>
+                            <input type="text" id="txtLibre" name="txtLibre" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_galeria" class="form-label">Galería:</label>
+                            <select id="id_galeria" name="id_galeria" class="form-input" required>
+                                <?php
+                                $conexion = getConexion();
+                                $galerias = $conexion->query("SELECT ID, Nombre_galeria FROM Galerias");
+                                while ($galeria = $galerias->fetch_assoc()) {
+                                    echo "<option value='" . $galeria['ID'] . "'>" . $galeria['Nombre_galeria'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coaches" class="form-label">Coaches:</label>
+                            <select id="coaches" name="coaches[]" class="form-input" multiple required>
+                                <?php
+                                $conexion = getConexion();
+                                $coaches = $conexion->query("SELECT ID, Nombre, Apellidos FROM Coaches");
+                                while ($coach = $coaches->fetch_assoc()) {
+                                    echo "<option value='" . $coach['ID'] . "'>" . $coach['Nombre'] . " " . $coach['Apellidos'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="atributos" class="form-label">Atributos:</label>
+                            <select id="atributos" name="atributos[]" class="form-input" multiple required>
+                                <?php
+                                $conexion = getConexion();
+                                $atributos = $conexion->query("SELECT ID, Nombre FROM Atributos");
+                                while ($atributo = $atributos->fetch_assoc()) {
+                                    echo "<option value='" . $atributo['ID'] . "'>" . $atributo['Nombre'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Sección Testimonios -->
             <div id="testimonios" class="seccion">
                 <h1>Mis Testimonios</h1>
                 <?php
-                // Consulta para obtener los testimonios
                 $query = "
-            SELECT t.ID, t.Nombre, t.Subtitulo, t.Descripcion, t.Foto, p.Nombre AS Producto
-            FROM Testimonios t
-            LEFT JOIN Productos p ON t.ID_Producto = p.ID;
-        ";
+                    SELECT t.ID, t.Nombre, t.Subtitulo, t.Descripcion, t.Foto, p.Nombre AS Producto
+                    FROM Testimonios t
+                    LEFT JOIN Productos p ON t.ID_Producto = p.ID;
+                ";
                 $conn = getConexion();
                 $resultado = $conn->query($query);
 
-                // Comprobar si hay resultados
                 if ($resultado->num_rows > 0) {
                     echo '<table class="clientes-table">';
                     echo '<thead>';
@@ -321,7 +406,6 @@ $conexion->close();
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-                    // Iterar sobre los resultados y mostrar cada testimonio en una fila de la tabla
                     while ($testimonio = $resultado->fetch_assoc()) {
                         echo '<tr onclick="redireccionarATestimonio(' . $testimonio['ID'] . ')">';
                         echo '<td>' . htmlspecialchars($testimonio['Nombre']) . '</td>';
@@ -335,7 +419,6 @@ $conexion->close();
                 } else {
                     echo 'No se encontraron testimonios.';
                 }
-
                 ?>
                 <button type="button" class="volver" onclick="mostrarFormularioTestimonio()">Añadir Nuevo</button>
                 <div id="formularioTestimonio" style="display: none;">
@@ -352,7 +435,6 @@ $conexion->close();
                         <label for="producto">Producto Asociado:</label>
                         <select id="producto" name="producto" required>
                             <?php
-                            // Obtener productos para el desplegable
                             $productos = $conn->query("SELECT ID, Nombre FROM Productos");
                             while ($producto = $productos->fetch_assoc()) {
                                 echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
