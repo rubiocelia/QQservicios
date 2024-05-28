@@ -150,3 +150,120 @@ function mostrarFormularioProducto() {
     }
   });
 }
+
+document.getElementById("tipo").addEventListener("change", function () {
+  var tipo = this.value;
+  var campoLocal = document.getElementById("campoLocal");
+  var campoYoutube = document.getElementById("campoYoutube");
+
+  if (tipo === "foto" || tipo === "video_local") {
+    campoLocal.style.display = "block";
+    campoYoutube.style.display = "none";
+  } else if (tipo === "video_youtube") {
+    campoLocal.style.display = "none";
+    campoYoutube.style.display = "block";
+  } else {
+    campoLocal.style.display = "none";
+    campoYoutube.style.display = "none";
+  }
+});
+
+function subirContenido() {
+  var formData = new FormData(document.getElementById("formNuevoContenido"));
+
+  fetch("subir_contenido.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      alert(data);
+      const currentSection = getCurrentSectionId();
+      actualizarSeccion(currentSection);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function mostrarFormularioContenido() {
+  document.getElementById("formularioNuevoContenido").style.display = "block";
+  actualizarCampos(); // Asegúrate de actualizar los campos al abrir el formulario
+}
+
+function actualizarCampos() {
+  var tipo = document.getElementById("tipo").value;
+  var campoLocal = document.getElementById("campoLocal");
+  var campoYoutube = document.getElementById("campoYoutube");
+
+  if (tipo === "foto" || tipo === "video_local") {
+    campoLocal.style.display = "block";
+    campoYoutube.style.display = "none";
+  } else if (tipo === "video_youtube") {
+    campoLocal.style.display = "none";
+    campoYoutube.style.display = "block";
+  } else {
+    campoLocal.style.display = "none";
+    campoYoutube.style.display = "none";
+  }
+}
+
+function getCurrentSectionId() {
+  var secciones = document.getElementsByClassName("seccion");
+  for (var i = 0; i < secciones.length; i++) {
+    if (secciones[i].style.display !== "none") {
+      return secciones[i].id;
+    }
+  }
+  return "perfil"; // Valor por defecto si no se encuentra ninguna sección visible
+}
+
+function eliminarContenido(id) {
+  if (confirm("¿Seguro que deseas eliminar este contenido?")) {
+    fetch("eliminar_contenido.php?id=" + id, {
+      method: "GET",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        alert(data);
+        const currentSection = getCurrentSectionId();
+        actualizarSeccion(currentSection);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+}
+
+function actualizarSeccion(id) {
+  fetch(window.location.pathname + "?seccion=" + id)
+    .then((response) => response.text())
+    .then((data) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, "text/html");
+      const newContent = doc.getElementById(id).innerHTML;
+      document.getElementById(id).innerHTML = newContent;
+    })
+    .catch((error) => {
+      console.error("Error al actualizar la sección:", error);
+    });
+}
+
+function mostrarSeccion(id) {
+  var secciones = document.getElementsByClassName("seccion");
+  for (var i = 0; i < secciones.length; i++) {
+    secciones[i].style.display = "none"; // Oculta todas las secciones
+  }
+  document.getElementById(id).style.display = "block"; // Muestra la sección seleccionada
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const seccion = urlParams.get("seccion") || "perfil"; // Muestra 'perfil' por defecto si no hay parámetro
+  mostrarSeccion(seccion);
+});
+
+function mostrarBibliotecaMedios() {
+  document.getElementById("carrusel").style.display = "none";
+  document.getElementById("bibliotecaMedios").style.display = "block";
+}

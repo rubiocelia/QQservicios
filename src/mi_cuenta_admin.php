@@ -45,7 +45,7 @@ $conexion->close();
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- CDN para el popup de cerrar sesión -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -266,9 +266,81 @@ $conexion->close();
                     echo 'No se encontraron galerías.';
                 }
                 ?>
-
                 <button class="volver" onclick="crearNuevaGaleria()">Crear Nueva Galería</button>
+                <button class="volver" onclick="mostrarBibliotecaMedios()">Biblioteca de Medios</button>
             </div>
+
+            <!-- Sección Biblioteca de Medios -->
+            <div id="bibliotecaMedios" class="seccion" style="display: none;">
+                <h1>Biblioteca de Medios</h1>
+                <?php
+                $conexion = getConexion();
+                $query = "SELECT * FROM ContenidoMultimedia";
+                $resultado = $conexion->query($query);
+
+                if ($resultado->num_rows > 0) {
+                    echo '<table class="medios-table">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Tipo</th>';
+                    echo '<th>Contenido</th>';
+                    echo '<th>Acciones</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                    while ($contenido = $resultado->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($contenido['Tipo']) . '</td>';
+                        echo '<td>';
+                        if ($contenido['Tipo'] == 'foto') {
+                            echo '<img src="' . htmlspecialchars($contenido['URL_Local']) . '" alt="Foto" width="100">';
+                        } elseif ($contenido['Tipo'] == 'video_local') {
+                            echo '<video src="' . htmlspecialchars($contenido['URL_Local']) . '" width="100" controls></video>';
+                        } elseif ($contenido['Tipo'] == 'video_youtube') {
+                            echo '<iframe src="https://www.youtube.com/embed/' . htmlspecialchars(parse_url($contenido['URL_Youtube'], PHP_URL_QUERY)) . '" width="100" frameborder="0" allowfullscreen></iframe>';
+                        }
+                        echo '</td>';
+                        echo '<td><button onclick="eliminarContenido(' . $contenido['ID'] . ')">Eliminar</button></td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo 'No se encontraron contenidos multimedia.';
+                }
+                ?>
+                <button type="button" class="volver" onclick="mostrarFormularioContenido()">Añadir Nuevo</button>
+                <div id="formularioNuevoContenido" class="form-container" style="display: none;">
+                    <form id="formNuevoContenido" class="styled-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="tipo" class="form-label">Tipo de Contenido:</label>
+                            <select id="tipo" name="tipo" class="form-input" required>
+                                <option value="foto">Foto</option>
+                                <option value="video_local">Video Local</option>
+                                <option value="video_youtube">Video de YouTube</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="campoLocal" style="display: none;">
+                            <label for="url_local" class="form-label">Archivo Local:</label>
+                            <input type="file" id="url_local" name="url_local" class="form-input">
+                        </div>
+                        <div class="form-group" id="campoYoutube" style="display: none;">
+                            <label for="url_youtube" class="form-label">URL de YouTube:</label>
+                            <input type="url" id="url_youtube" name="url_youtube" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+                        </div>
+                        <button type="button" onclick="subirContenido()" class="form-button">Subir Contenido</button>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+
             <!-- Sección Servicios -->
             <div id="servicios" class="seccion">
                 <h1>Mis servicios</h1>
