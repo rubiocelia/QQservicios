@@ -73,6 +73,38 @@ $conexion->close();
                 ?>
             </div>
         </div>
+
+
+        <!-- top servicios -->
+        <section class="featured-events">
+            <h2>Top 5 servicios QQ</h2>
+            <div class="carousel">
+                <?php if ($productoResult->num_rows > 0): ?>
+                <?php while ($producto = $productoResult->fetch_assoc()): ?>
+                <div class="event-card">
+                    <div class="event-number"><?php echo $producto['ID']; ?></div>
+                    <a href="producto1BBDD.php?id=<?php echo $producto['ID']; ?>">
+                        <img src="<?php echo htmlspecialchars($producto['Foto']); ?>"
+                            alt="<?php echo htmlspecialchars($producto['Nombre']); ?>">
+                    </a>
+                    <h3><?php echo htmlspecialchars($producto['Nombre']); ?></h3>
+                    <p>
+                        <?php echo htmlspecialchars(substr($producto['DescripcionCorta'], 0, 100)); ?>
+                        <?php if (strlen($producto['DescripcionCorta']) > 100): ?>
+                        ... <a href="producto1BBDD.php?id=<?php echo $producto['ID']; ?>" class="read-more-link">Leer
+                            más</a>
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <?php endwhile; ?>
+                <?php else: ?>
+                <p>No se encontraron productos.</p>
+                <?php endif; ?>
+            </div>
+            <a href="servicios.php" class="view-all-link">Ver todos los servicios</a>
+        </section>
+
+
         <div class="info">
             <h1>Descubre cómo podemos ayudarte a crecer</h1>
             <div class="fila">
@@ -91,18 +123,20 @@ $conexion->close();
 
 
             <div class="fila">
-                <div class="cuad1">
-                    <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
-
-                </div>
-                <div class="cuad2">
-                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
-                </div>
                 <div class="cuad3">
                     <p>Nuestro objetivo es ofrecer un espacio que permita a los participantes adquirir habilidades
                         prácticas de liderazgo y vida personal, brindando los recursos y el apoyo necesarios para
                         alcanzar sus metas personales y profesionales.</p>
                 </div>
+
+                <div class="cuad2">
+                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
+                </div>
+                <div class="cuad1">
+                    <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
+
+                </div>
+
 
 
             </div>
@@ -120,28 +154,6 @@ $conexion->close();
                         carrera.</p>
                 </div>
             </div>
-        </div>
-
-        <div class="carrusel-container">
-            <h1>Servicios destacados</h1>
-            <button class="prev">&#10094;</button>
-            <div class="carrusel">
-                <div class="carrusel-inner">
-                    <?php if ($productoResult->num_rows > 0): ?>
-                    <?php while($row = $productoResult->fetch_assoc()): ?>
-                    <div class="carrusel-item">
-                        <div class="producto-info">
-                            <h3 class="producto-nombre"><?php echo $row['Nombre']; ?></h3>
-                            <img src="<?php echo $row['Foto']; ?>" alt="<?php echo $row['Nombre']; ?>">
-                        </div>
-                    </div>
-                    <?php endwhile; ?>
-                    <?php else: ?>
-                    <p>No se encontraron productos.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <button class="next">&#10095;</button>
         </div>
 
 
