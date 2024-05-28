@@ -44,6 +44,27 @@ function crearTablas($conexion)
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255)
         )",
+        "contenido_multimedia" => "CREATE TABLE IF NOT EXISTS ContenidoMultimedia (
+                    ID INT AUTO_INCREMENT PRIMARY KEY,
+                    Tipo ENUM('video_local', 'foto', 'video_youtube') NOT NULL,
+                    URL_Local VARCHAR(255),
+                    URL_Youtube VARCHAR(255),
+                    Descripcion TEXT
+                )",
+
+        "galerias" => "CREATE TABLE IF NOT EXISTS Galerias (
+                    ID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nombre_galeria VARCHAR(255) NOT NULL
+                )",
+
+        "galeria_contenido" => "CREATE TABLE IF NOT EXISTS GaleriaContenido (
+                    ID INT AUTO_INCREMENT PRIMARY KEY,
+                    ID_Galeria INT,
+                    ID_Contenido INT,
+                    Orden INT,
+                    FOREIGN KEY (ID_Galeria) REFERENCES Galerias(ID),
+                    FOREIGN KEY (ID_Contenido) REFERENCES ContenidoMultimedia(ID)
+                )",
         "productos" => "CREATE TABLE IF NOT EXISTS Productos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             Nombre VARCHAR(255),
@@ -57,10 +78,8 @@ function crearTablas($conexion)
             Duracion VARCHAR(255),
             Modalidad VARCHAR(255),
             txtLibre VARCHAR(255),
-            ID_coaches INT,
-            Id_atributo INT,
-            FOREIGN KEY (ID_coaches) REFERENCES Coaches(ID),
-            FOREIGN KEY (Id_atributo) REFERENCES Atributos(ID)
+            Id_galeria INT,
+            FOREIGN KEY (Id_galeria) REFERENCES Galerias(ID)
         )",
         "datos_acceso" => "CREATE TABLE IF NOT EXISTS DatosAcceso (
             ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,27 +134,24 @@ function crearTablas($conexion)
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
             )",
 
-        "contenido_multimedia" => "CREATE TABLE IF NOT EXISTS ContenidoMultimedia (
+        "ProductoCoaches" => "CREATE TABLE IF NOT EXISTS ProductoCoaches (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Tipo ENUM('video_local', 'foto', 'video_youtube') NOT NULL,
-            URL_Local VARCHAR(255),
-            URL_Youtube VARCHAR(255),
-            Descripcion TEXT
+            ID_Producto INT,
+            ID_Coach INT,
+            FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
+            FOREIGN KEY (ID_Coach) REFERENCES Coaches(ID)
         )",
 
-        "galerias" => "CREATE TABLE IF NOT EXISTS Galerias (
+        "ProductoAtriburos" => "CREATE TABLE IF NOT EXISTS ProductoAtributos (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Nombre_galeria VARCHAR(255) NOT NULL
-        )",
+            ID_Producto INT,
+            ID_Atributo INT,
+            FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
+            FOREIGN KEY (ID_Atributo) REFERENCES Atributos(ID)
+        )
+        "
 
-        "galeria_contenido" => "CREATE TABLE IF NOT EXISTS GaleriaContenido (
-            ID INT AUTO_INCREMENT PRIMARY KEY,
-            ID_Galeria INT,
-            ID_Contenido INT,
-            Orden INT,
-            FOREIGN KEY (ID_Galeria) REFERENCES Galerias(ID),
-            FOREIGN KEY (ID_Contenido) REFERENCES ContenidoMultimedia(ID)
-        )"
+
     ];
 
     // Crear cada tabla en la base de datos
@@ -203,18 +219,46 @@ function insertarDatos($conexion)
                       ('Atributo8'),
                       ('Atributo9'),
                       ('Atributo10')");
+    // Insertar datos en carruselMultimedia
+    $conexion->query("INSERT INTO ContenidoMultimedia (Tipo, URL_Local, URL_Youtube, Descripcion) VALUES
+        ('foto', './archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg', NULL, 'Foto de Julia y Javier en el sofá'),
+        ('foto', './archivos/productos/carruselProducto1/javier_ontiveros.jpeg', NULL, 'Foto de Javier Ontiveros'),
+        ('video_youtube', NULL, 'https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz', 'Video de YouTube'),
+        ('foto', './archivos/productos/carruselProducto1/Foto3.png', NULL, 'Foto de Ejemplo 3'),
+        ('foto', './archivos/productos/carruselProducto1/Foto4.jpeg', NULL, 'Foto de EJemplo 4'),
+        ('video_local', './archivos/productos/carruselProducto1/Video1.mp4', NULL, 'Video de ejemplo 1')
+    ");
 
-    $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, Duracion, Modalidad, txtLibre, ID_coaches, Id_atributo) VALUES
-                        ('Impulsa tus Competencias como líder. Neuroliderazgo', '¿Listo para potenciar tu liderazgo y gestión emocional? Nuestro programa de Neuroliderazgo mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de diversidad.', '¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.<br><em>6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.</em>', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, '6 sesiones', 'Presencial', '', 1, 1),
-                        ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, '6 sesiones', 'Presencial', '', 2, 2),
-                        ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, '6 sesiones', 'Presencial', '', 3, 3),
-                        ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, '6 sesiones', 'Presencial', '', 4, 4),
-                        ('Producto5', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion5', 'Categoria5', './archivos/servicios/Producto5.jpg', 'video5producto.mp4', 500, 1, '6 sesiones', 'Presencial', '', 5, 5),
-                        ('Producto6', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion6', 'Categoria6', './archivos/servicios/Producto6.jpg', 'video6producto.mp4', 600, 0, '6 sesiones', 'Presencial', '', 6, 6),
-                        ('Producto7', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion7', 'Categoria7', './archivos/servicios/Producto7.jpg', 'video7producto.mp4', 700, 1, '6 sesiones', 'Presencial', '', 7, 7),
-                        ('Producto8', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion8', 'Categoria8', './archivos/servicios/Producto8.jpg', 'video8producto.mp4', 800, 0, '6 sesiones', 'Presencial', '', 8, 8),
-                        ('Producto9', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion9', 'Categoria9', './archivos/servicios/Producto9.jpg', 'video9producto.mp4', 900, 1, '6 sesiones', 'Presencial', '', 9, 9),
-                        ('Producto10', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion10', 'Categoria10', './archivos/servicios/Producto10.jpg', 'video10producto.mp4', 1000, 0, '6 sesiones', 'Presencial', '', 10, 10)");
+    // Insertar contenido en la tabla Galerias
+    $conexion->query("INSERT INTO Galerias (Nombre_galeria) VALUES
+        ('Galería 1'),
+        ('Galería 2')
+    ");
+
+    // Insertar contenido en la tabla GaleriaContenido
+    $conexion->query("INSERT INTO GaleriaContenido (ID_Galeria, ID_Contenido, Orden) VALUES
+        (1, 1, 1),
+        (1, 2, 2),
+        (1, 3, 3),
+        (1, 4, 4),
+        (1, 5, 5),
+        (2, 6, 1),
+        (2, 1, 2),
+        (2, 2, 3),
+        (2, 3, 4)
+    ");
+
+    $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, Videos, Precio, Adquirible, Duracion, Modalidad, txtLibre, Id_galeria) VALUES
+                        ('Impulsa tus Competencias como líder. Neuroliderazgo', '¿Listo para potenciar tu liderazgo y gestión emocional? Nuestro programa de Neuroliderazgo mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de diversidad.', '¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.<br><em>6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.</em>', 'Categoria1', './archivos/servicios/Producto1.jpg', 'video1producto.mp4', 100, 1, '6 sesiones', 'Presencial', '',1),
+                        ('Producto2', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion2', 'Categoria2', './archivos/servicios/Producto2.jpg', 'video2producto.mp4', 200, 0, '6 sesiones', 'Presencial', '', 1),
+                        ('Producto3', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion3', 'Categoria3', './archivos/servicios/Producto3.jpg', 'video3producto.mp4', 300, 1, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto4', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion4', 'Categoria4', './archivos/servicios/Producto4.jpg', 'video4producto.mp4', 400, 0, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto5', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion5', 'Categoria5', './archivos/servicios/Producto5.jpg', 'video5producto.mp4', 500, 1, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto6', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion6', 'Categoria6', './archivos/servicios/Producto6.jpg', 'video6producto.mp4', 600, 0, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto7', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion7', 'Categoria7', './archivos/servicios/Producto7.jpg', 'video7producto.mp4', 700, 1, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto8', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion8', 'Categoria8', './archivos/servicios/Producto8.jpg', 'video8producto.mp4', 800, 0, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto9', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion9', 'Categoria9', './archivos/servicios/Producto9.jpg', 'video9producto.mp4', 900, 1, '6 sesiones', 'Presencial', '', 2),
+                        ('Producto10', 'Lorem ipsu ejemplo de una descripción corta para la card', 'Descripcion10', 'Categoria10', './archivos/servicios/Producto10.jpg', 'video10producto.mp4', 1000, 0, '6 sesiones', 'Presencial', '',2)");
 
 
 
@@ -332,6 +376,35 @@ function insertarDatos($conexion)
                         ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 9',NOW(),0,7, 9),
                         ('./archivos/archivosClientes/ejemplo1.pdf', 'Manual del usuario 10',NOW(),0,8, 10)");
 
+    $conexion->query("INSERT INTO ProductoCoaches (ID_Producto, ID_Coach) VALUES
+                        (1, 1),
+                        (1, 2),
+                        (1, 3),
+                        (2, 1),
+                        (3, 1),
+                        (4, 1),
+                        (5, 1),
+                        (6, 1),
+                        (7, 1),
+                        (8, 1),
+                        (9, 1),
+                        (10, 1)");
+
+
+    $conexion->query("INSERT INTO ProductoAtributos (ID_Producto, ID_Atributo) VALUES
+                        (1, 1),
+                        (1, 2),
+                        (1, 3),
+                        (2, 1),
+                        (3, 1),
+                        (4, 1),
+                        (5, 1),
+                        (6, 1),
+                        (7, 1),
+                        (8, 1),
+                        (9, 1),
+                        (10, 1)");
+
 
 
 
@@ -346,37 +419,6 @@ function insertarDatos($conexion)
                         ('¿Cómo se mide el impacto del programa de coaching?', 'El impacto se mide a través de una sesión final de evaluación donde el coach y el coachee revisan los resultados logrados en comparación con los objetivos establecidos al inicio del programa. También se realiza una reevaluación del entorno profesional y del alcance de los cambios implementados.', 1),
                         ('¿Qué es el modelo i4 de neuroliderazgo?', 'El modelo i4 de neuroliderazgo es un marco avanzado que evalúa y desarrolla competencias de liderazgo basándose en principios de neurociencia. Este modelo ayuda a entender y mejorar cómo piensas, te comportas y lideras, utilizando evaluaciones 360º y planes personalizados para fomentar el crecimiento y la efectividad.', 1),
                         ('¿El programa incluye formación en habilidades técnicas específicas?', 'El enfoque principal del programa es el desarrollo de competencias de liderazgo y gestión emocional. Sin embargo, también se proporcionan herramientas y recursos específicos según las necesidades individuales identificadas durante el proceso de coaching.', 1)");
-
-
-
-    // Insertar datos en carruselMultimedia
-    $conexion->query("INSERT INTO ContenidoMultimedia (Tipo, URL_Local, URL_Youtube, Descripcion) VALUES
-    ('foto', './archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg', NULL, 'Foto de Julia y Javier en el sofá'),
-    ('foto', './archivos/productos/carruselProducto1/javier_ontiveros.jpeg', NULL, 'Foto de Javier Ontiveros'),
-    ('video_youtube', NULL, 'https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz', 'Video de YouTube'),
-    ('foto', './archivos/productos/carruselProducto1/Foto3.png', NULL, 'Foto de Ejemplo 3'),
-    ('foto', './archivos/productos/carruselProducto1/Foto4.jpeg', NULL, 'Foto de EJemplo 4'),
-    ('video_local', './archivos/productos/carruselProducto1/Video1.mp4', NULL, 'Video de ejemplo 1')
-");
-
-    // Insertar contenido en la tabla Galerias
-    $conexion->query("INSERT INTO Galerias (Nombre_galeria) VALUES
-    ('Carrusel 1'),
-    ('Carrusel 2')
-");
-
-    // Insertar contenido en la tabla GaleriaContenido
-    $conexion->query("INSERT INTO GaleriaContenido (ID_Galeria, ID_Contenido, Orden) VALUES
-    (1, 1, 1),
-    (1, 2, 2),
-    (1, 3, 3),
-    (1, 4, 4),
-    (1, 5, 5),
-    (2, 6, 1),
-    (2, 1, 2),
-    (2, 2, 3),
-    (2, 3, 4)
-");
 }
 
 
