@@ -1,0 +1,116 @@
+/* Incorporar la tipografía personalizada */
+@font-face {
+    font-family: "titulo";
+    src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "texto";
+    src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  :root {
+    /* Variables de tipografía */
+    --titulo: "titulo", sans-serif;
+    --texto: "texto", sans-serif;
+    --rojoQQ: #e6312f;
+    --azulQQ: #2a255b;
+  }
+
+  .header {
+    background-color: var(--azulQQ);
+}
+
+*{
+    font-family: var(--texto);
+}
+
+h1{
+    margin: 0 auto;
+    text-align: center;
+    margin: 20px;
+}
+
+  /* Estilos para el formulario de edición de servicio */
+.form-editar-servicio {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-editar-servicio .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-editar-servicio .form-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-editar-servicio .form-input,
+.form-editar-servicio .form-input[type="file"],
+.form-editar-servicio .form-input select,
+.form-editar-servicio .form-input textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-editar-servicio .form-input:focus,
+.form-editar-servicio .form-input[type="file"]:focus,
+.form-editar-servicio .form-input select:focus,
+.form-editar-servicio .form-input textarea:focus {
+    outline: none;
+    border-color: var(--rojoQQ);
+    box-shadow: var(--rojoQQ);
+}
+
+.form-editar-servicio .form-button,
+.form-editar-servicio, .form-button-cancel {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.form-editar-servicio .form-button {
+    background-color: var(--azulQQ);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.form-editar-servicio .form-button:hover {
+    background-color: var(--azulQQ);
+}
+
+.form-editar-servicio .form-button-cancel {
+    background-color: var(--rojoQQ);
+    color: #fff;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.form-editar-servicio .form-button-cancel:hover {
+    background-color: var(--rojoQQ);
+}
+
+.form-editar-servicio .form-input[type="textarea"],
+.form-editar-servicio .form-input textarea {
+    height: 250px !important; /* Aumentar altura para campos de texto grandes */
+}

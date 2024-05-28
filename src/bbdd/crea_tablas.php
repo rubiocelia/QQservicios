@@ -219,12 +219,12 @@ function insertarDatos($conexion)
                       ('Atributo10')");
     // Insertar datos en carruselMultimedia
     $conexion->query("INSERT INTO ContenidoMultimedia (Tipo, URL_Local, URL_Youtube, Descripcion) VALUES
-        ('foto', './archivos/productos/carruselProducto1/juliaYjavierSofa.jpeg', NULL, 'Foto de Julia y Javier en el sofá'),
-        ('foto', './archivos/productos/carruselProducto1/javier_ontiveros.jpeg', NULL, 'Foto de Javier Ontiveros'),
+        ('foto', './archivos/galerias/Foto1.jpg', NULL, 'Foto de Julia y Javier en el sofá'),
+        ('foto', './archivos/galerias/Foto2.jpg', NULL, 'Foto de Javier Ontiveros'),
         ('video_youtube', NULL, 'https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz', 'Video de YouTube'),
-        ('foto', './archivos/productos/carruselProducto1/Foto3.png', NULL, 'Foto de Ejemplo 3'),
-        ('foto', './archivos/productos/carruselProducto1/Foto4.jpeg', NULL, 'Foto de EJemplo 4'),
-        ('video_local', './archivos/productos/carruselProducto1/Video1.mp4', NULL, 'Video de ejemplo 1')
+        ('foto', './archivos/galerias/Foto3.jpg', NULL, 'Foto de Ejemplo 3'),
+        ('foto', './archivos/galerias/Foto4.jpg', NULL, 'Foto de EJemplo 4'),
+        ('video_local', './archivos/galerias/Video1.mp4', NULL, 'Video de ejemplo 1')
     ");
 
     // Insertar contenido en la tabla Galerias

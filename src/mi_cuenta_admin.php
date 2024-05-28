@@ -244,7 +244,7 @@ $conexion->close();
                 <h1>Mis Galerías</h1>
                 <?php
                 $conexion = getConexion();
-                $query = "SELECT ID, Nombre_galeria FROM Galerias";
+                $query = "SELECT ID, Nombre_galeria FROM Galerias ORDER BY ID DESC";
                 $resultado = $conexion->query($query);
 
                 if ($resultado->num_rows > 0) {
@@ -275,7 +275,7 @@ $conexion->close();
                 <h1>Biblioteca de Medios</h1>
                 <?php
                 $conexion = getConexion();
-                $query = "SELECT * FROM ContenidoMultimedia";
+                $query = "SELECT * FROM ContenidoMultimedia ORDER BY ID DESC";
                 $resultado = $conexion->query($query);
 
                 if ($resultado->num_rows > 0) {
@@ -284,6 +284,7 @@ $conexion->close();
                     echo '<tr>';
                     echo '<th>Tipo</th>';
                     echo '<th>Contenido</th>';
+                    echo '<th>Descripción</th>';
                     echo '<th>Acciones</th>';
                     echo '</tr>';
                     echo '</thead>';
@@ -297,9 +298,12 @@ $conexion->close();
                         } elseif ($contenido['Tipo'] == 'video_local') {
                             echo '<video src="' . htmlspecialchars($contenido['URL_Local']) . '" width="100" controls></video>';
                         } elseif ($contenido['Tipo'] == 'video_youtube') {
-                            echo '<iframe src="https://www.youtube.com/embed/' . htmlspecialchars(parse_url($contenido['URL_Youtube'], PHP_URL_QUERY)) . '" width="100" frameborder="0" allowfullscreen></iframe>';
+                            parse_str(parse_url($contenido['URL_Youtube'], PHP_URL_QUERY), $youtubeParams);
+                            $videoId = isset($youtubeParams['v']) ? $youtubeParams['v'] : '';
+                            echo '<iframe src="https://www.youtube.com/embed/' . htmlspecialchars($videoId) . '" width="100" frameborder="0" allowfullscreen></iframe>';
                         }
                         echo '</td>';
+                        echo '<td>' . htmlspecialchars($contenido['Descripcion']) . '</td>';
                         echo '<td><button onclick="eliminarContenido(' . $contenido['ID'] . ')">Eliminar</button></td>';
                         echo '</tr>';
                     }
@@ -309,6 +313,7 @@ $conexion->close();
                     echo 'No se encontraron contenidos multimedia.';
                 }
                 ?>
+
                 <button type="button" class="volver" onclick="mostrarFormularioContenido()">Añadir Nuevo</button>
                 <div id="formularioNuevoContenido" class="form-container" style="display: none;">
                     <form id="formNuevoContenido" class="styled-form" enctype="multipart/form-data">
@@ -352,10 +357,10 @@ $conexion->close();
 
                     if ($resultado->num_rows > 0) {
                         while ($producto = $resultado->fetch_assoc()) {
-                            echo '<div class="servicio-box">';
+                            echo '<a href="editar_servicio.php?id=' . $producto['ID'] . '" class="servicio-box">';
                             echo '<h2>' . htmlspecialchars($producto['Nombre']) . '</h2>';
-                            echo '<p>' . htmlspecialchars($producto['Precio']) . ' €</p>';
-                            echo '</div>';
+                            echo '<p>' . htmlspecialchars($producto['Precio']) . ' </p>';
+                            echo '</a>';
                         }
                     } else {
                         echo 'No se encontraron servicios.';
@@ -364,6 +369,7 @@ $conexion->close();
                     $conexion->close();
                     ?>
                 </div>
+
                 <!-- Botón para añadir un nuevo producto -->
                 <button type="button" class="volver" onclick="mostrarFormularioProducto()">Añadir Nuevo</button>
 

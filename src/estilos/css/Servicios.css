@@ -237,6 +237,7 @@
 }
 .card .back p {
   letter-spacing: 1px;
+  padding: 18px;
 }
 .card:hover .back {
   transform: rotateY(360deg);
