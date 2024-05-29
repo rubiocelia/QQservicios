@@ -140,6 +140,12 @@ function convertirTiempoASegundos($tiempo) {
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <link rel="stylesheet" href="../src/estilos/css/producto1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+
+    <style>
+    .fondoProducto {
+        background-image: url('<?php echo htmlspecialchars($producto['FotoFondo']); ?>'), url('./archivos/productos/BackgroundCubes_V2.svg');
+    }
+    </style>
 </head>
 
 <body class="fondoProducto">
@@ -160,7 +166,7 @@ function convertirTiempoASegundos($tiempo) {
             </div>
             <div class="botonesPrecioComprar">
                 <?php if ($idUsuario): ?>
-                <p><?php echo htmlspecialchars($producto['Precio']); ?>€</p>
+                <p><?php echo htmlspecialchars($producto['Precio']); ?></p>
                 <?php endif; ?>
                 <button class="btnComprar" <?php if (!$idUsuario) echo 'id="comprarBtn"' ?>>Comprar</button>
             </div>
@@ -268,7 +274,7 @@ function convertirTiempoASegundos($tiempo) {
                                 <p>👥 Modalidad: <?php echo htmlspecialchars($producto['Modalidad']); ?></p>
                                 <?php endif; ?>
                                 <?php if (!empty($producto['txtLibre'])): ?>
-                                <p>👣<?php echo htmlspecialchars($producto['txtLibre']); ?></p>
+                                <p>🎯<?php echo htmlspecialchars($producto['txtLibre']); ?></p>
                                 <?php endif; ?>
                             </div>
                             <?php endif; ?>
@@ -313,32 +319,32 @@ function convertirTiempoASegundos($tiempo) {
 
     <?php include('footer.php'); ?>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         let controller = new ScrollMagic.Controller();
 
         let scene = new ScrollMagic.Scene({
-            triggerElement: 'body', // Elemento que desencadena la animación
-            triggerHook: 'onLeave', // Comienza cuando el elemento sale de la vista
-            offset: 1 // Un pequeño desplazamiento para evitar activación inmediata
-        })
-        .on('start', function (event) {
-            if (event.scrollDirection === 'FORWARD') {
-                window.scrollTo({
-                    top: window.innerHeight *1.15,
-                    behavior: 'smooth'
-                });
-            }
-        })
-        .addTo(controller);
+                triggerElement: 'body', // Elemento que desencadena la animación
+                triggerHook: 'onLeave', // Comienza cuando el elemento sale de la vista
+                offset: 1 // Un pequeño desplazamiento para evitar activación inmediata
+            })
+            .on('start', function(event) {
+                if (event.scrollDirection === 'FORWARD') {
+                    window.scrollTo({
+                        top: window.innerHeight * 1.2,
+                        behavior: 'smooth'
+                    });
+                }
+            })
+            .addTo(controller);
 
         // Resetear el estado cuando el usuario vuelve a la parte superior
-        window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', function() {
             if (window.scrollY === 0) {
                 controller.update(true);
             }
         });
     });
-</script>
+    </script>
 
 </body>
 

@@ -42,6 +42,7 @@ main {
 }
 
 .todo {
+  margin-top: 350px;
   display: flex;
   flex-direction: column;
 }
@@ -49,9 +50,7 @@ main {
 .fondoProducto {
   position: relative; /* en lugar de absolute */
   width: 100%;
-  min-height: 100vh; /* en lugar de height para que se expanda según el contenido */
-  background-image: url(../../archivos/productos/fondo.jpg),
-    url(../../archivos/productos/BackgroundCubes_V2.svg);
+  max-height: 100vh; /* en lugar de height para que se expanda según el contenido */
   background-size: cover, cover;
   background-position: center, bottom;
   background-repeat: no-repeat, repeat;
@@ -114,6 +113,11 @@ main {
   text-align: left;
   font-family: var(--texto);
   font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.infoProduct p {
+  margin-bottom: 5px;
 }
 
 .descripcion {
@@ -123,6 +127,7 @@ main {
 }
 
 .botonesPrecioComprar {
+  margin-top: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -556,6 +561,11 @@ main {
   font-size: 32px;
   margin-bottom: 20px;
   margin-left: 100px;
+}
+
+.faqSection p {
+  font-family: var(--texto);
+  margin-left: 155px;
 }
 
 .faq {

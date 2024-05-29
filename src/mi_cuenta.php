@@ -172,12 +172,12 @@ $conexion->close();
                         <p>
                             <?php echo htmlspecialchars(substr($servicio['DescripcionCorta'], 0, 100)); ?>
                             <?php if (strlen($servicio['DescripcionCorta']) > 100): ?>
-                            ... <a href="infoServicio.php?servicio=<?php echo $servicio['ID']; ?>"
+                            ... <a href="producto1BBDD.php?id=<?php echo $servicio['ID']; ?>"
                                 class="read-more-link">Leer
                                 más</a>
                             <?php endif; ?>
                         </p>
-                        <a href="infoServicio.php?servicio=<?php echo $servicio['ID']; ?>" class="btn-detalle">Ver
+                        <a href="producto1BBDD.php?id=<?php echo $servicio['ID']; ?>" class="btn-detalle">Ver
                             detalles</a>
                     </div>
                     <?php endwhile; ?>
