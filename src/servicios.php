@@ -63,6 +63,7 @@
                 <h3>' . htmlspecialchars($producto['Nombre']) . '</h3>
             </div>
             <div class="face back">
+                <div class="back-img" style="background-image: url(' . htmlspecialchars($producto['Foto']) . ');"></div>
                 <h3>' . htmlspecialchars($producto['Nombre']) . '</h3>
                 <p>' . htmlspecialchars($producto['DescripcionCorta']) . '</p>
                 <div class="link">
