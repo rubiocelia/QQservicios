@@ -38,6 +38,21 @@ $producto = $productoResult->fetch_assoc();
 
 // Manejar la actualización del producto
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    actualizarProducto($conexion, $idProducto, $producto);
+}
+
+// Obtener los datos necesarios para el formulario
+$coachesResult = $conexion->query("SELECT * FROM Coaches");
+$atributosResult = $conexion->query("SELECT * FROM Atributos");
+$galeriasResult = $conexion->query("SELECT * FROM Galerias ORDER BY ID DESC");
+$contenidosResult = obtenerContenidos($conexion, $idProducto);
+$productoCoaches = obtenerIds($conexion, "ProductoCoaches", "ID_Coach", $idProducto);
+$productoAtributos = obtenerIds($conexion, "ProductoAtributos", "ID_Atributo", $idProducto);
+
+$conexion->close();
+
+function actualizarProducto($conexion, $idProducto, $producto)
+{
     $nombre = $_POST['nombre'];
     $descripcionCorta = $_POST['descripcionCorta'];
     $descripcion = $_POST['descripcion'];
@@ -49,43 +64,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $txtLibre = $_POST['txtLibre'];
     $id_galeria = $_POST['id_galeria'];
 
-    // Subir archivos si hay nuevos
-    if ($_FILES['foto']['name']) {
-        $foto = "./archivos/productos/" . basename($_FILES['foto']['name']);
-        move_uploaded_file($_FILES['foto']['tmp_name'], $foto);
-    } else {
-        $foto = $producto['Foto'];
-    }
-
-    if ($_FILES['fotoFondo']['name']) {
-        $fotoFondo = "./archivos/productos/" . basename($_FILES['fotoFondo']['name']);
-        move_uploaded_file($_FILES['fotoFondo']['tmp_name'], $fotoFondo);
-    } else {
-        $fotoFondo = $producto['FotoFondo'];
-    }
+    $foto = subirArchivo('foto', './archivos/productos/', $producto['Foto']);
+    $fotoFondo = subirArchivo('fotoFondo', './archivos/productos/', $producto['FotoFondo']);
 
     $updateQuery = "UPDATE Productos SET Nombre=?, DescripcionCorta=?, Descripcion=?, Categorias=?, Foto=?, FotoFondo=?, Precio=?, Adquirible=?, Duracion=?, Modalidad=?, txtLibre=?, Id_galeria=? WHERE ID=?";
     $updateStmt = $conexion->prepare($updateQuery);
     $updateStmt->bind_param("sssssssisssii", $nombre, $descripcionCorta, $descripcion, $categorias, $foto, $fotoFondo, $precio, $adquirible, $duracion, $modalidad, $txtLibre, $id_galeria, $idProducto);
 
     if ($updateStmt->execute()) {
-        // Actualizar coaches asociados
-        $conexion->query("DELETE FROM ProductoCoaches WHERE ID_Producto = $idProducto");
-        if (isset($_POST['coaches'])) {
-            foreach ($_POST['coaches'] as $id_coach) {
-                $conexion->query("INSERT INTO ProductoCoaches (ID_Producto, ID_Coach) VALUES ($idProducto, $id_coach)");
-            }
-        }
+        actualizarAsociaciones($conexion, $idProducto, 'ProductoCoaches', 'ID_Coach', $_POST['coaches']);
+        actualizarAsociaciones($conexion, $idProducto, 'ProductoAtributos', 'ID_Atributo', $_POST['atributos']);
+        actualizarContenidos($conexion, $idProducto, $_POST['contenidos_titulo'], $_POST['contenidos_descripcion']);
 
-        // Actualizar atributos asociados
-        $conexion->query("DELETE FROM ProductoAtributos WHERE ID_Producto = $idProducto");
-        if (isset($_POST['atributos'])) {
-            foreach ($_POST['atributos'] as $id_atributo) {
-                $conexion->query("INSERT INTO ProductoAtributos (ID_Producto, ID_Atributo) VALUES ($idProducto, $id_atributo)");
-            }
-        }
-
-        // Redirigir a la misma página con el parámetro success
         header("Location: editar_servicio.php?id=$idProducto&success=1");
         exit();
     } else {
@@ -93,39 +83,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Obtener los datos de coaches y atributos
-$coachesQuery = "SELECT * FROM Coaches";
-$coachesResult = $conexion->query($coachesQuery);
-
-$atributosQuery = "SELECT * FROM Atributos";
-$atributosResult = $conexion->query($atributosQuery);
-
-$galeriasQuery = "SELECT * FROM Galerias ORDER BY ID DESC";
-$galeriasResult = $conexion->query($galeriasQuery);
-
-// Obtener los IDs de los coaches asociados al producto
-$productoCoachesQuery = "SELECT ID_Coach FROM ProductoCoaches WHERE ID_Producto = ?";
-$productoCoachesStmt = $conexion->prepare($productoCoachesQuery);
-$productoCoachesStmt->bind_param("i", $idProducto);
-$productoCoachesStmt->execute();
-$productoCoachesResult = $productoCoachesStmt->get_result();
-$productoCoaches = [];
-while ($row = $productoCoachesResult->fetch_assoc()) {
-    $productoCoaches[] = $row['ID_Coach'];
+function subirArchivo($inputName, $targetDir, $currentFile)
+{
+    if ($_FILES[$inputName]['name']) {
+        $filePath = $targetDir . basename($_FILES[$inputName]['name']);
+        move_uploaded_file($_FILES[$inputName]['tmp_name'], $filePath);
+        return $filePath;
+    }
+    return $currentFile;
 }
 
-// Obtener los IDs de los atributos asociados al producto
-$productoAtributosQuery = "SELECT ID_Atributo FROM ProductoAtributos WHERE ID_Producto = ?";
-$productoAtributosStmt = $conexion->prepare($productoAtributosQuery);
-$productoAtributosStmt->bind_param("i", $idProducto);
-$productoAtributosStmt->execute();
-$productoAtributosResult = $productoAtributosStmt->get_result();
-$productoAtributos = [];
-while ($row = $productoAtributosResult->fetch_assoc()) {
-    $productoAtributos[] = $row['ID_Atributo'];
+function actualizarAsociaciones($conexion, $idProducto, $tabla, $columna, $nuevasAsociaciones)
+{
+    $conexion->query("DELETE FROM $tabla WHERE ID_Producto = $idProducto");
+    if (!empty($nuevasAsociaciones)) {
+        foreach ($nuevasAsociaciones as $id) {
+            $conexion->query("INSERT INTO $tabla (ID_Producto, $columna) VALUES ($idProducto, $id)");
+        }
+    }
 }
 
-$conexion->close();
+function actualizarContenidos($conexion, $idProducto, $titulos, $descripciones)
+{
+    if (!empty($titulos) && !empty($descripciones)) {
+        foreach ($titulos as $idContenido => $titulo) {
+            $descripcionContenido = $descripciones[$idContenido];
+            if ($idContenido > 0) {
+                $updateContenidoQuery = "UPDATE Contenidos SET Titulo = ?, Descripcion = ? WHERE ID = ?";
+                $updateContenidoStmt = $conexion->prepare($updateContenidoQuery);
+                $updateContenidoStmt->bind_param("ssi", $titulo, $descripcionContenido, $idContenido);
+                $updateContenidoStmt->execute();
+            } else {
+                $insertContenidoQuery = "INSERT INTO Contenidos (Titulo, Descripcion, ID_Producto) VALUES (?, ?, ?)";
+                $insertContenidoStmt = $conexion->prepare($insertContenidoQuery);
+                $insertContenidoStmt->bind_param("ssi", $titulo, $descripcionContenido, $idProducto);
+                $insertContenidoStmt->execute();
+            }
+        }
+    }
+}
+
+function obtenerContenidos($conexion, $idProducto)
+{
+    $contenidosQuery = "SELECT * FROM Contenidos WHERE ID_Producto = ?";
+    $contenidosStmt = $conexion->prepare($contenidosQuery);
+    $contenidosStmt->bind_param("i", $idProducto);
+    $contenidosStmt->execute();
+    return $contenidosStmt->get_result();
+}
+
+function obtenerIds($conexion, $tabla, $columna, $idProducto)
+{
+    $query = "SELECT $columna FROM $tabla WHERE ID_Producto = ?";
+    $stmt = $conexion->prepare($query);
+    $stmt->bind_param("i", $idProducto);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $ids = [];
+    while ($row = $result->fetch_assoc()) {
+        $ids[] = $row[$columna];
+    }
+    return $ids;
+}
 ?>
 
 <!DOCTYPE html>
@@ -138,6 +157,25 @@ $conexion->close();
     <link rel="stylesheet" type="text/css" href="../src/estilos/css/editar_servicio.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .contenido-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .contenido-header {
+            cursor: pointer;
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .contenido-body {
+            display: none;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -201,15 +239,15 @@ $conexion->close();
             </div>
             <div class="form-group">
                 <label for="duracion" class="form-label">Duración:</label>
-                <input type="text" id="duracion" name="duracion" class="form-input" value="<?php echo htmlspecialchars($producto['Duracion']); ?>" >
+                <input type="text" id="duracion" name="duracion" class="form-input" value="<?php echo htmlspecialchars($producto['Duracion']); ?>">
             </div>
             <div class="form-group">
                 <label for="modalidad" class="form-label">Modalidad:</label>
-                <input type="text" id="modalidad" name="modalidad" class="form-input" value="<?php echo htmlspecialchars($producto['Modalidad']); ?>" >
+                <input type="text" id="modalidad" name="modalidad" class="form-input" value="<?php echo htmlspecialchars($producto['Modalidad']); ?>">
             </div>
             <div class="form-group">
                 <label for="txtLibre" class="form-label">Texto Libre:</label>
-                <input type="text" id="txtLibre" name="txtLibre" class="form-input" value="<?php echo htmlspecialchars($producto['txtLibre']); ?>" >
+                <input type="text" id="txtLibre" name="txtLibre" class="form-input" value="<?php echo htmlspecialchars($producto['txtLibre']); ?>">
             </div>
             <div class="form-group">
                 <label for="id_galeria" class="form-label">Galería:</label>
@@ -241,6 +279,28 @@ $conexion->close();
                     ?>
                 </select>
             </div>
+            <div id="contenidos">
+                <?php while ($contenido = $contenidosResult->fetch_assoc()) { ?>
+                    <div class="contenido-item">
+                        <div class="contenido-header">
+                            <span>Contenido: <?php echo htmlspecialchars($contenido['Titulo']); ?></span>
+                        </div>
+                        <div class="contenido-body">
+                            <div class="form-group">
+                                <label for="contenido_titulo_<?php echo $contenido['ID']; ?>" class="form-label">Título de Contenido:</label>
+                                <input type="text" id="contenido_titulo_<?php echo $contenido['ID']; ?>" name="contenidos_titulo[<?php echo $contenido['ID']; ?>]" class="form-input" value="<?php echo htmlspecialchars($contenido['Titulo']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contenido_descripcion_<?php echo $contenido['ID']; ?>" class="form-label">Descripción de Contenido:</label>
+                                <textarea id="contenido_descripcion_<?php echo $contenido['ID']; ?>" name="contenidos_descripcion[<?php echo $contenido['ID']; ?>]" class="form-input" required><?php echo htmlspecialchars($contenido['Descripcion']); ?></textarea>
+                            </div>
+                            <button type="button" class="form-button eliminar-contenido" data-id="<?php echo $contenido['ID']; ?>">Eliminar Contenido</button>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+            <!-- Botón para agregar nuevo contenido -->
+            <button id="agregarContenido" type="button" class="form-button">Agregar Nuevo Contenido</button>
             <button type="submit" class="form-button">Guardar Cambios</button>
         </form>
         <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar Servicio</button>
@@ -261,6 +321,59 @@ $conexion->close();
                     });
             }
         }
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('contenido-header')) {
+                const contenidoBody = event.target.nextElementSibling;
+                contenidoBody.style.display = contenidoBody.style.display === 'none' ? 'block' : 'none';
+            }
+
+            if (event.target.classList.contains('eliminar-contenido')) {
+                const contenidoId = event.target.getAttribute('data-id');
+                if (contenidoId > 0) {
+                    fetch('eliminar_contenido.php?id=' + contenidoId, {
+                            method: 'GET',
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            event.target.closest('.contenido-item').remove();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    event.target.closest('.contenido-item').remove();
+                }
+            }
+        });
+
+        document.getElementById('agregarContenido').addEventListener('click', function() {
+            const nuevoContenido = document.createElement('div');
+            nuevoContenido.classList.add('contenido-item');
+            nuevoContenido.innerHTML = `
+                <div class="contenido-header">
+                    <span>Nuevo Contenido</span>
+                </div>
+                <div class="contenido-body">
+                    <div class="form-group">
+                        <label for="nuevo_contenido_titulo" class="form-label">Título de Contenido:</label>
+                        <input type="text" name="contenidos_titulo[0]" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nuevo_contenido_descripcion" class="form-label">Descripción de Contenido:</label>
+                        <textarea name="contenidos_descripcion[0]" class="form-input" required></textarea>
+                    </div>
+                    <button type="button" class="form-button eliminar-contenido" data-id="0">Eliminar Contenido</button>
+                </div>
+            `;
+            document.getElementById('contenidos').appendChild(nuevoContenido);
+        });
+
+        // Inicializar los acordeones
+        document.querySelectorAll('.contenido-body').forEach(function(body) {
+            body.style.display = 'none';
+        });
     </script>
     <?php include('footer.php'); ?>
 </body>
