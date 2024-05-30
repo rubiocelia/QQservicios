@@ -114,3 +114,29 @@ h1{
 .form-editar-servicio .form-input textarea {
     height: 250px !important; /* Aumentar altura para campos de texto grandes */
 }
+
+#popupNuevaGaleria {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+#popupNuevaGaleria .popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#popupNuevaGaleria .close {
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+#popupNuevaGaleria .close:hover {
+    color: red;
+}

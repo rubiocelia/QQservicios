@@ -50,6 +50,10 @@ $conexion->close();
 </head>
 
 <body class="miCuenta">
+<video autoplay muted loop id="backgroundVideo">
+    <source src="./archivos/perfil/fondoPerfil2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
     <?php include('menu_sesion_iniciada.php'); ?>
     <h1 class="bienvenido">Bienvenid@ administrador, <?php echo htmlspecialchars($usuario['Nombre']); ?></h1>
     <main>

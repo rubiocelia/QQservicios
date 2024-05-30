@@ -83,8 +83,76 @@ $resultado = $stmt->get_result();
         <button type="submit" class="volver">Añadir Contenido Seleccionado</button>
     </form>
     <button type="button" class="volver" onclick="window.history.back()">Volver</button>
-    <button type="button" class="volver" onclick="window.location.href='formulario_nuevo_contenido.php'">Añadir Nuevo Contenido</button>
+    <button type="button" class="volver" onclick="mostrarFormulario()">Añadir Nuevo Contenido</button>
+
+    <div id="formularioNuevoContenido" class="form-container" style="display: none;">
+        <form id="formNuevoContenido" class="styled-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="tipo" class="form-label">Tipo de Contenido:</label>
+                <select id="tipo" name="tipo" class="form-input" required>
+                    <option value="foto">Foto</option>
+                    <option value="video_local">Video Local</option>
+                    <option value="video_youtube">Video de YouTube</option>
+                </select>
+            </div>
+            <div class="form-group" id="campoLocal" style="display: none;">
+                <label for="url_local" class="form-label">Archivo Local:</label>
+                <input type="file" id="url_local" name="url_local" class="form-input">
+            </div>
+            <div class="form-group" id="campoYoutube" style="display: none;">
+                <label for="url_youtube" class="form-label">URL de YouTube:</label>
+                <input type="url" id="url_youtube" name="url_youtube" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+            </div>
+            <button type="button" onclick="subirContenido()" class="form-button">Subir Contenido</button>
+        </form>
+    </div>
     <?php include('footer.php'); ?>
 </body>
+<script>
+    function mostrarFormulario() {
+        document.getElementById('formularioNuevoContenido').style.display = 'block';
+        mostrarCampoCorrespondiente();
+    }
+
+    document.getElementById('tipo').addEventListener('change', mostrarCampoCorrespondiente);
+
+    function mostrarCampoCorrespondiente() {
+        var tipo = document.getElementById('tipo').value;
+        var campoLocal = document.getElementById('campoLocal');
+        var campoYoutube = document.getElementById('campoYoutube');
+        campoLocal.style.display = 'none';
+        campoYoutube.style.display = 'none';
+        if (tipo === 'foto' || tipo === 'video_local') {
+            campoLocal.style.display = 'block';
+        } else if (tipo === 'video_youtube') {
+            campoYoutube.style.display = 'block';
+        }
+    }
+
+    function subirContenido() {
+        var formData = new FormData(document.getElementById('formNuevoContenido'));
+        fetch('subir_contenido.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    // Mostrar el campo correspondiente basado en la selección inicial
+    document.addEventListener('DOMContentLoaded', function() {
+        mostrarCampoCorrespondiente();
+    });
+</script>
 
 </html>
