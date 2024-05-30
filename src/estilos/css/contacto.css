@@ -1,14 +1,14 @@
 /* Incorporar la tipografía personalizada */
 @font-face {
   font-family: "titulo";
-  src: url("../../estilos/tipografia/FUTURA PT DEMI.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "texto";
-  src: url("../../estilos/tipografia/FUTURA BOOK FONT.TTF") format("truetype");
+  src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -19,6 +19,8 @@
   --texto: "texto", sans-serif;
   --rojoQQ: #e6312f;
   --azulQQ: #2a255b;
+  --azulsuave1: #b6add0;
+  --azulsuave2: #d9d3ed;
 }
 
 body {
@@ -28,7 +30,7 @@ body {
 }
 
 .contacto {
-  background-color: #7080a8;
+  background-color: var(--azulsuave1);
   position: relative;
   height: 100vh; /* Asegura que la sección ocupe toda la altura de la pantalla */
 }
@@ -144,7 +146,7 @@ body {
 }
 
 ::placeholder {
-  color: #afacac; /* Color del placeholder */
+  color: #e4e3e3; /* Color del placeholder */
   opacity: 1; /* Por defecto es medio transparente */
 }
 

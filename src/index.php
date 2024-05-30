@@ -90,8 +90,8 @@ $conexion->close();
                     <h3><?php echo htmlspecialchars($producto['Nombre']); ?></h3>
                     <p>
                         <?php echo htmlspecialchars(substr($producto['DescripcionCorta'], 0, 100)); ?>
-                        <?php if (strlen($producto['DescripcionCorta']) > 100): ?>
-                        ... <a href="producto1BBDD.php?id=<?php echo $producto['ID']; ?>" class="read-more-link">Leer
+                        <?php if (strlen($producto['DescripcionCorta']) > 100): ?>... <a
+                            href="producto1BBDD.php?id=<?php echo $producto['ID']; ?>" class="read-more-link">Leer
                             más</a>
                         <?php endif; ?>
                     </p>

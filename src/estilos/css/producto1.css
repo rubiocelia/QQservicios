@@ -19,6 +19,8 @@
   --texto: "texto", sans-serif;
   --rojoQQ: #e6312f;
   --azulQQ: #2a255b;
+  --azulsuave1: #b6add0;
+  --azulsuave2: #d9d3ed;
 }
 
 /* body */
@@ -105,7 +107,7 @@ main {
   height: fit-content;
   overflow: hidden;
   padding: 5px;
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -248,6 +250,7 @@ main {
 }
 
 .menuContTest button.active {
+  /* font-family: var(--titulo); */
   background-color: white;
   color: var(--rojoQQ);
   box-shadow: -1px -3px 4px rgba(0, 0, 0, 0.1), 0px -3px 2px rgba(0, 0, 0, 0.1);
@@ -280,11 +283,10 @@ main {
   font-family: var(--titulo);
   padding: 15px 20px;
   font-size: 1.2em;
-  font-weight: bold;
   color: black;
   cursor: pointer;
   position: relative;
-  background-color: rgb(241, 241, 250);
+  background-color: var(--azulsuave2);
   border-radius: 8px 8px 0 0;
 }
 
@@ -571,13 +573,14 @@ main {
 .faq {
   margin-bottom: 10px;
   padding: 10px;
-  border-bottom: 1px solid var(--azulQQ);
+  border-bottom: 1px solid var(--azulsuave1);
   margin-left: 200px;
   margin-right: 200px;
 }
 
 .faq h3 {
   font-family: var(--titulo);
+  color: var(--azulQQ);
   font-size: 1.2em;
   margin: 0;
   cursor: pointer;

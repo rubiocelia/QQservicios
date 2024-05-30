@@ -49,7 +49,7 @@
         </div>
 
         <!-- Sección con información sobre los coaches -->
-        <div class="info">
+        <!-- <div class="info">
             <p>En cualquier programa de desarrollo profesional el contenido es
                 importante, pero la forma y el contexto son aspectos clave a la hora
                 de entender y anclar cualquier concepto. Por ello, nuestra
@@ -61,7 +61,7 @@
                 un espacio experiencial que será el “laboratorio” perfecto a la hora de
                 vivir estas actividades. (Espacios distintos y específicos según el tipo
                 de Experiencia).</p>
-        </div>
+        </div> -->
 
 
         <div class="container">
