@@ -226,7 +226,7 @@ $conexion->close();
                 </div>
                 <div class="form-group">
                     <label for="contenidos_descripcion_0" class="form-label">Descripción de Contenido:</label>
-                    <textarea id="contenidos_descripcion_0" name="contenidos_descripcion[0]" class="form-input"></textarea>
+                    <textarea id="contenidos_descripcion_0" name="contenidos_descripcion[0]" class="form-input"><ul><li>Tu 1º contenido aquí</li><li>Tu 2º contenido aquí</li></ul></textarea>
                 </div>
             </div>
             <!-- Botón para agregar nuevo contenido -->

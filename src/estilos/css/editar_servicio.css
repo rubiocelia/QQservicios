@@ -4,139 +4,179 @@
     src: url("../../estilos/tipografia/FUTURA\ PT\ DEMI.TTF") format("truetype");
     font-weight: normal;
     font-style: normal;
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: "texto";
     src: url("../../estilos/tipografia/FUTURA\ BOOK\ FONT.TTF") format("truetype");
     font-weight: normal;
     font-style: normal;
-  }
-  
-  :root {
+}
+
+:root {
     /* Variables de tipografía */
     --titulo: "titulo", sans-serif;
     --texto: "texto", sans-serif;
     --rojoQQ: #e6312f;
     --azulQQ: #2a255b;
-  }
-
-  .header {
-    background-color: var(--azulQQ);
+    --grisClaro: #f9f9f9;
+    --grisOscuro: #ccc;
+    --sombra: rgba(0, 0, 0, 0.1);
 }
 
 *{
     font-family: var(--texto);
 }
 
-h1{
-    margin: 0 auto;
+header{
+    background-color: #2a255b;
+}
+
+body {
+    font-family: var(--texto);
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px 0;
     text-align: center;
-    margin: 20px;
+    color: var(--azulQQ);
+    font-family: var(--titulo);
 }
 
-  /* Estilos para el formulario de edición de servicio */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .form-editar-servicio {
-    width: 80%;
+    width: 90%;
     max-width: 800px;
-    margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--grisOscuro);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px var(--sombra);
+    margin-bottom: 20px;
 }
 
-.form-editar-servicio .form-group {
+.form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-.form-editar-servicio .form-label {
+.form-label {
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--azulQQ);
 }
 
-.form-editar-servicio .form-input,
-.form-editar-servicio .form-input[type="file"],
-.form-editar-servicio .form-input select,
-.form-editar-servicio .form-input textarea {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.form-input,
+.form-input[type="file"],
+.form-input select,
+.form-input textarea {
+    padding: 10px;
+    border: 1px solid var(--grisOscuro);
+    border-radius: 5px;
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
 
-.form-editar-servicio .form-input:focus,
-.form-editar-servicio .form-input[type="file"]:focus,
-.form-editar-servicio .form-input select:focus,
-.form-editar-servicio .form-input textarea:focus {
+.form-input:focus,
+.form-input[type="file"]:focus,
+.form-input select:focus,
+.form-input textarea:focus {
     outline: none;
     border-color: var(--rojoQQ);
-    box-shadow: var(--rojoQQ);
 }
 
-.form-editar-servicio .form-button,
-.form-editar-servicio, .form-button-cancel {
-    padding: 15px 20px;
+.form-button,
+.form-button-cancel,
+.form-subutton {
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
     margin-top: 10px;
 }
 
-.form-editar-servicio .form-button {
+.form-button {
     background-color: var(--azulQQ);
     color: #fff;
-    transition: background-color 0.3s ease;
 }
 
-.form-editar-servicio .form-button:hover {
-    background-color: var(--azulQQ);
+.form-button:hover {
+    background-color: rgb(250, 70, 70);
 }
 
-.form-editar-servicio .form-button-cancel {
+.form-button-cancel {
     background-color: var(--rojoQQ);
     color: #fff;
     margin-left: 10px;
-    transition: background-color 0.3s ease;
 }
 
-.form-editar-servicio .form-button-cancel:hover {
-    background-color: var(--rojoQQ);
+.form-button-cancel:hover {
+    background-color: var(--azulQQ);
 }
 
-.form-editar-servicio .form-input[type="textarea"],
-.form-editar-servicio .form-input textarea {
-    height: 250px !important; /* Aumentar altura para campos de texto grandes */
+.form-subutton {
+    padding: 8px 15px;
+    background-color: var(--azulQQ);
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50px;
 }
 
-#popupNuevaGaleria {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    z-index: 1000;
+.form-subutton:hover {
+    background-color: rgb(250, 70, 70);
 }
 
-#popupNuevaGaleria .popup-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.contenido-item,
+.faq-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--grisOscuro);
+    border-radius: 5px;
 }
 
-#popupNuevaGaleria .close {
-    align-self: flex-end;
+.contenido-header,
+.faq-header {
     cursor: pointer;
+    background-color: #dcdcdc;
+    color: #000000;
+    padding: 10px;
+    border-bottom: 1px solid  #6f6f6f;
+    border-radius: 5px 5px 0 0;
+
 }
 
-#popupNuevaGaleria .close:hover {
-    color: red;
+.contenido-body,
+.faq-body {
+    display: none;
+    padding: 10px;
 }
+
+h3 {
+    margin: 20px 0;
+    background-color: var(--grisOscuro);
+    border: 1px solid var(--grisOscuro);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--azulQQ);
+    text-align: center;
+}
+
+hr{
+    margin-top: 3%;
+}
+

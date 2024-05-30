@@ -59,8 +59,10 @@ $atributosResult = $conexion->query("SELECT * FROM Atributos");
 $galeriasResult = $conexion->query("SELECT * FROM Galerias ORDER BY ID DESC");
 $contenidosResult = obtenerContenidos($conexion, $idProducto);
 $faqsResult = obtenerFAQs($conexion, $idProducto);
+$testimoniosResult = $conexion->query("SELECT * FROM Testimonios ORDER BY ID DESC");
 $productoCoaches = obtenerIds($conexion, "ProductoCoaches", "ID_Coach", $idProducto);
 $productoAtributos = obtenerIds($conexion, "ProductoAtributos", "ID_Atributo", $idProducto);
+$productoTestimonios = obtenerIds($conexion, "testimonios", "ID", $idProducto);
 
 $conexion->close();
 
@@ -71,7 +73,7 @@ function actualizarProducto($conexion, $idProducto, $producto)
     $descripcion = $_POST['descripcion'];
     $categorias = $_POST['categorias'];
     $precio = $_POST['precio'];
-    $adquirible = isset($_POST['adquirible']) ? 1 : 0;
+    $adquirible = isset($_POST['adquirible']) && $_POST['adquirible'] == "1" ? 1 : 0;
     $duracion = $_POST['duracion'];
     $modalidad = $_POST['modalidad'];
     $txtLibre = $_POST['txtLibre'];
@@ -87,6 +89,7 @@ function actualizarProducto($conexion, $idProducto, $producto)
     if ($updateStmt->execute()) {
         actualizarAsociaciones($conexion, $idProducto, 'ProductoCoaches', 'ID_Coach', $_POST['coaches']);
         actualizarAsociaciones($conexion, $idProducto, 'ProductoAtributos', 'ID_Atributo', $_POST['atributos']);
+        actualizarAsociaciones($conexion, $idProducto, 'ProductoTestimonios', 'ID_Testimonio', $_POST['testimonios']);
         actualizarContenidos($conexion, $idProducto, $_POST['contenidos_titulo'], $_POST['contenidos_descripcion']);
         actualizarFAQs($conexion, $idProducto, $_POST['faqs_pregunta'], $_POST['faqs_respuesta']);
 
@@ -227,22 +230,26 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .contenido-item, .faq-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .contenido-header, .faq-header {
-            cursor: pointer;
-            background-color: #f7f7f7;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .contenido-body, .faq-body {
+        /* Estilo del popup */
+        #popupNuevoTestimonio {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
             display: none;
-            padding: 10px;
+        }
+
+        #popupNuevoTestimonio .close {
+            cursor: pointer;
+            color: red;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
     </style>
 </head>
@@ -348,6 +355,19 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                     ?>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="testimonios" class="form-label">Testimonios:</label>
+                <select id="testimonios" name="testimonios[]" class="form-input" multiple required>
+                    <?php
+                    while ($testimonio = $testimoniosResult->fetch_assoc()) {
+                        echo "<option value='" . $testimonio['ID'] . "' " . (in_array($testimonio['ID'], $productoTestimonios) ? 'selected' : '') . ">" . $testimonio['Nombre'] . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="button" class="form-subutton" onclick="mostrarPopupTestimonio()">Agregar Nuevo Testimonio</button>
+            <hr>
+            <h3>Contenidos</h3>
             <div id="contenidos">
                 <?php while ($contenido = $contenidosResult->fetch_assoc()) { ?>
                     <div class="contenido-item">
@@ -369,7 +389,9 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                 <?php } ?>
             </div>
             <!-- Botón para agregar nuevo contenido -->
-            <button id="agregarContenido" type="button" class="form-button">Agregar Nuevo Contenido</button>
+            <button id="agregarContenido" type="button" class="form-subutton">Agregar Nuevo Contenido</button>
+            <hr>
+            <h3>FAQS</h3>
             <div id="faqs">
                 <?php while ($faq = $faqsResult->fetch_assoc()) { ?>
                     <div class="faq-item">
@@ -391,12 +413,95 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                 <?php } ?>
             </div>
             <!-- Botón para agregar nueva FAQ -->
-            <button id="agregarFAQ" type="button" class="form-button">Agregar Nueva FAQ</button>
-            <button type="submit" class="form-button">Guardar Cambios</button>
+            <button id="agregarFAQ" type="button" class="form-subutton">Agregar Nueva FAQ</button>
+            <hr>
+            <br>
+            <br>
+            <br>
+            <button type="submit" class="form-button btn-1">Guardar Cambios</button>
         </form>
         <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar Servicio</button>
     </main>
+
+    <!-- Popup para añadir nuevo testimonio -->
+    <div id="popupNuevoTestimonio">
+        <span class="close" onclick="cerrarPopupTestimonio()">&times;</span>
+        <form id="formNuevoTestimonio" enctype="multipart/form-data">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="subtitulo">Subtitulo:</label>
+            <input type="text" id="subtitulo" name="subtitulo" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+
+            <label for="producto">Producto Asociado:</label>
+            <select id="producto" name="producto" required>
+                <?php
+                $productos = $conexion->query("SELECT ID, Nombre FROM Productos");
+                while ($producto = $productos->fetch_assoc()) {
+                    echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
+                }
+                ?>
+            </select>
+
+            <label for="foto">Foto:</label>
+            <input type="file" id="foto" name="foto" required>
+
+            <button type="button" onclick="crearTestimonio()">Crear Testimonio</button>
+        </form>
+    </div>
+
     <script>
+        function mostrarPopupTestimonio() {
+            document.getElementById('popupNuevoTestimonio').style.display = 'block';
+        }
+
+        function cerrarPopupTestimonio() {
+            document.getElementById('popupNuevoTestimonio').style.display = 'none';
+        }
+
+        function crearTestimonio() {
+            const form = document.getElementById('formNuevoTestimonio');
+            const formData = new FormData(form);
+
+            fetch('crear_testimonio.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    cerrarPopupTestimonio();
+                    actualizarTestimonios();
+                } else {
+                    alert('Error al crear el testimonio: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function actualizarTestimonios() {
+            fetch('obtener_testimonios.php?id=<?php echo $idProducto; ?>')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('testimonios');
+                select.innerHTML = '';
+                data.testimonios.forEach(testimonio => {
+                    const option = document.createElement('option');
+                    option.value = testimonio.ID;
+                    option.textContent = testimonio.Nombre;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
         function eliminarProducto(id) {
             if (confirm("¿Seguro que deseas eliminar este servicio?")) {
                 fetch("eliminar_servicio.php?id=" + id, {
