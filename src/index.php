@@ -84,7 +84,7 @@ $conexion->close();
                 <div class="event-card">
                     <div class="event-number"><?php echo $producto['ID']; ?></div>
                     <a href="producto1BBDD.php?id=<?php echo $producto['ID']; ?>">
-                        <img src="<?php echo htmlspecialchars($producto['Foto']); ?>"
+                        <img class="productoTop5" src="<?php echo htmlspecialchars($producto['Foto']); ?>"
                             alt="<?php echo htmlspecialchars($producto['Nombre']); ?>">
                     </a>
                     <h3><?php echo htmlspecialchars($producto['Nombre']); ?></h3>

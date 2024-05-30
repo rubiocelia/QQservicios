@@ -10,6 +10,8 @@
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- Enlace a la librería de animaciones animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -72,9 +74,41 @@
             </div>
         </div>
 
-        <div class="container2">
-            <h2>Gráfico de Aprendizaje</h2>
-            <canvas id="myChart"></canvas>
+        <div class="grafico">
+            <div class="grafYfrase">
+                <div class="graficoFoto">
+                    <img src="./archivos/coaches/grafico.png">
+                </div>
+
+                <div class="frase">
+                    <p>“La madurez de una compañía se consolida por su buen hacer a lo largo de los años, su
+                        adaptabilidad a los nuevos entornos y una cultura de empresa que cale hacia todos los estamentos
+                        de la organización”
+                    </p>
+                </div>
+            </div>
+            <div class="explicacion">
+                <p>QQ Experience es una metodología que no sólo tiene en cuenta los contenidos y su aprendizaje, también
+                    el estado de ánimo del participante. El éxito pasa por 3 fases que permita la adopción de un nuevo
+                    “set” de hábitos:
+                </p>
+                <ul>
+                    <li><b>Actívate y equípate</b>, para</li>
+                    <li><b>Saltar y apoyarte</b> cuando lo necesites.</li>
+                    <li><b>Movilízate</b> para conseguir los <b>resultados</b>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-coaches">
+            <h3>
+                <ion-icon name="people-circle-outline"></ion-icon>
+            </h3>
+            <h2>Conoce a nuestros coaches</h2>
+            <p>En QQ Experience, contamos con un equipo de coaches altamente capacitados y apasionados por el desarrollo
+                personal y profesional. Cada uno de nuestros coaches trae consigo una vasta experiencia y un enfoque
+                único para ayudarte a alcanzar tus metas. A continuación, te presentamos a los expertos que estarán
+                guiándote en tu viaje de transformación:</p>
         </div>
 
         <!-- Carrusel de testimonios -->

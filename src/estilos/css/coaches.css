@@ -96,15 +96,90 @@
   transform: scale(1.1); /* Aumenta la imagen al pasar el ratón */
 }
 
-.container2 {
-  text-align: center;
-  margin-top: 50px;
+/* grafico */
+.grafico {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 20px;
 }
 
-#myChart {
-  width: 70%;
-  height: 60%;
+.grafYfrase {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.graficoFoto {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 55%;
+  height: auto;
+}
+
+.graficoFoto img {
+  width: 100%;
+  display: block;
   margin: 0 auto;
+}
+
+.frase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.frase p {
+  text-align: right;
+  font-size: 1.2em;
+  font-family: var(--texto);
+  margin-left: 50px;
+}
+
+.explicacion {
+  font-family: var(--texto);
+  font-size: 1.2em;
+  width: 70%;
+  margin: 35px 110px;
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
+
+.explicacion ul {
+  margin-top: 10px;
+  padding-left: 50px; /* Ajusta este valor según sea necesario para mover los bullets más a la derecha */
+}
+
+/* coaches */
+
+.intro-coaches {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 0;
+  background-color: #4a5fa4;
+}
+
+.intro-coaches h2 {
+  font-family: var(--titulo);
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.intro-coaches h3 ion-icon {
+  color: white;
+  font-size: 3em;
+}
+
+.intro-coaches p {
+  font-size: 1.3em;
+  line-height: 1.5;
+  color: white;
+  font-family: var(--texto);
+  margin: 0 75px;
 }
 
 .testimonial-slider {
