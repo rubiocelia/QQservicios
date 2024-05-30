@@ -78,11 +78,6 @@ if (isset($_SESSION['id_usuario'])) {
             <section class="contacto-info">
                 <h2>Puedes encontrarnos en:</h2>
                 <p>
-                    <ion-icon name="time-outline"></ion-icon>
-                    Lunes-Viernes: 10:00-14:00h
-
-                </p>
-                <p>
                     <ion-icon name="business-outline"></ion-icon>
                     C. de Eugenio Salazar, 14, 28002 Madrid
                 </p>
