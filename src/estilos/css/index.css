@@ -412,12 +412,14 @@
 }
 /* testimonios */
 .testimonios {
+  width: 70%;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin: 0 auto;
 }
 
 .testimonios h1 {
@@ -485,11 +487,11 @@ h4 {
 }
 
 .prevTest {
-  left: 150px;
+  left: 5px;
 }
 
 .nextTest {
-  right: 150px;
+  right: 5px;
 }
 
 .prevTest:hover,
