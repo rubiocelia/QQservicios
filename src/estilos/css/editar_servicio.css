@@ -180,3 +180,24 @@ hr{
     margin-top: 3%;
 }
 
+#popupNuevoTestimonio {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+#popupNuevoTestimonio .close {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
