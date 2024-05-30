@@ -1,5 +1,4 @@
 <?php
-// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está registrado
@@ -8,7 +7,6 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Obtener los datos del usuario
 require_once("./bbdd/conecta.php");
 $conexion = getConexion();
 
@@ -18,6 +16,20 @@ $idProducto = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($idProducto == 0) {
     echo "ID de producto no válido.";
     $conexion->close();
+    exit();
+}
+
+// Manejar la eliminación de contenido específico
+if (isset($_GET['eliminar_contenido'])) {
+    $idContenido = intval($_GET['eliminar_contenido']);
+    eliminarContenido($conexion, $idContenido);
+    exit();
+}
+
+// Manejar la eliminación de FAQ específico
+if (isset($_GET['eliminar_faq'])) {
+    $idFAQ = intval($_GET['eliminar_faq']);
+    eliminarFAQ($conexion, $idFAQ);
     exit();
 }
 
@@ -46,6 +58,7 @@ $coachesResult = $conexion->query("SELECT * FROM Coaches");
 $atributosResult = $conexion->query("SELECT * FROM Atributos");
 $galeriasResult = $conexion->query("SELECT * FROM Galerias ORDER BY ID DESC");
 $contenidosResult = obtenerContenidos($conexion, $idProducto);
+$faqsResult = obtenerFAQs($conexion, $idProducto);
 $productoCoaches = obtenerIds($conexion, "ProductoCoaches", "ID_Coach", $idProducto);
 $productoAtributos = obtenerIds($conexion, "ProductoAtributos", "ID_Atributo", $idProducto);
 
@@ -75,11 +88,38 @@ function actualizarProducto($conexion, $idProducto, $producto)
         actualizarAsociaciones($conexion, $idProducto, 'ProductoCoaches', 'ID_Coach', $_POST['coaches']);
         actualizarAsociaciones($conexion, $idProducto, 'ProductoAtributos', 'ID_Atributo', $_POST['atributos']);
         actualizarContenidos($conexion, $idProducto, $_POST['contenidos_titulo'], $_POST['contenidos_descripcion']);
+        actualizarFAQs($conexion, $idProducto, $_POST['faqs_pregunta'], $_POST['faqs_respuesta']);
 
         header("Location: editar_servicio.php?id=$idProducto&success=1");
         exit();
     } else {
         echo "Error al actualizar el producto: " . $updateStmt->error;
+    }
+}
+
+function eliminarContenido($conexion, $idContenido)
+{
+    $deleteQuery = "DELETE FROM Contenidos WHERE ID = ?";
+    $deleteStmt = $conexion->prepare($deleteQuery);
+    $deleteStmt->bind_param("i", $idContenido);
+
+    if ($deleteStmt->execute()) {
+        echo "Contenido eliminado correctamente.";
+    } else {
+        echo "Error al eliminar el contenido: " . $deleteStmt->error;
+    }
+}
+
+function eliminarFAQ($conexion, $idFAQ)
+{
+    $deleteQuery = "DELETE FROM faqs WHERE ID = ?";
+    $deleteStmt = $conexion->prepare($deleteQuery);
+    $deleteStmt->bind_param("i", $idFAQ);
+
+    if ($deleteStmt->execute()) {
+        echo "FAQ eliminada correctamente.";
+    } else {
+        echo "Error al eliminar la FAQ: " . $deleteStmt->error;
     }
 }
 
@@ -123,6 +163,26 @@ function actualizarContenidos($conexion, $idProducto, $titulos, $descripciones)
     }
 }
 
+function actualizarFAQs($conexion, $idProducto, $preguntas, $respuestas)
+{
+    if (!empty($preguntas) && !empty($respuestas)) {
+        foreach ($preguntas as $idFAQ => $pregunta) {
+            $respuesta = $respuestas[$idFAQ];
+            if ($idFAQ > 0) {
+                $updateFAQQuery = "UPDATE faqs SET Pregunta = ?, Respuesta = ? WHERE ID = ?";
+                $updateFAQStmt = $conexion->prepare($updateFAQQuery);
+                $updateFAQStmt->bind_param("ssi", $pregunta, $respuesta, $idFAQ);
+                $updateFAQStmt->execute();
+            } else {
+                $insertFAQQuery = "INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES (?, ?, ?)";
+                $insertFAQStmt = $conexion->prepare($insertFAQQuery);
+                $insertFAQStmt->bind_param("ssi", $pregunta, $respuesta, $idProducto);
+                $insertFAQStmt->execute();
+            }
+        }
+    }
+}
+
 function obtenerContenidos($conexion, $idProducto)
 {
     $contenidosQuery = "SELECT * FROM Contenidos WHERE ID_Producto = ?";
@@ -130,6 +190,15 @@ function obtenerContenidos($conexion, $idProducto)
     $contenidosStmt->bind_param("i", $idProducto);
     $contenidosStmt->execute();
     return $contenidosStmt->get_result();
+}
+
+function obtenerFAQs($conexion, $idProducto)
+{
+    $faqsQuery = "SELECT * FROM faqs WHERE ID_Producto = ?";
+    $faqsStmt = $conexion->prepare($faqsQuery);
+    $faqsStmt->bind_param("i", $idProducto);
+    $faqsStmt->execute();
+    return $faqsStmt->get_result();
 }
 
 function obtenerIds($conexion, $tabla, $columna, $idProducto)
@@ -158,20 +227,20 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .contenido-item {
+        .contenido-item, .faq-item {
             margin-bottom: 10px;
             padding: 10px;
             border: 1px solid #ccc;
         }
 
-        .contenido-header {
+        .contenido-header, .faq-header {
             cursor: pointer;
             background-color: #f7f7f7;
             padding: 10px;
             border-bottom: 1px solid #ccc;
         }
 
-        .contenido-body {
+        .contenido-body, .faq-body {
             display: none;
             padding: 10px;
         }
@@ -301,6 +370,28 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             </div>
             <!-- Botón para agregar nuevo contenido -->
             <button id="agregarContenido" type="button" class="form-button">Agregar Nuevo Contenido</button>
+            <div id="faqs">
+                <?php while ($faq = $faqsResult->fetch_assoc()) { ?>
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span>FAQ: <?php echo htmlspecialchars($faq['Pregunta']); ?></span>
+                        </div>
+                        <div class="faq-body">
+                            <div class="form-group">
+                                <label for="faq_pregunta_<?php echo $faq['ID']; ?>" class="form-label">Pregunta:</label>
+                                <input type="text" id="faq_pregunta_<?php echo $faq['ID']; ?>" name="faqs_pregunta[<?php echo $faq['ID']; ?>]" class="form-input" value="<?php echo htmlspecialchars($faq['Pregunta']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="faq_respuesta_<?php echo $faq['ID']; ?>" class="form-label">Respuesta:</label>
+                                <textarea id="faq_respuesta_<?php echo $faq['ID']; ?>" name="faqs_respuesta[<?php echo $faq['ID']; ?>]" class="form-input" required><?php echo htmlspecialchars($faq['Respuesta']); ?></textarea>
+                            </div>
+                            <button type="button" class="form-button eliminar-faq" data-id="<?php echo $faq['ID']; ?>">Eliminar FAQ</button>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+            <!-- Botón para agregar nueva FAQ -->
+            <button id="agregarFAQ" type="button" class="form-button">Agregar Nueva FAQ</button>
             <button type="submit" class="form-button">Guardar Cambios</button>
         </form>
         <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar Servicio</button>
@@ -314,7 +405,7 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                     .then(response => response.text())
                     .then(data => {
                         alert(data);
-                        window.location.href = "pagina_admin.php"; // Redirigir a la página de administración
+                        window.location.href = "mi_cuenta_admin.php"; // Redirigir a la página de administración
                     })
                     .catch(error => {
                         console.error("Error:", error);
@@ -331,19 +422,47 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             if (event.target.classList.contains('eliminar-contenido')) {
                 const contenidoId = event.target.getAttribute('data-id');
                 if (contenidoId > 0) {
-                    fetch('eliminar_contenido.php?id=' + contenidoId, {
+                    fetch('editar_servicio.php?id=<?php echo $idProducto; ?>&eliminar_contenido=' + contenidoId, {
                             method: 'GET',
                         })
                         .then(response => response.text())
                         .then(data => {
                             alert(data);
-                            event.target.closest('.contenido-item').remove();
+                            if (data.includes("Contenido eliminado correctamente")) {
+                                event.target.closest('.contenido-item').remove();
+                            }
                         })
                         .catch(error => {
                             console.error('Error:', error);
                         });
                 } else {
                     event.target.closest('.contenido-item').remove();
+                }
+            }
+
+            if (event.target.classList.contains('faq-header')) {
+                const faqBody = event.target.nextElementSibling;
+                faqBody.style.display = faqBody.style.display === 'none' ? 'block' : 'none';
+            }
+
+            if (event.target.classList.contains('eliminar-faq')) {
+                const faqId = event.target.getAttribute('data-id');
+                if (faqId > 0) {
+                    fetch('editar_servicio.php?id=<?php echo $idProducto; ?>&eliminar_faq=' + faqId, {
+                            method: 'GET',
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            if (data.includes("FAQ eliminada correctamente")) {
+                                event.target.closest('.faq-item').remove();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    event.target.closest('.faq-item').remove();
                 }
             }
         });
@@ -370,8 +489,30 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             document.getElementById('contenidos').appendChild(nuevoContenido);
         });
 
+        document.getElementById('agregarFAQ').addEventListener('click', function() {
+            const nuevaFAQ = document.createElement('div');
+            nuevaFAQ.classList.add('faq-item');
+            nuevaFAQ.innerHTML = `
+                <div class="faq-header">
+                    <span>Nueva FAQ</span>
+                </div>
+                <div class="faq-body">
+                    <div class="form-group">
+                        <label for="nueva_faq_pregunta" class="form-label">Pregunta:</label>
+                        <input type="text" name="faqs_pregunta[0]" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nueva_faq_respuesta" class="form-label">Respuesta:</label>
+                        <textarea name="faqs_respuesta[0]" class="form-input" required></textarea>
+                    </div>
+                    <button type="button" class="form-button eliminar-faq" data-id="0">Eliminar FAQ</button>
+                </div>
+            `;
+            document.getElementById('faqs').appendChild(nuevaFAQ);
+        });
+
         // Inicializar los acordeones
-        document.querySelectorAll('.contenido-body').forEach(function(body) {
+        document.querySelectorAll('.contenido-body, .faq-body').forEach(function(body) {
             body.style.display = 'none';
         });
     </script>
