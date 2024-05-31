@@ -148,6 +148,15 @@ function crearTablas($conexion)
             ID_Atributo INT,
             FOREIGN KEY (ID_Producto) REFERENCES Productos(ID),
             FOREIGN KEY (ID_Atributo) REFERENCES Atributos(ID)
+        )",
+
+        "Sesiones" =>"CREATE TABLE IF NOT EXISTS Sesiones (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            ID_usuario INT,
+            FechaInicio DATETIME,
+            FechaFin DATETIME,
+            UltimoLatido DATETIME,
+            FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID)
         )"
 
     ];

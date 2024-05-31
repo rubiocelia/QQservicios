@@ -1,5 +1,69 @@
-<!-- footer.php -->
+<!-- Este Script controla si el usuario sigue en la página o no  -->
+<script>
+        let heartbeatInterval;
+
+        // Función para enviar latidos al servidor
+        function sendHeartbeat() {
+            fetch('heartbeat.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'id_usuario=' + encodeURIComponent(sessionStorage.getItem('id_usuario'))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    console.error('Error al enviar el latido:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al enviar el latido:', error);
+            });
+        }
+
+        // Función para iniciar el envío de latidos
+        function startHeartbeat() {
+            if (!heartbeatInterval) {
+                heartbeatInterval = setInterval(sendHeartbeat, 60000); // 1 minuto
+            }
+        }
+
+        // Función para detener el envío de latidos
+        function stopHeartbeat() {
+            if (heartbeatInterval) {
+                clearInterval(heartbeatInterval);
+                heartbeatInterval = null;
+            }
+        }
+
+        // Manejar el evento de visibilidad de la página
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                startHeartbeat();
+            } else {
+                stopHeartbeat();
+            }
+        });
+
+        // Iniciar el envío de latidos si la página está visible
+        if (document.visibilityState === 'visible') {
+            startHeartbeat();
+        }
+
+        // Guardar el ID del usuario en sessionStorage (por seguridad)
+        sessionStorage.setItem('id_usuario', '<?php echo $_SESSION['id_usuario']; ?>');
+
+        // Manejar el evento de cierre de pestaña
+        window.addEventListener('beforeunload', function (event) {
+            // Enviar un último latido antes de cerrar la pestaña
+            navigator.sendBeacon('heartbeat.php', 'id_usuario=' + encodeURIComponent(sessionStorage.getItem('id_usuario')));
+        });
+    </script>
+
+<!-- |||||||||||||||||||| footer.php |||||||||||||||||||| -->
 <?php echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/menuFooter.css">'; ?>
+
 
 <footer class="footer">
     <div class="footer-content">

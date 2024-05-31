@@ -288,65 +288,162 @@ $result2 = $stmt2->get_result();
                     </div>
         </div>
 
+        <h2>Estadísticas de Usuario</h2>
+    <div class="container-stats">
+        <div class="chart-container">
+            <h2>Última semana: Veces y tiempo en la plataforma</h2>
+            <canvas id="graficoSemana"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Últimos 3 meses: Veces en la plataforma</h2>
+            <canvas id="graficoTresMeses"></canvas>
+        </div>
+    </div>
 
-
-
-        <!-- <div class="seccion">
-            <h1>Accesos del usuario en los últimos 3 meses</h1>
-            <canvas id="accesosChart"></canvas>
-        </div> -->
-
-    </main>
+    <div class="export-button">
+        <button id="exportarCsv">Exportar datos a CSV</button>
+    </div>
     <script>
-        // Obtener los datos de PHP
-        const fechas = <?php echo json_encode($fechas); ?>;
-        const accesos = <?php echo json_encode($accesos); ?>;
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const id_usuario = params.get('id');
 
-        // Debugging: verificar que los datos se obtienen correctamente
-        console.log(fechas);
-        console.log(accesos);
+            if (id_usuario) {
+                fetch(`obtener_datos_graficos.php?id=${id_usuario}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error al obtener los datos:', data.error);
+                            return;
+                        }
 
-        // Crear la gráfica con Chart.js
-        const ctx = document.getElementById('accesosChart').getContext('2d');
-        const accesosChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: fechas,
-                datasets: [{
-                    label: 'Número de accesos',
-                    data: accesos,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day',
-                            tooltipFormat: 'dd/MM/yyyy', // Asegúrate de usar 'dd' en lugar de 'DD'
-                            displayFormats: {
-                                day: 'dd/MM/yyyy' // Asegúrate de usar 'dd' en lugar de 'DD'
+                        const datosSemana = data.semana;
+                        const datosTresMeses = data.tres_meses;
+
+                        // Datos para el gráfico semanal
+                        const labelsSemana = datosSemana.map(d => d.fecha);
+                        const vecesSemana = datosSemana.map(d => d.veces);
+                        const tiempoSemana = datosSemana.map(d => d.tiempo);
+
+                        const ctxSemana = document.getElementById('graficoSemana').getContext('2d');
+                        const graficoSemana = new Chart(ctxSemana, {
+                            type: 'bar',
+                            data: {
+                                labels: labelsSemana,
+                                datasets: [{
+                                        label: 'Veces',
+                                        data: vecesSemana,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Tiempo (minutos)',
+                                        data: tiempoSemana,
+                                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                        borderColor: 'rgba(153, 102, 255, 1)',
+                                        borderWidth: 1,
+                                        type: 'line',
+                                        pointRadius: 10, // Tamaño de los puntos
+                                        pointHoverRadius: 15 // Tamaño de los puntos al pasar el mouse
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            color: 'black', // Color de los números del eje y
+                                            font: {
+                                                size: 12 // Tamaño de fuente de los números del eje y
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            color: 'black', // Color de los números del eje x
+                                            font: {
+                                                size: 12 // Tamaño de fuente de los números del eje x
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            color: 'black', // Color de las etiquetas de la leyenda
+                                            font: {
+                                                size: 12 // Tamaño de fuente de las etiquetas de la leyenda
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Fecha'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Accesos'
-                        }
-                    }
-                }
+                        });
+
+                        // Datos para el gráfico de los últimos 3 meses
+                        const labelsTresMeses = datosTresMeses.map(d => d.mes);
+                        const vecesTresMeses = datosTresMeses.map(d => d.veces);
+
+                        const ctxTresMeses = document.getElementById('graficoTresMeses').getContext('2d');
+                        const graficoTresMeses = new Chart(ctxTresMeses, {
+                            type: 'bar',
+                            data: {
+                                labels: labelsTresMeses,
+                                datasets: [{
+                                    label: 'Veces',
+                                    data: vecesTresMeses,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            color: 'black', // Color de los números del eje y
+                                            font: {
+                                                size: 12 // Tamaño de fuente de los números del eje y
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            color: 'black', // Color de los números del eje x
+                                            font: {
+                                                size: 12 // Tamaño de fuente de los números del eje x
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            color: 'black', // Color de las etiquetas de la leyenda
+                                            font: {
+                                                size: 12 // Tamaño de fuente de las etiquetas de la leyenda
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error al obtener los datos:', error));
+                    document.getElementById('exportarCsv').addEventListener('click', function() {
+                    window.location.href = `exportar_csv.php?id=${id_usuario}`;
+                });
+            } else {
+                console.error('ID de usuario no proporcionado en la URL');
             }
+
         });
     </script>
+    </main>
+
     <script src="./scripts/scriptPopUp.js"></script>
     <script src="./scripts/botonesPerfilVistaAdmin.js"></script>
     <script src="./scripts/scriptArchivoAdmin.js"></script>

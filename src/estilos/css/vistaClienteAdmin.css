@@ -34,7 +34,6 @@ main {
   font-family: var(--texto);
   margin: 0;
   padding: 0;
-
 }
 
 .bienvenido {
@@ -287,7 +286,8 @@ main {
   border-collapse: collapse;
 }
 
-.clientes-table th, .clientes-table td {
+.clientes-table th,
+.clientes-table td {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -306,11 +306,10 @@ main {
   cursor: pointer;
 }
 
-.clientes-table img{
-width: 70px;
-border-radius:100%;
+.clientes-table img {
+  width: 70px;
+  border-radius: 100%;
 }
-
 
 .archivos-table {
   width: 100%;
@@ -336,7 +335,6 @@ border-radius:100%;
 .archivos-table tbody tr:hover {
   background-color: #ddd;
 }
-
 
 .archivos-table .btn-eliminar {
   padding: 5px 10px;
@@ -377,15 +375,14 @@ border-radius:100%;
   cursor: pointer;
 }
 
-caption{
+caption {
   margin: 2%;
 }
 
-caption a{
+caption a {
   margin: 2%;
   color: var(--rojoQQ);
 }
-
 
 .volver {
   background-color: var(--azulQQ);
@@ -463,8 +460,6 @@ caption a{
   background-color: #c82333;
 }
 
-
-
 /* Contenedor del formulario */
 .form-container {
   background: #f9f9f9;
@@ -489,7 +484,7 @@ caption a{
 
 /* Etiqueta del formulario */
 .form-label {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 14px;
   font-weight: bold;
   color: #333;
@@ -498,7 +493,7 @@ caption a{
 
 /* Entradas del formulario */
 .form-input {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 14px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -523,8 +518,30 @@ caption a{
   background-color: #1e1a47;
 }
 
-canvas{
-align-self: center !important;
+canvas {
+  align-self: center !important;
   width: 60% !important;
   height: 40% !important;
+}
+
+.container-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+.chart-container {
+  width: 45%; /* Ajusta el tamaño de los gráficos */
+  margin-bottom: 40px;
+}
+canvas {
+  background-color: white; /* Fondo blanco para los gráficos */
+  width: 100% !important;
+  height: 100% !important;
+}
+h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  background-color: #69659f9c;
 }

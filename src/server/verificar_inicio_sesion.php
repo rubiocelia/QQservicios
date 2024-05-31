@@ -29,13 +29,23 @@ if ($resultado->num_rows > 0) {
         // Contraseña válida, iniciar sesión
         session_start();
         $_SESSION['id_usuario'] = $id_usuario; // Establecemos el ID del usuario en la sesión
+        //Código para guardar la fecha de inicio de sesión del usuario
+        $fecha_inicio = date('Y-m-d H:i:s');
+        $_SESSION['inicio_sesion'] = $fecha_inicio;
+
+        // Registrar el inicio de sesión en la tabla de sesiones
+        $query_sesion = "INSERT INTO Sesiones (ID_usuario, FechaInicio, UltimoLatido) VALUES (?, ?, ?)";
+        $stmt_sesion = $conexion->prepare($query_sesion);
+        $stmt_sesion->bind_param('iss', $id_usuario, $fecha_inicio, $fecha_inicio);
+        $stmt_sesion->execute();
+
         // Devolver respuesta JSON con éxito
         if ($administrador == 1) {
             echo json_encode(array("success" => true, "redirect" => "mi_cuenta_admin.php"));
         } else {
             echo json_encode(array("success" => true, "redirect" => ""));
         }
-        exit(); 
+        exit();
     } else {
         // Contraseña incorrecta, devolver respuesta JSON con error
         echo json_encode(array("success" => false, "message" => "Error de credenciales"));
@@ -44,4 +54,3 @@ if ($resultado->num_rows > 0) {
     // Usuario no encontrado, devolver respuesta JSON con error
     echo json_encode(array("success" => false, "message" => "Error de credenciales"));
 }
-?>

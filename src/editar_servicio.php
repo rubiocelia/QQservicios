@@ -1,4 +1,5 @@
 <?php
+// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está registrado
@@ -7,6 +8,7 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
+// Obtener los datos del usuario
 require_once("./bbdd/conecta.php");
 $conexion = getConexion();
 
@@ -16,20 +18,6 @@ $idProducto = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($idProducto == 0) {
     echo "ID de producto no válido.";
     $conexion->close();
-    exit();
-}
-
-// Manejar la eliminación de contenido específico
-if (isset($_GET['eliminar_contenido'])) {
-    $idContenido = intval($_GET['eliminar_contenido']);
-    eliminarContenido($conexion, $idContenido);
-    exit();
-}
-
-// Manejar la eliminación de FAQ específico
-if (isset($_GET['eliminar_faq'])) {
-    $idFAQ = intval($_GET['eliminar_faq']);
-    eliminarFAQ($conexion, $idFAQ);
     exit();
 }
 
@@ -58,11 +46,8 @@ $coachesResult = $conexion->query("SELECT * FROM Coaches");
 $atributosResult = $conexion->query("SELECT * FROM Atributos");
 $galeriasResult = $conexion->query("SELECT * FROM Galerias ORDER BY ID DESC");
 $contenidosResult = obtenerContenidos($conexion, $idProducto);
-$faqsResult = obtenerFAQs($conexion, $idProducto);
-$testimoniosResult = $conexion->query("SELECT * FROM Testimonios ORDER BY ID DESC");
 $productoCoaches = obtenerIds($conexion, "ProductoCoaches", "ID_Coach", $idProducto);
 $productoAtributos = obtenerIds($conexion, "ProductoAtributos", "ID_Atributo", $idProducto);
-$productoTestimonios = obtenerIds($conexion, "testimonios", "ID", $idProducto);
 
 $conexion->close();
 
@@ -73,7 +58,7 @@ function actualizarProducto($conexion, $idProducto, $producto)
     $descripcion = $_POST['descripcion'];
     $categorias = $_POST['categorias'];
     $precio = $_POST['precio'];
-    $adquirible = isset($_POST['adquirible']) && $_POST['adquirible'] == "1" ? 1 : 0;
+    $adquirible = isset($_POST['adquirible']) ? 1 : 0;
     $duracion = $_POST['duracion'];
     $modalidad = $_POST['modalidad'];
     $txtLibre = $_POST['txtLibre'];
@@ -89,40 +74,12 @@ function actualizarProducto($conexion, $idProducto, $producto)
     if ($updateStmt->execute()) {
         actualizarAsociaciones($conexion, $idProducto, 'ProductoCoaches', 'ID_Coach', $_POST['coaches']);
         actualizarAsociaciones($conexion, $idProducto, 'ProductoAtributos', 'ID_Atributo', $_POST['atributos']);
-        actualizarAsociaciones($conexion, $idProducto, 'ProductoTestimonios', 'ID_Testimonio', $_POST['testimonios']);
         actualizarContenidos($conexion, $idProducto, $_POST['contenidos_titulo'], $_POST['contenidos_descripcion']);
-        actualizarFAQs($conexion, $idProducto, $_POST['faqs_pregunta'], $_POST['faqs_respuesta']);
 
         header("Location: editar_servicio.php?id=$idProducto&success=1");
         exit();
     } else {
         echo "Error al actualizar el producto: " . $updateStmt->error;
-    }
-}
-
-function eliminarContenido($conexion, $idContenido)
-{
-    $deleteQuery = "DELETE FROM Contenidos WHERE ID = ?";
-    $deleteStmt = $conexion->prepare($deleteQuery);
-    $deleteStmt->bind_param("i", $idContenido);
-
-    if ($deleteStmt->execute()) {
-        echo "Contenido eliminado correctamente.";
-    } else {
-        echo "Error al eliminar el contenido: " . $deleteStmt->error;
-    }
-}
-
-function eliminarFAQ($conexion, $idFAQ)
-{
-    $deleteQuery = "DELETE FROM faqs WHERE ID = ?";
-    $deleteStmt = $conexion->prepare($deleteQuery);
-    $deleteStmt->bind_param("i", $idFAQ);
-
-    if ($deleteStmt->execute()) {
-        echo "FAQ eliminada correctamente.";
-    } else {
-        echo "Error al eliminar la FAQ: " . $deleteStmt->error;
     }
 }
 
@@ -166,26 +123,6 @@ function actualizarContenidos($conexion, $idProducto, $titulos, $descripciones)
     }
 }
 
-function actualizarFAQs($conexion, $idProducto, $preguntas, $respuestas)
-{
-    if (!empty($preguntas) && !empty($respuestas)) {
-        foreach ($preguntas as $idFAQ => $pregunta) {
-            $respuesta = $respuestas[$idFAQ];
-            if ($idFAQ > 0) {
-                $updateFAQQuery = "UPDATE faqs SET Pregunta = ?, Respuesta = ? WHERE ID = ?";
-                $updateFAQStmt = $conexion->prepare($updateFAQQuery);
-                $updateFAQStmt->bind_param("ssi", $pregunta, $respuesta, $idFAQ);
-                $updateFAQStmt->execute();
-            } else {
-                $insertFAQQuery = "INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES (?, ?, ?)";
-                $insertFAQStmt = $conexion->prepare($insertFAQQuery);
-                $insertFAQStmt->bind_param("ssi", $pregunta, $respuesta, $idProducto);
-                $insertFAQStmt->execute();
-            }
-        }
-    }
-}
-
 function obtenerContenidos($conexion, $idProducto)
 {
     $contenidosQuery = "SELECT * FROM Contenidos WHERE ID_Producto = ?";
@@ -193,15 +130,6 @@ function obtenerContenidos($conexion, $idProducto)
     $contenidosStmt->bind_param("i", $idProducto);
     $contenidosStmt->execute();
     return $contenidosStmt->get_result();
-}
-
-function obtenerFAQs($conexion, $idProducto)
-{
-    $faqsQuery = "SELECT * FROM faqs WHERE ID_Producto = ?";
-    $faqsStmt = $conexion->prepare($faqsQuery);
-    $faqsStmt->bind_param("i", $idProducto);
-    $faqsStmt->execute();
-    return $faqsStmt->get_result();
 }
 
 function obtenerIds($conexion, $tabla, $columna, $idProducto)
@@ -230,26 +158,22 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Estilo del popup */
-        #popupNuevoTestimonio {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: none;
+        .contenido-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
         }
 
-        #popupNuevoTestimonio .close {
+        .contenido-header {
             cursor: pointer;
-            color: red;
-            font-size: 20px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .contenido-body {
+            display: none;
+            padding: 10px;
         }
     </style>
 </head>
@@ -355,19 +279,6 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                     ?>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="testimonios" class="form-label">Testimonios:</label>
-                <select id="testimonios" name="testimonios[]" class="form-input" multiple required>
-                    <?php
-                    while ($testimonio = $testimoniosResult->fetch_assoc()) {
-                        echo "<option value='" . $testimonio['ID'] . "' " . (in_array($testimonio['ID'], $productoTestimonios) ? 'selected' : '') . ">" . $testimonio['Nombre'] . "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <button type="button" class="form-subutton" onclick="mostrarPopupTestimonio()">Agregar Nuevo Testimonio</button>
-            <hr>
-            <h3>Contenidos</h3>
             <div id="contenidos">
                 <?php while ($contenido = $contenidosResult->fetch_assoc()) { ?>
                     <div class="contenido-item">
@@ -389,119 +300,12 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                 <?php } ?>
             </div>
             <!-- Botón para agregar nuevo contenido -->
-            <button id="agregarContenido" type="button" class="form-subutton">Agregar Nuevo Contenido</button>
-            <hr>
-            <h3>FAQS</h3>
-            <div id="faqs">
-                <?php while ($faq = $faqsResult->fetch_assoc()) { ?>
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span>FAQ: <?php echo htmlspecialchars($faq['Pregunta']); ?></span>
-                        </div>
-                        <div class="faq-body">
-                            <div class="form-group">
-                                <label for="faq_pregunta_<?php echo $faq['ID']; ?>" class="form-label">Pregunta:</label>
-                                <input type="text" id="faq_pregunta_<?php echo $faq['ID']; ?>" name="faqs_pregunta[<?php echo $faq['ID']; ?>]" class="form-input" value="<?php echo htmlspecialchars($faq['Pregunta']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="faq_respuesta_<?php echo $faq['ID']; ?>" class="form-label">Respuesta:</label>
-                                <textarea id="faq_respuesta_<?php echo $faq['ID']; ?>" name="faqs_respuesta[<?php echo $faq['ID']; ?>]" class="form-input" required><?php echo htmlspecialchars($faq['Respuesta']); ?></textarea>
-                            </div>
-                            <button type="button" class="form-button eliminar-faq" data-id="<?php echo $faq['ID']; ?>">Eliminar FAQ</button>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <!-- Botón para agregar nueva FAQ -->
-            <button id="agregarFAQ" type="button" class="form-subutton">Agregar Nueva FAQ</button>
-            <hr>
-            <br>
-            <br>
-            <br>
-            <button type="submit" class="form-button btn-1">Guardar Cambios</button>
+            <button id="agregarContenido" type="button" class="form-button">Agregar Nuevo Contenido</button>
+            <button type="submit" class="form-button">Guardar Cambios</button>
         </form>
         <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar Servicio</button>
     </main>
-
-    <!-- Popup para añadir nuevo testimonio -->
-    <div id="popupNuevoTestimonio">
-        <span class="close" onclick="cerrarPopupTestimonio()">&times;</span>
-        <form id="formNuevoTestimonio" enctype="multipart/form-data">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="subtitulo">Subtitulo:</label>
-            <input type="text" id="subtitulo" name="subtitulo" required>
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required></textarea>
-
-            <label for="producto">Producto Asociado:</label>
-            <select id="producto" name="producto" required>
-                <?php
-                $productos = $conexion->query("SELECT ID, Nombre FROM Productos");
-                while ($producto = $productos->fetch_assoc()) {
-                    echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
-                }
-                ?>
-            </select>
-
-            <label for="foto">Foto:</label>
-            <input type="file" id="foto" name="foto" required>
-
-            <button type="button" onclick="crearTestimonio()">Crear Testimonio</button>
-        </form>
-    </div>
-
     <script>
-        function mostrarPopupTestimonio() {
-            document.getElementById('popupNuevoTestimonio').style.display = 'block';
-        }
-
-        function cerrarPopupTestimonio() {
-            document.getElementById('popupNuevoTestimonio').style.display = 'none';
-        }
-
-        function crearTestimonio() {
-            const form = document.getElementById('formNuevoTestimonio');
-            const formData = new FormData(form);
-
-            fetch('crear_testimonio.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    cerrarPopupTestimonio();
-                    actualizarTestimonios();
-                } else {
-                    alert('Error al crear el testimonio: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-
-        function actualizarTestimonios() {
-            fetch('obtener_testimonios.php?id=<?php echo $idProducto; ?>')
-            .then(response => response.json())
-            .then(data => {
-                const select = document.getElementById('testimonios');
-                select.innerHTML = '';
-                data.testimonios.forEach(testimonio => {
-                    const option = document.createElement('option');
-                    option.value = testimonio.ID;
-                    option.textContent = testimonio.Nombre;
-                    select.appendChild(option);
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-
         function eliminarProducto(id) {
             if (confirm("¿Seguro que deseas eliminar este servicio?")) {
                 fetch("eliminar_servicio.php?id=" + id, {
@@ -510,7 +314,7 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                     .then(response => response.text())
                     .then(data => {
                         alert(data);
-                        window.location.href = "mi_cuenta_admin.php"; // Redirigir a la página de administración
+                        window.location.href = "pagina_admin.php"; // Redirigir a la página de administración
                     })
                     .catch(error => {
                         console.error("Error:", error);
@@ -527,47 +331,19 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             if (event.target.classList.contains('eliminar-contenido')) {
                 const contenidoId = event.target.getAttribute('data-id');
                 if (contenidoId > 0) {
-                    fetch('editar_servicio.php?id=<?php echo $idProducto; ?>&eliminar_contenido=' + contenidoId, {
+                    fetch('eliminar_contenido.php?id=' + contenidoId, {
                             method: 'GET',
                         })
                         .then(response => response.text())
                         .then(data => {
                             alert(data);
-                            if (data.includes("Contenido eliminado correctamente")) {
-                                event.target.closest('.contenido-item').remove();
-                            }
+                            event.target.closest('.contenido-item').remove();
                         })
                         .catch(error => {
                             console.error('Error:', error);
                         });
                 } else {
                     event.target.closest('.contenido-item').remove();
-                }
-            }
-
-            if (event.target.classList.contains('faq-header')) {
-                const faqBody = event.target.nextElementSibling;
-                faqBody.style.display = faqBody.style.display === 'none' ? 'block' : 'none';
-            }
-
-            if (event.target.classList.contains('eliminar-faq')) {
-                const faqId = event.target.getAttribute('data-id');
-                if (faqId > 0) {
-                    fetch('editar_servicio.php?id=<?php echo $idProducto; ?>&eliminar_faq=' + faqId, {
-                            method: 'GET',
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            alert(data);
-                            if (data.includes("FAQ eliminada correctamente")) {
-                                event.target.closest('.faq-item').remove();
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                } else {
-                    event.target.closest('.faq-item').remove();
                 }
             }
         });
@@ -594,30 +370,8 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             document.getElementById('contenidos').appendChild(nuevoContenido);
         });
 
-        document.getElementById('agregarFAQ').addEventListener('click', function() {
-            const nuevaFAQ = document.createElement('div');
-            nuevaFAQ.classList.add('faq-item');
-            nuevaFAQ.innerHTML = `
-                <div class="faq-header">
-                    <span>Nueva FAQ</span>
-                </div>
-                <div class="faq-body">
-                    <div class="form-group">
-                        <label for="nueva_faq_pregunta" class="form-label">Pregunta:</label>
-                        <input type="text" name="faqs_pregunta[0]" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nueva_faq_respuesta" class="form-label">Respuesta:</label>
-                        <textarea name="faqs_respuesta[0]" class="form-input" required></textarea>
-                    </div>
-                    <button type="button" class="form-button eliminar-faq" data-id="0">Eliminar FAQ</button>
-                </div>
-            `;
-            document.getElementById('faqs').appendChild(nuevaFAQ);
-        });
-
         // Inicializar los acordeones
-        document.querySelectorAll('.contenido-body, .faq-body').forEach(function(body) {
+        document.querySelectorAll('.contenido-body').forEach(function(body) {
             body.style.display = 'none';
         });
     </script>
