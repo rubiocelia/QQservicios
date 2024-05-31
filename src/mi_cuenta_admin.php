@@ -63,7 +63,7 @@ $conexion->close();
                 <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil" class="iconoMenu">Clientes</li>
                 <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
                 <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
-                <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Carruseles</li>
+                <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Galerias</li>
                 <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/testimonios.png" alt="Icono de perfil" class="iconoMenu">Testimonios</li>
                 <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
