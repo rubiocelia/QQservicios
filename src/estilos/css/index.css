@@ -386,12 +386,23 @@
 
 .infografia {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filaArriba {
+  display: flex;
+  flex-direction: row;
+}
+
+.filaAbajo {
+  display: flex;
+  flex-direction: row;
 }
 
 .dato {
-  margin: 1rem;
+  margin: 1.5em;
   padding: 1rem;
   background: var(--azulsuave1);
   border-radius: 10px;

@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   showTestimonial(currentIndex);
 });
 
-// datos
 document.addEventListener("DOMContentLoaded", () => {
   const counters = document.querySelectorAll(".count");
   const duration = 3000; // Duración en milisegundos para completar la cuenta
@@ -49,12 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 Math.floor(progress * target)
               );
 
-              counter.innerText = "+" + currentCount;
+              if (target >= 1000) {
+                counter.innerText = "+" + Math.floor(currentCount / 1000) + "K";
+              } else {
+                counter.innerText = "+" + currentCount;
+              }
 
               if (elapsedTime < duration) {
                 setTimeout(updateCount, updateInterval);
               } else {
-                counter.innerText = "+" + target;
+                if (target >= 1000) {
+                  counter.innerText = "+" + Math.floor(target / 1000) + "K";
+                } else {
+                  counter.innerText = "+" + target;
+                }
               }
             };
 

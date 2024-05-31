@@ -205,18 +205,34 @@ $conexion->close();
         <div class="datos-interactivos">
             <h2>Lo que hemos logrado</h2>
             <div class="infografia">
+                <div class="filaArriba">
+                    <div class="dato">
+                        <h3 class="count" data-target="34000">0</h3>
+                        <p>Participantes satisfechos</p>
+                    </div>
+                    <div class="dato">
+                        <h3 class="count" data-target="95">0</h3>
+                        <p>Clientes</p>
+                    </div>
+                    <div class="dato">
+                        <h3 class="count" data-target="9">0</h3>
+                        <p>Sectores</p>
+                    </div>
 
-                <div class="dato">
-                    <h3 class="count" data-target="10800">0</h3>
-                    <p>Asistentes satisfechos</p>
                 </div>
-                <div class="dato">
-                    <h3 class="count" data-target="15">0</h3>
-                    <p>Años de experiencia</p>
-                </div>
-                <div class="dato">
-                    <h3 class="count" data-target="25">0</h3>
-                    <p>Empresas</p>
+                <div class="filaAbajo">
+                    <div class="dato">
+                        <h3 class="count" data-target="22">0</h3>
+                        <p>Proyectos TX</p>
+                    </div>
+                    <div class="dato">
+                        <h3 class="count" data-target="12">0</h3>
+                        <p>Proyecto QQ Digital</p>
+                    </div>
+                    <div class="dato">
+                        <h3 class="count" data-target="32">0</h3>
+                        <p>Proyectos CX</p>
+                    </div>
                 </div>
             </div>
         </div>
