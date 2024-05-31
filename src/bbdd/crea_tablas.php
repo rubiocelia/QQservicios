@@ -192,18 +192,14 @@ function insertarDatos($conexion)
                       ('Nombre9', 'Apellido9', 'email9@example.com', '1234567898', 'Organización 1', 'foto9Usuario.jpg', CURDATE()),
                       ('Nombre10', 'Apellido10', 'email10@example.com', '1234567899', 'Organización 1', 'foto10Usuario.jpg', CURDATE())");
 
-    // Insertar datos en Coaches
     $conexion->query("INSERT INTO Coaches (Nombre, Apellidos, Titulacion, Descripcion, LinkedIn, Video, General, Foto) VALUES
-                        ('Javier', 'Ontiveros', 'Fundador y CEO de Quid Qualitas', 'Con más de 20 años en puestos directivos en TI y consultoría, ha trabajado en Xerox, Borland y Lotus. Es director y profesor en programas ejecutivos y másteres en varias universidades. Diseñó programas de liderazgo femenino y es coach ejecutivo para directivos.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach4.png'),
-                        ('Coach2', 'Apellido2', 'Titulacion2',  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach2.png'),
-                        ('Coach3', 'Apellido3', 'Titulacion3',  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach3.png'),
-                        ('Coach4', 'Apellido4', 'Titulacion4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach4.png'),
-                        ('Coach5', 'Apellido5', 'Titulacion5',  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach1.png'),
-                        ('Coach6', 'Apellido6', 'Titulacion6','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach2.png'),
-                        ('Coach7', 'Apellido7', 'Titulacion7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach3.png'),
-                        ('Coach8', 'Apellido8', 'Titulacion8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach4.png'),
-                        ('Coach9', 'Apellido9', 'Titulacion9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach1.png'),
-                        ('Coach10', 'Apellido10', 'Titulacion10',  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/FotoCoach2.png')");
+                    ('Javier', 'Ontiveros', 'Fundador y CEO de Quid Qualitas', 'Con más de 20 años en puestos directivos en TI y consultoría, ha trabajado en Xerox, Borland y Lotus. Es director y profesor en programas ejecutivos y másteres en varias universidades. Diseñó programas de liderazgo femenino y es coach ejecutivo para directivos.', 'https://www.linkedin.com/in/javierontiveros/', '', '', './archivos/coaches/JavierOntiveros.jpg'),
+                    ('Equipo', 'QQ', 'Experiencia de Cliente y Empleado', 'Equipo de consultores, coach, diseñadores, desarrolladores multiplataforma y analistas de datos, apasionados por impulsar programas e iniciativas de Experiencia de Cliente. Nos ponemos en tu piel y te ayudamos a transformar la cultura de tu organización, alineando valores, desarrollando las competencias clave en los profesionales, directivos y equipos de tu organización.', 'https://www.linkedin.com/company/quid-qualitas/', 'https://www.youtube.com/@QQUALITAS', 'https://quidqualitas.es/', './archivos/coaches/equipoQQ.jpg'),
+                    ('QQ', 'Voice', 'Servicio de Voz de Cliente y Empleado de Quid Qualitas', 'El equipo multidisciplinar de Quid Qualitas, compuesto por consultores expertos en CX, ingeniería de diseño y análisis de datos, lanza un nuevo servicio tras más de 15 años en el mundo del Customer Experience. Este servicio permitirá a las marcas ser más humanas en su escucha, diferenciándose de la competencia con poco esfuerzo.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/qqvoice.jpg'),
+                    ('QQ', 'Digital', 'Automatización de Procesos, Digitalización y Tecnologías de Business Intelligence', 'Nuestro equipo, con más de 15 años en Customer Experience, está compuesto por expertos en CX, diseño e ingeniería de análisis de datos. En Quid Qualitas Digital, ayudamos a las marcas a humanizar su atención al cliente y destacarse, especializándonos en integración, deep learning y big data para la transformación digital.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/qqdigital.jpg'),
+                    ('Patricia', 'R. Cima', 'Agile Coach Innovación y Coach Ejecutiva y de Equipos Coach Certificado modelo i4 de Neuroliderazgo', 'Licenciada en Periodismo y Experta en Protocolo (Universidad Pontificia Salamanca), con Masters en Gestión Empresarial y Coaching Ejecutivo (CORAOPS). Experiencia en Editoriales y Comunicación: Marketing Manager en Mutualidad de Arquitectos, Directora de Marketing en MC Lifestyle, y Responsable de Comunicación en Grupo Sanca. Consultora en Transformación Digital/Cultural, con más de 4,500 horas de formación. Profesora y mentora en EOI y Generation Spain McKinsey.', 'https://www.linkedin.com/', 'https://www.youtube.com/', 'https://www.google.es/', './archivos/coaches/patricia.jpg')
+                    ");
+
 
     // Insertar datos en Atributos
     $conexion->query("INSERT INTO Atributos (Nombre) VALUES
@@ -530,14 +526,17 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
     $conexion->query("INSERT INTO ProductoCoaches (ID_Producto, ID_Coach) VALUES
                         (1, 1),
                         (1, 2),
-                        (1, 3),
                         (2, 1),
+                        (2, 2),
                         (3, 1),
+                        (3, 2),
                         (4, 1),
-                        (5, 1),
-                        (6, 1),
-                        (7, 1),
-                        (8, 1)");
+                        (4, 2),
+                        (5, 3),
+                        (6, 4),
+                        (7, 4),
+                        (8, 1),
+                        (8, 5)");
 
 
     $conexion->query("INSERT INTO ProductoAtributos (ID_Producto, ID_Atributo) VALUES

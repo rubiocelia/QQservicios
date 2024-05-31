@@ -434,7 +434,7 @@
 
 .testimonial {
   display: none;
-  width: 1500px; /* Ensure it takes full width */
+  width: 90vw;
   margin-bottom: 30px;
 }
 

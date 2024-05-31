@@ -432,24 +432,28 @@ main {
 
 .coach img {
   width: 190px;
-  height: 250px;
+  height: 190px;
   margin-bottom: 20px;
+  object-fit: cover;
 }
 
 .coach h2 {
   font-family: var(--titulo);
   font-size: 1.4em;
+  margin: 0 10px;
 }
 
 .coach h3 {
   font-family: var(--titulo);
   font-size: 1.2em;
+  margin: 0 10px;
 }
 
 .coach p {
   text-align: left;
   font-family: var(--texto);
   font-size: 1.2em;
+  margin: 0 15px;
 }
 
 .coach h2,

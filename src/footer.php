@@ -13,7 +13,8 @@
 
                 <a href="#"><img class="rrss" src="../src/archivos/facebook.png" alt="facebook" target="_blank"></a>
 
-                <a id="openPopupFooter"><img class="rrss" src="../src/archivos/llamada.png" alt="llamadas" target="_blank"></a>
+                <a id="openPopupFooter"><img class="rrss" src="../src/archivos/llamada.png" alt="llamadas"
+                        target="_blank"></a>
 
             </div>
         </div>
@@ -21,10 +22,10 @@
         <div class="footer-section links">
             <h2>SITIO WEB</h2>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Coaches</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Quid Qualitas</a></li>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="coaches.php">Coaches</a></li>
+                <li><a href="servicios.php">Servicios</a></li>
+                <li> <a href="https://quidqualitas.es/" target="_blank">QuidQualitas</a></li>
             </ul>
         </div>
 
@@ -48,11 +49,11 @@
     </div>
 
     <div id="popupFooter">
-    <div id="popupContentFooter">
-      <img src="./archivos/contactanos.png" alt="Contactanos">
-      <span id="closePopup">&times;</span>
+        <div id="popupContentFooter">
+            <img src="./archivos/contactanos.png" alt="Contactanos">
+            <span id="closePopup">&times;</span>
+        </div>
     </div>
-  </div>
 
 
 </footer>
