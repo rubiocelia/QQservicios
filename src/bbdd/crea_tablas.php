@@ -224,31 +224,55 @@ function insertarDatos($conexion)
                       ('Atributo10')");
     // Insertar datos en carruselMultimedia
     $conexion->query("INSERT INTO ContenidoMultimedia (Tipo, URL_Local, URL_Youtube, Descripcion) VALUES
-        ('foto', './archivos/galerias/Foto1.jpg', NULL, 'Foto de Julia y Javier en el sofá'),
-        ('foto', './archivos/galerias/Foto2.jpg', NULL, 'Foto de Javier Ontiveros'),
-        ('video_youtube', NULL, 'https://www.youtube.com/watch?v=9cAUjEHHhxs&pp=ygUMcXVpZHF1YWxpdGFz', 'Video de YouTube'),
-        ('foto', './archivos/galerias/Foto3.jpg', NULL, 'Foto de Ejemplo 3'),
-        ('foto', './archivos/galerias/Foto4.jpg', NULL, 'Foto de EJemplo 4'),
-        ('video_local', './archivos/galerias/Video1.mp4', NULL, 'Video de ejemplo 1')
+        ('foto', './archivos/galerias/golf.jpg', NULL, 'foto del golf'),
+        ('foto', './archivos/galerias/golfArbol.jpg', NULL, 'Golf desde un arbol'),
+        ('video_youtube', NULL, 'https://www.youtube.com/watch?v=v4jIRWPBjzg&start=45', 'Video de YouTube comenzando en el segundo 45'),
+        ('foto', './archivos/galerias/orquesta.jpg', NULL, 'orquesta'),
+        ('video_youtube', NULL, 'https://www.youtube.com/watch?v=Dm5vWVSnTq0&t=2s', 'Video de YouTube comenzando en el segundo2'),
+        ('video_youtube', NULL, 'https://youtu.be/_2ig94wp0h4?si=IzHwqYGKOXZaXrAJ&t=154', 'Video de YouTube comenzando en el segundo 154'),
+        ('foto', './archivos/galerias/muralComun.jpg', NULL, 'mural foto de todos juntos'),
+        ('foto', './archivos/galerias/muralQuiron.jpg', NULL, 'mural de quiron'),
+        ('foto', './archivos/galerias/qqvoice.jpg', NULL, 'foto qqvoice'),
+        ('foto', './archivos/galerias/movilqqvoice.jpg', NULL, 'foto movil qq voice'),
+        ('video_youtube', NULL, 'https://youtu.be/z3wNPSZowGo?si=nXa4j_7-7VmAKdm4&t=21', 'Video de YouTube coustomer digital'),
+        ('video_youtube', NULL, 'https://youtu.be/UDRn-2M7pJ0?si=JdsP7sXC9z3TMv8X&t=29', 'Video de YouTube neuroliderazgo')
     ");
 
     // Insertar contenido en la tabla Galerias
     $conexion->query("INSERT INTO Galerias (Nombre_galeria) VALUES
-        ('Galería 1'),
-        ('Galería 2')
-    ");
+        ('QQExperience-Golf'),
+        ('QQExperience-Orquesta'),
+        ('QQExperience-Mural'),
+        ('QQExperience-Vela'),
+        ('QQExperience-QQVoice'),
+        ('QQExperience-omnicanalidad'),    
+        ('QQExperience-coustomerJourney'),
+        ('QQExperience-neuroliderazgo')
+        ");
 
     // Insertar contenido en la tabla GaleriaContenido
     $conexion->query("INSERT INTO GaleriaContenido (ID_Galeria, ID_Contenido, Orden) VALUES
         (1, 1, 1),
-        (1, 2, 2),
-        (1, 3, 3),
-        (1, 4, 4),
-        (1, 5, 5),
-        (2, 6, 1),
-        (2, 1, 2),
-        (2, 2, 3),
-        (2, 3, 4)
+        (1, 2, 3),
+        (1, 3, 2),
+
+        (2, 4, 1),
+        (2, 5, 2),
+
+        (3, 6, 1),
+        (3, 7, 2),
+        (3, 8, 3),
+
+        (4, 3, 1),
+
+        (5, 9, 1),
+        (5, 10, 2),
+
+        (7, 11, 1),
+        
+        (8, 12, 1)
+
+
     ");
 
 $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, Categorias, Foto, FotoFondo, Precio, Adquirible, Duracion, Modalidad, txtLibre, Id_galeria) VALUES
@@ -256,7 +280,7 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
 ('Leadership Experiences - Orquesta', 'Únete a una orquesta en una convención y refuerza el liderazgo, la cohesión y el sentido de pertenencia. Una oportunidad única para conectar y alinear a tu equipo.', 'Conviértete en parte de una orquesta en una reunión o convención y vive una experiencia inolvidable que refuerza los conceptos de liderazgo eficaz, cohesión y sentido de pertenencia a la empresa. Una oportunidad única para conectar y alinear a tu equipo.', 'Categoria3', './archivos/servicios/fotoOrquesta.jpg', './archivos/servicios/fondoOrquesta.jpg', '(200-500€)', 0, '1 a 3 horas', 'Presencial', 'Grupos de 20 a 1200 personas', 1),
 ('Leadership Experiences - Mural', 'Crea un mural colectivo para fortalecer la cohesión y colaboración del equipo. Sin habilidades artísticas, cada aporte simboliza la importancia del éxito grupal.', 'Participa en la creación de un mural colectivo que fortalece la cohesión y colaboración del equipo. Sin necesidad de habilidades artísticas individuales, juntos se crea una impresionante obra de arte común, simbolizando la importancia de cada aportación en el éxito del grupo.', 'Categoria3', './archivos/servicios/fotoMural.jpg', './archivos/servicios/fondoMural.jpg', '(200-500€)', 0, '3 a 8 horas', 'Presencial', 'Grupos de mínimo 50 personas', 1),
 ('Leadership Experiences - Vela', 'Disfruta una aventura en la Ría de Sada a bordo del BAVARIA 50 Cruiser. Sin experiencia previa en navegación, esta actividad fortalece la cohesión y habilidades de liderazgo de tu equipo.', 'Experimenta una aventura única en la Ría de Sada (A Coruña) a bordo del impresionante barco crucero BAVARIA 50 Cruiser. Esta experiencia de liderazgo y trabajo en equipo, accesible para todos sin necesidad de experiencia previa en navegación, fortalecerá la cohesión y las habilidades de tu equipo.', 'Categoria4', './archivos/servicios/fotoVela.jpg', './archivos/servicios/fondoVela.jpg', '(200-500€)', 0, '1 o 2 días', 'Presencial', 'Grupos de hasta 12 personas', 1),
-('Conecta con tu Comunidad con QQVoice','Con QQVoice, conoce las emociones de tus clientes y empleados. Usa un dashboard personalizado para impulsar tu marca y diferenciarte de la competencia.','Toma decisiones acertadas al conocer las emociones de tus clientes y empleados. Mantén siempre a mano tu dashboard personalizado de resultados. Impulsa la experiencia de tu marca y diferénciate de la competencia con QQVoice. Guarda en tu bolsillo las emociones y opiniones que importan para tu negocio.', 'Categoria5', './archivos/servicios/fotoVoice.jpg','./archivos/servicios/fondoVoice.jpg','1500€', 1,'', '','Incluye: Diseño único y personalizado de Cuestionario y Dashboard. Feedback.',1 ),
+('Conecta con tu Comunidad con QQVoice','Con QQVoice, conoce las emociones de tus clientes y empleados. Usa un dashboard personalizado para impulsar tu marca y diferenciarte de la competencia.','Toma decisiones acertadas al conocer las emociones de tus clientes y empleados. Mantén siempre a mano tu dashboard personalizado de resultados. Impulsa la experiencia de tu marca y diferénciate de la competencia con QQVoice. Guarda en tu bolsillo las emociones y opiniones que importan para tu negocio.', 'Categoria5', './archivos/servicios/fotoVoice.jpg','./archivos/servicios/fondoVoice.png','1500€', 1,'', '','Incluye: Diseño único y personalizado de Cuestionario y Dashboard. Feedback.',1 ),
 ('El Viaje a la Omnicanalidad','Transforma la experiencia de tus clientes. Nuestro taller en omnicanalidad mejora la coherencia en atención al cliente e integra todos tus canales eficazmente.','¿Estás listo para transformar la experiencia de tus clientes en todos los canales? Nuestro taller de diagnóstico y asesoramiento en omnicanalidad te ayudará a evaluar y mejorar la coherencia y consistencia de la atención al cliente en tu empresa. Descubre en qué fase de la transformación digital te encuentras y aprende a integrar todos tus canales de manera efectiva.', 'Categoria6','./archivos/servicios/fotoViaje.jpg','./archivos/servicios/fondoViaje.jpg','(200-500€)', 0, '2 horas', 'Presencial u online', 'Individuos o equipos (ideal para equipos transversales de hasta 10 personas dentro de la organización)',1),
 ('Optimiza el Camino del Cliente con nuestro Taller de Customer Journey','Comprende y mejora cada etapa del camino del cliente. Adapta expectativas a las tendencias digitales, aumentando satisfacción y lealtad. Diferénciate de la competencia.','Comprender profundamente cada etapa del camino del cliente, mejorar su experiencia en cada punto de contacto. En el contexto actual de digitalización, es crucial adaptar las expectativas y comportamientos de los usuarios a las nuevas tendencias. Aumenta la satisfacción y lealtad del cliente, diferenciándote de la competencia.','Categoria6','./archivos/servicios/fotoCoustomer.jpg','./archivos/servicios/fondoCoustomer.jpg','(200-500€)',0,'2 a 4 horas','Presnecial u online',' Individuos o equipos (ideal para equipos transversales de al menos 4-5 personas).',1),
 ('Impulsa tus Competencias como líder. Neuroliderazgo',' Potencia tu liderazgo y gestión emocional con nuestro programa de Neuroliderazgo. Mejora tu desempeño, equilibrio personal, creatividad, colaboración y gestión de la diversidad en tu equipo.','¿Estás listo para potenciar tus habilidades de liderazgo y gestión emocional? Nuestro programa completo de Neuroliderazgo está diseñado para ayudarte a alcanzar un desempeño óptimo en tus funciones y mejorar tu equilibrio personal. Descubre cómo impulsar tu creatividad, fomentar la colaboración y gestionar la diversidad en tu equipo.','Categoria7','./archivos/servicios/fotoNeurolider.jpg','./archivos/servicios/fondoNeurolider.jpg','(200-500€)',0,'6 sesiones 1 to 1 incluidas. Opción de ampliación a demanda.','Presnecial u online','',1)
@@ -564,16 +588,81 @@ $conexion->query("INSERT INTO Productos (Nombre, DescripcionCorta, Descripcion, 
 
 
 
-    // Insertar datos en faqs
-    $conexion->query("INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES
-                        ('¿Qué es el coaching y cómo se diferencia de la terapia o la consultoría?', 'El coaching se centra en ayudarte a alcanzar objetivos específicos y desarrollar habilidades a través de un proceso de colaboración y guía. A diferencia de la terapia, que trata problemas emocionales profundos y del pasado, el coaching se enfoca en el presente y el futuro. La consultoría implica ofrecer soluciones específicas y consejos expertos, mientras que el coaching te ayuda a descubrir tus propias respuestas y estrategias.', 8),
-                        ('¿Cómo se realiza la evaluación 360º en el programa de Neuroliderazgo?', 'La evaluación 360º en nuestro programa se basa en el modelo i4 de neuroliderazgo. Incluye retroalimentación de compañeros, superiores y subordinados para proporcionar una visión completa de tus competencias de liderazgo. Esto ayuda a identificar tus fortalezas, áreas de mejora y puntos ciegos.', 8),
-                        ('¿Qué incluye el Plan de Mejora Individual (PMI)?', 'El PMI es un plan detallado que se elabora durante el programa y que incluye metas claras, objetivos específicos y estrategias personalizadas para mejorar tus competencias de liderazgo. Este plan es fundamental para guiar tu desarrollo y seguimiento continuo.', 8),
-                        ('¿Cuánto tiempo tarda en ver resultados con el programa de coaching?', 'Los resultados varían según el individuo y sus objetivos específicos, pero generalmente los participantes empiezan a notar mejoras significativas en sus habilidades de liderazgo y gestión emocional dentro de los primeros 3 a 6 meses del programa.', 8),
-                        ('¿Qué tipo de apoyo continuo está disponible durante y después del programa?', 'Durante el programa, tendrás acceso continuo a tu coach para orientación y seguimiento. Después de la finalización del programa, puedes optar por sesiones adicionales para mantener y seguir desarrollando tus habilidades.', 8),
-                        ('¿Cómo se mide el impacto del programa de coaching?', 'El impacto se mide a través de una sesión final de evaluación donde el coach y el coachee revisan los resultados logrados en comparación con los objetivos establecidos al inicio del programa. También se realiza una reevaluación del entorno profesional y del alcance de los cambios implementados.', 8),
-                        ('¿Qué es el modelo i4 de neuroliderazgo?', 'El modelo i4 de neuroliderazgo es un marco avanzado que evalúa y desarrolla competencias de liderazgo basándose en principios de neurociencia. Este modelo ayuda a entender y mejorar cómo piensas, te comportas y lideras, utilizando evaluaciones 360º y planes personalizados para fomentar el crecimiento y la efectividad.', 8),
-                        ('¿El programa incluye formación en habilidades técnicas específicas?', 'El enfoque principal del programa es el desarrollo de competencias de liderazgo y gestión emocional. Sin embargo, también se proporcionan herramientas y recursos específicos según las necesidades individuales identificadas durante el proceso de coaching.', 8)");
+$conexion->query("INSERT INTO faqs (Pregunta, Respuesta, ID_Producto) VALUES
+    ('¿Cuáles son las competencias específicas de liderazgo y trabajo en equipo que se desarrollarán durante la experiencia?', 'El programa se enfoca en mejorar habilidades de liderazgo eficaz, comunicación, cooperación, resolución de problemas y trabajo en equipo a través de dinámicas en el campo de golf.', 1),
+    ('¿Cómo se alinea esta experiencia con los objetivos estratégicos de nuestra compañía?', 'La experiencia está diseñada para reflejar situaciones reales del entorno laboral, promoviendo competencias clave que apoyan los objetivos estratégicos de liderazgo y trabajo en equipo de su compañía.', 1),
+    ('¿Qué tipo de feedback y métricas se utilizan para medir el impacto de esta experiencia?', 'Se incluyen sesiones de retroalimentación detalladas, análisis de desempeño y encuestas de satisfacción para evaluar el impacto y aplicabilidad de los aprendizajes en el entorno profesional.', 1),
+    ('¿Cómo se asegura que los aprendizajes se traduzcan en cambios concretos en el trabajo?', 'Las sesiones de reflexión y feedback están diseñadas para conectar directamente las experiencias del campo de golf con situaciones y desafíos específicos del entorno laboral.', 1),
+    ('¿Qué tipo de apoyo está disponible si tengo preguntas o necesito más información?', 'Ofrecemos soporte a través de chat en vivo, una línea de contacto y un formulario para solicitar más información. Nuestro equipo está disponible para responder cualquier duda que tenga.', 1),
+    ('¿Cómo funciona la modalidad \"scramble\" y las dinámicas de equipo?', 'La modalidad \"scramble\" es un formato de golf en equipo donde se fomenta la cooperación y la estrategia en grupo. Se juega en equipos de 4 personas, combinando participantes con y sin experiencia en golf.', 1),
+    ('¿Qué opciones de duración del programa están disponibles?', 'Ofrecemos opciones de uno o dos días completos de actividades intensivas, adaptándose a las necesidades y disponibilidad de su equipo.', 1),
+    ('¿Qué perfil y credenciales tienen los coaches?', 'Nuestro equipo de coaches, liderado por Javier Ontiveros, cuenta con vasta experiencia en liderazgo, coaching y desarrollo de competencias directivas. Sus perfiles y logros están detallados en la página para su referencia.', 1),
+
+    ('¿Cuáles son las competencias específicas de liderazgo y trabajo en equipo que se desarrollarán durante la experiencia de orquesta?', 'El programa está diseñado para mejorar habilidades de liderazgo, cohesión, comunicación, adaptabilidad y sentido de pertenencia a través de la integración y participación en una orquesta.', 2),
+    ('¿Cómo se alinea esta experiencia con los objetivos estratégicos de nuestra compañía?', 'La experiencia en la orquesta refuerza la cohesión del equipo y el liderazgo, aspectos clave para el éxito organizacional y alineados con los objetivos estratégicos de su compañía.', 2),
+    ('¿Qué tipo de feedback y métricas se utilizan para medir el impacto de esta experiencia?', 'Utilizamos encuestas de satisfacción completamente personalizadas, sesiones de retroalimentación y análisis de desempeño para medir el impacto y la aplicabilidad de los aprendizajes en el entorno profesional.', 2),
+    ('¿Cómo se asegura que los aprendizajes se traduzcan en cambios concretos en el trabajo?', 'Las sesiones de reflexión post-actividad están diseñadas para conectar directamente la experiencia musical con situaciones y desafíos específicos del entorno laboral.', 2),
+    ('¿Cómo funciona la formación de la orquesta y las dinámicas de equipo?', 'Todos los participantes, sin importar su experiencia musical, se integran en una orquesta bajo la dirección de un renombrado director. Esta actividad promueve la inclusión, la adaptabilidad y la cohesión del equipo.', 2),
+    ('¿Qué opciones de duración del programa están disponibles?', 'Ofrecemos opciones flexibles de una a tres horas, adaptadas a las necesidades de su evento o convención.', 2),
+    ('¿Qué perfil y credenciales tienen los coaches?', 'Nuestro equipo de coaches, liderado por Javier Ontiveros, cuenta con vasta experiencia en liderazgo, coaching y desarrollo de competencias directivas. Sus perfiles y logros están detallados en la página para su referencia.', 2),
+
+    ('¿Cuáles son las competencias específicas de liderazgo y trabajo en equipo que se desarrollarán durante la creación del mural?', 'El programa se enfoca en mejorar habilidades de liderazgo, cohesión de equipo, colaboración, creatividad y comunicación a través de la creación conjunta de un mural.', 3),
+    ('¿Cómo se alinea esta experiencia con los objetivos estratégicos de nuestra compañía?', 'La creación del mural refuerza la importancia de cada aportación individual al éxito colectivo, promoviendo una cultura de colaboración y cohesión que es crucial para los objetivos estratégicos de su compañía.', 3),
+    ('¿Qué tipo de feedback y métricas se utilizan para medir el impacto de esta experiencia?', 'Se incluyen sesiones de retroalimentación detalladas y encuestas de satisfacción para evaluar el impacto y la aplicabilidad de los aprendizajes en el entorno profesional.', 3),
+    ('¿Cómo se asegura que los aprendizajes se traduzcan en cambios concretos en el trabajo?', 'Las sesiones de reflexión y feedback están diseñadas para conectar directamente la experiencia creativa con situaciones y desafíos específicos del entorno laboral, fomentando la aplicación práctica de las lecciones aprendidas.', 3),
+    ('¿Cómo funciona la creación del mural y las dinámicas de equipo?', 'El programa comienza con una introducción a la actividad y la asignación de roles y materiales. Luego, bajo guía experta, cada participante contribuye con su trazo al mural, reflejando la diversidad y unidad del equipo. Finalmente, se realiza una sesión de reflexión y feedback para discutir el proceso y las lecciones aprendidas.', 3),
+    ('¿Qué opciones de duración del programa están disponibles?', 'Ofrecemos opciones flexibles de duración que se adaptan a las necesidades de su evento o convención.', 3),
+    ('¿Qué perfil y credenciales tienen los coaches?', 'Nuestro equipo de coaches, liderado por Javier Ontiveros, cuenta con vasta experiencia en liderazgo, coaching y desarrollo de competencias directivas. Sus perfiles y logros están detallados en la página para su referencia.', 3),
+
+    ('¿Cuáles son las competencias específicas de liderazgo y trabajo en equipo que se desarrollarán durante la experiencia de vela?', 'El programa se enfoca en mejorar habilidades de liderazgo, toma de decisiones, adaptabilidad, comunicación, y cohesión de equipo a través de actividades de navegación y desafíos en el mar.', 4),
+    ('¿Cómo se alinea esta experiencia con los objetivos estratégicos de nuestra compañía?', 'La experiencia en vela refuerza la colaboración y el liderazgo en situaciones desafiantes, alineándose con los objetivos estratégicos de su compañía de promover un entorno de trabajo cooperativo y resiliente.', 4),
+    ('¿Qué tipo de feedback y métricas se utilizan para medir el impacto de esta experiencia?', 'Utilizamos encuestas de satisfacción, sesiones de retroalimentación y análisis de desempeño para evaluar el impacto de la actividad y cómo los aprendizajes se aplican en el entorno profesional.', 4),
+    ('¿Cómo se asegura que los aprendizajes se traduzcan en cambios concretos en el trabajo?', 'Las sesiones de reflexión y feedback post-actividad están diseñadas para conectar directamente la experiencia de navegación con situaciones y desafíos específicos del entorno laboral, promoviendo cambios concretos en la dinámica de trabajo.', 4),
+    ('¿Cómo funciona la formación de equipos y las dinámicas de navegación?', 'La actividad comienza con una bienvenida y briefing inicial, seguido de la formación de equipos y la distribución de roles. Los participantes practican técnicas de navegación y maniobras bajo la guía de un capitán experimentado, enfrentando desafíos que simulan escenarios reales del entorno profesional.', 4),
+    ('¿Qué opciones de duración del programa están disponibles?', 'Ofrecemos opciones flexibles de uno o dos días, permitiendo una inmersión completa en la experiencia náutica y adaptándose a las necesidades de su equipo.', 4),
+    ('¿Qué perfil y credenciales tienen los coaches?', 'Nuestro equipo de coaches, liderado por Javier Ontiveros, cuenta con vasta experiencia en liderazgo, coaching y desarrollo de competencias directivas. Sus perfiles y logros están detallados en la página para su referencia.', 4),
+    ('¿Dónde puedo reservar o solicitar más información?', 'Puede reservar su taller directamente desde la página o utilizar el formulario para solicitar más información. Ambos botones están claramente visibles y accesibles en la página.', 4),
+
+    ('¿Cómo puede QQVoice ayudar a mejorar la imagen de marca de nuestra compañía?', 'QQVoice permite crear una voz de marca auténtica y resonante mediante la co-creación de preguntas y la personalización de los cuestionarios y dashboards. Esto asegura que la imagen de su marca se destaque y se diferencie de la competencia.', 5),
+    ('¿De qué manera QQVoice ayuda a entender mejor a nuestros clientes y empleados?', 'QQVoice proporciona un análisis detallado de las emociones y opiniones de sus clientes y empleados a través de un dashboard personalizado. Esto facilita la toma de decisiones informadas y rápidas basadas en datos reales y en tiempo real.', 5),
+    ('¿Qué tipo de feedback y análisis se proporcionan con este servicio?', 'QQVoice ofrece reportes periódicos que incluyen un análisis exhaustivo de los datos recopilados y recomendaciones para la mejora continua. Además, se reciben alertas en tiempo real sobre los resultados obtenidos.', 5),
+    ('¿Cómo se asegura la integración de los KPIs de QQVoice con nuestros otros indicadores de negocio?', 'El dashboard personalizado de QQVoice permite la integración con otros KPIs de su negocio, proporcionando una vista completa y unificada de todas las métricas importantes para su empresa.', 5),
+    ('¿Cómo funciona la consultoría inicial y la identificación de necesidades?', 'Comenzamos con una consultoría inicial para analizar el programa de voz actual (si lo hay) y determinar las necesidades específicas de sus clientes y empleados, asegurando que el plan de voz esté perfectamente alineado con sus objetivos. Además, nos empapamos de la cultura de la marca y los valores.', 5),
+    ('¿Qué implica la co-creación de la voz de la marca y las preguntas?', 'Trabajamos en colaboración con su equipo para desarrollar una voz de marca que resuene con sus valores y estilo. También co-creamos las preguntas que se alineen con esta voz y objetivos, asegurando una conexión auténtica con su audiencia.', 5),
+    ('¿Qué incluye el diseño del producto digital?', 'El diseño del producto digital incluye la creación de un cuestionario personalizado que destaca la imagen de su marca y un dashboard que muestra todos los KPIs relevantes, con alertas en tiempo real sobre los resultados obtenidos.', 5),
+    ('¿Qué tipo de reportes periódicos se proporcionan y con qué frecuencia?', 'Proporcionamos reportes periódicos con un análisis detallado de los datos recopilados y recomendaciones para la mejora continua. La frecuencia de los reportes puede adaptarse a sus necesidades específicas. En la oferta de este servicio están contemplados reportes mensuales.', 5),
+
+    ('¿Cómo puede el taller de omnicanalidad mejorar los procesos y la experiencia de nuestros clientes?', 'El taller de omnicanalidad ayuda a evaluar y mejorar la coherencia y consistencia de la atención al cliente a través de todos los canales de comunicación. Proporciona estrategias para integrar de manera efectiva los canales, mejorando la experiencia del cliente y la eficiencia operativa.', 6),
+    ('¿Qué diferencia hay entre multicanalidad y omnicanalidad?', 'La multicanalidad implica tener varios canales de comunicación disponibles, mientras que la omnicanalidad se enfoca en integrar estos canales para proporcionar una experiencia de cliente coherente y sin fisuras en todos los puntos de contacto.', 6),
+    ('¿Cómo se evalúa la integración de canales en mi empresa?', 'Durante el taller, realizamos una evaluación personalizada de la integración de canales en su empresa, identificando brechas y oportunidades para mejorar la experiencia del cliente.', 6),
+    ('¿Qué tipo de plan de acción se desarrolla durante el taller?', 'Se desarrolla un plan de acción específico para alcanzar la omnicanalidad, incluyendo la implementación de mejores prácticas y el seguimiento de resultados para asegurar una mejora continua en la atención al cliente.', 6),
+    ('¿Cómo funciona el mapeo del recorrido del cliente y la identificación de áreas de mejora?', 'El taller incluye una sesión dedicada a mapear el recorrido del cliente a través de los canales digitales, identificando puntos de contacto clave y áreas de mejora para optimizar la experiencia del cliente.', 6),
+    ('¿Qué estrategias se enseñan para una integración efectiva de los canales?', 'Se enseñan estrategias para diferenciar entre multicanalidad y omnicanalidad, y cómo integrar efectivamente todos los canales de comunicación para proporcionar una experiencia de cliente coherente y eficiente.', 6),
+    ('¿Qué implica el diagnóstico de integración de canales?', 'El diagnóstico incluye una evaluación personalizada de la efectividad y coherencia de los canales de atención al cliente en su empresa, identificando brechas y oportunidades para mejorar la integración de los canales.', 6),
+    ('¿Qué se incluye en el plan de acción para alcanzar la omnicanalidad?', 'El plan de acción incluye el desarrollo e implementación de mejores prácticas, estrategias específicas para la integración de canales, y un seguimiento de resultados para asegurar una mejora continua en la experiencia del cliente.', 6),
+
+    ('¿Cómo puede el taller de Customer Journey mejorar los procesos y la experiencia de nuestros clientes en la compañía farmacéutica?', 'El taller de Customer Journey ayuda a comprender profundamente cada etapa del recorrido del cliente, identificando áreas de mejora y desarrollando estrategias para optimizar la experiencia en cada punto de contacto. Esto incrementa la satisfacción y lealtad del cliente, diferenciando a su compañía de la competencia.', 7),
+    ('¿Qué se incluye en la definición del público objetivo?', 'La definición del público objetivo incluye la creación de un Mapa de Empatía para identificar detalladamente las necesidades, deseos y comportamientos de sus clientes. Esto permite entender mejor a su audiencia y personalizar las experiencias de cliente.', 7),
+    ('¿Cómo se analizan las etapas del ciclo de vida del cliente?', 'Se realiza un análisis exhaustivo de cada fase del customer journey: antes, durante y después de la interacción con su empresa. Esto ayuda a identificar puntos de contacto clave y áreas donde se pueden hacer mejoras significativas.', 7),
+    ('¿Qué implica la detección de “momentos de dolor”?', 'La detección de “momentos de dolor” implica localizar las fricciones y problemas que enfrentan los clientes durante su recorrido. Esto permite identificar áreas críticas que necesitan atención para mejorar la experiencia del cliente.', 7),
+    ('¿Cómo se desarrollan las estrategias de mejora?', 'Se identifican oportunidades y se desarrollan estrategias específicas para optimizar la experiencia del cliente en cada etapa del customer journey. Esto incluye acciones concretas para mejorar la satisfacción y lealtad del cliente.', 7),
+    ('¿Cómo se realiza la definición del público objetivo y el mapeo de empatía?', 'El taller incluye sesiones dedicadas a la creación de un Mapa de Empatía, identificando detalladamente las necesidades, deseos y comportamientos de sus clientes para entender mejor a su audiencia.', 7),
+    ('¿Qué implica la identificación y análisis de las etapas del ciclo de vida del cliente?', 'Se analizan cada una de las fases del customer journey (antes, durante y después) para identificar puntos de contacto clave y áreas de mejora, asegurando una experiencia de cliente coherente y fluida.', 7),
+    ('¿Cómo se lleva a cabo la detección de “momentos de dolor” y oportunidades de mejora?', 'Se realiza un análisis profundo para localizar las fricciones y problemas que enfrentan los clientes. Luego, se desarrollan estrategias específicas para abordar estos problemas y mejorar la satisfacción del cliente.', 7),
+    ('¿Qué tipo de plan de acción se desarrolla durante el taller?', 'El plan de acción incluye la implementación de mejores prácticas y estrategias específicas para optimizar la experiencia del cliente en cada punto de contacto, con un enfoque en mejorar la satisfacción y lealtad del cliente.', 7),
+
+    ('¿Qué es el coaching y cómo se diferencia de la terapia o la consultoría?', 'El coaching se centra en ayudarte a alcanzar objetivos específicos y desarrollar habilidades a través de un proceso de colaboración y guía. A diferencia de la terapia, que trata problemas emocionales profundos y del pasado, el coaching se enfoca en el presente y el futuro. La consultoría implica ofrecer soluciones específicas y consejos expertos, mientras que el coaching te ayuda a descubrir tus propias respuestas y estrategias.', 8),
+    ('¿Cómo se realiza la evaluación 360º en el programa de Neuroliderazgo?', 'La evaluación 360º en nuestro programa se basa en el modelo i4 de neuroliderazgo. Incluye retroalimentación de compañeros, superiores y subordinados para proporcionar una visión completa de tus competencias de liderazgo. Esto ayuda a identificar tus fortalezas, áreas de mejora y puntos ciegos.', 8),
+    ('¿Qué incluye el Plan de Mejora Individual (PMI)?', 'El PMI es un plan detallado que se elabora durante el programa y que incluye metas claras, objetivos específicos y estrategias personalizadas para mejorar tus competencias de liderazgo. Este plan es fundamental para guiar tu desarrollo y seguimiento continuo.', 8),
+    ('¿Cuánto tiempo tarda en ver resultados con el programa de coaching?', 'Los resultados varían según el individuo y sus objetivos específicos, pero generalmente los participantes empiezan a notar mejoras significativas en sus habilidades de liderazgo y gestión emocional dentro de los primeros 3 a 6 meses del programa.', 8),
+    ('¿Qué tipo de apoyo continuo está disponible durante y después del programa?', 'Durante el programa, tendrás acceso continuo a tu coach para orientación y seguimiento. Después de la finalización del programa, puedes optar por sesiones adicionales para mantener y seguir desarrollando tus habilidades.', 8),
+    ('¿Cómo se mide el impacto del programa de coaching?', 'El impacto se mide a través de una sesión final de evaluación donde el coach y el coachee revisan los resultados logrados en comparación con los objetivos establecidos al inicio del programa. También se realiza una reevaluación del entorno profesional y del alcance de los cambios implementados.', 8),
+    ('¿Qué es el modelo i4 de neuroliderazgo?', 'El modelo i4 de neuroliderazgo es un marco avanzado que evalúa y desarrolla competencias de liderazgo basándose en principios de neurociencia. Este modelo ayuda a entender y mejorar cómo piensas, te comportas y lideras, utilizando evaluaciones 360º y planes personalizados para fomentar el crecimiento y la efectividad.', 8),
+    ('¿El programa incluye formación en habilidades técnicas específicas?', 'El enfoque principal del programa es el desarrollo de competencias de liderazgo y gestión emocional. Sin embargo, también se proporcionan herramientas y recursos específicos según las necesidades individuales identificadas durante el proceso de coaching.', 8),
+    ('¿Quién es Javier Ontiveros y cuál es su experiencia?', 'Javier Ontiveros es el fundador y CEO de Quid Qualitas y vicepresidente de la Comunidad de Experiencia de Cliente AEC. Es un coach certificado en neuroliderazgo con más de 20 años de experiencia en puestos directivos en multinacionales del sector tecnológico y consultoría. Ha diseñado y desarrollado numerosos programas de desarrollo directivo, transformación cultural y experiencia del cliente.', 8),
+    ('¿Cuál es el costo del programa y qué incluye?', 'El costo del programa es XXX€ e incluye 6 sesiones individuales (1 to 1) con la opción de ampliación a demanda. Cada sesión está diseñada para proporcionar un seguimiento personalizado y efectivo de tu desarrollo como líder.', 8)
+");
+
 }
 
 
