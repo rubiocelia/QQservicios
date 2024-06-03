@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/Servicios.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/Servicios.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 </head>
 
@@ -40,14 +40,6 @@
                 </p>
             </div>
         </div>
-
-        <div class="video-background">
-            <video autoplay muted loop class="video">
-                <source src="../../archivos/videoEjemplo1.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-        </div>
-
         <div class="info">
             <h1>DESPIERTA TODO TU POTENCIAL AL EXPLORAR LO QUE OFRECEN NUESTROS SERVICIOS.</h1>
         </div>
@@ -78,9 +70,9 @@
     </main>
 
     <!-- JS de lógica para ocultarlo y mostrarlo -->
-    <script src="../src/scripts/carruselProducto.js"></script>
+    <script src="./scripts/carruselProducto.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
-    <script src="../src/scripts/validacionRegistro.js"></script>
+    <script src="./scripts/validacionRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <?php include('footer.php'); ?>

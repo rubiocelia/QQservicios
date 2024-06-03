@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
     <!-- Enlace a la hoja de estilos para los coaches -->
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/coaches.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/coaches.css">
     <!-- Icono de la pestaña del navegador -->
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- Enlace a la librería de animaciones animate.css -->

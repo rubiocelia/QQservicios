@@ -91,15 +91,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Detalle del Testimonio</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- CDN para el popup de cerrar sesión -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body class="miCuenta">
     <?php include('menu_sesion_iniciada.php'); ?>
     <button type="button" class="volver" onclick="window.location.href = 'mi_cuenta_admin.php';">⬅️ Volver</button>
@@ -108,17 +110,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" class="styled-form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="form-input" value="<?php echo htmlspecialchars($testimonio['Nombre']); ?>">
+                <input type="text" id="nombre" name="nombre" class="form-input"
+                    value="<?php echo htmlspecialchars($testimonio['Nombre']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="subtitulo" class="form-label">Subtitulo:</label>
-                <input type="text" id="subtitulo" name="subtitulo" class="form-input" value="<?php echo htmlspecialchars($testimonio['Subtitulo']); ?>">
+                <input type="text" id="subtitulo" name="subtitulo" class="form-input"
+                    value="<?php echo htmlspecialchars($testimonio['Subtitulo']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="descripcion" class="form-label">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" class="form-input"><?php echo htmlspecialchars($testimonio['Descripcion']); ?></textarea>
+                <textarea id="descripcion" name="descripcion"
+                    class="form-input"><?php echo htmlspecialchars($testimonio['Descripcion']); ?></textarea>
             </div>
 
             <div class="form-group">
@@ -139,7 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="foto" class="form-label">Foto:</label>
                 <input type="file" id="foto" name="foto" class="form-input" accept="image/*">
                 <?php if (!empty($testimonio['Foto'])): ?>
-                    <img src="<?php echo htmlspecialchars($testimonio['Foto']); ?>" alt="Foto del testimonio" style="width:100px;">
+                <img src="<?php echo htmlspecialchars($testimonio['Foto']); ?>" alt="Foto del testimonio"
+                    style="width:100px;">
                 <?php endif; ?>
             </div>
 
@@ -152,4 +158,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <?php include('footer.php'); ?>
 </body>
+
 </html>

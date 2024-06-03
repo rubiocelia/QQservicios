@@ -29,9 +29,9 @@ $resultado = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Añadir Contenido a Galería</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/galeria.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/galeria.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 </head>
 
@@ -113,46 +113,46 @@ $resultado = $stmt->get_result();
     <?php include('footer.php'); ?>
 </body>
 <script>
-    function mostrarFormulario() {
-        document.getElementById('formularioNuevoContenido').style.display = 'block';
-        mostrarCampoCorrespondiente();
+function mostrarFormulario() {
+    document.getElementById('formularioNuevoContenido').style.display = 'block';
+    mostrarCampoCorrespondiente();
+}
+
+document.getElementById('tipo').addEventListener('change', mostrarCampoCorrespondiente);
+
+function mostrarCampoCorrespondiente() {
+    var tipo = document.getElementById('tipo').value;
+    var campoLocal = document.getElementById('campoLocal');
+    var campoYoutube = document.getElementById('campoYoutube');
+    campoLocal.style.display = 'none';
+    campoYoutube.style.display = 'none';
+    if (tipo === 'foto' || tipo === 'video_local') {
+        campoLocal.style.display = 'block';
+    } else if (tipo === 'video_youtube') {
+        campoYoutube.style.display = 'block';
     }
+}
 
-    document.getElementById('tipo').addEventListener('change', mostrarCampoCorrespondiente);
+function subirContenido() {
+    var formData = new FormData(document.getElementById('formNuevoContenido'));
+    fetch('subir_contenido.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
-    function mostrarCampoCorrespondiente() {
-        var tipo = document.getElementById('tipo').value;
-        var campoLocal = document.getElementById('campoLocal');
-        var campoYoutube = document.getElementById('campoYoutube');
-        campoLocal.style.display = 'none';
-        campoYoutube.style.display = 'none';
-        if (tipo === 'foto' || tipo === 'video_local') {
-            campoLocal.style.display = 'block';
-        } else if (tipo === 'video_youtube') {
-            campoYoutube.style.display = 'block';
-        }
-    }
-
-    function subirContenido() {
-        var formData = new FormData(document.getElementById('formNuevoContenido'));
-        fetch('subir_contenido.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-
-    // Mostrar el campo correspondiente basado en la selección inicial
-    document.addEventListener('DOMContentLoaded', function() {
-        mostrarCampoCorrespondiente();
-    });
+// Mostrar el campo correspondiente basado en la selección inicial
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarCampoCorrespondiente();
+});
 </script>
 
 </html>

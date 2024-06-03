@@ -50,7 +50,7 @@ if (isset($_SESSION['id_usuario'])) {
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="../src/estilos/css/contacto.css">
+    <link rel="stylesheet" href="./estilos/css/contacto.css">
 </head>
 
 <body class="contacto">

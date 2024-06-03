@@ -28,11 +28,11 @@ $(document).ready(function() {
 
 
 <!-- menu.php -->
-<?php echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/menuFooter.css">';
-echo '<link rel="stylesheet" type="text/css" href="../src/estilos/css/PopUpLoginSignUp.css">'; ?>
+<?php echo '<link rel="stylesheet" type="text/css" href="./estilos/css/menuFooter.css">';
+echo '<link rel="stylesheet" type="text/css" href="./estilos/css/PopUpLoginSignUp.css">'; ?>
 <header class="header">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
-    <a href="index.php"><img class="logo" src="../src/archivos/QQAzul.png" alt="logoQQ" class="logo"></a>
+    <a href="index.php"><img class="logo" src="./archivos/QQAzul.png" alt="logoQQ" class="logo"></a>
     <nav>
 
         <button class="hamburger" aria-label="Abrir menú">☰</button>

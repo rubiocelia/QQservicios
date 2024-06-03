@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Añadir Nuevo Contenido</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/galeria.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/galeria.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 </head>
+
 <body>
-<?php include('menu_sesion_iniciada.php'); ?>
+    <?php include('menu_sesion_iniciada.php'); ?>
     <h1>Añadir Nuevo Contenido</h1>
     <form action="procesar_nuevo_contenido.php" method="post" enctype="multipart/form-data">
         <label for="tipo">Tipo de Contenido:</label>
@@ -42,21 +44,22 @@
     <button type="button" class="volver" onclick="window.history.back()">Volver</button>
 
     <script>
-        document.getElementById('tipo').addEventListener('change', function () {
-            var tipo = this.value;
-            document.getElementById('fotoInput').style.display = 'none';
-            document.getElementById('videoLocalInput').style.display = 'none';
-            document.getElementById('videoYoutubeInput').style.display = 'none';
+    document.getElementById('tipo').addEventListener('change', function() {
+        var tipo = this.value;
+        document.getElementById('fotoInput').style.display = 'none';
+        document.getElementById('videoLocalInput').style.display = 'none';
+        document.getElementById('videoYoutubeInput').style.display = 'none';
 
-            if (tipo === 'foto') {
-                document.getElementById('fotoInput').style.display = 'block';
-            } else if (tipo === 'video_local') {
-                document.getElementById('videoLocalInput').style.display = 'block';
-            } else if (tipo === 'video_youtube') {
-                document.getElementById('videoYoutubeInput').style.display = 'block';
-            }
-        });
+        if (tipo === 'foto') {
+            document.getElementById('fotoInput').style.display = 'block';
+        } else if (tipo === 'video_local') {
+            document.getElementById('videoLocalInput').style.display = 'block';
+        } else if (tipo === 'video_youtube') {
+            document.getElementById('videoYoutubeInput').style.display = 'block';
+        }
+    });
     </script>
     <?php include('footer.php'); ?>
 </body>
+
 </html>

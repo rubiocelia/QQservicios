@@ -41,8 +41,8 @@ $conexion->close();
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -50,22 +50,29 @@ $conexion->close();
 </head>
 
 <body class="miCuenta">
-<video autoplay muted loop id="backgroundVideo">
-    <source src="./archivos/perfil/fondoPerfil2.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="./archivos/perfil/fondoPerfil2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <?php include('menu_sesion_iniciada.php'); ?>
     <h1 class="bienvenido">Bienvenid@ administrador, <?php echo htmlspecialchars($usuario['Nombre']); ?></h1>
     <main>
         <div id="menu2">
             <ul>
-                <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil" class="iconoMenu">Mi perfil</li>
-                <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil" class="iconoMenu">Clientes</li>
-                <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil" class="iconoMenu">Coaches</li>
-                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png" alt="Icono de perfil" class="iconoMenu">Servicios</li>
-                <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil" class="iconoMenu">Galerias</li>
-                <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/testimonios.png" alt="Icono de perfil" class="iconoMenu">Testimonios</li>
-                <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png" alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
+                <li onclick="mostrarSeccion('perfil')"><img src="./archivos/perfil/usuario.png" alt="Icono de perfil"
+                        class="iconoMenu">Mi perfil</li>
+                <li onclick="mostrarSeccion('clientes')"><img src="./archivos/perfil/clientes.png" alt="Icono de perfil"
+                        class="iconoMenu">Clientes</li>
+                <li onclick="mostrarSeccion('coaches')"><img src="./archivos/perfil/coaches.png" alt="Icono de perfil"
+                        class="iconoMenu">Coaches</li>
+                <li onclick="mostrarSeccion('servicios')"><img src="./archivos/perfil/servicio.png"
+                        alt="Icono de perfil" class="iconoMenu">Servicios</li>
+                <li onclick="mostrarSeccion('carrusel')"><img src="./archivos/perfil/carrusel.png" alt="Icono de perfil"
+                        class="iconoMenu">Galerias</li>
+                <li onclick="mostrarSeccion('testimonios')"><img src="./archivos/perfil/testimonios.png"
+                        alt="Icono de perfil" class="iconoMenu">Testimonios</li>
+                <li onclick="confirmarCerrarSesion()"><img src="./archivos/perfil/cerrar-sesion.png"
+                        alt="Icono de cerrar sesion" class="iconoMenu">Cerrar sesión</li>
             </ul>
         </div>
         <div id="contenido">
@@ -75,7 +82,8 @@ $conexion->close();
                 <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                     <div class="perfil">
                         <div class="foto">
-                            <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil" class="fotoPerfil">
+                            <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
+                                class="fotoPerfil">
                             <input type="file" id="foto" name="foto" style="display:none;">
                             <!-- Ocultamos el input real -->
                             <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
@@ -86,33 +94,40 @@ $conexion->close();
                             <div class="fila">
                                 <div class="campo">
                                     <label for="nombre">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
+                                    <input type="text" id="nombre" name="nombre"
+                                        value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="apellidos">Apellidos:</label>
-                                    <input type="text" id="apellidos" name="apellidos" value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
+                                    <input type="text" id="apellidos" name="apellidos"
+                                        value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
                                 </div>
                             </div>
                             <!-- Fila para Email, Teléfono y Organización -->
                             <div class="fila">
                                 <div class="campo">
                                     <label for="email">Correo electrónico:</label>
-                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
+                                    <input type="email" id="email" name="email"
+                                        value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>"
+                                        readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="telefono">Número de teléfono:</label>
-                                    <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
+                                    <input type="tel" id="telefono" name="telefono"
+                                        value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
                                 </div>
                                 <div class="campo">
                                     <label for="organizacion">Organización:</label>
-                                    <input type="text" id="organizacion" name="organizacion" value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
+                                    <input type="text" id="organizacion" name="organizacion"
+                                        value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="acciones">
                             <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                             <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
-                            <button type="button" id="btnCancelar" style="display:none;" onclick="cancelarEdicion()">Cancelar</button>
+                            <button type="button" id="btnCancelar" style="display:none;"
+                                onclick="cancelarEdicion()">Cancelar</button>
                         </div>
                     </div>
                 </form>
@@ -375,7 +390,8 @@ $conexion->close();
                 </div>
 
                 <!-- Botón para añadir un nuevo producto -->
-                <button type="button" class="volver" onclick="window.location.href='nuevo_servicio.php'">Añadir Nuevo</button>
+                <button type="button" class="volver" onclick="window.location.href='nuevo_servicio.php'">Añadir
+                    Nuevo</button>
             </div>
             <!-- Sección Testimonios -->
             <div id="testimonios" class="seccion">

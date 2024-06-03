@@ -122,8 +122,8 @@ $result2 = $stmt2->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Editar Cliente - Vista Administrador</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/vistaClienteAdmin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/vistaClienteAdmin.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
@@ -141,7 +141,8 @@ $result2 = $stmt2->get_result();
             <form action="guardar_perfil.php" method="post" enctype="multipart/form-data">
                 <div class="perfil">
                     <div class="foto">
-                        <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil" class="fotoPerfil">
+                        <img src="<?php echo htmlspecialchars($usuario['Foto']); ?>" alt="Foto de Perfil"
+                            class="fotoPerfil">
                         <input type="file" id="foto" name="foto" style="display:none;">
                         <!-- Ocultamos el input real -->
                         <button type="button" id="btnSeleccionarFoto">Cambiar foto</button>
@@ -152,33 +153,39 @@ $result2 = $stmt2->get_result();
                         <div class="fila">
                             <div class="campo">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
+                                <input type="text" id="nombre" name="nombre"
+                                    value="<?php echo htmlspecialchars($usuario['Nombre']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="apellidos">Apellidos:</label>
-                                <input type="text" id="apellidos" name="apellidos" value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
+                                <input type="text" id="apellidos" name="apellidos"
+                                    value="<?php echo htmlspecialchars($usuario['Apellidos']); ?>" readonly>
                             </div>
                         </div>
                         <!-- Fila para Email, Teléfono y Organización -->
                         <div class="fila">
                             <div class="campo">
                                 <label for="email">Correo electrónico:</label>
-                                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
+                                <input type="email" id="email" name="email"
+                                    value="<?php echo htmlspecialchars($usuario['Correo_electronico']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="telefono">Número de teléfono:</label>
-                                <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
+                                <input type="tel" id="telefono" name="telefono"
+                                    value="<?php echo htmlspecialchars($usuario['Numero_telefono']); ?>" readonly>
                             </div>
                             <div class="campo">
                                 <label for="organizacion">Organización:</label>
-                                <input type="text" id="organizacion" name="organizacion" value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
+                                <input type="text" id="organizacion" name="organizacion"
+                                    value="<?php echo htmlspecialchars($usuario['Organizacion']); ?>" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="acciones">
                         <button type="button" id="btnModificar" onclick="habilitarEdicion()">Modificar</button>
                         <button type="submit" id="btnGuardar" style="display:none;">Guardar cambios</button>
-                        <button type="button" id="btnCancelar" style="display:none;" onclick="cancelarEdicion()">Cancelar</button>
+                        <button type="button" id="btnCancelar" style="display:none;"
+                            onclick="cancelarEdicion()">Cancelar</button>
                     </div>
                 </div>
             </form>
@@ -199,13 +206,14 @@ $result2 = $stmt2->get_result();
                 </thead>
                 <tbody>
                     <?php while ($rowCompra = $resultCompras->fetch_assoc()) : ?>
-                        <tr>
-                            <td><?php echo $rowCompra['Nombre']; ?></td>
-                            <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
-                            <td><?php echo $rowCompra['FechaHora']; ?></td>
-                            <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
-                            <td><button class="btn-eliminar" onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $rowCompra['Nombre']; ?></td>
+                        <td><?php echo $rowCompra['DescripcionCorta']; ?></td>
+                        <td><?php echo $rowCompra['FechaHora']; ?></td>
+                        <td><?php echo $rowCompra['Confirmacion'] == 1 ? 'Si' : 'No'; ?></td>
+                        <td><button class="btn-eliminar"
+                                onclick="eliminarCompra(<?php echo $rowCompra['ID']; ?>);">Eliminar</button></td>
+                    </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
@@ -220,90 +228,94 @@ $result2 = $stmt2->get_result();
                 if ($currentProducto !== $row['ID_Producto']) :
                     $currentProducto = $row['ID_Producto'];
             ?>
-                    <table class="archivos-table">
-                        <caption><a><?php echo $row['TipoArchivo']; ?></a></caption>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th>Descripción</th>
-                                <th>Fecha de Subida</th>
-                                <th>Accion</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php endif; ?>
-                        <tr>
-                            <td><a href="<?php echo $row['Ruta']; ?>" target="_blank"><?php echo basename($row['Ruta']); ?></a></td>
-                            <td><?php echo $row['TipoArchivo']; ?></td>
-                            <td><?php echo $row['Descripcion']; ?></td>
-                            <td><?php echo $row['Fecha']; ?></td>
-                            <td><button class="btn-eliminar" onclick="eliminarArchivo(<?php echo $row['ID']; ?>, <?php echo $_GET['id']; ?>);">Eliminar</button>
-                            </td>
-                            <td>
-                                <!-- Si es un 0, el usuario puede ver el archivo, Si es un 1, no puede verlo -->
-                                <?php if ($row['Deshabilitado'] == 0) : ?>
-                                    <button class="btn-deshabilitar" onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 1);">Deshabilitar</button>
-                                <?php else : ?>
-                                    <button class="btn-habilitar" onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 0);">Habilitar</button>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+            <table class="archivos-table">
+                <caption><a><?php echo $row['TipoArchivo']; ?></a></caption>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Fecha de Subida</th>
+                        <th>Accion</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php endif; ?>
+                    <tr>
+                        <td><a href="<?php echo $row['Ruta']; ?>"
+                                target="_blank"><?php echo basename($row['Ruta']); ?></a></td>
+                        <td><?php echo $row['TipoArchivo']; ?></td>
+                        <td><?php echo $row['Descripcion']; ?></td>
+                        <td><?php echo $row['Fecha']; ?></td>
+                        <td><button class="btn-eliminar"
+                                onclick="eliminarArchivo(<?php echo $row['ID']; ?>, <?php echo $_GET['id']; ?>);">Eliminar</button>
+                        </td>
+                        <td>
+                            <!-- Si es un 0, el usuario puede ver el archivo, Si es un 1, no puede verlo -->
+                            <?php if ($row['Deshabilitado'] == 0) : ?>
+                            <button class="btn-deshabilitar"
+                                onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 1);">Deshabilitar</button>
+                            <?php else : ?>
+                            <button class="btn-habilitar"
+                                onclick="cambiarEstadoArchivo(<?php echo $row['ID']; ?>, 0);">Habilitar</button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
                     <?php endwhile; ?>
-                        </tbody>
-                    </table>
-                    <button type="button" class="volver" onclick="mostrarFormulario();">Añadir Archivo</button>
+                </tbody>
+            </table>
+            <button type="button" class="volver" onclick="mostrarFormulario();">Añadir Archivo</button>
 
-                    <!-- Contenedor del formulario que se muestra/oculta -->
-                    <div id="formularioArchivo" class="form-container" style="display: none;">
-                        <form id="formArchivo" class="styled-form" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="archivo" class="form-label">Seleccionar archivo:</label>
-                                <input type="file" id="archivo" name="archivo" class="form-input" required>
-                            </div>
+            <!-- Contenedor del formulario que se muestra/oculta -->
+            <div id="formularioArchivo" class="form-container" style="display: none;">
+                <form id="formArchivo" class="styled-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="archivo" class="form-label">Seleccionar archivo:</label>
+                        <input type="file" id="archivo" name="archivo" class="form-input" required>
+                    </div>
 
-                            <div class="form-group">
-                                <label for="producto" class="form-label">Producto:</label>
-                                <select id="producto" name="producto" class="form-input" required>
-                                    <?php
+                    <div class="form-group">
+                        <label for="producto" class="form-label">Producto:</label>
+                        <select id="producto" name="producto" class="form-input" required>
+                            <?php
                                     while ($producto = $productos->fetch_assoc()) {
                                         echo "<option value='" . $producto['ID'] . "'>" . $producto['Nombre'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="descripcion" class="form-label">Descripción:</label>
-                                <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
-                            </div>
-
-                            <input type="hidden" name="idUsuario" value="<?php echo  $_GET['id']; ?>">
-
-                            <button type="button" class="form-button" onclick="subirArchivo();">Subir Archivo</button>
-                        </form>
-                        <button type="button" class="btn-eliminar" onclick="ocultarFormulario();">Cancelar</button>
-
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" class="form-input" required></textarea>
+                    </div>
+
+                    <input type="hidden" name="idUsuario" value="<?php echo  $_GET['id']; ?>">
+
+                    <button type="button" class="form-button" onclick="subirArchivo();">Subir Archivo</button>
+                </form>
+                <button type="button" class="btn-eliminar" onclick="ocultarFormulario();">Cancelar</button>
+
+            </div>
         </div>
 
         <h2>Estadísticas de Usuario</h2>
-    <div class="container-stats">
-        <div class="chart-container">
-            <h2>Última semana: Veces y tiempo en la plataforma</h2>
-            <canvas id="graficoSemana"></canvas>
+        <div class="container-stats">
+            <div class="chart-container">
+                <h2>Última semana: Veces y tiempo en la plataforma</h2>
+                <canvas id="graficoSemana"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Últimos 3 meses: Veces en la plataforma</h2>
+                <canvas id="graficoTresMeses"></canvas>
+            </div>
         </div>
-        <div class="chart-container">
-            <h2>Últimos 3 meses: Veces en la plataforma</h2>
-            <canvas id="graficoTresMeses"></canvas>
-        </div>
-    </div>
 
-    <div class="export-button">
-        <button id="exportarCsv">Exportar datos a CSV</button>
-    </div>
-    <script>
+        <div class="export-button">
+            <button id="exportarCsv">Exportar datos a CSV</button>
+        </div>
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const id_usuario = params.get('id');
@@ -433,7 +445,7 @@ $result2 = $stmt2->get_result();
                         });
                     })
                     .catch(error => console.error('Error al obtener los datos:', error));
-                    document.getElementById('exportarCsv').addEventListener('click', function() {
+                document.getElementById('exportarCsv').addEventListener('click', function() {
                     window.location.href = `exportar_csv.php?id=${id_usuario}`;
                 });
             } else {
@@ -441,7 +453,7 @@ $result2 = $stmt2->get_result();
             }
 
         });
-    </script>
+        </script>
     </main>
 
     <script src="./scripts/scriptPopUp.js"></script>

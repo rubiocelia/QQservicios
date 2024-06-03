@@ -65,8 +65,8 @@ $conexion->close();
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- CDN para el popup de cerrar sesión -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

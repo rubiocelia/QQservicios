@@ -14,9 +14,9 @@ $idGaleria = isset($_GET['id']) ? intval($_GET['id']) : 0;
 <head>
     <meta charset="UTF-8">
     <title>Mi galería</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/galeria.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/galeria.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- CDN para el popup de cerrar sesión -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -84,87 +84,88 @@ $idGaleria = isset($_GET['id']) ? intval($_GET['id']) : 0;
     <button onclick="añadirContenido(<?php echo $idGaleria; ?>)" class="volver">Añadir Contenido</button>
 
     <script>
-        function eliminarContenido(idContenido) {
-            if (confirm("¿Estás seguro de que quieres eliminar este contenido?")) {
-                window.location.href = './server/eliminar_contenido.php?id=' + idContenido;
-            }
+    function eliminarContenido(idContenido) {
+        if (confirm("¿Estás seguro de que quieres eliminar este contenido?")) {
+            window.location.href = './server/eliminar_contenido.php?id=' + idContenido;
         }
+    }
 
-        function añadirContenido(idGaleria) {
-            window.location.href = './añadir_contenido.php?id_galeria=' + idGaleria;
-        }
+    function añadirContenido(idGaleria) {
+        window.location.href = './añadir_contenido.php?id_galeria=' + idGaleria;
+    }
 
-        // Código para manejar el drag and drop y reordenar el contenido
-        document.addEventListener('DOMContentLoaded', function() {
-            const table = document.getElementById('contenidoTable');
-            const rows = Array.from(table.querySelectorAll('tbody tr'));
+    // Código para manejar el drag and drop y reordenar el contenido
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('contenidoTable');
+        const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-            let draggingElement;
-            let placeholder = document.createElement('tr');
-            placeholder.className = 'placeholder';
+        let draggingElement;
+        let placeholder = document.createElement('tr');
+        placeholder.className = 'placeholder';
 
-            rows.forEach(row => {
-                row.draggable = true;
+        rows.forEach(row => {
+            row.draggable = true;
 
-                row.addEventListener('dragstart', function(e) {
-                    draggingElement = row;
-                    e.dataTransfer.effectAllowed = 'move';
-                });
+            row.addEventListener('dragstart', function(e) {
+                draggingElement = row;
+                e.dataTransfer.effectAllowed = 'move';
+            });
 
-                row.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    const target = e.target.closest('tr');
-                    if (target && target !== draggingElement) {
-                        const rect = target.getBoundingClientRect();
-                        const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
-                        table.tBodies[0].insertBefore(placeholder, next && target.nextSibling || target);
-                    }
-                });
+            row.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                const target = e.target.closest('tr');
+                if (target && target !== draggingElement) {
+                    const rect = target.getBoundingClientRect();
+                    const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
+                    table.tBodies[0].insertBefore(placeholder, next && target.nextSibling ||
+                        target);
+                }
+            });
 
-                row.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    if (placeholder.parentNode) {
-                        table.tBodies[0].insertBefore(draggingElement, placeholder);
-                        placeholder.remove();
-                    }
-                });
-
-                row.addEventListener('dragend', function() {
+            row.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (placeholder.parentNode) {
+                    table.tBodies[0].insertBefore(draggingElement, placeholder);
                     placeholder.remove();
-                    actualizarOrden();
-                });
+                }
+            });
+
+            row.addEventListener('dragend', function() {
+                placeholder.remove();
+                actualizarOrden();
+            });
+        });
+    });
+
+    function actualizarOrden() {
+        const rows = document.querySelectorAll('#contenidoTable tbody tr');
+        let orden = [];
+        rows.forEach((row, index) => {
+            const id = row.id.split('_')[1];
+            orden.push({
+                id,
+                orden: index + 1
             });
         });
 
-        function actualizarOrden() {
-            const rows = document.querySelectorAll('#contenidoTable tbody tr');
-            let orden = [];
-            rows.forEach((row, index) => {
-                const id = row.id.split('_')[1];
-                orden.push({
-                    id,
-                    orden: index + 1
-                });
-            });
-
-            fetch('./server/actualizar_orden.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        orden
-                    })
+        fetch('./server/actualizar_orden.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    orden
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire('Orden actualizado correctamente', '', 'success');
-                    } else {
-                        Swal.fire('Error al actualizar el orden', '', 'error');
-                    }
-                });
-        }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire('Orden actualizado correctamente', '', 'success');
+                } else {
+                    Swal.fire('Error al actualizar el orden', '', 'error');
+                }
+            });
+    }
     </script>
     <?php include('footer.php'); ?>
 </body>

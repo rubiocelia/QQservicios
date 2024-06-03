@@ -120,8 +120,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/miCuenta_admin.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/miCuenta_admin.css">
     <link rel="stylesheet" type="text/css" href="path/to/your/estilos.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <!-- CDN para el popup de cerrar sesión -->
@@ -136,37 +136,44 @@ $conn->close();
         <form method="post" class="styled-form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="form-input" value="<?php echo htmlspecialchars($coach['Nombre']); ?>">
+                <input type="text" id="nombre" name="nombre" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['Nombre']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="apellidos" class="form-label">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" class="form-input" value="<?php echo htmlspecialchars($coach['Apellidos']); ?>">
+                <input type="text" id="apellidos" name="apellidos" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['Apellidos']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="titulacion" class="form-label">Titulo profesional:</label>
-                <input type="text" id="titulacion" name="titulacion" class="form-input" value="<?php echo htmlspecialchars($coach['Titulacion']); ?>">
+                <input type="text" id="titulacion" name="titulacion" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['Titulacion']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="descripcion" class="form-label">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" class="form-input" value="<?php echo htmlspecialchars($coach['Descripcion']); ?>">
+                <input type="text" id="descripcion" name="descripcion" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['Descripcion']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="linkedin" class="form-label">LinkedIn:</label>
-                <input type="text" id="linkedin" name="linkedin" class="form-input" value="<?php echo htmlspecialchars($coach['LinkedIn']); ?>">
+                <input type="text" id="linkedin" name="linkedin" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['LinkedIn']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="video" class="form-label">Video:</label>
-                <input type="text" id="video" name="video" class="form-input" value="<?php echo htmlspecialchars($coach['Video']); ?>">
+                <input type="text" id="video" name="video" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['Video']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="general" class="form-label">General:</label>
-                <input type="text" id="general" name="general" class="form-input" value="<?php echo htmlspecialchars($coach['General']); ?>">
+                <input type="text" id="general" name="general" class="form-input"
+                    value="<?php echo htmlspecialchars($coach['General']); ?>">
             </div>
 
             <div class="form-group">

@@ -138,7 +138,7 @@ function convertirTiempoASegundos($tiempo) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($producto['Nombre']); ?></title>
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../src/estilos/css/producto1.css">
+    <link rel="stylesheet" href="./estilos/css/producto1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
 
     <style>
@@ -280,8 +280,8 @@ function convertirTiempoASegundos($tiempo) {
                             <?php endif; ?>
 
                             <div class="image-container">
-                                <img src="../src/archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
-                                <img src="../src/archivos/productos/trophy.gif" id="animatedImage" class="hidden"
+                                <img src="./archivos/productos/Trofeo.png" id="staticImage" alt="Imagen estática">
+                                <img src="./archivos/productos/trophy.gif" id="animatedImage" class="hidden"
                                     alt="GIF animado">
                             </div>
                             <button class="btnComprar2"
@@ -311,7 +311,7 @@ function convertirTiempoASegundos($tiempo) {
             </div>
         </div>
     </main>
-    <script src="../src/scripts/carruselProducto1.js"></script>
+    <script src="./scripts/carruselProducto1.js"></script>
     <script src="./scripts/scriptPopUp.js"></script>
 
 

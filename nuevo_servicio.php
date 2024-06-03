@@ -105,8 +105,8 @@ $conexion->close();
 <head>
     <meta charset="UTF-8">
     <title>Nuevo Servicio</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/editar_servicio.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/editar_servicio.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -116,19 +116,20 @@ $conexion->close();
     <main>
         <h1>Nuevo Servicio</h1>
         <?php if (isset($_GET['success']) && $_GET['success'] == 1) : ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: 'Éxito',
-                        text: 'Producto añadido correctamente.',
-                        icon: 'success'
-                    }).then(function() {
-                        window.location.href = window.location.pathname;
-                    });
-                });
-            </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Éxito',
+                text: 'Producto añadido correctamente.',
+                icon: 'success'
+            }).then(function() {
+                window.location.href = window.location.pathname;
+            });
+        });
+        </script>
         <?php endif; ?>
-        <form id="formNuevoServicio" action="nuevo_servicio.php" method="post" enctype="multipart/form-data" class="form-editar-servicio">
+        <form id="formNuevoServicio" action="nuevo_servicio.php" method="post" enctype="multipart/form-data"
+            class="form-editar-servicio">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" class="form-input" required>
@@ -226,7 +227,8 @@ $conexion->close();
                 </div>
                 <div class="form-group">
                     <label for="contenidos_descripcion_0" class="form-label">Descripción de Contenido:</label>
-                    <textarea id="contenidos_descripcion_0" name="contenidos_descripcion[0]" class="form-input"><ul><li>Tu 1º contenido aquí</li><li>Tu 2º contenido aquí</li></ul></textarea>
+                    <textarea id="contenidos_descripcion_0" name="contenidos_descripcion[0]"
+                        class="form-input"><ul><li>Tu 1º contenido aquí</li><li>Tu 2º contenido aquí</li></ul></textarea>
                 </div>
             </div>
             <!-- Botón para agregar nuevo contenido -->
@@ -247,10 +249,10 @@ $conexion->close();
         </form>
     </main>
     <script>
-        document.getElementById('agregarContenido').addEventListener('click', function() {
-            const nuevoContenido = document.createElement('div');
-            const index = document.querySelectorAll('#contenidos .form-group').length / 2;
-            nuevoContenido.innerHTML = `
+    document.getElementById('agregarContenido').addEventListener('click', function() {
+        const nuevoContenido = document.createElement('div');
+        const index = document.querySelectorAll('#contenidos .form-group').length / 2;
+        nuevoContenido.innerHTML = `
                 <div class="form-group">
                     <label for="contenidos_titulo_${index}" class="form-label">Título de Contenido:</label>
                     <input type="text" id="contenidos_titulo_${index}" name="contenidos_titulo[${index}]" class="form-input">
@@ -260,13 +262,13 @@ $conexion->close();
                     <textarea id="contenidos_descripcion_${index}" name="contenidos_descripcion[${index}]" class="form-input"></textarea>
                 </div>
             `;
-            document.getElementById('contenidos').appendChild(nuevoContenido);
-        });
+        document.getElementById('contenidos').appendChild(nuevoContenido);
+    });
 
-        document.getElementById('agregarFAQ').addEventListener('click', function() {
-            const nuevaFAQ = document.createElement('div');
-            const index = document.querySelectorAll('#faqs .form-group').length / 2;
-            nuevaFAQ.innerHTML = `
+    document.getElementById('agregarFAQ').addEventListener('click', function() {
+        const nuevaFAQ = document.createElement('div');
+        const index = document.querySelectorAll('#faqs .form-group').length / 2;
+        nuevaFAQ.innerHTML = `
                 <div class="form-group">
                     <label for="faqs_pregunta_${index}" class="form-label">Pregunta:</label>
                     <input type="text" id="faqs_pregunta_${index}" name="faqs_pregunta[${index}]" class="form-input">
@@ -276,64 +278,64 @@ $conexion->close();
                     <textarea id="faqs_respuesta_${index}" name="faqs_respuesta[${index}]" class="form-input"></textarea>
                 </div>
             `;
-            document.getElementById('faqs').appendChild(nuevaFAQ);
-        });
+        document.getElementById('faqs').appendChild(nuevaFAQ);
+    });
 
-        document.getElementById('id_galeria').addEventListener('change', function() {
-            if (this.value === 'new') {
-                document.getElementById('popupNuevaGaleria').style.display = 'block';
-            }
-        });
+    document.getElementById('id_galeria').addEventListener('change', function() {
+        if (this.value === 'new') {
+            document.getElementById('popupNuevaGaleria').style.display = 'block';
+        }
+    });
 
-        document.querySelector('#popupNuevaGaleria .close').addEventListener('click', function() {
-            document.getElementById('popupNuevaGaleria').style.display = 'none';
-        });
+    document.querySelector('#popupNuevaGaleria .close').addEventListener('click', function() {
+        document.getElementById('popupNuevaGaleria').style.display = 'none';
+    });
 
-        document.getElementById('btnGuardarGaleria').addEventListener('click', function() {
-            const nombreGaleria = document.getElementById('nombreNuevaGaleria').value;
-            if (nombreGaleria) {
-                const formData = new FormData();
-                formData.append('nombreGaleria', nombreGaleria);
+    document.getElementById('btnGuardarGaleria').addEventListener('click', function() {
+        const nombreGaleria = document.getElementById('nombreNuevaGaleria').value;
+        if (nombreGaleria) {
+            const formData = new FormData();
+            formData.append('nombreGaleria', nombreGaleria);
 
-                fetch('guardar_galeria.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            const selectGaleria = document.getElementById('id_galeria');
-                            const nuevaOpcion = document.createElement('option');
-                            nuevaOpcion.value = data.id;
-                            nuevaOpcion.text = nombreGaleria;
-                            selectGaleria.add(nuevaOpcion);
-                            selectGaleria.value = data.id;
+            fetch('guardar_galeria.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const selectGaleria = document.getElementById('id_galeria');
+                        const nuevaOpcion = document.createElement('option');
+                        nuevaOpcion.value = data.id;
+                        nuevaOpcion.text = nombreGaleria;
+                        selectGaleria.add(nuevaOpcion);
+                        selectGaleria.value = data.id;
 
-                            document.getElementById('popupNuevaGaleria').style.display = 'none';
-                            document.getElementById('nombreNuevaGaleria').value = '';
-                        } else {
-                            alert('Error al guardar la galería.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            } else {
-                alert('Por favor, ingrese un nombre para la nueva galería.');
-            }
-        });
+                        document.getElementById('popupNuevaGaleria').style.display = 'none';
+                        document.getElementById('nombreNuevaGaleria').value = '';
+                    } else {
+                        alert('Error al guardar la galería.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        } else {
+            alert('Por favor, ingrese un nombre para la nueva galería.');
+        }
+    });
 
-        document.getElementById('btnModificarGaleria').addEventListener('click', function() {
-            const selectGaleria = document.getElementById('id_galeria');
-            const idGaleria = selectGaleria.value;
+    document.getElementById('btnModificarGaleria').addEventListener('click', function() {
+        const selectGaleria = document.getElementById('id_galeria');
+        const idGaleria = selectGaleria.value;
 
-            if (idGaleria && idGaleria !== 'new') {
-                const url = `ver_galeria.php?id=${idGaleria}`;
-                window.open(url, '_blank');
-            } else {
-                alert('Por favor, selecciona una galería para modificar.');
-            }
-        });
+        if (idGaleria && idGaleria !== 'new') {
+            const url = `ver_galeria.php?id=${idGaleria}`;
+            window.open(url, '_blank');
+        } else {
+            alert('Por favor, selecciona una galería para modificar.');
+        }
+    });
     </script>
     <?php include('footer.php'); ?>
 </body>

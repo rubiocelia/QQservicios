@@ -153,28 +153,28 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
 <head>
     <meta charset="UTF-8">
     <title>Editar Servicio</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/editar_servicio.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/editar_servicio.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .contenido-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
+    .contenido-item {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
 
-        .contenido-header {
-            cursor: pointer;
-            background-color: #f7f7f7;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
+    .contenido-header {
+        cursor: pointer;
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
 
-        .contenido-body {
-            display: none;
-            padding: 10px;
-        }
+    .contenido-body {
+        display: none;
+        padding: 10px;
+    }
     </style>
 </head>
 
@@ -183,34 +183,39 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
     <main>
         <h1>Editar Servicio</h1>
         <?php if (isset($_GET['success']) && $_GET['success'] == 1) : ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: 'Éxito',
-                        text: 'Producto actualizado correctamente.',
-                        icon: 'success'
-                    }).then(function() {
-                        window.location.href = window.location.pathname + "?id=<?php echo $idProducto; ?>";
-                    });
-                });
-            </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Éxito',
+                text: 'Producto actualizado correctamente.',
+                icon: 'success'
+            }).then(function() {
+                window.location.href = window.location.pathname + "?id=<?php echo $idProducto; ?>";
+            });
+        });
+        </script>
         <?php endif; ?>
-        <form action="editar_servicio.php?id=<?php echo $idProducto; ?>" method="post" enctype="multipart/form-data" class="form-editar-servicio">
+        <form action="editar_servicio.php?id=<?php echo $idProducto; ?>" method="post" enctype="multipart/form-data"
+            class="form-editar-servicio">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="form-input" value="<?php echo htmlspecialchars($producto['Nombre']); ?>" required>
+                <input type="text" id="nombre" name="nombre" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['Nombre']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="descripcionCorta" class="form-label">Descripción Corta:</label>
-                <textarea id="descripcionCorta" name="descripcionCorta" class="form-input" required><?php echo htmlspecialchars($producto['DescripcionCorta']); ?></textarea>
+                <textarea id="descripcionCorta" name="descripcionCorta" class="form-input"
+                    required><?php echo htmlspecialchars($producto['DescripcionCorta']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="descripcion" class="form-label">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" class="form-input" required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
+                <textarea id="descripcion" name="descripcion" class="form-input"
+                    required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="categorias" class="form-label">Categorías:</label>
-                <input type="text" id="categorias" name="categorias" class="form-input" value="<?php echo htmlspecialchars($producto['Categorias']); ?>" required>
+                <input type="text" id="categorias" name="categorias" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['Categorias']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="foto" class="form-label">Foto:</label>
@@ -228,7 +233,8 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             </div>
             <div class="form-group">
                 <label for="precio" class="form-label">Precio:</label>
-                <input type="text" id="precio" name="precio" class="form-input" value="<?php echo htmlspecialchars($producto['Precio']); ?>" required>
+                <input type="text" id="precio" name="precio" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['Precio']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="adquirible" class="form-label">Adquirible:</label>
@@ -239,15 +245,18 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             </div>
             <div class="form-group">
                 <label for="duracion" class="form-label">Duración:</label>
-                <input type="text" id="duracion" name="duracion" class="form-input" value="<?php echo htmlspecialchars($producto['Duracion']); ?>">
+                <input type="text" id="duracion" name="duracion" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['Duracion']); ?>">
             </div>
             <div class="form-group">
                 <label for="modalidad" class="form-label">Modalidad:</label>
-                <input type="text" id="modalidad" name="modalidad" class="form-input" value="<?php echo htmlspecialchars($producto['Modalidad']); ?>">
+                <input type="text" id="modalidad" name="modalidad" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['Modalidad']); ?>">
             </div>
             <div class="form-group">
                 <label for="txtLibre" class="form-label">Texto Libre:</label>
-                <input type="text" id="txtLibre" name="txtLibre" class="form-input" value="<?php echo htmlspecialchars($producto['txtLibre']); ?>">
+                <input type="text" id="txtLibre" name="txtLibre" class="form-input"
+                    value="<?php echo htmlspecialchars($producto['txtLibre']); ?>">
             </div>
             <div class="form-group">
                 <label for="id_galeria" class="form-label">Galería:</label>
@@ -281,77 +290,85 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
             </div>
             <div id="contenidos">
                 <?php while ($contenido = $contenidosResult->fetch_assoc()) { ?>
-                    <div class="contenido-item">
-                        <div class="contenido-header">
-                            <span>Contenido: <?php echo htmlspecialchars($contenido['Titulo']); ?></span>
-                        </div>
-                        <div class="contenido-body">
-                            <div class="form-group">
-                                <label for="contenido_titulo_<?php echo $contenido['ID']; ?>" class="form-label">Título de Contenido:</label>
-                                <input type="text" id="contenido_titulo_<?php echo $contenido['ID']; ?>" name="contenidos_titulo[<?php echo $contenido['ID']; ?>]" class="form-input" value="<?php echo htmlspecialchars($contenido['Titulo']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contenido_descripcion_<?php echo $contenido['ID']; ?>" class="form-label">Descripción de Contenido:</label>
-                                <textarea id="contenido_descripcion_<?php echo $contenido['ID']; ?>" name="contenidos_descripcion[<?php echo $contenido['ID']; ?>]" class="form-input" required><?php echo htmlspecialchars($contenido['Descripcion']); ?></textarea>
-                            </div>
-                            <button type="button" class="form-button eliminar-contenido" data-id="<?php echo $contenido['ID']; ?>">Eliminar Contenido</button>
-                        </div>
+                <div class="contenido-item">
+                    <div class="contenido-header">
+                        <span>Contenido: <?php echo htmlspecialchars($contenido['Titulo']); ?></span>
                     </div>
+                    <div class="contenido-body">
+                        <div class="form-group">
+                            <label for="contenido_titulo_<?php echo $contenido['ID']; ?>" class="form-label">Título de
+                                Contenido:</label>
+                            <input type="text" id="contenido_titulo_<?php echo $contenido['ID']; ?>"
+                                name="contenidos_titulo[<?php echo $contenido['ID']; ?>]" class="form-input"
+                                value="<?php echo htmlspecialchars($contenido['Titulo']); ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contenido_descripcion_<?php echo $contenido['ID']; ?>"
+                                class="form-label">Descripción de Contenido:</label>
+                            <textarea id="contenido_descripcion_<?php echo $contenido['ID']; ?>"
+                                name="contenidos_descripcion[<?php echo $contenido['ID']; ?>]" class="form-input"
+                                required><?php echo htmlspecialchars($contenido['Descripcion']); ?></textarea>
+                        </div>
+                        <button type="button" class="form-button eliminar-contenido"
+                            data-id="<?php echo $contenido['ID']; ?>">Eliminar Contenido</button>
+                    </div>
+                </div>
                 <?php } ?>
             </div>
             <!-- Botón para agregar nuevo contenido -->
             <button id="agregarContenido" type="button" class="form-button">Agregar Nuevo Contenido</button>
             <button type="submit" class="form-button">Guardar Cambios</button>
         </form>
-        <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar Servicio</button>
+        <button class="form-button-cancel" onclick="eliminarProducto(<?php echo $idProducto; ?>)">Eliminar
+            Servicio</button>
     </main>
     <script>
-        function eliminarProducto(id) {
-            if (confirm("¿Seguro que deseas eliminar este servicio?")) {
-                fetch("eliminar_servicio.php?id=" + id, {
-                        method: "GET",
+    function eliminarProducto(id) {
+        if (confirm("¿Seguro que deseas eliminar este servicio?")) {
+            fetch("eliminar_servicio.php?id=" + id, {
+                    method: "GET",
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.href = "pagina_admin.php"; // Redirigir a la página de administración
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('contenido-header')) {
+            const contenidoBody = event.target.nextElementSibling;
+            contenidoBody.style.display = contenidoBody.style.display === 'none' ? 'block' : 'none';
+        }
+
+        if (event.target.classList.contains('eliminar-contenido')) {
+            const contenidoId = event.target.getAttribute('data-id');
+            if (contenidoId > 0) {
+                fetch('eliminar_contenido.php?id=' + contenidoId, {
+                        method: 'GET',
                     })
                     .then(response => response.text())
                     .then(data => {
                         alert(data);
-                        window.location.href = "pagina_admin.php"; // Redirigir a la página de administración
+                        event.target.closest('.contenido-item').remove();
                     })
                     .catch(error => {
-                        console.error("Error:", error);
+                        console.error('Error:', error);
                     });
+            } else {
+                event.target.closest('.contenido-item').remove();
             }
         }
+    });
 
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('contenido-header')) {
-                const contenidoBody = event.target.nextElementSibling;
-                contenidoBody.style.display = contenidoBody.style.display === 'none' ? 'block' : 'none';
-            }
-
-            if (event.target.classList.contains('eliminar-contenido')) {
-                const contenidoId = event.target.getAttribute('data-id');
-                if (contenidoId > 0) {
-                    fetch('eliminar_contenido.php?id=' + contenidoId, {
-                            method: 'GET',
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            alert(data);
-                            event.target.closest('.contenido-item').remove();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                } else {
-                    event.target.closest('.contenido-item').remove();
-                }
-            }
-        });
-
-        document.getElementById('agregarContenido').addEventListener('click', function() {
-            const nuevoContenido = document.createElement('div');
-            nuevoContenido.classList.add('contenido-item');
-            nuevoContenido.innerHTML = `
+    document.getElementById('agregarContenido').addEventListener('click', function() {
+        const nuevoContenido = document.createElement('div');
+        nuevoContenido.classList.add('contenido-item');
+        nuevoContenido.innerHTML = `
                 <div class="contenido-header">
                     <span>Nuevo Contenido</span>
                 </div>
@@ -367,13 +384,13 @@ function obtenerIds($conexion, $tabla, $columna, $idProducto)
                     <button type="button" class="form-button eliminar-contenido" data-id="0">Eliminar Contenido</button>
                 </div>
             `;
-            document.getElementById('contenidos').appendChild(nuevoContenido);
-        });
+        document.getElementById('contenidos').appendChild(nuevoContenido);
+    });
 
-        // Inicializar los acordeones
-        document.querySelectorAll('.contenido-body').forEach(function(body) {
-            body.style.display = 'none';
-        });
+    // Inicializar los acordeones
+    document.querySelectorAll('.contenido-body').forEach(function(body) {
+        body.style.display = 'none';
+    });
     </script>
     <?php include('footer.php'); ?>
 </body>

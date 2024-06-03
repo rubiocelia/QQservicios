@@ -29,7 +29,7 @@ $conexion->close();
 <head>
     <meta charset="UTF-8">
     <title>QQ Servicios</title>
-    <link rel="stylesheet" type="text/css" href="../src/estilos/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/css/index.css">
     <link rel="icon" href="./archivos/QQAzul.ico" type="image/x-icon">
 </head>
 
@@ -112,7 +112,7 @@ $conexion->close();
                     <h4>Una <span class="subRojo">Plataforma Única</span> para un Aprendizaje Personalizado</h4>
                 </div>
                 <div class="cuad2">
-                    <img class="icono" src="../src/archivos/index/ajustes.png" alt="linkedin">
+                    <img class="icono" src="./archivos/index/ajustes.png" alt="linkedin">
                 </div>
                 <div class="cuad3">
                     <p>Nuestra plataforma ofrece una experiencia de aprendizaje personalizada y adaptativa en coaching,
@@ -130,7 +130,7 @@ $conexion->close();
                 </div>
 
                 <div class="cuad2">
-                    <img class="icono" src="../src/archivos/index/auto-crecimiento.png" alt="linkedin">
+                    <img class="icono" src="./archivos/index/auto-crecimiento.png" alt="linkedin">
                 </div>
                 <div class="cuad1">
                     <h4>Nuestro Compromiso: Tu <span class="subRojo">Crecimiento y Éxito Personal</span></h4>
@@ -146,7 +146,7 @@ $conexion->close();
                     <h4>¿Qué <span class="subRojo">valor</span> me puede añadir?</h4>
                 </div>
                 <div class="cuad2">
-                    <img class="icono" src="../src/archivos/index/valor.png" alt="linkedin">
+                    <img class="icono" src="./archivos/index/valor.png" alt="linkedin">
                 </div>
                 <div class="cuad3">
                     <p>Nuestros programas de coaching mejoran la toma de decisiones, clarifican objetivos, desarrollan
@@ -161,15 +161,15 @@ $conexion->close();
             <h1>¿Por qué elegirnos?</h1>
             <div class="benefCuad">
                 <div class="beneficio">
-                    <img src="../src/archivos/index/medalla.png" class="logoBenef">
+                    <img src="./archivos/index/medalla.png" class="logoBenef">
                     <p>Expertos en la Industria</p>
                 </div>
                 <div class="beneficio">
-                    <img src="../src/archivos/index/personalizar.png" class="logoBenef">
+                    <img src="./archivos/index/personalizar.png" class="logoBenef">
                     <p>Soluciones Personalizadas</p>
                 </div>
                 <div class="beneficio">
-                    <img src="../src/archivos/index/garantizar.png" class="logoBenef">
+                    <img src="./archivos/index/garantizar.png" class="logoBenef">
                     <p>Resultados Garantizados</p>
                 </div>
             </div>
